@@ -1,6 +1,6 @@
 worker_processes 6
 
-root = "/home/deployer/apps/shuiguoshe/current"
+root = "/home/deployer/apps/shuiguoshe_production/current"
 working_directory root
 # shared_root = "/home/deployer/apps/shuiguoshe/shared"
 
