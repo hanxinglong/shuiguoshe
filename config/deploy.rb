@@ -35,6 +35,7 @@ namespace :deploy do
   # end
   
   after :finishing, 'deploy:cleanup'
+  after :finishing, 'deploy:restart'
   
   # before 'deploy:check:linked_files', 'deploy:setup_config'
 end

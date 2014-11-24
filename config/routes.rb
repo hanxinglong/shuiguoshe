@@ -2,7 +2,14 @@ Rails.application.routes.draw do
   
   root 'home#index'
 
-  devise_for :users
+  devise_for :users, path: "account", controllers: {
+    registrations: :account,
+    sessions: :sessions,
+  }
+  
+  post "account/update_private_token" => "users#update_private_token", as: 'update_private_token_account'
+  
+  resources :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
