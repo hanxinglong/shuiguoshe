@@ -14,11 +14,28 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
 set :keep_releases, 5
 
-set :linked_files, %w{config/database.yml config/config.yml config/secrets.yml}
+set :linked_files, %w{config/database.yml config/config.yml}
 
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads}
 
 namespace :deploy do
+  
+  %w[start stop restart].each do |command|
+    desc "#{command} unicorn server"
+    task command do
+      on roles(:app), in: :sequence, wait: 1 do
+        execute "/etc/init.d/unicorn_#{fetch(:application)} #{command}"
+      end
+    end
+  end
+  
+  # task :setup_config do
+  #   put File.read("config/database.yml.example"), "#{shared_path}/config/database.yml"
+  #   put File.read("config/config.yml.example"), "#{shared_path}/config/config.yml"
+  # end
+  
   after :finishing, 'deploy:cleanup'
+  
+  # before 'deploy:check:linked_files', 'deploy:setup_config'
 end
 
