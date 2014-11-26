@@ -2,6 +2,7 @@
   activerecord:
     models:
       user: "用户"
+      product: "产品"
     attributes:
       user:
         mobile: "手机"
@@ -11,6 +12,14 @@
         current_password: "旧密码"
         reset_password_token: "重置密码Token"
         avatar: "头像"
+      product:
+        type_id: "类别ID"
+        title: "产品标题"
+        subtitle: "产品子标题"
+        intro: "产品简介"
+        image: "产品图片"
+        low_price: "最低价格"
+        origin_price: "初始价格"
     errors:
       models:
         user: "用户"

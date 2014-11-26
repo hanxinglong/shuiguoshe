@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">产品列表</h3>
+    
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>产品图片</th>
+          <th>标题</th>
+          <th>子标题</th>
+          <th>简介</th>
+          <th>最低价格</th>
+          <th>初始价格</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= link_to product.id, [:cpanel, product] %></td>
+            <td><%= render_product_icon(product) %></td>
+            <td><%= product.title %></td>
+            <td><%= product.subtitle %></td>
+            <td><%= product.intro %></td>
+            <td><%= product.low_price %></td>
+            <td><%= product.origin_price %></td>
+            <td>
+              <%= link_to '下架', edit_cpanel_product_path(product), class: "btn btn-xs btn-primary" %>
+              <%= link_to '编辑', edit_cpanel_product_path(product), class: "btn btn-xs btn-default" %>
+              <%= link_to '删除', [:cpanel, product], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="center"><%= will_paginate @products %></div>
+  
+</div>
+
+<%= link_to '新建产品', new_cpanel_product_path, class: "btn btn-primary" %>
+

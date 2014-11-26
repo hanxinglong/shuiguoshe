@@ -10,6 +10,11 @@ Rails.application.routes.draw do
   post "account/update_private_token" => "users#update_private_token", as: 'update_private_token_account'
   
   resources :users
+  
+  namespace :cpanel do
+    root 'home#index'
+    resources :products
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

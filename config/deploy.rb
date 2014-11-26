@@ -40,3 +40,18 @@ namespace :deploy do
   # before 'deploy:check:linked_files', 'deploy:setup_config'
 end
 
+namespace :remote_rake do
+  task :create do
+    run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake db:create"
+  end
+  task :migrate do
+    run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake db:migrate"
+  end
+  task :seed do
+    run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake db:seed"
+  end
+  task :drop do
+    run "cd #{deploy_to}/current; RAILS_ENV=production bundle exec rake db:drop"
+  end
+end
+

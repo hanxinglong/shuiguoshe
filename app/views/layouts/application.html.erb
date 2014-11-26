@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag  'front', 'data-turbolinks-track' => true %>
   <link rel="shortcut icon" href="<%= asset_path("") %>" />
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
@@ -23,6 +22,8 @@
     <%= debug(params) if Rails.env.development? %>
     <%= render 'layouts/footer' %>
   </div>
+  
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= yield :scripts %>
 </body>
 </html>

@@ -1,0 +1,33 @@
+<%= simple_form_for([:cpanel, @product], html: { class: "form-horizontal" },wrapper: :horizontal_form,
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes,
+          radio_buttons: :horizontal_radio_and_checkboxes,
+          file: :horizontal_file_input,
+          boolean: :horizontal_boolean
+        }) do |f| %>
+  <%= render "/shared/error_messages", target: @product %>
+
+  <div class="col-md-6 col-md-offset-3">
+    <%= f.input :type_id, collection:[['水果', 1], ['干果',2]],prompt: "--请选择产品类型--", label: "类别ID" %>
+    <%= f.input :title, label: "产品标题" %>
+    <%= f.input :subtitle, label: "产品子标题" %>
+    <%= f.input :intro, label: "产品描述" %>
+    <%- if @product.image.small %>
+      <div class="col-sm-10 col-sm-offset-3">
+        <%= render_product_icon(@product) %>
+      </div>
+    <%- end %>
+    <%= f.input :image, label: "产品图片" %>
+    <%= f.hidden_field :image_cache %>
+    <%= f.input :low_price, label: "最低价格" %>
+    <%= f.input :origin_price, label: "初始价格" %>
+      
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-10">
+        <%= f.submit "提交", class: "btn btn-primary" %>&emsp;<%= link_to '返回', cpanel_products_path, class: "btn btn-default" %>
+      </div>
+    </div>
+  </div>
+
+  
+<% end %>

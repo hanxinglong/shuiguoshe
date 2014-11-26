@@ -2,3 +2,43 @@
  *= require application
  *= require_self
  */
+
+$medium-red: rgb(60,155,0);
+
+.link-color {
+  color: black;
+  &:hover {
+    color: $medium-red;
+  }
+}
+
+.topbar {
+  padding: 5px 0;
+  background-color: #eaeaea;
+  font-size: 12px;
+  border-bottom: 1px solid #aaa;
+
+  .user-login {
+    padding-left: 10px;
+  }
+}
+
+.logo {
+  display: block;
+  width: 291px;
+  height: 60px;
+  line-height: 60px;
+  img {
+    border: 0;
+  }
+}
+
+.logo-text {
+  height: 56px;
+  line-height: 56px;
+}
+
+#carousel-ads {
+  margin-top: -22px;
+  margin-bottom: 20px;
+}

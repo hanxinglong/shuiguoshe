@@ -1,4 +1,53 @@
-<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+<div class="topbar">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        欢迎来水果社
+        <% if current_user %>
+          <span class="user-logout"><%= current_user.mobile %>,<%= link_to "退出登录", destroy_user_session_path, method: :delete, class: "link-color" %>
+            <% if current_user.admin? %>
+            <%= link_to "进入后台", cpanel_root_path %>
+            <% end %>
+          </span>
+        <% else %>
+          <span class="user-login"><a href="<%= new_user_session_path %>" class="link-color">请登录</a><a href="<%= new_user_registration_path %>" class="link-color">免费注册</a></span>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <div class="pull-right">
+          我的订单 | <%= link_to "个人中心", current_user, class: "link-color" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> <!-- topbar -->
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <a class="logo" href="/"><%= image_tag 'logo.png', alt: "水果社" %></a>
+    </div>
+  
+    <div class="col-md-6">
+      <p class="logo-text">
+        <span style="font-size:20px">我们承诺:</span> 1.绝对比您附近的水果便宜 2.水果绝对新鲜可口 3.不满意可以选择不要
+      </p>
+      
+    </div>
+  
+    <div class="col-md-2">
+      <div class="pull-right">
+        <p class="logo-text">
+          <i class="glyphicon glyphicon-phone"></i><span class="mobile">18048553687</span>
+        </p>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<nav class="navbar navbar-static-top " role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -7,17 +56,19 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><%= Setting.app_name %></a>
+      
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="/">首页</a></li>
         <li><a href="#about">水果</a></li>
         <li><a href="#contact">干果</a></li>
-        <li><a href="#contact">常见问题</a></li>
+        <li><a href="#contact">服务小区</a></li>
+        <li><a href="#contact">帮助中心</a></li>
+        <li><a href="#contact">关于水果社</a></li>
       </ul>
       
-      <ul class="nav navbar-nav navbar-right">
+      <!--ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -36,7 +87,7 @@
           <li><a href="<%= new_user_registration_path %>">注册</a></li>
           <li><a href="<%= new_user_session_path %>">登录</a></li>
         <% end %>
-      </ul>
+      </ul-->
     </div><!-- /.nav-collapse -->
   </div><!-- /.container -->
 </nav><!-- /.navbar -->

@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
       self.update_without_password(params)
     end
   end
+  
+  def admin?
+    Setting.admin_emails.include?(self.email)
+  end
 
   # def update_private_token
   #   random_key = "#{SecureRandom.hex(10)}:#{self.id}"
