@@ -46,3 +46,19 @@ $medium-red: rgb(60,155,0);
 .order-head {
   border: 1px solid #ccc;
 }
+
+.apartments {
+  li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 20px;
+    width: 180px;
+    border: 1px solid #eee;
+    text-align: center;
+  }
+  
+  .apartment {
+//    width: 300px;
+  }
+}

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   root 'home#index'
 
   devise_for :users, path: "account", controllers: {
@@ -13,10 +13,18 @@ Rails.application.routes.draw do
   resources :products do
   end
   
+  resources :apartments, only: [:index]
+  
   namespace :cpanel do
     root 'home#index'
     resources :products
     resources :product_types
+    resources :apartments do
+      member do
+        patch :open
+        patch :close
+      end
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

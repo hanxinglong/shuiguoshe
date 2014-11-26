@@ -3,6 +3,7 @@
     models:
       user: "用户"
       product: "产品"
+      apartment: "小区"
     attributes:
       user:
         mobile: "手机"
@@ -20,6 +21,10 @@
         image: "产品图片"
         low_price: "最低价格"
         origin_price: "初始价格"
+      apartment:
+        name: "小区名字"
+        address: "小区地址"
+        image: "小区靓照"
     errors:
       models:
         user: "用户"
