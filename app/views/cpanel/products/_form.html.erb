@@ -8,7 +8,7 @@
   <%= render "/shared/error_messages", target: @product %>
 
   <div class="col-md-6 col-md-offset-3">
-    <%= f.input :type_id, collection:[['水果', 1], ['干果',2]],prompt: "--请选择产品类型--", label: "类别ID" %>
+    <%= f.input :type_id, collection: ProductType.all.map { |t| [t.name, t.id] }, prompt: "--请选择产品类型--", label: "类别ID" %>
     <%= f.input :title, label: "产品标题" %>
     <%= f.input :subtitle, label: "产品子标题" %>
     <%= f.input :intro, label: "产品描述" %>
