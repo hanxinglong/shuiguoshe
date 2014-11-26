@@ -22,7 +22,9 @@ window.App =
         if re == "1"
           if state == true
             $(el).text("开放")
+            $(el).data("state", false)
           else 
             $(el).text("关闭")
+            $(el).data("state", true)
         else
           App.alert("抱歉，系统异常", $(el))
