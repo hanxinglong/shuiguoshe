@@ -6,12 +6,17 @@ Rails.application.routes.draw do
     registrations: :account,
     sessions: :sessions,
   }
-  
   post "account/update_private_token" => "users#update_private_token", as: 'update_private_token_account'
   
-  resources :users
-  resources :products do
+  resources :users do
+    get :orders, on: :member
   end
+  
+  resources :products do
+    resources :orders, only: [:new, :create]
+  end
+  
+  # resources :orders
   
   resources :apartments, only: [:index]
   
@@ -26,6 +31,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   
   ACCESSABLE_ATTRS = [:login, :mobile, :email, :by, :avatar, :password, :password_confirmation, :current_password]
   
+  has_many :orders, dependent: :destroy
+  
   validates :mobile, format: { with: /\A1[3|4|5|8][0-9]\d{4,8}\z/, message: "请输入11位正确手机号" }, length: { is: 11 }, 
             :presence => true, :uniqueness => true
   

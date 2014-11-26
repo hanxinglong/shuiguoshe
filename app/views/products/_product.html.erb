@@ -7,7 +7,7 @@
         <p>已经有6人预订</p>
         <p>当前价：<%= product.origin_price %> 元/斤</p>
         <p>最低价：<%= product.low_price %> 元/斤</p>
-        <p><a href="#" class="btn btn-primary" role="button">立即预订</a></p>
+        <p><%= link_to "立即预订", new_product_order_path(product), class: "btn btn-primary", role: "button" %></p>
       </div>
     </div>
   </div>
