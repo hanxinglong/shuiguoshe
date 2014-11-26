@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   # 注册邮件提醒
   after_create :send_welcome_mail
   def send_welcome_mail
-    UserMailer.welcome(self.id).deliver
+    # UserMailer.welcome(self.id).deliver
   end
 
   def update_with_password(params = {})
