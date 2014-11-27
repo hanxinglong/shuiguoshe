@@ -13,12 +13,7 @@ class Cpanel::OrdersController < Cpanel::ApplicationController
   end
   
   def today_normal
-    
-    @orders = Order.normal.today
-    if params[:q]
-      @orders = @orders.search(params[:q])
-    end
-    @orders = @orders.includes(:user, :product).order('created_at DESC').paginate page: params[:page], per_page: 30
+    @orders = Order.normal.today.includes(:user, :product).order('created_at DESC').paginate page: params[:page], per_page: 30
     
     render :index
   end
