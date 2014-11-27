@@ -5,6 +5,7 @@
       product: "产品"
       apartment: "小区"
       site_config: "站点配置"
+      order: "订单"
     attributes:
       user:
         mobile: "手机"
@@ -30,6 +31,11 @@
         key: "配置key"
         value: "配置值"
         description: "配置说明"
+      order:
+        quantity: "购买重量"
+        state: "订单状态"
+        deliver_time: "配送时间"
+        deliver_address: "配置地址"
     errors:
       models:
         user: "用户"

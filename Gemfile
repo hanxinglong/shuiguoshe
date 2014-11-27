@@ -49,6 +49,8 @@ gem 'spring',        group: :development
 # Use unicorn as the app server
 gem 'unicorn'
 
+gem 'state_machine'
+
 # Use Capistrano for deployment
 group :development do
   

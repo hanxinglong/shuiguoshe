@@ -1,3 +1,4 @@
+# coding: utf-8
 class OrdersController < ApplicationController
   before_filter :require_user
   before_filter :check_user
@@ -50,6 +51,6 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:product_id, :quantity, :deliver_address, :deliver_time, :note)
+      params.require(:order).permit(:product_id, :quantity, :deliver_address, :deliver_time, :note, :state)
     end
 end

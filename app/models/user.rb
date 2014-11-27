@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   # 注册邮件提醒
   after_create :send_welcome_mail
   def send_welcome_mail
+    update_private_token
     # UserMailer.welcome(self.id).deliver
   end
 
@@ -45,10 +46,10 @@ class User < ActiveRecord::Base
     Setting.admin_emails.include?(self.email)
   end
 
-  # def update_private_token
-  #   random_key = "#{SecureRandom.hex(10)}:#{self.id}"
-  #   self.update_attribute(:private_token, random_key)
-  # end
+  def update_private_token
+    random_key = "#{SecureRandom.hex(10)}:#{self.id}"
+    self.update_attribute(:private_token, random_key)
+  end
   # 
   # def ensure_private_token!
   #   self.update_private_token if self.private_token.blank?

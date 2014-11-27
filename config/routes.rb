@@ -23,6 +23,18 @@ Rails.application.routes.draw do
   namespace :cpanel do
     root 'home#index'
     resources :site_configs, only: [:index, :edit, :create, :update, :destroy, :new]
+    resources :orders do
+      member do
+        patch :cancel
+        patch :complete
+      end
+      collection do
+        get :search
+        get :today_normal
+        get :completed
+        get :canceled 
+      end
+    end
     
     resources :products do
       member do
