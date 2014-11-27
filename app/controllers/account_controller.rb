@@ -2,6 +2,7 @@
 class AccountController < Devise::RegistrationsController
   protect_from_forgery
   
+  layout 'user_layout'
   def edit
     @user = current_user
     # 首次生成用户 Token

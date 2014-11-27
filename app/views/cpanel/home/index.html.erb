@@ -1,0 +1,48 @@
+<div class="row">
+  
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">用户统计</h3>
+      </div>
+      <div class="panel-body">
+        用户总数：<%= User.count %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">订单统计</h3>
+      </div>
+      <div class="panel-body">
+        <p>订单总数：<%= Product.count %></p>
+        <p>今日订单：<%= Order.today_count %></p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">产品统计</h3>
+      </div>
+      <div class="panel-body">
+        产品总数：<%= Product.count %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">小区信息统计</h3>
+      </div>
+      <div class="panel-body">
+        小区总数：<%= Apartment.count %>
+      </div>
+    </div>
+  </div>
+
+</div>

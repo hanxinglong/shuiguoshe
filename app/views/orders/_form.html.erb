@@ -3,6 +3,7 @@
     <div class="col-md-3">
       <%= image_tag @product.image_url(:thumb) %>
       <h3 class="text-center"><%= @product.title %></h3>
+      <p class="text-center"><%= @product.origin_price %>元/斤</p>
     </div>
     <div class="col-md-8">
       <%= simple_form_for([@product, @order], html: { class: "form-horizontal" },wrapper: :horizontal_form,
@@ -15,7 +16,8 @@
         <%= render '/shared/error_messages', target: @order %>
 
       <%= f.input :quantity, label: "购买数量 (单位:斤)", placeholder: "至少购买1斤", help_inline: "至少购买1斤" %>
-      <%= f.input :apartment, collection: Apartment.opened, label: "配送至", prompt: "--请选择您所在的小区--" %>
+      <%= f.input :deliver_time, collection: SiteConfig.deliver_times.map { |s| [s,s] }, label: "配送时间", prompt: "--请选择配送时间--" %>
+      <%= f.input :deliver_address, collection: Apartment.opened.map { |a| [a.name, a.name] }, label: "配送至", prompt: "--请选择您所在的小区--" %>
       <%= f.input :note, label: "备注信息", placeholder: "提醒注意的事项 (选填)" %>
       
       <div class="form-group">

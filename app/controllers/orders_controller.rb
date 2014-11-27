@@ -1,12 +1,23 @@
 class OrdersController < ApplicationController
   before_filter :require_user
+  before_filter :check_user
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
+  def check_user
+    unless current_user.verified
+      flash[:error] = "您的账号已经被冻结"
+      redirect_to root_path
+    end
+  end
+  
   def new
     @product = Product.find(params[:product_id])
     @order = @product.orders.build
+    
+    set_seo_meta("预订#{@product.title}", @product.title, @product.intro)
+    
     respond_with(@order)
   end
 
@@ -39,6 +50,6 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:product_id, :quantity, :apartment, :note)
+      params.require(:order).permit(:product_id, :quantity, :deliver_address, :deliver_time, :note)
     end
 end

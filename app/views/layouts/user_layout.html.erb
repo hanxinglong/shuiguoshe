@@ -1,0 +1,16 @@
+<% content_for :content do %>
+<div class="row">
+  <div class="col-md-2">
+    <div class="list-group">
+      <a href="#" class="list-group-item">我的订单</a>
+      <%= link_to "个人资料设置", edit_user_registration_path, class: "list-group-item" %>
+    </div>
+  </div>
+  <div class="col-md-10">
+    <%= yield %>
+  </div>
+</div>
+
+<% end %>
+
+<%= render :template => 'layouts/application' %>

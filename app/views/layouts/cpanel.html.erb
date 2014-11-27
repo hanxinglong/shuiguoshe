@@ -36,13 +36,13 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/cpanel">首页</a></li>
-            <li><a href="#">站点配置</a></li>
+            <li><%= link_to "站点配置", cpanel_site_configs_path %></li>
             <li><%= link_to '产品种类', cpanel_product_types_path %></li>
             <li><%= link_to '产品', cpanel_products_path %></li>
             <li><%= link_to '小区', cpanel_apartments_path %></li>
-            <li><a href="#">用户</a></li>
+            <li><%= link_to "用户", cpanel_users_path %></li>
           </ul>
-
+          <p class="navbar-text pull-right"><span class="label label-success">管理员 [<%= current_user.mobile %>]</span></p>
         </div>
       </div>
     </nav>
