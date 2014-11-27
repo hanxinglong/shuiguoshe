@@ -1,6 +1,6 @@
 # coding: utf-8
 class Cpanel::ProductsController < Cpanel::ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :upshelf, :downshelf]
 
   def index
     @products = Product.order('created_at desc').paginate page: params[:page], per_page: 30
@@ -33,6 +33,26 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
       redirect_to cpanel_products_path
     else
       render :edit
+    end
+  end
+  
+  # 上架
+  def upshelf
+    @product.on_sale = true
+    if @product.save
+      render text: "1"
+    else
+      render text: "-1"
+    end
+  end
+  
+  # 下架
+  def downshelf
+    @product.on_sale = false
+    if @product.save
+      render text: "1"
+    else
+      render text: "-1"
     end
   end
 

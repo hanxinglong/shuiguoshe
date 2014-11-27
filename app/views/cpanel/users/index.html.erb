@@ -31,13 +31,11 @@
             <td><%= user.last_sign_in_at %></td>
             <td><%= user.sign_in_count %></td>
             <td>
-              <a href="#" data-remote="true" data-id="<%= user.id %>" data-state="<%= user.verified %>" onclick="App.updateUserState(this);" class="btn btn-danger btn-xs" >
-                <% if user.verified %>
-                禁用
-                <% else %>
-                启用
-                <% end %>
-              </a>
+              <%= state_link_to state: user.verified,
+                                yes_uri: "/cpanel/users/#{user.id}/block", 
+                                yes_text: "禁用",
+                                no_uri: "/cpanel/users/#{user.id}/unblock",
+                                no_text: "启用" %>
             </td>
           </tr>
         <% end %>

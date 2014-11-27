@@ -1,3 +1,4 @@
+<% cache @apartments.map { |a| a.id }.join do %>
 <ul class="apartments">
   <% @apartments.each do |apartment| %>
   <li>
@@ -10,4 +11,6 @@
   </li>
   <% end %>
 </ul>
+<% end %>
+
 

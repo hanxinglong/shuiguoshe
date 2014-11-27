@@ -23,14 +23,11 @@
             <td><%= apartment.name %></td>
             <td><%= apartment.address %></td>
             <td>
-              <a href="#" data-remote="true" 
-                          data-state="<%= apartment.is_open %>" 
-                          data-id="<%= apartment.id %>" 
-                          data-type="<%= apartment.class.to_s.pluralize.downcase %>" 
-                          onclick="App.updateState(this);" 
-                          class="btn btn-xs btn-primary">
-                  <%= apartment.is_open ? "关闭" : "开放" %>
-              </a>
+              <%= state_link_to state: apartment.is_open,
+                                yes_uri: "/cpanel/apartments/#{apartment.id}/close", 
+                                yes_text: "关闭",
+                                no_uri: "/cpanel/apartments/#{apartment.id}/open",
+                                no_text: "开放" %>
               <%= link_to '编辑', edit_cpanel_apartment_path(apartment), class: "btn btn-xs btn-default" %>
               <%= link_to '删除', [:cpanel, apartment], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
             </td>
