@@ -1,10 +1,14 @@
 /*
  *= require application
+ *= require orders
+ *= require users
  *= require_self
  */
 
 $nature-green: rgb(99,185,76);
 $medium-red: rgb(60,155,0);
+$light-gray: #777;
+$gray-medium-light: #eaeaea;
 
 .topbar {
 //  padding: 5px 0;
@@ -44,51 +48,6 @@ $medium-red: rgb(60,155,0);
   }
 }
 
-// 用户登录、注册
-.user-login-box {
-  background-color: rgb(251,248,240);
-  .user-login-form {
-    padding: 10px 50px;
-    h2 {
-      padding: 10px 0;
-      font-size: 18px;
-      border-bottom: 2px solid $nature-green;
-      margin-bottom: 20px;
-    }
-    
-    .reg-tip {
-      color:red;
-      font-size: 14px;
-      padding-left: 10px;
-    }
-  }
-  
-  .forget-password {
-    padding: 0 10px;
-    color: $nature-green;
-  }
-  
-  .user-reg-info {
-    padding-top: 40px;
-    height: 540px;
-    background-color: rgb(221,230,202);
-    text-align: center;
-    color: $nature-green;
-    h3 {
-      font-size: 20px;
-    }
-    p {
-      font-size: 18px;
-      
-    }
-    a {
-      margin-top: 30px;
-    }
-    
-  }
-  
-}
-
 .logo-text {
   height: 56px;
   line-height: 56px;
@@ -99,9 +58,9 @@ $medium-red: rgb(60,155,0);
   margin-bottom: 20px;
 }
 
-.order-head {
-  border: 1px solid #ccc;
-}
+//.order-head {
+//  border: 1px solid #ccc;
+//}
 
 .apartments {
   li {
@@ -117,39 +76,4 @@ $medium-red: rgb(60,155,0);
   .apartment {
 //    width: 300px;
   }
-}
-
-.tab-head {
-  a {
-    color: black;
-    font-size: 14px;
-    font-weight: bold;
-    &:hover {
-      color: white;
-    };
-  }
-}
-
-.tab-body {
-  margin-top: 20px;
-  table {
-    border: 1px solid #ccc;
-  }
-  .order-info {
-    background-color: rgb(245,245,245);
-    font-size: 12px;
-  }
-  thead {
-    background-color: rgb(231,231,231);
-    th {
-      font-weight: normal;
-      text-align: center;
-    }
-  }
-  
-  td {
-    text-align: center;
-    font-size: 13px;
-  }
-  
 }

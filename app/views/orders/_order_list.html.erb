@@ -1,0 +1,28 @@
+<div class="orders">
+  <table class="table">
+    <thead>
+      <tr style="text-align:center">
+        <th>订单信息</th>
+        <th>单价(元/斤)</th>
+        <th>重量(斤)</th>
+        <th>实付款(元)</th>
+        <th>下单日期</th>
+        <th>订单状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @orders.empty? %>
+        <tr>
+          <td colspan="7">
+            <div class="text-center">没有记录!</div>
+          </td>
+        </tr>
+      <% else %>
+        <%= render @orders %>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <div class="center"><%= will_paginate @orders, renderer: BootstrapPagination::Rails %></div>
+</div>

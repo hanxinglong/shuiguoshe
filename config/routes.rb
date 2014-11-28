@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post "account/update_private_token" => "users#update_private_token", as: 'update_private_token_account'
   
   resources :users
+  resources :messages, only: [:new, :create]
   
   get 'user/home' => 'users#home', as: 'home_user'
   get 'user/orders' => 'users#orders', as: 'orders_user'
@@ -22,17 +23,22 @@ Rails.application.routes.draw do
   
   resources :orders do
     collection do
-      get :search
-      get :all
-      get :incompleted
-      get :completed
-      get :canceled
+      # get :search
+      # get :all
+      # get :incompleted
+      # get :completed
+      # get :canceled
     end
     
     member do 
       patch :cancel
     end
   end
+  
+  get '/user/orders/incompleted' => 'orders#incompleted', as: :incompleted_orders
+  get '/user/orders/completed' => 'orders#completed', as: :completed_orders
+  get '/user/orders/canceled' => 'orders#canceled', as: :canceled_orders
+  get '/user/orders/search' => 'orders#search', as: :search_orders
   
   resources :apartments, only: [:index]
   

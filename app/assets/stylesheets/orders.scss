@@ -1,0 +1,22 @@
+.orders {
+  padding:0;
+  table {
+//    border: 1px solid #ccc;
+  }
+  .order-info {
+    background-color: rgb(245,245,245);
+    font-size: 12px;
+  }
+  thead {
+    background-color: rgb(235,235,235);
+    th {
+      font-weight: normal;
+      text-align: center;
+    }
+  }
+  
+  td {
+    text-align: center;
+    font-size: 13px;
+  }
+}

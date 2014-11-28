@@ -4,18 +4,25 @@
 
 <div class="tab-head">
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="<%= @current == '/all' ? "active" : "" %>"><%= link_to "所有订单", all_orders_path %></li>
-    <li role="presentation" class="<%= @current == '/incompleted' ? "active" : "" %>"><%= link_to "待配送(#{@orders.normal.count})", incompleted_orders_path %></li>
-    <li role="presentation" class="<%= @current == '/completed' ? "active" : "" %>"><%= link_to "已完成", completed_orders_path %></li>
-    <li role="presentation" class="<%= @current == '/canceled' ? "active" : "" %>"><%= link_to "已取消", canceled_orders_path %></li>
+    <li role="presentation" class="<%= @current == 'user_orders' ? "active" : "" %>"><%= link_to "所有订单", orders_user_path %></li>
+    <li role="presentation" class="<%= @current == 'user_orders_incompleted' ? "active" : "" %>"><%= link_to "待配送(#{current_user.orders.normal.count})", incompleted_orders_path %></li>
+    <li role="presentation" class="<%= @current == 'user_orders_completed' ? "active" : "" %>"><%= link_to "已完成", completed_orders_path %></li>
+    <li role="presentation" class="<%= @current == 'user_orders_canceled' ? "active" : "" %>"><%= link_to "已取消", canceled_orders_path %></li>
     <li>
-      <div style="padding-left: 80px;">
+      <div style="padding-left: 60px;">
         <%= form_tag search_orders_path, method: 'get', class: "form-inline" do %>
         <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "请输入订单号或商品名称", style: "width: 300px;" %>
-        <%= submit_tag '搜索', class: "btn btn-sm btn-success" %>
+        <button type="submit" class="btn btn-sm btn-success">&emsp;搜索&emsp;</button>
         <% end %>
       </div>
-    
     </li>
+    <% if @current == 'user_orders_incompleted' %>
+    <li>
+      <div style="padding: 10px 0 0 80px;">
+        <strong>共计：</strong><em><%= render_orders_total_price(current_user.orders.normal) %></em>元
+      </div>
+      
+    </li>
+    <% end %>
   </ul>
 </div>

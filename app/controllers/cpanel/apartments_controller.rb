@@ -3,7 +3,7 @@ class Cpanel::ApartmentsController < Cpanel::ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy, :open, :close]
 
   def index
-    @apartments = Apartment.order('created_at desc').paginate page: params[:page], per_page: 30
+    @apartments = Apartment.order('created_at desc').paginate page: params[:page], per_page: 3
   end
 
   def show

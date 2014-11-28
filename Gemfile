@@ -14,8 +14,8 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
-gem 'will_paginate', '3.0.7'
-gem 'bootstrap-will_paginate', '0.0.3'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 gem 'bootstrap_helper', '4.2.3'
 
 # 上传组件

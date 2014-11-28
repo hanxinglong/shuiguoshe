@@ -31,6 +31,7 @@ height: 100%;
 body {
 //  padding-top: 70px;
   padding-bottom: 50px;
+  background-color: rgb(251,251,251);
 }
 
 section {
@@ -50,7 +51,7 @@ textarea {
 
 .navbar {
   border-bottom: 1px solid $gray-medium-light;
-  background-color: rgb(99,185,76);
+  background-color: $nature-green;
   a {
     color: white;
     font-weight:bold;
@@ -119,3 +120,6 @@ footer{
   font-weight: bold;
 }
 
+.debug_dump {
+  margin-top: 20px;
+}

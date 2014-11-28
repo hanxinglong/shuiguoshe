@@ -1,0 +1,25 @@
+<% cache(order) do %>
+<tr class="order-info">
+  <td colspan="7" style="text-align:left;">
+    订单号：<%= order.order_no %>
+  </td>
+</tr>
+<tr>
+  <td>
+    <div class="product-info" style="text-align:center">
+      <%= image_tag order.product.image_url(:small), alt: order.product.title %>
+      <p><%= order.product.title %></p>
+    </div>
+  </td>
+  <td>￥<%= order.product.origin_price %></td>
+  <td><%= order.quantity %></td>
+  <td>￥<%= order.total_price %></td>
+  <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+  <td><%= render_order_state(order) %></td>
+  <td>
+    <% if can_cancel?(order) %>
+      <a href="javascript:;" onclick="App.cancelOrder(this)" data-remote="true" data-current="<%= action_name %>" data-id="<%= order.id %>" class="btn btn-danger btn-sm">取消订单</a>
+    <% end %>
+  </td>
+</tr>
+<% end %>

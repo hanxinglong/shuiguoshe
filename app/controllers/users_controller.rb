@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   layout 'user_layout'
   
   def home
-    
+    @orders = current_user.orders.today.normal.order("created_at DESC").paginate page: params[:page], per_page: 10
   end
   
   def show
@@ -13,11 +13,11 @@ class UsersController < ApplicationController
   end
   
   def orders
-    @user = User.find_by_id(params[:id])
+    @user = User.find_by_id(current_user.id)
     
-    if @user && @user == current_user
-      @orders = current_user.orders.order("created_at DESC").paginate page: params[:page], per_page: 10
-      @current = '/all'
+    if @user
+      @orders = @user.orders.order("created_at DESC").paginate page: params[:page], per_page: 10
+      @current = 'user_orders'
     else
       render_404
     end

@@ -1,0 +1,17 @@
+<%= render "users/user_info" %>
+
+<div class="alert alert-warning" role="alert" style="margin-top: 20px; margin-bottom:-20px;">
+  温馨提示：如要取消订单，请在当天23点59分59秒以前操作！
+</div>
+
+<div class="user-today-orders">
+  <h2>
+    今日待处理订单
+    <span class="pull-right">
+      共计：<em style="color:red;"><%= render_orders_total_price(@orders) %></em> 元
+    </span>
+  </h2>
+  <div class="order-list">
+    <%= render "/orders/order_list" %>
+  </div>
+</div>

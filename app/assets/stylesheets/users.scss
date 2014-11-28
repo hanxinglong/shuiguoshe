@@ -1,0 +1,157 @@
+$nature-green: rgb(99,185,76);
+$medium-red: rgb(60,155,0);
+$light-gray: #777;
+$gray-medium-light: #eaeaea;
+.user-box {
+  h2 {
+    font-size: 18px;
+    margin:0;
+    padding:0;
+    padding: 10px 0;
+    
+    border-bottom: 2px solid $nature-green;
+    margin-bottom: 30px;
+  }
+}
+
+// 用户登录、注册
+.user-login-box {
+  background-color: rgb(251,248,240);
+  .user-login-form {
+    padding: 10px 50px;
+    h2 {
+      padding: 10px 0;
+      font-size: 18px;
+      border-bottom: 2px solid $nature-green;
+      margin-bottom: 20px;
+    }
+    
+    .reg-tip {
+      color:red;
+      font-size: 14px;
+      padding-left: 10px;
+    }
+  }
+  
+  .forget-password {
+    padding: 0 10px;
+    color: $nature-green;
+  }
+  
+  .user-reg-info {
+    padding-top: 40px;
+    height: 540px;
+    background-color: rgb(221,230,202);
+    text-align: center;
+    color: $nature-green;
+    h3 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 18px;
+      
+    }
+    a {
+      margin-top: 30px;
+    }
+    
+  }
+  
+}
+
+// 用户主页侧边栏
+.slide-left {
+//  width: 140px;
+//  height: 300px;
+  border: 1px solid $gray-medium-light;
+  text-align: center;
+  h2 {
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid $gray-medium-light;
+    margin: 0;
+    padding: 15px 0;
+  }
+  li.last {
+    border-bottom: 1px solid $gray-medium-light;
+  }
+  
+  a {
+    color: black;
+    &:hover {
+      color: white;
+    };
+  }
+  a.user-home {
+    color: black;
+    &:hover {
+      color:black;
+      text-decoration: underline;
+    };
+  }
+}
+
+// 用户主页内容区
+.user-info {
+  margin: 0;
+  clear: both;
+  .user-intro {
+    margin-left: 20px;
+    margin-top: -15px;
+    h3 {
+      color: $nature-green;
+    }
+  }
+  .user-points {
+    width: 200px;
+    margin-left: 350px;
+    h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    p {
+      margin-top: 10px;
+      font-size: 16px;
+//      font-weight: bold;
+    }
+    padding-left: 60px;
+    border-left: 1px solid $gray-medium-light;
+    height: 120px;
+  }
+}
+
+.user-today-orders {
+  clear: both;
+//  border: 1px solid $gray-medium-light;
+  margin-top: 40px;
+  h2 {
+    margin: 0;
+    padding: 0;
+    padding: 10px;
+    border: 1px solid rgb(221,221,221);
+    font-size: 16px;
+    color: $nature-green;
+    background-color: rgb(235,235,235);
+    margin-bottom: 10px;
+  }
+  
+  .order-list {
+    border: 1px solid rgb(221,221,221);
+  }
+}
+
+.tab-head {
+  a {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    &:hover {
+      color: white;
+    };
+  }
+}
+
+.tab-body {
+  margin-top: 20px;
+  border: 1px solid $gray-medium-light;
+}
