@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
   before_filter :require_user
   before_filter :check_user
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  
+  layout 'user_layout', only: [:search, :incompleted, :completed, :canceled, :all, :cancel]
 
   respond_to :html
 
@@ -11,6 +13,54 @@ class OrdersController < ApplicationController
       flash[:error] = "您的账号已经被冻结"
       redirect_to root_path
     end
+  end
+  
+  def search
+    @orders = Order.search(params[:q]).includes(:product).order("orders.created_at DESC").paginate page: params[:page], per_page: 10
+    @current = '/all'
+    render :index
+  end
+  
+  def all
+    @orders = current_user.orders.order("created_at DESC").paginate page: params[:page], per_page: 10
+    @current = '/all'
+    render :index
+  end
+  
+  def incompleted
+    @orders = Order.normal.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
+    @current = '/incompleted'
+    render :index
+  end
+  
+  def completed
+    @orders = Order.completed.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
+    @current = '/completed'
+    render :index
+  end
+  
+  def canceled
+    @orders = Order.canceled.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
+    @current = '/canceled'
+    render :index
+  end
+  
+  def cancel
+    @order = Order.find(params[:id])
+    if @order.user == current_user
+      if Time.now.strftime('%Y-%m-%d %H:%M:%S') < @order.created_at.strftime('%Y-%m-%d 23:59:59')
+        if @order.cancel
+          @msg = "操作成功"
+        else
+          @msg = "操作失败"
+        end
+      else
+        @msg = "对不起不能进行该操作"
+      end
+    else
+      @msg = "非法操作"
+    end
+    
   end
   
   def new
@@ -28,7 +78,7 @@ class OrdersController < ApplicationController
     @order.user_id = current_user.id
     if @order.save
       flash[:success] = "预订成功"
-      redirect_to root_path
+      redirect_to orders_user_path(current_user)
     else
       render :new
     end

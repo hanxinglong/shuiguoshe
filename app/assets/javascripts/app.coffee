@@ -1,6 +1,19 @@
 window.App =
   alert: (msg, to) ->
     $(to).before("<div data-alert class='alert-message'><a class='close' href='#'>×</a>#{msg}</div>")
+  
+  # 取消订单
+  cancelOrder: (el) ->
+    result = confirm("您确定吗？")
+    if !result
+      return false
+    
+    id = $(el).data("id")
+    current = $(el).data("current")
+    
+    $.ajax
+      url: "/orders/#{id}/cancel"
+      type: "PATCH"
     
   # 更新状态
   updateState: (el) ->

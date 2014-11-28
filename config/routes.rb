@@ -8,15 +8,31 @@ Rails.application.routes.draw do
   }
   post "account/update_private_token" => "users#update_private_token", as: 'update_private_token_account'
   
-  resources :users do
-    get :orders, on: :member
-  end
+  resources :users
+  
+  get 'user/home' => 'users#home', as: 'home_user'
+  get 'user/orders' => 'users#orders', as: 'orders_user'
   
   resources :products do
     resources :orders, only: [:new, :create]
+    collection do
+      get :search
+    end
   end
   
-  # resources :orders
+  resources :orders do
+    collection do
+      get :search
+      get :all
+      get :incompleted
+      get :completed
+      get :canceled
+    end
+    
+    member do 
+      patch :cancel
+    end
+  end
   
   resources :apartments, only: [:index]
   

@@ -1,0 +1,21 @@
+<div class="alert alert-warning" role="alert">
+  温馨提示：如要取消订单，请在当天23点59分59秒以前操作！
+</div>
+
+<div class="tab-head">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="<%= @current == '/all' ? "active" : "" %>"><%= link_to "所有订单", all_orders_path %></li>
+    <li role="presentation" class="<%= @current == '/incompleted' ? "active" : "" %>"><%= link_to "待配送(#{@orders.normal.count})", incompleted_orders_path %></li>
+    <li role="presentation" class="<%= @current == '/completed' ? "active" : "" %>"><%= link_to "已完成", completed_orders_path %></li>
+    <li role="presentation" class="<%= @current == '/canceled' ? "active" : "" %>"><%= link_to "已取消", canceled_orders_path %></li>
+    <li>
+      <div style="padding-left: 80px;">
+        <%= form_tag search_orders_path, method: 'get', class: "form-inline" do %>
+        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "请输入订单号或商品名称", style: "width: 300px;" %>
+        <%= submit_tag '搜索', class: "btn btn-sm btn-success" %>
+        <% end %>
+      </div>
+    
+    </li>
+  </ul>
+</div>

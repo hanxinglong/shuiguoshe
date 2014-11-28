@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render_page_title %>
+  <meta charset='utf-8' />
+  <meta name="keywords" content="<%= @meta_keywords %>" />
+  <meta name="description" content="<%= @meta_description %>" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag  'front', 'data-turbolinks-track' => true %>
+  <link rel="shortcut icon" href="<%= asset_path("") %>" />
+  
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
+</head>
+<body>
+  <div class="user-navbar">
+    <div class="container">
+      <a class="logo" href="/"><%= image_tag 'logo.png', alt: "水果社" %></a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="user-login-box">
+      <%= yield %>
+    </div>
+    <%= debug(params) if Rails.env.development? %>
+    <%= render 'layouts/footer' %>
+  </div>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= yield :scripts %>
+</body>
+</html>

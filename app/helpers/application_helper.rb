@@ -18,6 +18,11 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
   
+  def owner?(item)
+    return false if item.blank?
+    return item.user == current_user
+  end
+  
   # state: true, yes_uri: "/cpanel/users/1/block", yes_text: "禁用", no_uri: "/cpanel/users/1/unblock", no_text: "启用"
   def state_link_to(opts = {})
     state = opts[:state]

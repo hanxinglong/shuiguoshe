@@ -1,6 +1,7 @@
 <div class="row">
-  <div class="col-md-9">
-    <div class="box">
+  <div class="col-md-8">
+    <div class="user-login-form">
+      <h2>会员注册<span class="reg-tip">赠送10元积分下单可抵扣</span></h2>
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'form-horizontal' },
         wrapper: :horizontal_form,
         wrapper_mappings: {
@@ -9,36 +10,26 @@
           file: :horizontal_file_input,
           boolean: :horizontal_boolean
         }) do |f| %>
-      
-        <%= render 'shared/error_messages', target: resource %>
-        <fieldset>
-          <legend>新用户注册</legend>
-      
-          <%= f.input :mobile, label: "手机", input_html: { class: "col-md-1" } %>
-          <%= f.input :email, label: "邮箱" %>
-          <%= f.input :password, label: "密码" %>
-          <%= f.input :password_confirmation, label: "确认密码" %>
-        
+          
+          <%= f.input :mobile, label: "手机", placeholder: "请输入11位正确的手机号", hint: "以便我们送货时联系您", input_html: { style: "width:300px;" } %>
+          <%= f.input :email, label: "邮箱", placeholder: "example@foo.com", hint: "密码忘记时，可以通过您的邮箱找回", input_html: { style: "width:300px;" } %>
+          <%= f.input :password, label: "密码", placeholder: "密码至少6位", input_html: { style: "width:300px;" } %>
+          <%= f.input :password_confirmation, label: "确认密码", placeholder: "请确保两次密码输入一致", input_html: { style: "width:300px;" } %>
+
           <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-10">
-              <%= f.submit "提交注册信息", class: "btn btn-primary" %>
+            <div class="col-sm-offset-3 col-sm-9">
+              <button type="submit" class="btn btn-success">&emsp;注册&emsp;</button>
             </div>
-            
           </div>
-        
-        </fieldset>
       
       <% end %>
     </div>
     
   </div>
-  <div class="col-md-3">
-    <div class="box">
-      <%= render "devise/shared/links" %>
+  <div class="col-md-4">
+    <div class="user-reg-info">
+      <h3>已经是水果社会员？</h3>
+      <%= link_to "立即登录", new_user_session_path, class: "btn btn-success" %>
     </div>
-    
   </div>
 </div>
-
-
-

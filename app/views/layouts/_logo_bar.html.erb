@@ -1,0 +1,23 @@
+<div class="container" style="padding-top: 15px;">
+  <div class="row">
+    <div class="col-md-4">
+      <a class="logo" href="/"><%= image_tag 'logo.png', alt: "水果社" %></a>
+    </div>
+  
+    <div class="col-md-6" style="padding-top:15px">
+      <%= form_tag search_products_path, method: 'get', class: "form-inline" do %>
+      <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "请输入商品名称", style: "width: 420px;" %>
+      <%= hidden_field_tag :type_id, params[:type_id] if params[:type_id].present? %>
+      <button type="submit" class="btn btn-sm btn-success">&emsp;搜索&emsp;</button>
+      <% end %>
+    </div>
+  
+    <div class="col-md-2">
+      <div class="pull-right order-btn-box">
+        <a href="<%= orders_user_path %>" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i> 订单查询</a>
+        
+      </div>
+    </div>
+  </div>
+  
+</div>

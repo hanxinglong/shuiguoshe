@@ -3,24 +3,32 @@
  *= require_self
  */
 
-$medium-red: rgb(60,155,0);
+$nature-green: rgb(99,185,76);
 
-.link-color {
-  color: black;
-  &:hover {
-    color: $medium-red;
-  }
-}
+$medium-red: rgb(60,155,0);
 
 .topbar {
   padding: 5px 0;
-  background-color: #eaeaea;
+//  background-color: #eaeaea;
   font-size: 12px;
-  border-bottom: 1px solid #aaa;
+//  border-bottom: 1px solid #aaa;
+  
+  .dot {
+    padding: 0 4px;
+    color: $nature-green;
+  }
+  
+  a {
+    color: rgb(100,100,100);
+  }
 
   .user-login {
     padding-left: 10px;
   }
+}
+
+.order-btn-box{
+  padding-top: 15px;
 }
 
 .logo {
@@ -31,6 +39,51 @@ $medium-red: rgb(60,155,0);
   img {
     border: 0;
   }
+}
+
+// 用户登录、注册
+.user-login-box {
+  background-color: rgb(251,248,240);
+  .user-login-form {
+    padding: 10px 50px;
+    h2 {
+      padding: 10px 0;
+      font-size: 18px;
+      border-bottom: 2px solid $nature-green;
+      margin-bottom: 20px;
+    }
+    
+    .reg-tip {
+      color:red;
+      font-size: 14px;
+      padding-left: 10px;
+    }
+  }
+  
+  .forget-password {
+    padding: 0 10px;
+    color: $nature-green;
+  }
+  
+  .user-reg-info {
+    padding-top: 40px;
+    height: 540px;
+    background-color: rgb(221,230,202);
+    text-align: center;
+    color: $nature-green;
+    h3 {
+      font-size: 20px;
+    }
+    p {
+      font-size: 18px;
+      
+    }
+    a {
+      margin-top: 30px;
+    }
+    
+  }
+  
 }
 
 .logo-text {
@@ -61,4 +114,39 @@ $medium-red: rgb(60,155,0);
   .apartment {
 //    width: 300px;
   }
+}
+
+.tab-head {
+  a {
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    &:hover {
+      color: white;
+    };
+  }
+}
+
+.tab-body {
+  margin-top: 20px;
+  table {
+    border: 1px solid #ccc;
+  }
+  .order-info {
+    background-color: rgb(245,245,245);
+    font-size: 12px;
+  }
+  thead {
+    background-color: rgb(231,231,231);
+    th {
+      font-weight: normal;
+      text-align: center;
+    }
+  }
+  
+  td {
+    text-align: center;
+    font-size: 13px;
+  }
+  
 }

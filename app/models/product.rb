@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
   has_many :orders
   
   scope :saled, -> { where(on_sale: true) }
+  scope :search, -> keyword { where('title like :keyword or subtitle like :keyword or intro like :keyword', { keyword: "%#{keyword}%" }) }
   
   validates :title, :image, :low_price, :type_id, :origin_price, presence: true
   validates :low_price, :origin_price, format: { with: /\A\d+\.\d{1,}\z/, message: "不正确的价格" }

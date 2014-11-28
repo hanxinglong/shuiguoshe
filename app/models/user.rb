@@ -25,6 +25,10 @@ class User < ActiveRecord::Base
       where(conditions).first
     end
   end
+  
+  def login
+    self.mobile || self.email
+  end
 
   # 注册邮件提醒
   after_create :send_welcome_mail
