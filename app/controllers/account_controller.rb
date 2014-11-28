@@ -13,6 +13,12 @@ class AccountController < Devise::RegistrationsController
   
   def edit
     @user = current_user
+    
+    if params[:by] == 'pwd'
+      @current = 'user_edit_pwd'
+    else
+      @current = 'user_edit_profile'
+    end
     # 首次生成用户 Token
     # @user.update_private_token if @user.private_token.blank?
   end

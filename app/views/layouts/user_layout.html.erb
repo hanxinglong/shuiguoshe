@@ -3,16 +3,40 @@
   <div class="col-sm-2">
     <div class="slide-left">
         <h2><%= link_to "我的账户", home_user_path, class: "user-home" %></h2>
-        <ul class="nav ">
+        <!--ul class="nav">
           <li class="<%= @current == 'user_orders' ? "active" : "" %>"><a href="<%= orders_user_path %>">我的订单</a></li>
           <li class="<%= @current == 'user_points' ? "active" : "" %>"><%= link_to "我的积分", points_user_path %></li>
-          <li class="last <%= @current == 'user_orders' ? "active" : "" %>"><%= link_to "我有话说", new_message_path %></li>
+          <li class="last <%= @current == 'user_message_new' ? "active" : "" %>"><%= link_to "我有话说", new_message_path %></li>
         </ul>
-        <ul class="nav ">
-          <li><%= link_to "基本资料", edit_user_registration_path %></li>
-          <li><%= link_to "修改密码", edit_user_registration_path(by: 'pwd') %></li>
-          <li><%= link_to "配送设置", edit_user_path %></li>
-        </ul>
+        <ul class="nav">
+          <li class="<%= @current == 'user_edit_profile' ? "active" : "" %>"><%= link_to "基本资料", edit_user_registration_path, class: "active" %></li>
+          <li class="<%= @current == 'user_edit_pwd' ? "active" : "" %>"><%= link_to "修改密码", edit_user_registration_path(by: 'pwd') %></li>
+          <li class="<%= @current == 'user_edit_other' ? "active" : "" %>"><%= link_to "配送设置", edit_user_path %></li>
+        </ul-->
+        
+        <div class="list-group">
+          <a href="<%= orders_user_path %>" class="list-group-item <%= @current == 'user_orders' ? "active" : "" %>">
+            我的订单
+          </a>
+          <a href="<%= points_user_path %>" class="list-group-item <%= @current == 'user_points' ? "active" : "" %>">
+            我的积分
+          </a>
+          <a href="<%= new_message_path %>" class="list-group-item <%= @current == 'user_message_new' ? "active" : "" %>">
+            我有话说
+          </a>
+        </div>
+        <div class="list-group">
+          <a href="<%= edit_user_registration_path %>" class="list-group-item <%= @current == 'user_edit_profile' ? "active" : "" %>">
+            基本资料
+          </a>
+          <a href="<%= edit_user_registration_path(by:'pwd') %>" class="list-group-item <%= @current == 'user_edit_pwd' ? "active" : "" %>">
+            修改密码
+          </a>
+          <a href="<%= edit_user_path %>" class="list-group-item <%= @current == 'user_edit_other' ? "active" : "" %>">
+            配送设置
+          </a>
+        </div>
+        
     </div>
   </div>
   <div class="col-sm-10">

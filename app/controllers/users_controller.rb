@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   
   def edit
     @user = current_user
+    @current = 'user_edit_other'
   end
   
   def update
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
   
   def points
     @traces = ScoreTrace.where(user_id: current_user.id).order("created_at DESC").paginate page: params[:page], per_page: 30
+    @current = 'user_points'
   end
   
   def orders

@@ -16,6 +16,7 @@ class MessagesController < ApplicationController
 
   def new
     @message = Message.new
+    @current = "user_message_new"
     respond_with(@message)
   end
 
@@ -23,6 +24,7 @@ class MessagesController < ApplicationController
   end
 
   def create
+    @current = "user_message_new"
     @message = Message.new(message_params)
     @message.user_id = current_user.id
     if @message.save
