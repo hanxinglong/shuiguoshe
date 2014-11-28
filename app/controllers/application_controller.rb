@@ -72,6 +72,13 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def check_user
+    unless current_user.verified
+      flash[:error] = "您的账号已经被冻结"
+      redirect_to root_path
+    end
+  end
+  
   def fresh_when(opts = {})
     super(opts)
   end

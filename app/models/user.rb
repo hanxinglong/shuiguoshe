@@ -33,7 +33,11 @@ class User < ActiveRecord::Base
   # 注册邮件提醒
   after_create :send_welcome_mail
   def send_welcome_mail
+    # 生成token
     update_private_token
+    # 赠送积分
+    update_score
+    # 发送欢迎邮件
     # UserMailer.welcome(self.id).deliver
   end
 
@@ -48,6 +52,15 @@ class User < ActiveRecord::Base
   
   def admin?
     Setting.admin_emails.include?(self.email)
+  end
+  
+  def update_score
+    default_score = 1000
+    self.score += default_score
+    if self.save
+      # 生成积分交易记录
+      ScoreTrace.create!(score: default_score, summary: "成功注册，赠送#{default_score}积分", user_id: self.id)
+    end
   end
 
   def update_private_token

@@ -7,25 +7,12 @@ class OrdersController < ApplicationController
   layout 'user_layout', only: [:search, :incompleted, :completed, :canceled, :cancel]
 
   respond_to :html
-
-  def check_user
-    unless current_user.verified
-      flash[:error] = "您的账号已经被冻结"
-      redirect_to root_path
-    end
-  end
   
   def search
     @orders = current_user.orders.search(params[:q]).includes(:product).order("orders.created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders'
     render :index
   end
-  
-  # def all
-  #   @orders = current_user.orders.order("created_at DESC").paginate page: params[:page], per_page: 10
-  #   @current = '/all'
-  #   render :index
-  # end
   
   def incompleted
     @orders = current_user.orders.normal.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10

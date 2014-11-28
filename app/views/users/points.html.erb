@@ -1,0 +1,33 @@
+<div class="user-box">
+  <h2>我的积分</h2>
+  <div class="points-detail">
+    <div class="points-head">目前的积分为：<%= current_user.score %></div>
+    <div class="points-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="25%">交易记录</th>
+            <th width="25%">积分</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @traces.empty? %>
+          <tr>
+            <td colspan="3" align="center">目前无交易记录!</td>
+          </tr>
+          <% else %>
+          <% @traces.each do |trace| %>
+          <tr>
+            <td width="25%"><%= trace.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td width="25%"><%= trace.score %></td>
+            <td><%= trace.summary %></td>
+          </tr>
+          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center"><%= will_paginate @traces, renderer: BootstrapPagination::Rails %></div>
+  </div>
+</div>

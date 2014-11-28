@@ -7,7 +7,7 @@ module UsersHelper
     width = user_avatar_width_for_size(size)
     
     if user.avatar.blank?
-      default_url = asset_path("avatar/#{size}.png")
+      default_url = "avatar/#{size}.png"
       img = image_tag(default_url, alt: "用户头像", class: "img-circle")
     else
       img = image_tag(user.avatar.url(size), alt: "用户头像", class: "img-circle")

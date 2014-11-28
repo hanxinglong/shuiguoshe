@@ -2,21 +2,16 @@
 <div class="row">
   <div class="col-sm-2">
     <div class="slide-left">
-      <!-- div class="list-group">
-        <%= link_to "我的订单", orders_user_path(current_user), class: "list-group-item #{['/all', '/incompleted', '/completed', '/canceled'].include?(@current) ? "active" : ""}" %>
-        <%= link_to "个人资料设置", edit_user_registration_path, class: "list-group-item #{controller_name == "account" and action_name == "edit" ? "active" : ""}" %>
-      </div -->
         <h2><%= link_to "我的账户", home_user_path, class: "user-home" %></h2>
         <ul class="nav ">
           <li class="<%= @current == 'user_orders' ? "active" : "" %>"><a href="<%= orders_user_path %>">我的订单</a></li>
-          <li class="<%= @current == 'user_orders' ? "active" : "" %>"><a href="#">我的积分</a></li>
+          <li class="<%= @current == 'user_points' ? "active" : "" %>"><%= link_to "我的积分", points_user_path %></li>
           <li class="last <%= @current == 'user_orders' ? "active" : "" %>"><%= link_to "我有话说", new_message_path %></li>
         </ul>
         <ul class="nav ">
-          <li><a href="">上传头像</a></li>
-          <li><a href="">基本资料</a></li>
-          <li><a href="">修改密码</a></li>
-          <li><a href="">配送地址</a></li>
+          <li><%= link_to "基本资料", edit_user_registration_path %></li>
+          <li><%= link_to "修改密码", edit_user_registration_path(by: 'pwd') %></li>
+          <li><%= link_to "配送设置", edit_user_path %></li>
         </ul>
     </div>
   </div>

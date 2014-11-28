@@ -2,6 +2,7 @@ $nature-green: rgb(99,185,76);
 $medium-red: rgb(60,155,0);
 $light-gray: #777;
 $gray-medium-light: #eaeaea;
+
 .user-box {
   h2 {
     font-size: 18px;
@@ -154,4 +155,22 @@ $gray-medium-light: #eaeaea;
 .tab-body {
   margin-top: 20px;
   border: 1px solid $gray-medium-light;
+}
+
+// 用户积分
+.points-detail {
+  margin: 0;
+  .points-head {
+    padding-bottom: 10px;
+    font-size: 16px;
+  }
+  table {
+    border: 1px solid rgb(235,235,235);
+    thead {
+      background-color: rgb(241,241,241);
+    }
+    th,td {
+      text-align: center;
+    }
+  }
 }
