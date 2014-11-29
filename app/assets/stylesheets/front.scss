@@ -9,6 +9,27 @@ $nature-green: rgb(99,185,76);
 $medium-red: rgb(60,155,0);
 $light-gray: #777;
 $gray-medium-light: #eaeaea;
+$common-border-color: rgb(204,204,204);
+
+.green {
+  color: $nature-green;
+}
+
+.f16 {
+  font-size: 16px;
+}
+
+.f18 {
+  font-size: 18px;
+}
+
+.f20 {
+  font-size: 20px;
+}
+
+.f24 {
+  font-size: 24px;
+}
 
 .topbar {
 //  padding: 5px 0;
@@ -69,7 +90,7 @@ $gray-medium-light: #eaeaea;
     margin-right: 30px;
     margin-bottom: 20px;
     width: 180px;
-    border: 1px solid #eee;
+    border: 1px solid $common-border-color;
     text-align: center;
   }
   
@@ -78,29 +99,24 @@ $gray-medium-light: #eaeaea;
   }
 }
 
-#carousel-ads .carousel-indicators li {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 1px;
-  text-indent: -999px;
-  cursor: pointer;
-  background-color: #fff;
-  border: 1px solid $nature-green;
-  border-radius: 10px;
-}
-
-#carousel-ads .carousel-indicators li.active {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  margin: 1px;
-  text-indent: -999px;
-  cursor: pointer;
-  background-color: $nature-green;
-  border: 1px solid $nature-green;
-  border-radius: 10px;
-}
+#carousel-ads .carousel-indicators {
+//  display: none;
+  li {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 1px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid $nature-green;
+    border-radius: 10px;
+    &.active {
+      background-color: $nature-green;
+      border: 1px solid $nature-green;
+    }
+  }
+} 
 
 // 首页相关css
 .home-content-box {
@@ -125,7 +141,7 @@ $gray-medium-light: #eaeaea;
   
   .sidebar-right-box {
     margin-bottom: 20px;
-    border: 1px solid $gray-medium-light;
+    border: 1px solid $common-border-color;
   }
   
   .newsblasts-list {
@@ -134,7 +150,7 @@ $gray-medium-light: #eaeaea;
       margin: 0;
       padding: 0;
       padding: 10px;
-      border-bottom: 1px solid $gray-medium-light;
+      border-bottom: 1px solid $common-border-color;
       font-size: 18px;
       background-color: rgb(241,241,241);
       font-weight: bold;
@@ -152,3 +168,14 @@ $gray-medium-light: #eaeaea;
     }
   }
 }
+
+.product {
+  .thumbnail {
+    border: 0;
+  }
+  .price {
+    height: 35px;
+    line-height: 35px;
+  }
+}
+

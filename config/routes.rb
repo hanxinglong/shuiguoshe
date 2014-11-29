@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
+  
+  get '/help'  => 'home#help', as: :help
+  get '/about' => 'home#about', as: :about
 
   devise_for :users, path: "account", controllers: {
     registrations: :account,

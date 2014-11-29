@@ -5,4 +5,13 @@ class HomeController < ApplicationController
     @newsblasts = Newsblast.sorted.limit(5)
     @ads = SidebarAd.sorted.limit(4)
   end
+  
+  def about
+    
+  end
+  
+  def help
+    
+  end
+  
 end
