@@ -49,4 +49,20 @@ module ApplicationHelper
     html.html_safe
   end
   
+  def render_grid_for(collection, cell_count = 3)
+    html = ""
+    collection.each_with_index do |item, index|
+      if index % cell_count == 0
+        html += '<div class="row">'
+      end
+      
+      html += render item
+      
+      if index % cell_count == cell_count -1 or index == collection.size - 1
+        html += '</div>'
+      end
+    end
+    html.html_safe
+  end
+  
 end

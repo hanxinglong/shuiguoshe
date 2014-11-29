@@ -1,0 +1,10 @@
+<% if @newsblasts.any? %>
+<div class="newsblasts-list sidebar-right-box">
+  <h2>水果社公告</h2>
+  <ul>
+    <% @newsblasts.each do |newsblast| %>
+    <li><%= link_to truncate(newsblast.title, length: 20), newsblast %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'home#index'
 
   devise_for :users, path: "account", controllers: {
@@ -38,6 +37,7 @@ Rails.application.routes.draw do
   end
   
   resources :apartments, only: [:index]
+  resources :newsblasts, path: "news", only: [:show]
   
   namespace :cpanel do
     root 'home#index'
@@ -56,6 +56,8 @@ Rails.application.routes.draw do
     end
     
     resources :banners
+    resources :newsblasts
+    resources :sidebar_ads
     
     resources :products do
       member do

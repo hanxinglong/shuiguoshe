@@ -17,27 +17,21 @@
     </div>
     <% end %>
   </div>
-
-  <!-- Controls -->
-  <!--% if @banners.size > 1 %>
-  <a class="left carousel-control" href="#carousel-ads" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#carousel-ads" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-    <span class="sr-only">Next</span>
-  </a>
-  <% end %-->
   
 </div>
 
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">热门订购</h3>
+<div class="row home-content-box">
+  <div class="col-md-9">
+    <div class="content-box">
+      <h2>热门订购</h2>
+      <%= render_grid_for @products %>
+    </div>
   </div>
-  <div class="panel-body">
-    Panel content
+  <div class="col-md-3">
+    <div class="sidebar-right">
+      <%= render 'newsblasts/newsblasts_list' %>
+      <%= render 'sidebar_ads/ads_list' %>
+    </div>
   </div>
 </div>
 

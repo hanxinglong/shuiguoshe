@@ -101,3 +101,54 @@ $gray-medium-light: #eaeaea;
   border: 1px solid $nature-green;
   border-radius: 10px;
 }
+
+// 首页相关css
+.home-content-box {
+  
+}
+.content-box {
+  margin: 0;
+  h2 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    border-top: 2px solid $nature-green;
+  }
+}
+
+.sidebar-right {
+  margin: 0;
+  padding: 0;
+  
+  .sidebar-right-box {
+    margin-bottom: 20px;
+    border: 1px solid $gray-medium-light;
+  }
+  
+  .newsblasts-list {
+//    border: 1px solid $gray-medium-light;
+    h2 {
+      margin: 0;
+      padding: 0;
+      padding: 10px;
+      border-bottom: 1px solid $gray-medium-light;
+      font-size: 18px;
+      background-color: rgb(241,241,241);
+      font-weight: bold;
+    }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px 0;
+      li {
+        padding: 0 10px;
+        a {
+          color: black;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<% if @ads.any? %>
+  <% @ads.each do |ad| %>
+    <div class="sidebar-right-box">
+      <%= render_sidebar_ad_image(ad) %>
+    </div>
+  <% end %>
+<% end %>
