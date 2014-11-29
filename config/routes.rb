@@ -55,6 +55,8 @@ Rails.application.routes.draw do
       end
     end
     
+    resources :banners
+    
     resources :products do
       member do
         patch :upshelf

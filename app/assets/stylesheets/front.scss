@@ -77,3 +77,27 @@ $gray-medium-light: #eaeaea;
 //    width: 300px;
   }
 }
+
+#carousel-ads .carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid $nature-green;
+  border-radius: 10px;
+}
+
+#carousel-ads .carousel-indicators li.active {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: $nature-green;
+  border: 1px solid $nature-green;
+  border-radius: 10px;
+}
