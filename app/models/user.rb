@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
   def login
     self.mobile || self.email
   end
+  
+  def apartment
+    @apartment ||= Apartment.find_by_id(self.apartment_id).try(:name)
+  end
 
   # 注册邮件提醒
   after_create :send_welcome_mail

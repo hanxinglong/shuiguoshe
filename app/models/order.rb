@@ -5,7 +5,7 @@ class Order < ActiveRecord::Base
   belongs_to :product
   belongs_to :apartment
   
-  validates :quantity, :deliver_address, :deliver_time, presence: true
+  validates :quantity, :apartment_id, :deliver_time, presence: true
   validates :quantity, numericality: { greater_than_or_equal_to: 1.0 }
   
   before_create :create_order_no

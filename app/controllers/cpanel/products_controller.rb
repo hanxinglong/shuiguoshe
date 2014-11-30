@@ -1,6 +1,6 @@
 # coding: utf-8
 class Cpanel::ProductsController < Cpanel::ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :upshelf, :downshelf]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :upshelf, :downshelf, :unsuggest, :suggest]
 
   def index
     @products = Product.order('created_at desc').paginate page: params[:page], per_page: 30
@@ -33,6 +33,24 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
       redirect_to cpanel_products_path
     else
       render :edit
+    end
+  end
+  
+  def unsuggest
+    @product.suggested_at = nil
+    if @product.save
+      render text: "1"
+    else
+      render text: "-1"
+    end
+  end
+  
+  def suggest
+    @product.suggested_at = Time.zone.now
+    if @product.save
+      render text: "1"
+    else
+      render text: "-1"
     end
   end
   

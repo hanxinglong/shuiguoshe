@@ -1,16 +1,11 @@
-<% cache @apartments.map { |a| a.id }.join do %>
-<ul class="apartments">
-  <% @apartments.each do |apartment| %>
-  <li>
-    <div class="apartment">
-      <%= image_tag apartment.image, alt: apartment.name %>
-      <div class="caption">
-        <h3 class="text-center"><%= apartment.name %></h3>
-      </div>
-    </div>
-  </li>
-  <% end %>
-</ul>
-<% end %>
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'apartments/sidebar_hot_apartments' %>
+  </div>
+  
+  <div class="col-md-9">
+    <%= render_grid_for @apartments %>
+  </div>
+</div>
 
 

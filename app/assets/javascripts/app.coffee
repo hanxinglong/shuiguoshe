@@ -4,10 +4,10 @@ window.App =
   
   doSaveAddress: (el) ->
     id = $(el).data("user-id")
-    address = $("#order_deliver_address").val()
+    address = $("#order_apartment_id").val()
     if address == ''
       return
-      
+    alert(address)
     $.ajax
       url: "/users/#{id}/update_address"
       type: "PATCH"

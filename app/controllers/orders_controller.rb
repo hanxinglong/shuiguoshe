@@ -60,7 +60,11 @@ class OrdersController < ApplicationController
     @product = Product.find(params[:product_id])
     @order = @product.orders.new(order_params)
     @order.user_id = current_user.id
+    @apartment = Apartment.find_by_id(@order.apartment_id)
+    puts @apartment.name
     if @order.save
+      @product.add_order_count
+      @apartment.add_order_count if @apartment
       flash[:success] = "预订成功"
       redirect_to orders_user_path
     else
@@ -85,6 +89,6 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:product_id, :quantity, :deliver_address, :deliver_time, :note, :state)
+      params.require(:order).permit(:product_id, :quantity, :deliver_address, :deliver_time, :note, :state, :apartment_id)
     end
 end

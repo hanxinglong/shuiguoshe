@@ -7,6 +7,9 @@ class Product < ActiveRecord::Base
   scope :saled, -> { where(on_sale: true) }
   scope :search, -> keyword { where('title like :keyword or subtitle like :keyword or intro like :keyword', { keyword: "%#{keyword}%" }) }
   
+  scope :suggest, -> { where.not(suggested_at: nil).order('suggested_at desc') }
+  scope :hot, -> { where('orders_count > 0').order('orders_count desc').limit(5) }
+  
   validates :title, :image, :low_price, :type_id, :origin_price, presence: true
   validates :low_price, :origin_price, format: { with: /\A\d+\.\d{1,}\z/, message: "不正确的价格" }
   
@@ -17,4 +20,11 @@ class Product < ActiveRecord::Base
     end
   end
   
+  def add_order_count
+    self.class.increment_counter(:orders_count, self.id)
+  end
+  
+  def suggested?
+    self.suggested_at.present?
+  end
 end

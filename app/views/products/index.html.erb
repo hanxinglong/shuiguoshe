@@ -1,15 +1,14 @@
 <div class="row">
   <div class="col-md-3">
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        <h3 class="panel-title">热门订购</h3>
-      </div>
-      <div class="panel-body">
-      </div>
-    </div>
+    <%= render 'products/sidebar_products', products: @suggested_products, head_caption: "推荐区" %>
+    <%= render 'products/sidebar_products', products: @hot_products, head_caption: "热门订购" %>
   </div>
   
   <div class="col-md-9">
-    <%= render_grid_for @products %>
+    <% if @products.any? %>
+      <%= render_grid_for @products %>
+    <% else %>
+      没有找到相关记录!
+    <% end %>
   </div>
 </div>

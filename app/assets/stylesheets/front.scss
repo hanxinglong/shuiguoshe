@@ -190,3 +190,45 @@ $common-border-color: rgb(204,204,204);
   }
 }
 
+.sidebar-box {
+  border: 1px solid $common-border-color;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  h2 {
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid $common-border-color;
+    background-color: rgb(241,241,241);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .products {
+    padding: 0 10px;
+    .product {
+      padding: 10px 0;
+      border-bottom: 1px dashed $common-border-color;
+      &:last-child {
+        border: 0;
+      };
+      img {
+        width: 180px;
+        height: 150px;
+      }
+      h3 {
+        font-size: 16px;
+      }
+      p {
+        em {
+          font-size: 16px;
+          font-weight: bold;
+          color: $nature-green;
+        }
+        font-size: 12px;
+      }
+    }
+    
+  }
+  
+}

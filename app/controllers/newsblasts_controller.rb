@@ -2,7 +2,7 @@ class NewsblastsController < ApplicationController
   before_action :set_newsblast, only: [:show]
 
   def show
-    respond_with(@newsblast)
+    
   end
 
   private

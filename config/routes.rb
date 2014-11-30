@@ -68,6 +68,8 @@ Rails.application.routes.draw do
       member do
         patch :upshelf
         patch :downshelf
+        patch :unsuggest
+        patch :suggest
       end
     end
     

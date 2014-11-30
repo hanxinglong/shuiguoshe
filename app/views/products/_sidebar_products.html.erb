@@ -1,0 +1,17 @@
+<% if products.any? %>
+<% cache(products) do %>
+<div class="sidebar-box">
+  <h2><%= head_caption %></h2>
+  <div class="products">
+    <% products.each do |product| %>
+    <div class="text-center product">
+      <%= render_product_icon(product, :thumb) %>
+      <h3><%= product.title %></h3>
+      <p><em><%= product.origin_price %></em>&nbsp;元/斤</p>
+      <%= link_to "立即预订", new_product_order_path(product), class: "btn btn-success" %>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+<% end %>

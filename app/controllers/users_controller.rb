@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    user_params = params.require(:user).permit(:deliver_time,:deliver_address)
+    user_params = params.require(:user).permit(:deliver_time,:apartment_id)
     if current_user.update(user_params)
       flash[:success] = "修改成功"
       redirect_to edit_user_path
@@ -26,8 +26,8 @@ class UsersController < ApplicationController
   def update_address
     @success = true
     @user = User.find_by_id(params[:user_id])
-    @user.deliver_address = params[:address]
-    if @user.deliver_address.blank?
+    @user.apartment_id = params[:address].to_i
+    if @user.apartment_id.blank?
       return
     end
     
