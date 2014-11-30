@@ -23,6 +23,19 @@ class UsersController < ApplicationController
     end
   end
   
+  def update_address
+    @success = true
+    @user = User.find_by_id(params[:user_id])
+    @user.deliver_address = params[:address]
+    if @user.deliver_address.blank?
+      return
+    end
+    
+    if not @user.save
+      @success = false
+    end
+  end
+  
   def points
     @traces = ScoreTrace.where(user_id: current_user.id).order("created_at DESC").paginate page: params[:page], per_page: 30
     @current = 'user_points'

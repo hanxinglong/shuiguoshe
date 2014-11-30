@@ -1,2 +1,15 @@
-<%= render 'form' %>
+<div class="user-box">
+  <h2>开始下单</h2>
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag @product.image_url(:thumb) %>
+      <h3 class="text-center"><%= @product.title %></h3>
+      <p class="text-center"><%= @product.origin_price %>元/斤</p>
+    </div>
+    <div class="col-md-9">
+      <%= render "form" %>
+    </div>
+  </div>
+</div>
+
 

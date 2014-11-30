@@ -2,6 +2,43 @@ window.App =
   alert: (msg, to) ->
     $(to).before("<div data-alert class='alert-message'><a class='close' href='#'>×</a>#{msg}</div>")
   
+  doSaveAddress: (el) ->
+    id = $(el).data("user-id")
+    address = $("#order_deliver_address").val()
+    if address == ''
+      return
+      
+    $.ajax
+      url: "/users/#{id}/update_address"
+      type: "PATCH"
+      data: { address: "#{address}" }
+      # success: (re) ->
+        # alert(re)
+        # $('.address-html-container').html(re)
+    
+  checkValue: (el) ->
+    reg = /^[+]?(([1-9]\d*[.]?)|(0.))(\d{0,2})?$/
+    value = $(el).val()
+    
+    if value.length > 0 and !value.match(reg)
+      $(el).val(1)
+    
+  doWeight: (el) ->
+    id = $(el).data("id")
+    type = $(el).data("type")
+    weight = $("#product-weight-#{id}").val()
+    weight = parseInt(weight)
+    if type == '+'
+      weight += 1
+    else
+      weight -= 1
+      if weight == 0
+        weight = 1
+    $("#product-weight-#{id}").val(weight)
+  
+  # 新建订单
+  createOrder: (el) ->
+    
   # 取消订单
   cancelOrder: (el) ->
     result = confirm("您确定吗？")

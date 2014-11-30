@@ -19,3 +19,7 @@
 $('.carousel').carousel({
   interval: 4000
 });
+
+// function doWeight(a) {
+//   alert(a.data("type"));
+// }

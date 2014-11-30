@@ -12,7 +12,7 @@
     <%= render 'shared/error_messages', target: @user %>
     
       <%= f.input :deliver_time, collection: SiteConfig.deliver_times.map { |s| [s,s] }, label: "配送时间", prompt: "--请选择配送时间--", input_html: { style: "width: 300px;" } %>
-      <%= f.input :deliver_time, collection: Apartment.opened.map { |a| [a.name, a.name] }, label: "配送小区", prompt: "--请选择您所在的小区--", input_html: { style: "width: 300px;" } %>
+      <%= f.input :deliver_address, collection: Apartment.opened.map { |a| [a.name, a.name] }, label: "配送小区", prompt: "--请选择您所在的小区--", input_html: { style: "width: 300px;" } %>
     
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">

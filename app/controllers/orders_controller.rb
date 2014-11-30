@@ -62,7 +62,7 @@ class OrdersController < ApplicationController
     @order.user_id = current_user.id
     if @order.save
       flash[:success] = "预订成功"
-      redirect_to orders_user_path(current_user)
+      redirect_to orders_user_path
     else
       render :new
     end

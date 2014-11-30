@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     
   end
   
+  patch '/users/:user_id/update_address' => 'users#update_address'
+  
   resources :products do
     resources :orders, only: [:new, :create]
     collection do
