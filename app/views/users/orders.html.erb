@@ -3,3 +3,5 @@
 <div class="tab-body">
   <%= render '/orders/order_list' %>
 </div>
+
+<div class="center"><%= will_paginate @orders, renderer: BootstrapPagination::Rails %></div>

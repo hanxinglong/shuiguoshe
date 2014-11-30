@@ -1,4 +1,10 @@
-<tr>
+<% cache(order) do %>
+<tr class="order-info">
+  <td colspan="7" style="text-align:left;">
+    订单号：<%= order.order_no %>
+  </td>
+</tr>
+<tr id="item-row-<%= order.id %>">
   <td>
     <div class="product-info" style="text-align:center">
       <%= image_tag order.product.image_url(:small), alt: order.product.title %>
@@ -16,3 +22,4 @@
     <% end %>
   </td>
 </tr>
+<% end %>

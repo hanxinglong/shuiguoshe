@@ -19,10 +19,10 @@
           </td>
         </tr>
       <% else %>
-        <%= render @orders %>
+        <% @orders.each do |order| %>
+        <%= render "orders/order_detail", order: order %>
+        <% end %>
       <% end %>
     </tbody>
   </table>
-  
-  <div class="center"><%= will_paginate @orders, renderer: BootstrapPagination::Rails %></div>
 </div>

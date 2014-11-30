@@ -33,16 +33,19 @@ class OrdersController < ApplicationController
   end
   
   def cancel
-    @order = current_user.orders.find(params[:id])
+    @incompleted_orders_count = current_user.orders.normal.count
     
+    @order = current_user.orders.find(params[:id])
+    @status = 1
     if Time.now.strftime('%Y-%m-%d %H:%M:%S') < @order.created_at.strftime('%Y-%m-%d 23:59:59')
       if @order.cancel
-        @msg = "操作成功"
+        @status = 1
       else
-        @msg = "操作失败"
+        @status = 0
       end
     else
-      @msg = "对不起不能进行该操作"
+      puts "非法操作"
+      @status = -1
     end
     
   end
