@@ -31,6 +31,10 @@ $common-border-color: rgb(204,204,204);
   font-size: 24px;
 }
 
+.container-box {
+  margin-top: 20px;
+}
+
 .topbar {
 //  padding: 5px 0;
 //  background-color: #eaeaea;
@@ -75,7 +79,8 @@ $common-border-color: rgb(204,204,204);
 }
 
 #carousel-ads {
-  margin-top: -22px;
+  margin: 0;
+//  margin-top: -22px;
   margin-bottom: 20px;
 }
 

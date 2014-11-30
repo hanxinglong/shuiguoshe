@@ -26,4 +26,11 @@ class AccountController < Devise::RegistrationsController
   def update
     super
   end
+  
+  protected
+
+    def after_sign_up_path_for(resource)
+      home_user_path
+    end
+  
 end
