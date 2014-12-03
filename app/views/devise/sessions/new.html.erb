@@ -14,7 +14,7 @@
           <div class="form-group">
             <%= f.label :password, "密码", class: "col-sm-3 control-label" %>
             <div class="col-sm-9">
-              <%= f.password_field :password, class: "form-control", autocomplete: "off", style: "width: 300px;" %>
+              <%= f.password_field :password, class: "form-control", autocomplete: "off", style: "width: 300px;", placeholder: "密码" %>
             </div>
           </div>
 
@@ -32,7 +32,7 @@
 
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
-              <button type="submit" class="btn btn-success">&emsp;登录&emsp;</button><%= link_to "忘记了密码？", new_password_path(resource_name), class:"forget-password" %>
+              <button type="submit" class="btn btn-success">登录</button><%= link_to "忘记了密码？", new_password_path(resource_name), class:"forget-password" %>
             </div>
           </div>
       
