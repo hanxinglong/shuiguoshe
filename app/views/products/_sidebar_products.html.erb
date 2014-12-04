@@ -4,11 +4,15 @@
   <h2><%= head_caption %></h2>
   <div class="products">
     <% products.each do |product| %>
-    <div class="text-center product">
-      <%= render_product_icon(product, :thumb) %>
-      <h3><%= product.title %></h3>
-      <p><em><%= product.origin_price %></em>&nbsp;元/斤</p>
-      <%= link_to "立即预订", new_product_order_path(product), class: "btn btn-success" %>
+    <div class="product">
+      <dl class="horizontal-dl">
+        <dt>
+          <%= image_tag product.image.url(:thumb), style:"width: 108px; height: 90px;" %>
+        </dt>
+        <dd><%= product.title %></dd>
+        <dd><em class="green f18"><%= product.origin_price %></em>&nbsp;元/斤</dd>
+        <dd><%= link_to "立即预订", new_product_order_path(product), class: "btn btn-success btn-sm" %></dd>
+      </dl>     
     </div>
     <% end %>
   </div>

@@ -22,10 +22,18 @@
 
 <div class="row home-content-box">
   <div class="col-md-9">
+    <% if @suggest_products.any? %>
+    <div class="content-box">
+      <h2>推荐区</h2>
+      <%= render_grid_for @suggest_products %>
+    </div>
+    <% end %>
+    <% if @products.any? %>
     <div class="content-box">
       <h2>热门订购</h2>
       <%= render_grid_for @products %>
     </div>
+    <% end %>
   </div>
   <div class="col-md-3">
     <div class="sidebar-right">
