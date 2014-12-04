@@ -4,8 +4,8 @@
     <h2>热门订购小区</h2>
     <div class="products">
       <% @hot_apartments.each do |apartment| %>
-      <div class="product">
-        <dl class="horizontal-dl" style="padding-bottom: 20px;">
+      <div class="product" style="padding-bottom: 20px;">
+        <dl class="horizontal-dl" style="padding-bottom: 10px">
           <dt><%= image_tag apartment.image, alt: apartment.name, style: "width: 108px; height: 90px;" %></dt>
           <dd><%= apartment.name %></dd>
           <dd>已经订购了<em class="green f16"><%= apartment.orders_count %></em>单</dd>
