@@ -28,12 +28,14 @@ Rails.application.routes.draw do
   
   patch '/users/:user_id/update_address' => 'users#update_address'
   
-  resources :products do
+  resources :products, only: [:index] do
     resources :orders, only: [:new, :create]
     collection do
-      get :search
+      # get :search
     end
   end
+  
+  get '/products/search' => 'products#index', as: :search_products
   
   resources :orders do    
     member do 

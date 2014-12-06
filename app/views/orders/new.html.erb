@@ -1,5 +1,8 @@
 <div class="user-box">
-  <h2>开始下单</h2>
+  <h2 style="margin-bottom: 10px;">开始下单</h2>
+  <div class="alert alert-warning" role="alert">
+    温馨提示：如果您在当天12:00以前订购了我们的产品，那么我们会在当天您指定的配送时间送货；否则就在第二天您指定的配送时间送货。
+  </div>
   <div class="row">
     <div class="col-md-3">
       <%= image_tag @product.image_url(:thumb) %>

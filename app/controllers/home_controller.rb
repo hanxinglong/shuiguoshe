@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     @newsblasts = Newsblast.sorted.limit(5)
     @ads = SidebarAd.sorted.limit(4)
     @current = 'home_index'
-    set_seo_meta('首页')
+    set_seo_meta(SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description)
   end
   
   def about
