@@ -2,8 +2,8 @@
 class Order < ActiveRecord::Base
   
   belongs_to :user
-  belongs_to :product
-  belongs_to :apartment
+  belongs_to :product, touch: true
+  belongs_to :apartment, touch: true
   
   validates :quantity, :apartment_id, :deliver_time, presence: true
   validates :quantity, numericality: { greater_than_or_equal_to: 1.0 }

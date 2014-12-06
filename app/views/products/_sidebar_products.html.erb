@@ -1,9 +1,10 @@
 <% if products.any? %>
-<% cache(products) do %>
+<% cache cache_key_for("products_#{cache_prefix}", products) do %>
 <div class="sidebar-box">
   <h2><%= head_caption %></h2>
   <div class="products">
     <% products.each do |product| %>
+    <% cache product do %>
     <div class="product">
       <dl class="horizontal-dl">
         <dt>
@@ -14,6 +15,7 @@
         <dd><%= link_to "立即预订", new_product_order_path(product), class: "btn btn-success btn-sm" %></dd>
       </dl>     
     </div>
+    <% end %>
     <% end %>
   </div>
 </div>

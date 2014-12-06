@@ -4,7 +4,9 @@
   </div>
   
   <div class="col-md-9">
+    <% cache cache_key_for('apartments', @apartments) do %>
     <%= render_grid_for @apartments %>
+    <% end %>
   </div>
 </div>
 

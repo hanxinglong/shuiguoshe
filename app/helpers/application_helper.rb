@@ -23,6 +23,11 @@ module ApplicationHelper
     return item.user == current_user
   end
   
+  def cache_key_for(prefix = '', array = [])
+    return "empty" if array.blank?
+    [prefix, array.map(&:updated_at).max.strftime("%Y%m%d%H%M%S")]
+  end
+  
   # state: true, yes_uri: "/cpanel/users/1/block", yes_text: "禁用", no_uri: "/cpanel/users/1/unblock", no_text: "启用"
   def state_link_to(opts = {})
     state = opts[:state]

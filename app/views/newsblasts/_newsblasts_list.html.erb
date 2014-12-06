@@ -1,10 +1,14 @@
 <% if @newsblasts.any? %>
+<% cache(cache_key_for('newsblasts', @newsblasts)) do %>
 <div class="newsblasts-list sidebar-right-box">
   <h2>水果社公告</h2>
   <ul>
     <% @newsblasts.each do |newsblast| %>
+    <% cache newsblast do %>
     <li><%= link_to truncate(newsblast.title, length: 20), newsblast %></li>
+    <% end %>
     <% end %>
   </ul>
 </div>
+<% end %>
 <% end %>

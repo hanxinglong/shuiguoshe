@@ -25,8 +25,10 @@ class ProductsController < ApplicationController
       keyword = params[:q].gsub(/\s+/, "")
       if @products.size > 0
         set_seo_meta("#{keyword} - 商品搜索", "#{keyword}", "在#{Setting.app_name}中找到了#{@products.size}件#{keyword}的类似商品，其中包括了“#{@products.map(&:title).join('、')}”等类型的#{keyword}的商品。")
+        @cache_prefix = "products_#{type_id}_#{keyword}"
       else
         set_seo_meta("#{keyword} - 商品搜索")
+        @cache_prefix = "products_#{type_id}"
       end
     else
       if type_id == 1
@@ -34,6 +36,8 @@ class ProductsController < ApplicationController
       else
         set_seo_meta('各种干果、坚果订购区', @products.map(&:title).join('、'), SiteConfig.nut_meta_description)
       end
+      
+      @cache_prefix = "products_#{type_id}"
     end
     
   end

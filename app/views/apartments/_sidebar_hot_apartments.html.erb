@@ -1,9 +1,10 @@
 <% if @hot_apartments.any? %>
-  <% cache(@hot_apartments) do %>
+  <% cache(cache_key_for('sidebar_hot_apartments', @hot_apartments)) do %>
   <div class="sidebar-box">
     <h2>热门订购小区</h2>
     <div class="products">
       <% @hot_apartments.each do |apartment| %>
+      <% cache apartment do %>
       <div class="product" style="padding-bottom: 20px;">
         <dl class="horizontal-dl" style="padding-bottom: 10px">
           <dt><%= image_tag apartment.image, alt: apartment.name, style: "width: 108px; height: 90px;" %></dt>
@@ -11,6 +12,7 @@
           <dd>已经订购了<em class="green f16"><%= apartment.orders_count %></em>单</dd>
         </dl>
       </div>
+      <% end %>
       <% end %>
     </div>
   </div>
