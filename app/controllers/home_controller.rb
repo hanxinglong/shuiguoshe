@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  layout 'help_layout', only: [:order_help, :pay_help, :deliver_help]
   def index
     @banners = Banner.sorted.limit(4)
     @products = Product.hot.order("created_at DESC").limit(6)
@@ -14,8 +15,18 @@ class HomeController < ApplicationController
     set_seo_meta('关于水果社')
   end
   
-  def help
-    @current = 'home_help'
+  def order_help
+    @current = 'order_help'
+    set_seo_meta('帮助中心')
+  end
+  
+  def pay_help
+    @current = 'pay_help'
+    set_seo_meta('帮助中心')
+  end
+  
+  def deliver_help
+    @current = 'deliver_help'
     set_seo_meta('帮助中心')
   end
   

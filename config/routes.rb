@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   
   get '/help'  => 'home#help', as: :help
   get '/about' => 'home#about', as: :about
+  get '/order_help' => 'home#order_help', as: :order_help
+  get '/pay_help' => 'home#pay_help', as: :pay_help
+  get '/deliver_help' => 'home#deliver_help', as: :deliver_help
 
   devise_for :users, path: "account", controllers: {
     registrations: :account,
