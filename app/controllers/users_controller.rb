@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   
   def orders
     @orders = current_user.orders.order("created_at DESC").paginate page: params[:page], per_page: 10
-    @current = 'user_orders'    
+    @current = 'user_orders'   
+    @cache_prefix = "user_#{current_user.mobile}-#{@current}" 
   end
 end

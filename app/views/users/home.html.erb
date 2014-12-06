@@ -12,6 +12,6 @@
     </span>
   </h2>
   <div class="order-list">
-    <%= render "/orders/order_list" %>
+    <%= render "/orders/order_list", cache_prefix: "user_#{current_user.mobile}_home_today_orders" %>
   </div>
 </div>

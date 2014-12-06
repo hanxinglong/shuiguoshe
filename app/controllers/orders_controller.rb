@@ -11,24 +11,33 @@ class OrdersController < ApplicationController
   def search
     @orders = current_user.orders.search(params[:q]).includes(:product).order("orders.created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders'
+    if params[:q].gsub(/\s+/, "").present?
+      @cache_prefix = "user_#{current_user.mobile}-orders-search_#{params[:q].gsub(/\s+/, "")}"
+    else
+      @cache_prefix = "user_#{current_user.mobile}-#{@current}"
+    end
     render :index
   end
   
   def incompleted
     @orders = current_user.orders.normal.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders_incompleted'
+    @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     render :index
   end
   
   def completed
     @orders = current_user.orders.completed.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders_completed'
+    @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     render :index
   end
   
   def canceled
     @orders = current_user.orders.canceled.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders_canceled'
+    
+    @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     render :index
   end
   
@@ -36,6 +45,8 @@ class OrdersController < ApplicationController
     @incompleted_orders_count = current_user.orders.normal.count
     
     @order = current_user.orders.find(params[:id])
+    @incompleted = params[:current] == 'user_orders_incompleted'
+    
     @status = 1
     if Time.now.strftime('%Y-%m-%d %H:%M:%S') < @order.created_at.strftime('%Y-%m-%d 23:59:59')
       if @order.cancel

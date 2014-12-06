@@ -1,5 +1,7 @@
 <%= render '/orders/tab_head' %>
 
 <div class="tab-body">
-  <%= render '/orders/order_list' %>
+  <%= render '/orders/order_list', cache_prefix: @cache_prefix %>
 </div>
+
+<div class="center"><%= will_paginate @orders, renderer: BootstrapPagination::Rails %></div>

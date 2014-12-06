@@ -1,3 +1,4 @@
+<% cache cache_key_for("#{cache_prefix}", @orders) do %>
 <div class="orders">
   <table class="table">
     <thead>
@@ -26,3 +27,4 @@
     </tbody>
   </table>
 </div>
+<% end %>

@@ -28,6 +28,7 @@ module OrdersHelper
   def can_cancel?(order)
     return false if order.blank?
     
+    puts Time.now.strftime("%Y-%m-%d %H:%M:%S") + ' - c - ' + order.created_at.strftime("%Y-%m-%d 23:59:59")
     ( order.can_cancel? and
       ( Time.now.strftime("%Y-%m-%d %H:%M:%S") < order.created_at.strftime("%Y-%m-%d 23:59:59") ) and
       owner?(order) )

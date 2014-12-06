@@ -40,7 +40,12 @@ class Order < ActiveRecord::Base
   end
   
   def self.search(keyword)
+    if keyword.gsub(/\s+/, "").present?
       joins(:user, :product).where('orders.order_no like :keyword or users.mobile like :keyword or orders.deliver_address like :keyword or products.title like :keyword',{ keyword: "%#{keyword}%"})
+    else
+      all
+    end
+      
   end
   
 end

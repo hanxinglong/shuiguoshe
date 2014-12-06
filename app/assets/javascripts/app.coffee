@@ -51,6 +51,7 @@ window.App =
     $.ajax
       url: "/orders/#{id}/cancel"
       type: "PATCH"
+      data: { 'current': current }
     
   # 更新状态
   updateState: (el) ->

@@ -12,7 +12,7 @@ module ApplicationHelper
       type = :success if type.to_s == "notice"
       type = :warning if type.to_s == "alert"
       type = :danger if type.to_s == "error"
-      text = content_tag(:div, link_to("×", "#", class: "close", 'data-dismiss' => "alert") + message, class: "alert alert-#{type}")
+      text = content_tag(:div, link_to("×", "#", class: "close", 'data-dismiss' => "alert") + message, class: "alert alert-#{type}", style: "margin-top: 20px;")
       flash_messages << text if message
     end
     flash_messages.join("\n").html_safe
@@ -24,7 +24,7 @@ module ApplicationHelper
   end
   
   def cache_key_for(prefix = '', array = [])
-    return "empty" if array.blank?
+    return [prefix, "empty"] if array.blank?
     [prefix, array.map(&:updated_at).max.strftime("%Y%m%d%H%M%S")]
   end
   
