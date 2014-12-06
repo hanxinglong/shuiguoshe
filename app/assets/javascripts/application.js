@@ -20,6 +20,17 @@ $('.carousel').carousel({
   interval: 4000
 });
 
-// function doWeight(a) {
-//   alert(a.data("type"));
-// }
+$(function(){
+    $(window).scroll(function(){
+    var top=$(window).scrollTop();
+    if( top>200 ){
+      $("#scrolltop").fadeIn();
+    } else {
+      $("#scrolltop").fadeOut();
+    }
+});
+ 
+$("#scrolltop").click(function(){
+    $("html,body").animate({scrollTop:0});
+    });
+});

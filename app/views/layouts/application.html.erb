@@ -22,6 +22,9 @@
     <%= debug(params) if Rails.env.development? %>
     <%= render 'layouts/footer' %>
   </div>
+  
+  <div id="scrolltop" style="display: block; display: none;">返回顶部</div>
+  
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= yield :scripts %>
 </body>

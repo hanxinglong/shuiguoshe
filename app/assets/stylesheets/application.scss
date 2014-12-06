@@ -113,6 +113,21 @@ footer{
   }
 }
 
+#scrolltop {
+  position:fixed;
+  bottom:50px;
+  right:10px;
+  _position:absolute;
+  width:40px;
+  border-radius:3px;
+  font-size:12px;
+  text-align:center;
+  color: #fff;
+  cursor:pointer;
+  padding:4px;
+  background-color: $nature-green;
+}
+
 .error-404 {
   color: red;
   height: 40px;
