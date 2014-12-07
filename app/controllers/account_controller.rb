@@ -11,6 +11,11 @@ class AccountController < Devise::RegistrationsController
     end
   end
   
+  def new
+    set_seo_meta('会员注册')
+    super
+  end
+  
   def edit
     @user = current_user
     

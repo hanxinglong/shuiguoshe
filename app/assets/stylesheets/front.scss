@@ -267,8 +267,9 @@ $common-border-color: rgb(204,204,204);
     float: left;
   }
   dd {
+    margin: 0;
     margin-left: 120px;
-    margin-bottom: 5px;
+//    margin-bottom: 0;
   }
 }
 
