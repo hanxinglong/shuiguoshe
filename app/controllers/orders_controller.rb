@@ -23,6 +23,7 @@ class OrdersController < ApplicationController
     @orders = current_user.orders.normal.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders_incompleted'
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
+    set_seo_meta("我的待配送订单")
     render :index
   end
   
@@ -30,6 +31,7 @@ class OrdersController < ApplicationController
     @orders = current_user.orders.completed.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders_completed'
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
+    set_seo_meta("我的已完成订单")
     render :index
   end
   
@@ -38,6 +40,7 @@ class OrdersController < ApplicationController
     @current = 'user_orders_canceled'
     
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
+    set_seo_meta("我的已取消订单")
     render :index
   end
   
@@ -80,7 +83,7 @@ class OrdersController < ApplicationController
       @product.add_order_count
       @apartment.add_order_count if @apartment
       flash[:success] = "预订成功"
-      redirect_to orders_user_path
+      redirect_to incompleted_orders_user_path
     else
       render :new
     end

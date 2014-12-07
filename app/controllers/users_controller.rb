@@ -6,11 +6,13 @@ class UsersController < ApplicationController
   
   def home
     @orders = current_user.orders.today.normal.order("created_at DESC").paginate page: params[:page], per_page: 10
+    set_seo_meta("个人主页")
   end
   
   def edit
     @user = current_user
     @current = 'user_edit_other'
+    set_seo_meta("配送设置")
   end
   
   def update
@@ -39,11 +41,13 @@ class UsersController < ApplicationController
   def points
     @traces = ScoreTrace.where(user_id: current_user.id).order("created_at DESC").paginate page: params[:page], per_page: 30
     @current = 'user_points'
+    set_seo_meta("我的积分")
   end
   
   def orders
     @orders = current_user.orders.order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders'   
     @cache_prefix = "user_#{current_user.mobile}-#{@current}" 
+    set_seo_meta("我的订单")
   end
 end

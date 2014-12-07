@@ -17,6 +17,7 @@ class MessagesController < ApplicationController
   def new
     @message = Message.new
     @current = "user_message_new"
+    set_seo_meta("给我们留言")
     respond_with(@message)
   end
 

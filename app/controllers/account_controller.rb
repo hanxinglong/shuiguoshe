@@ -15,10 +15,14 @@ class AccountController < Devise::RegistrationsController
     @user = current_user
     
     if params[:by] == 'pwd'
+      set_seo_meta("修改密码")
       @current = 'user_edit_pwd'
     else
+      set_seo_meta("修改基本资料")
       @current = 'user_edit_profile'
     end
+    
+    
     # 首次生成用户 Token
     # @user.update_private_token if @user.private_token.blank?
   end
@@ -30,6 +34,10 @@ class AccountController < Devise::RegistrationsController
   protected
 
     def after_sign_up_path_for(resource)
+      home_user_path
+    end
+    
+    def after_update_path_for(resource)
       home_user_path
     end
   
