@@ -11,6 +11,17 @@ $light-gray: #777;
 $gray-medium-light: #eaeaea;
 $common-border-color: rgb(204,204,204);
 
+// 关闭响应式设计
+.container {
+  width: 1170px !important;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 990px;
+  }
+}
+
 .green {
   color: $nature-green;
 }

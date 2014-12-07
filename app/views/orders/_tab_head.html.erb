@@ -9,17 +9,17 @@
     <li role="presentation" class="<%= @current == 'user_orders_completed' ? "active" : "" %>"><%= link_to "已完成", completed_orders_user_path %></li>
     <li role="presentation" class="<%= @current == 'user_orders_canceled' ? "active" : "" %>"><%= link_to "已取消", canceled_orders_user_path %></li>
     <li>
-      <div style="padding-left: 60px;">
+      <div style="padding-left: 40px;">
         <%= form_tag search_orders_user_path, method: 'get', class: "form-inline" do %>
-        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "请输入订单号或商品名称", style: "width: 300px;" %>
+        <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "请输入订单号或商品名称", style: "width:200px;" %>
         <button type="submit" class="btn btn-sm btn-success">搜索</button>
         <% end %>
       </div>
     </li>
     <% if @current == 'user_orders_incompleted' %>
-    <li>
-      <div style="padding: 10px 0 0 80px;">
-        <strong>共计：</strong><em><%= render_orders_total_price(current_user.orders.normal) %></em>元
+    <li class="pull-right">
+      <div style="padding-top: 10px;" class="green f16">
+        <strong>共计：</strong><em style="color:red;"><%= render_orders_total_price(current_user.orders.normal) %></em>元
       </div>
       
     </li>
