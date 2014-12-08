@@ -13,18 +13,18 @@ $common-border-color: rgb(204,204,204);
 
 // 关闭响应式设计
 .container {
-  width: 1170px !important;
+  width: 1024px !important;
 }
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 768px) {
-  .container {
-    max-width: 1100px;
-  }
-  .f24 {
-    font-size: 18px;
-//    font-weight: bold;
-  }
-}
+//@media only screen and (min-device-width : 320px) and (max-device-width : 768px) {
+//  .container {
+//    max-width: 1100px;
+//  }
+//  .f24 {
+//    font-size: 18px;
+////    font-weight: bold;
+//  }
+//}
 
 
 //@media only screen and (min-width: 1024px) {
