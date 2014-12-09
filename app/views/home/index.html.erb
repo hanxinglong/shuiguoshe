@@ -29,7 +29,7 @@
     <% if @suggest_products.any? %>
     <% cache cache_key_for('home_suggest_products', @suggest_products) do %>
     <div class="content-box">
-      <h2>推荐区</h2>
+      <h2>推荐订购</h2>
       <%= render_grid_for @suggest_products %>
     </div>
     <% end %>
