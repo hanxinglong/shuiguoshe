@@ -41,5 +41,11 @@ class ProductsController < ApplicationController
     end
     
   end
+  
+  def show
+    @product = Product.find(params[:id])
+    # @order = @product.orders.build
+    set_seo_meta(@product.title, '', @product.intro)
+  end
 
 end

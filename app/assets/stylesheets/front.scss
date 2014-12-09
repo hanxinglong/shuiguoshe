@@ -66,6 +66,10 @@ $common-border-color: rgb(204,204,204);
   font-size: 24px;
 }
 
+.f30 {
+  font-size: 30px;
+}
+
 .container-box {
   margin-top: 20px;
 }
@@ -233,6 +237,10 @@ $common-border-color: rgb(204,204,204);
     text-decoration: none;
     cursor: pointer;
   }
+}
+
+.product-info {
+  margin-bottom: 10px;
 }
 
 .sidebar-box {

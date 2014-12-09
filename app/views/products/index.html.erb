@@ -1,13 +1,13 @@
 <div class="row container-box">
-  <div class="col-md-3">
+  <!--div class="col-md-3">
     <%= render 'products/sidebar_products', products: @suggested_products, head_caption: "推荐订购", cache_prefix: "suggest_sidebar" %>
     <%= render 'products/sidebar_products', products: @hot_products, head_caption: "热门订购", cache_prefix: "hot_sidebar" %>
-  </div>
+  </div-->
   
-  <div class="col-md-9">
+  <div class="col-md-12">
     <% if @products.any? %>
     <% cache cache_key_for(@cache_prefix, @products) do %>
-      <%= render_grid_for @products %>
+      <%= render_grid_for @products, 4 %>
     <% end %>
     <% else %>
       没有找到相关记录!

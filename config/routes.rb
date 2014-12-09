@@ -31,7 +31,7 @@ Rails.application.routes.draw do
   
   patch '/users/:user_id/update_address' => 'users#update_address'
   
-  resources :products, only: [:index] do
+  resources :products, only: [:index, :show] do
     resources :orders, only: [:new, :create]
     collection do
       # get :search

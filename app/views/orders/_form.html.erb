@@ -1,6 +1,5 @@
-<%= form_for([@product, @order], html: { class: "form-horizontal" }) do |f| %>
-  <%= render '/shared/error_messages', target: @order %>
-  
+<%= form_for(Order.new, url: product_orders_path(@product), html: { class: "form-horizontal" }) do |f| %>
+  <%= render '/shared/error_messages', target: f.object %>
   <div class="form-group">
     <%= f.label :quantity, "* 购买数量 (单位:斤)", class: "control-label col-sm-3" %>
     <div class="col-sm-4">
@@ -12,7 +11,7 @@
   <div class="form-group">
     <%= f.label :deliver_time, "* 配送时间", class: "control-label col-sm-3" %>
     <div class="col-sm-4">
-      <%= f.select :deliver_time, SiteConfig.deliver_times.map { |s| [s,s] }, {prompt: "--请选择配送时间--"}, { class: "form-control" } %>
+      <%= f.select :deliver_time, SiteConfig.deliver_times.map { |s| [s,s] }, { prompt: "--请选择配送时间--" }, { class: "form-control" } %>
     </div>
   </div>
   
@@ -67,3 +66,4 @@ updateButtonState();
 
 </script>
 <% end %>
+

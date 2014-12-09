@@ -1,14 +1,19 @@
 <% cache [@product, current_user.apartment_id] do %>
 <div class="user-box">
   <h2 style="margin-bottom: 10px;">开始下单</h2>
-  <div class="alert alert-warning" role="alert">
-    温馨提示：如果您在当天12:00以前订购了我们的产品，那么我们会在当天您指定的配送时间送货；否则就在第二天您指定的配送时间送货。
+  <div class="product-info">
+    <h3><%= @product.title %></h3>
+    <div class="product-intro">
+      <%= @product.intro %>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-3">
       <%= image_tag @product.image_url(:thumb) %>
-      <h3 class="text-center"><%= @product.title %></h3>
-      <p class="text-center"><%= @product.origin_price %>元/斤</p>
+      <div class="text-center">
+        <div class=""><span class="green f30"><%= @product.low_price %></span>&nbsp;<span class="f14">元/斤</span></div>
+        <div class="text-muted f16"><del>市场价<%= @product.origin_price %>&nbsp;元/斤</del></div>
+      </div>
     </div>
     <div class="col-md-9">
       <%= render "form" %>
@@ -16,5 +21,6 @@
   </div>
 </div>
 <% end %>
+
 
 

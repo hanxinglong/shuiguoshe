@@ -1,34 +1,23 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @product.type_id %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @product.title %>
-</p>
-
-<p>
-  <strong>Intro:</strong>
-  <%= @product.intro %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @product.image %>
-</p>
-
-<p>
-  <strong>Low price:</strong>
-  <%= @product.low_price %>
-</p>
-
-<p>
-  <strong>Origin price:</strong>
-  <%= @product.origin_price %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<% cache [@product, current_user.apartment_id] do %>
+<div class="user-box">
+  <h2 style="margin-bottom: 10px;">开始下单</h2>
+  <div class="product-info">
+    <h3><%= @product.title %></h3>
+    <div class="product-intro">
+      <%= @product.intro %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag @product.image_url(:thumb) %>
+      <div class="text-center">
+        <div class=""><span class="green f30"><%= @product.low_price %></span>&nbsp;<span class="f14">元/斤</span></div>
+        <div class="text-muted f16"><del>市场价<%= @product.origin_price %>&nbsp;元/斤</del></div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <%= render "products/order_form" %>
+    </div>
+  </div>
+</div>
+<% end %>

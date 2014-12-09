@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
     
     set_seo_meta("预订#{@product.title}", @product.title, @product.intro)
     
-    respond_with(@order)
+    # respond_with(@order)
   end
 
   def create
@@ -78,7 +78,6 @@ class OrdersController < ApplicationController
     @order = @product.orders.new(order_params)
     @order.user_id = current_user.id
     @apartment = Apartment.find_by_id(@order.apartment_id)
-    puts @apartment.name
     if @order.save
       @product.add_order_count
       @apartment.add_order_count if @apartment

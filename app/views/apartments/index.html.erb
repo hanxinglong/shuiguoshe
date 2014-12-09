@@ -1,11 +1,11 @@
 <div class="row container-box">
-  <div class="col-md-3">
+  <!--div class="col-md-3">
     <%= render 'apartments/sidebar_hot_apartments' %>
-  </div>
+  </div-->
   
-  <div class="col-md-9">
+  <div class="col-md-12">
     <% cache cache_key_for('apartments', @apartments) do %>
-    <%= render_grid_for @apartments %>
+    <%= render_grid_for @apartments, 4 %>
     <% end %>
   </div>
 </div>

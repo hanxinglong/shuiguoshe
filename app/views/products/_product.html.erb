@@ -1,7 +1,8 @@
 <% cache("#{product}/#{product.orders_count}") do %>
+<a href="<%= product_path(product) %>">
 <div class="product">
-  <div class="col-md-4">
-    <div class="thumbnail" title="<%= product.title %>">
+  <div class="col-md-<%= controller_name == "home" ? 4 : 3 %>">
+    <div class="thumbnail">
       <% if product.suggested? and controller_name != 'home' %>
         <div class="suggest-icon"><%= image_tag 'suggest_icon.png' %></div>
       <% end %>
@@ -17,12 +18,13 @@
               <div><span class="purchased">已订<%= product.orders_count %>单</span></div>
             </div>
           </div>
-          <div style="margin-top: 8px;">
+          <!--div style="margin-top: 8px;">
             <%= link_to "立即预订", new_product_order_path(product), class: "btn btn-success" %>
-          </div>
+          </div-->
           
       </div>
     </div>
   </div> 
 </div>
+</a>
 <% end %>
