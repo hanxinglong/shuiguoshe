@@ -2,6 +2,7 @@
  *= require application
  *= require orders
  *= require users
+ *= require apartments
  *= require_self
  */
 
@@ -39,6 +40,18 @@ $common-border-color: rgb(204,204,204);
 
 .f16 {
   font-size: 16px;
+}
+
+.f12 {
+  font-size: 12px;
+}
+
+.f13 {
+  font-size: 13px;
+}
+
+.f14 {
+  font-size: 14px;
 }
 
 .f18 {
@@ -81,10 +94,6 @@ $common-border-color: rgb(204,204,204);
   }
 }
 
-.order-btn-box{
-  padding-top: 15px;
-}
-
 .logo {
   display: block;
   width: 291px;
@@ -109,22 +118,6 @@ $common-border-color: rgb(204,204,204);
 //.order-head {
 //  border: 1px solid #ccc;
 //}
-
-.apartments {
-  li {
-    list-style: none;
-    display: inline-block;
-    margin-right: 30px;
-    margin-bottom: 20px;
-    width: 180px;
-    border: 1px solid $common-border-color;
-    text-align: center;
-  }
-  
-  .apartment {
-//    width: 300px;
-  }
-}
 
 #carousel-ads .carousel-indicators {
 //  display: none;
@@ -200,15 +193,39 @@ $common-border-color: rgb(204,204,204);
 .product {
   .thumbnail {
     border: 0;
+    .suggest-icon {
+      position: absolute;
+      top: 0;
+      right: 15px;
+    }
   }
-  .price {
-    height: 35px;
-    line-height: 35px;
+  .caption {
+    .name {
+      color: rgb(83,83,83);
+      font-size: 16px;
+    }
+    .price {
+      .numeric {
+        font-size: 24px;
+//        font-weight: bold;
+        color: $nature-green;
+      }
+    }
+    .price-extra {
+      text-align: right;
+      font-size: 14px;
+      del {
+        font-size: 14px;
+        color: rgb(107,107,107);
+      }
+      .purchased {
+        background-color: $nature-green;
+        padding: 2px;
+        font-size: 13px;
+        color: white;
+      }
+    }
   }
-}
-
-.weight-input-control {
-  
 }
 
 .product {
@@ -221,7 +238,7 @@ $common-border-color: rgb(204,204,204);
 .sidebar-box {
   border: 1px solid $common-border-color;
   margin-bottom: 20px;
-  padding-bottom: 10px;
+//  padding-bottom: 10px;
   h2 {
     margin: 0;
     padding: 10px;
@@ -229,47 +246,19 @@ $common-border-color: rgb(204,204,204);
     background-color: rgb(241,241,241);
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px;
+//    margin-bottom: 10px;
   }
   
-  .products {
+  .sidebar-items {
     padding: 0 10px;
-    .product {
-//      padding: 10px 0;
-      border-bottom: 1px dashed $common-border-color;
-      &:last-child {
-        border: 0;
-      };
-      img {
-        width: 180px;
-        height: 150px;
-      }
-      h3 {
-        font-size: 16px;
-      }
-      p {
-        em {
-          font-size: 16px;
-          font-weight: bold;
-          color: $nature-green;
-        }
-        font-size: 12px;
-      }
-    }
-    
   }
   
-}
-
-.horizontal-dl {
-  margin-top: 15px;
-  dt {
-    float: left;
-  }
-  dd {
-    margin: 0;
-    margin-left: 120px;
-//    margin-bottom: 0;
+  .sidebar-item {
+    padding: 10px 0;
+    border-bottom: 1px dashed $common-border-color;
+    &:last-child {
+      border: 0;
+    };
   }
 }
 

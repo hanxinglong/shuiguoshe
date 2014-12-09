@@ -27,4 +27,5 @@ class Product < ActiveRecord::Base
   def suggested?
     self.suggested_at.present?
   end
+  
 end

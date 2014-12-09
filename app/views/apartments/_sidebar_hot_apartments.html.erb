@@ -2,15 +2,19 @@
   <% cache(cache_key_for('sidebar_hot_apartments', @hot_apartments)) do %>
   <div class="sidebar-box">
     <h2>热门订购小区</h2>
-    <div class="products">
+    <div class="apartments sidebar-items">
       <% @hot_apartments.each do |apartment| %>
       <% cache apartment do %>
-      <div class="product" style="padding-bottom: 20px;">
-        <dl class="horizontal-dl" style="padding-bottom: 10px">
-          <dt><%= image_tag apartment.image, alt: apartment.name, style: "width: 108px; height: 90px;" %></dt>
-          <dd><%= apartment.name %></dd>
-          <dd>已经订购了<em class="green f16"><%= apartment.orders_count %></em>单</dd>
-        </dl>
+      <div class="apartment sidebar-item">
+        <div class="row">
+          <div class="col-xs-6">
+            <%= image_tag apartment.image, alt: apartment.name, style: "width: 108px; height: 90px;" %>
+          </div>
+          <div class="col-xs-6">
+            <div><%= apartment.name %></div>
+            <div>已订<em class="green f16"><%= apartment.orders_count %></em>单</div>
+          </div>
+        </div>
       </div>
       <% end %>
       <% end %>
