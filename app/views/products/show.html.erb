@@ -11,7 +11,7 @@
     <div class="col-md-3">
       <%= image_tag @product.image_url(:thumb) %>
       <div class="text-center">
-        <div class=""><span class="green f30"><%= @product.low_price %></span>&nbsp;<span class="f14">元/斤</span></div>
+        <div class=""><span class="green f30 price-numeric"><%= @product.low_price %></span>&nbsp;<span class="f14">元/斤</span></div>
         <div class="text-muted f16"><del>市场价<%= @product.origin_price %>&nbsp;元/斤</del></div>
       </div>
     </div>
@@ -20,4 +20,21 @@
     </div>
   </div>
 </div>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+
+function updateButtonState() {
+  var select = $("#order_apartment_id");
+  if (select.val() == '') {
+    $("#save_address").attr("disabled", true);
+  } else {
+    $("#save_address").removeAttr("disabled");
+  }
+}
+
+updateButtonState();
+
+</script>
 <% end %>

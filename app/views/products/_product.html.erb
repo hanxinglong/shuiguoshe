@@ -1,7 +1,7 @@
 <% cache("#{product}/#{product.orders_count}") do %>
-<a href="<%= product_path(product) %>">
 <div class="product">
   <div class="col-md-<%= controller_name == "home" ? 4 : 3 %>">
+    <a href="<%= product_path(product) %>" class="product-link">
     <div class="thumbnail">
       <% if product.suggested? and controller_name != 'home' %>
         <div class="suggest-icon"><%= image_tag 'suggest_icon.png' %></div>
@@ -24,7 +24,7 @@
           
       </div>
     </div>
+    </a>
   </div> 
 </div>
-</a>
 <% end %>
