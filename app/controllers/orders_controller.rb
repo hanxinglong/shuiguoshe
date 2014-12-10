@@ -84,7 +84,8 @@ class OrdersController < ApplicationController
       flash[:success] = "预订成功"
       redirect_to incompleted_orders_user_path
     else
-      render :new
+      flash[:error] = @order.errors.full_messages.join(" ")
+      redirect_to @product
     end
     
   end

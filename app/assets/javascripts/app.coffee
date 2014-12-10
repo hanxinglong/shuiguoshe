@@ -7,7 +7,6 @@ window.App =
     address = $("#order_apartment_id").val()
     if address == ''
       return
-    alert(address)
     $.ajax
       url: "/users/#{id}/update_address"
       type: "PATCH"

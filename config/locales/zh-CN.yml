@@ -38,6 +38,7 @@
         state: "订单状态"
         deliver_time: "配送时间"
         deliver_address: "配置地址"
+        apartment_id: "配送小区"
       banner:
         image: "广告图片"
       sidebar_ad:
