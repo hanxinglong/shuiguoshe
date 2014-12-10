@@ -1,28 +1,9 @@
-<% cache cache_key_for('carousel_ads', @banners) do %>
-<div id="carousel-ads" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <% @banners.each_with_index do |banner, index| %>
-      <li data-target="#carousel-ads" data-slide-to="<%= index %>" class="<%= index == 0 ? "active" : "" %>"></li>
-    <% end %>
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <% @banners.each_with_index do |banner, index| %>
-    <% cache(banner) do %>
-    <div class="item <%= index == 0 ? "active" : "" %>">
-      <%= render_banner_image(banner) %>
-      <div class="carousel-caption">
-        
-      </div>
-    </div>
-    <% end %>
-    <% end %>
+<div class="home-ads-container clearfix">
+  <%= render "home/carousel_ads" %>
+  <div class="pull-right sidebar-ad-container">
+    <%= image_tag 'sidebar_ad.jpg', style: "width: 300px; height: 341px;" %>
   </div>
-  
 </div>
-<% end %>
 
 <div class="row home-content-box">
   <div class="col-md-9">

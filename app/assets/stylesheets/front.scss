@@ -116,12 +116,27 @@ $common-border-color: rgb(204,204,204);
 #carousel-ads {
   margin: 0;
 //  margin-top: -22px;
-  margin-bottom: 20px;
+//  margin-bottom: 20px;
 }
 
 //.order-head {
 //  border: 1px solid #ccc;
 //}
+
+.home-ads-container {
+  margin-bottom: 20px;
+  #carousel-ads {
+    width: 692px;
+    height: 342px;
+    float: left;
+  }
+  .sidebar-ad-container {
+    border: 1px solid $nature-green;//$common-border-color;
+    border-top: 0;
+  }
+}
+
+
 
 #carousel-ads .carousel-indicators {
 //  display: none;
