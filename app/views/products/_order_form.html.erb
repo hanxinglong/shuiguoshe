@@ -17,7 +17,7 @@
   <div class="form-group">
     <%= f.label :deliver_address, "* 配送至", class: "control-label col-sm-3" %>
     <div class="address-html-container">
-      <% if current_user.apartment.present? %>
+      <% if current_user && current_user.apartment.present? %>
       <div class="col-sm-8">
         <p style="height: 20px; line-height:30px;"><%= current_user.apartment %>&nbsp;<span class="label label-warning" style="font-size: 14px;">可以到 "我的水果社 > 配送设置" 进行修改</span></p>
         <%= f.hidden_field :apartment_id, value: current_user.apartment_id %>
