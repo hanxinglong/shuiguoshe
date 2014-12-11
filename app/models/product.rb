@@ -10,13 +10,14 @@ class Product < ActiveRecord::Base
   scope :suggest, -> { where.not(suggested_at: nil).order('suggested_at desc') }
   scope :hot, -> { where('orders_count > 0').order('orders_count desc').limit(5) }
   
-  validates :title, :image, :low_price, :type_id, :origin_price, presence: true
-  validates :low_price, :origin_price, format: { with: /\A\d+\.\d{1,}\z/, message: "不正确的价格" }
+  validates :title, :image, :low_price, :type_id, :origin_price, :units, presence: true
+  validates :low_price, :origin_price, format: { with: /\d+/, message: "不正确的价格" }
+  validates :low_price, :origin_price, numericality: { greater_than: 0 }
   
   validate :origin_price_greater_than_low_price
   def origin_price_greater_than_low_price
     if low_price >= origin_price
-      errors.add(:low_price, "必须小于初始价格")
+      errors.add(:low_price, "必须小于市场价格")
     end
   end
   

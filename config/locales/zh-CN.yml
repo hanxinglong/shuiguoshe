@@ -23,8 +23,9 @@
         subtitle: "产品子标题"
         intro: "产品简介"
         image: "产品图片"
-        low_price: "最低价格"
-        origin_price: "初始价格"
+        low_price: "最低价"
+        origin_price: "市场价"
+        units: "计量单位"
       apartment:
         name: "小区名字"
         address: "小区地址"
