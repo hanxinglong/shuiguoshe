@@ -6,6 +6,7 @@ class HomeController < ApplicationController
     @suggest_products = Product.suggest.limit(6)
     @newsblasts = Newsblast.sorted.limit(5)
     @ads = SidebarAd.sorted.limit(4)
+    @discounted_products = Product.saled.discounted
     @current = 'home_index'
     set_seo_meta(SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description)
   end

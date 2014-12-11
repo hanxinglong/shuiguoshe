@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.saled
+    @products = Product.saled.no_discount
     
     if params[:type_id]
       type_id = params[:type_id].to_i

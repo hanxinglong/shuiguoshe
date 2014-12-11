@@ -9,9 +9,11 @@ class Product < ActiveRecord::Base
   
   scope :suggest, -> { where.not(suggested_at: nil).order('suggested_at desc') }
   scope :hot, -> { where('orders_count > 0').order('orders_count desc').limit(5) }
+  scope :no_discount, -> { where(is_discount: false) }
+  scope :discounted, -> { where(is_discount: true).limit(3) }
   
   validates :title, :image, :low_price, :type_id, :origin_price, :units, presence: true
-  validates :low_price, :origin_price, format: { with: /\A\d+\.\d{2}\z/, message: "不正确的价格" }
+  validates :low_price, :origin_price, format: { with: /\A\d+\.\d{1,}\z/, message: "不正确的价格" }
   validates :low_price, :origin_price, numericality: { greater_than: 0 }
   
   validate :origin_price_greater_than_low_price

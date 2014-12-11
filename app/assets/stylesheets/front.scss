@@ -12,6 +12,10 @@ $light-gray: #777;
 $gray-medium-light: #eaeaea;
 $common-border-color: rgb(204,204,204);
 
+body {
+  color: rgb(83,83,83);
+}
+
 // 关闭响应式设计
 .container {
   width: 1024px !important;
@@ -136,7 +140,44 @@ $common-border-color: rgb(204,204,204);
   }
 }
 
-
+.home-discount-products {
+  margin-bottom: 30px;
+  .product-link {
+    display: block;
+    color: rgb(83,83,83);
+  }
+  .item {
+    background-color: white;
+    .info {
+      text-align: right;
+      padding: 10px 10px 10px 0;
+      .title {
+        font-weight: bold;
+        font-size: 16px;
+      }
+      .purchased {
+        font-size: 15px;
+        margin-top: 8px;
+      }
+      .countdown {
+        font-size: 15px;
+      }
+    }
+    img {
+      display: block;
+      width: 120px;
+      height: 100px;
+      margin-top: 20px;
+      margin-left: 5px;
+    }
+    .numeric {
+      font-family: Georgia, Times, "Times New Roman", serif;
+      font-size: 24px;
+//        font-weight: bold;
+      color: $nature-green;
+    }
+  }
+}
 
 #carousel-ads .carousel-indicators {
 //  display: none;

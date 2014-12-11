@@ -75,6 +75,12 @@ class OrdersController < ApplicationController
 
   def create
     @product = Product.find(params[:product_id])
+    unless @product.on_save
+      flash[:error] = "产品已经下架"
+      redirect_to @product
+      return
+    end
+    
     @order = @product.orders.new(order_params)
     @order.user_id = current_user.id
     @apartment = Apartment.find_by_id(@order.apartment_id)

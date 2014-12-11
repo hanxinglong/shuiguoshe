@@ -5,12 +5,43 @@
   </div>
 </div>
 
+<div class="content-box">
+  <h2>每周特惠<span class="f14 text-muted">（限周六、日配送）</span></h2>
+  <div class="home-discount-products">
+    <div class="row">
+      <% cache cache_key_for('home_discount_products', @discounted_products) do %>
+        <% @discounted_products.each do |product| %>
+          <% cache product do %>
+          <div class="col-xs-4 col-md-4">
+            <a href="<%= product_path(product) %>" class="product-link">
+              <div class="item clearfix">
+                <div class="info pull-right">
+                  <div class="title"><%= product.title %></div>
+                  <div class="purchased">已售<span class="numeric green"><%= product.orders_count %></span>件</div>
+                  <div class="price">
+                    <span class="numeric green"><%= number_with_precision(product.low_price, precision: 2) %></span>
+                    <span class="text-muted"><del><%= number_with_precision(product.origin_price, precision: 2) %></del></span>
+                    <span class="text-muted">（<%= product.units %>）</span>
+                  </div>
+                  <div class="countdown">剩余2天12小时02分52秒</div>
+                </div>
+                <%= image_tag product.image.url(:thumb) %>
+              </div>
+            </a>
+          </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
 <div class="row home-content-box">
   <div class="col-md-9">
     <% if @suggest_products.any? %>
       <% cache cache_key_for('home_suggest_products', @suggest_products) do %>
         <div class="content-box">
-          <h2>推荐订购</h2>
+          <h2>推荐预订</h2>
           <%= render_grid_for @suggest_products %>
         </div>
       <% end %>
@@ -18,7 +49,7 @@
     <% if @products.any? %>
     <% cache cache_key_for('home_hot_products', @products) do %>
     <div class="content-box">
-      <h2>热门订购</h2>
+      <h2>热门预订</h2>
       <%= render_grid_for @products %>
     </div>
     <% end %>
