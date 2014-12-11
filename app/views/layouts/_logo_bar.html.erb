@@ -1,10 +1,10 @@
-<div class="container" style="padding: 15px; 0">
+<div class="container" style="padding-bottom: 20px;">
   <div class="row">
     <div class="col-md-4">
       <a class="logo" href="/"><%= image_tag 'logo.png', alt: "水果社" %></a>
     </div>
   
-    <div class="col-md-5 col-md-offset-1" style="padding-top:15px;">
+    <div class="col-md-5 col-md-offset-1" style="padding-top:25px;">
       <%= form_tag search_products_path, method: 'get', class: "form-inline" do %>
       <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "请输入商品名称或商品描述", style: "width: 70%" %> <!-- 420px -->
       <%= hidden_field_tag :type_id, params[:type_id] if params[:type_id].present? %>
@@ -13,7 +13,7 @@
     </div>
   
     <div class="col-md-2">
-      <div class="pull-right order-btn-box">
+      <div class="pull-right order-btn-box" style="padding-top: 25px;">
         <a href="<%= orders_user_path %>" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i> 订单查询</a>
         
       </div>
