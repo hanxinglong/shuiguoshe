@@ -19,8 +19,7 @@
           <li class="<%= controller_name == 'products' and params[:type_id].to_i == type.id ? "active" : "" %>"><%= link_to type.name, products_path(type_id: type.id) %></li>
         <% end %>
         <li class="<%= controller_name == 'apartments' ? "active" : "" %>"><%= link_to "服务小区", apartments_path %></li>
-        <li class="<%= %w(order_help pay_help deliver_help).include?(@current) ? "active" : "" %>"><a href="<%= order_help_path %>">帮助中心</a></li>
-        <li class="<%= @current == 'home_about' ? "active" : "" %>"><a href="<%= about_path %>">关于水果社</a></li>
+
       </ul>
     </div><!-- /.nav-collapse -->
   </div><!-- /.container -->
