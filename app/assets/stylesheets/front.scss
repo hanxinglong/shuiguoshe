@@ -117,6 +117,15 @@ body {
   line-height: 56px;
 }
 
+.vertical-center {
+  line-height: 120px;
+}
+
+.cart {
+  background: image_url('cart.png') left center no-repeat;
+  padding-left: 30px;
+}
+
 #carousel-ads {
   margin: 0;
 //  margin-top: -22px;
