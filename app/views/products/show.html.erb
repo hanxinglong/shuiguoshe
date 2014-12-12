@@ -1,6 +1,5 @@
-<% cache @product do %>
-<div class="user-box">
-  <h2 style="margin-bottom: 10px;">开始下单</h2>
+<div class="user-box container-box">
+  <h2 style="margin-bottom: 10px;">开始预订</h2>
   <div class="product-info">
     <h3><%= @product.title %></h3>
     <div class="product-intro">
@@ -23,7 +22,6 @@
     </div>
   </div>
 </div>
-<% end %>
 
 <% content_for :scripts do %>
 <script>
@@ -37,7 +35,24 @@ function updateButtonState() {
   }
 }
 
-updateButtonState();
+
+$(function() {
+  
+  <% if @product.discounted_at %>
+  $("#timeLeft").countdown("<%= @product.discounted_at.strftime("%Y-%d-%m %H:%M:%S") %>")
+    .on('update.countdown', function(event) {
+      $(this).html(event.strftime('&nbsp;&nbsp;剩余' + '%D天%H小时%M分%S'));
+    })
+    .on('finish.countdown', function(event) {
+      $("#submit-button").attr("disabled", true);
+      $("#submit-button").attr("class", "btn btn-warning");
+      $("#submit-button").text("活动已结束,不支持预订");
+      $(this).text("");
+    });
+  <% end %>
+  
+
+});
 
 </script>
 <% end %>

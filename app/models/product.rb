@@ -15,12 +15,17 @@ class Product < ActiveRecord::Base
   validates :title, :image, :low_price, :type_id, :origin_price, :units, presence: true
   validates :low_price, :origin_price, format: { with: /\A\d+\.\d{1,}\z/, message: "不正确的价格" }
   validates :low_price, :origin_price, numericality: { greater_than: 0 }
+  validates :discounted_at, presence: true, if: Proc.new { |a| a[:is_discount] }#:required_discount?
   
   validate :origin_price_greater_than_low_price
   def origin_price_greater_than_low_price
     if low_price >= origin_price
       errors.add(:low_price, "必须小于市场价格")
     end
+  end
+  
+  def required_discount?
+    self.is_discount
   end
   
   def add_order_count

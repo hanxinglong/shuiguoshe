@@ -26,6 +26,7 @@
         low_price: "最低价"
         origin_price: "市场价"
         units: "计量单位"
+        discounted_at: "活动截止时间"
       apartment:
         name: "小区名字"
         address: "小区地址"

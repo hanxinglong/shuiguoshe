@@ -13,12 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require jquery.countdown.min
 //= require turbolinks
 //= require_tree .
-
-$('.carousel').carousel({
-  interval: 4000
-});
 
 $(function(){
     $(window).scroll(function(){
@@ -34,3 +31,4 @@ $("#scrolltop").click(function(){
     $("html,body").animate({scrollTop:0});
     });
 });
+
