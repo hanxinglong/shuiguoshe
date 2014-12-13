@@ -39,9 +39,9 @@ function updateButtonState() {
 $(function() {
   
   <% if @product.discounted_at %>
-  $("#timeLeft").countdown("<%= @product.discounted_at.strftime("%Y-%d-%m %H:%M:%S") %>")
+  $("#timeLeft").countdown("<%= @product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") %>")
     .on('update.countdown', function(event) {
-      $(this).html(event.strftime('&nbsp;&nbsp;剩余' + '%D天%H小时%M分%S'));
+      $(this).html(event.strftime('&nbsp;&nbsp;剩余' + '%D天%H小时%M分%S秒'));
     })
     .on('finish.countdown', function(event) {
       $("#submit-button").attr("disabled", true);

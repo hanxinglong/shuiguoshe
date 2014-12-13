@@ -23,7 +23,7 @@
                     <span class="text-muted"><del><%= number_with_precision(product.origin_price, precision: 2) %></del></span>
                     <span class="text-muted">（<%= product.units %>）</span>
                   </div>
-                  <div class="countdown" data-countdown="<%= product.discounted_at.strftime("%Y-%d-%m %H:%M:%S") %>"></div>
+                  <div class="countdown" data-countdown="<%= product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") %>"></div>
                 </div>
                 <%= image_tag product.image.url(:thumb) %>
               </div>
@@ -70,7 +70,7 @@ $(function() {
     var $item = $(item);
     var name = '剩余';
     $item.countdown($item.data('countdown'), function(event) {
-      $(this).html(event.strftime(name + '%D天%H小时%M分%S'));
+      $(this).html(event.strftime(name + '%D天%H小时%M分%S秒'));
     });
   });
 });
