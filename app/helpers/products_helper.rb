@@ -14,4 +14,9 @@ module ProductsHelper
     return truncate(product.intro, length: 15) if product.intro.present?
     return ""
   end
+  
+  def product_price_tag(price)
+    number_with_precision(price, precision: 2)
+  end
+  
 end

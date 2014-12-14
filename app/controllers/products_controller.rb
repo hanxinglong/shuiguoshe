@@ -43,9 +43,15 @@ class ProductsController < ApplicationController
   end
   
   def show
-    @product = Product.find(params[:id])
+    begin
+      @product = Product.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.error "Attempt to access invalid product #{params[:id]}"
     # @order = @product.orders.build
-    set_seo_meta(@product.title, '', @product.intro)
+      render_404
+    else
+      set_seo_meta(@product.title, '', @product.intro)
+    end
   end
 
 end

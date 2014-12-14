@@ -31,4 +31,8 @@ class HomeController < ApplicationController
     set_seo_meta('帮助中心')
   end
   
+  def error_404
+    render_404
+  end
+  
 end

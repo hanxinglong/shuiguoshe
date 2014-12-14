@@ -65,11 +65,9 @@ class OrdersController < ApplicationController
   end
   
   def new
-    @product = Product.find(params[:product_id])
-    @order = @product.orders.build
-    
-    set_seo_meta("预订#{@product.title}", @product.title, @product.intro)
-    
+    @order = Order.new
+    @cart = current_cart
+    set_seo_meta("提交订单")    
     # respond_with(@order)
   end
 

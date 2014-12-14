@@ -1,0 +1,8 @@
+<% if @success %>
+var total = $("#cart-total-id").data("cart-total");
+total = total + 1;
+$("#cart-total-id").data("cart-total", total);
+$("#cart-total-id").text(total);
+<% else %>
+
+<% end %>

@@ -11,11 +11,13 @@
       <button type="submit" class="btn btn-sm btn-success">搜索</button>
       <% end %>
     </div>
-  
+    
     <div class="col-md-2">
-      <div class="pull-right order-btn-box" style="padding-top: 25px;">
-        <a href="<%= orders_user_path %>" class="btn btn-default"><i class="glyphicon glyphicon-shopping-cart"></i> 订单查询</a>
-        
+      <div class="pull-right order-btn-box" style="padding-top: 25px;" id="cart-mini">
+        <%= cart_tag %>
+        <div class="cart-panel" id="cart-panel">
+          
+        </div>
       </div>
     </div>
   </div>

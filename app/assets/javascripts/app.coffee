@@ -14,6 +14,18 @@ window.App =
       # success: (re) ->
         # alert(re)
         # $('.address-html-container').html(re)
+  
+  addToCart: (el) ->
+    pid = $(el).data("product-id")
+    $.ajax
+      url: "/line_items"
+      type: "POST"
+      data: { product_id: "#{pid}" }
+      success: (re) ->
+        if re == "1"
+          
+        else
+          
     
   checkValue: (el) ->
     reg = /^[+]?(([1-9]\d*[.]?)|(0.))(\d{0,2})?$/

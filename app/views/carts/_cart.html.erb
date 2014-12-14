@@ -1,0 +1,26 @@
+<div class="user-box container-box my-cart">
+  <h2>我的购物车</h2>
+
+  <table class="table common-table">
+    <tr class="table-head">
+      <th>商品名称</th>
+      <th>规格</th>
+      <th>单价（元）</th>
+      <th>数量</th>
+      <th>总价（元）</th>
+      <th>操作</th>
+    </tr>
+    <%= render @cart.line_items %>
+    <tr>
+      <td colspan="6" class="table-head">
+        <div class="cart-total-price">
+          总计（不含运费）：<span class="green numeric">¥<%= product_price_tag(@cart.total_price) %></span>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <div class="text-right">
+    <%= link_to "提交订单", checkout_path, class: "btn btn-success" %>
+  </div>
+</div>
+

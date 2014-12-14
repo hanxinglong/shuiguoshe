@@ -9,16 +9,14 @@
   <div class="row">
     <div class="col-md-3">
       <%= image_tag @product.image_url(:thumb) %>
-      <div class="text-center">
-        <div>
-          <span class="green">￥<span class="f30 price-numeric"><%= number_with_precision(@product.low_price, precision: 2) %></span></span>
-          <span class="text-muted f16"><del>￥<%= number_with_precision(@product.origin_price, precision: 2) %></del></span>
-          <span class="text-muted">（<%= @product.units %>）</span>
-        </div>
-      </div>
     </div>
     <div class="col-md-9">
-      <%= render "products/order_form" %>
+      <div class="">
+          <span class="green">￥<span class="f30 price-numeric"><%= product_price_tag(@product.low_price) %></span></span>
+          <span class="text-muted f16"><del>￥<%= product_price_tag(@product.origin_price) %></del></span>
+          <span class="text-muted">（<%= @product.units %>）</span>
+      </div>
+      <%= add_to_cart_tag @product, "btn btn-success" %>
     </div>
   </div>
 </div>

@@ -37,6 +37,9 @@ Rails.application.routes.draw do
       # get :search
     end
   end
+  resources :line_items
+  resources :carts, only: [:show, :destroy]
+  get '/cart' => 'carts#show', as: :show_cart
   
   get '/products/search' => 'products#index', as: :search_products
   
@@ -45,6 +48,7 @@ Rails.application.routes.draw do
       patch :cancel
     end
   end
+  get '/checkout' => 'orders#new', as: :checkout
   
   resources :apartments, only: [:index]
   resources :newsblasts, path: "news", only: [:show]

@@ -19,8 +19,8 @@
                   <div class="title"><%= product.title %></div>
                   <div class="purchased">已售<span class="numeric green"><%= product.orders_count %></span>件</div>
                   <div class="price">
-                    <span class="numeric green"><%= number_with_precision(product.low_price, precision: 2) %></span>
-                    <span class="text-muted"><del><%= number_with_precision(product.origin_price, precision: 2) %></del></span>
+                    <span class="numeric green"><%= product_price_tag(product.low_price) %></span>
+                    <span class="text-muted"><del><%= product_price_tag(product.origin_price) %></del></span>
                     <span class="text-muted">（<%= product.units %>）</span>
                   </div>
                   <div class="countdown" data-countdown="<%= product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") %>"></div>

@@ -3,6 +3,7 @@ class Product < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   
   has_many :orders
+  has_many :line_items
   
   scope :saled, -> { where(on_sale: true) }
   scope :search, -> keyword { where('title like :keyword or subtitle like :keyword or intro like :keyword', { keyword: "%#{keyword}%" }) }
@@ -21,6 +22,16 @@ class Product < ActiveRecord::Base
   def origin_price_greater_than_low_price
     if low_price >= origin_price
       errors.add(:low_price, "必须小于市场价格")
+    end
+  end
+  
+  before_destroy :ensure_not_referenced_by_any_line_item
+  def ensure_not_referenced_by_any_line_item
+    if line_items.empty?
+      return true
+    else
+      errors.add(:base, '改产品已经被添加到了购物车，不能被删除')
+      return false
     end
   end
   

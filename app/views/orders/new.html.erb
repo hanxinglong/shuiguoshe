@@ -1,25 +1,139 @@
-<% cache [@product, current_user.apartment_id] do %>
-<div class="user-box">
-  <h2 style="margin-bottom: 10px;">开始下单</h2>
-  <div class="product-info">
-    <h3><%= @product.title %></h3>
-    <div class="product-intro">
-      <%= @product.intro %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      <%= image_tag @product.image_url(:thumb) %>
-      <div class="text-center">
-        <div class=""><span class="green f30"><%= @product.low_price %></span>&nbsp;<span class="f14">元/斤</span></div>
-        <div class="text-muted f16"><del>市场价<%= @product.origin_price %>&nbsp;元/斤</del></div>
+<div class="user-box container-box">
+  <h2>开始下单</h2>
+  
+  <%= simple_form_for(@order, html: { class: "form-horizontal" },wrapper: :horizontal_form,
+          wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            file: :horizontal_file_input,
+            boolean: :horizontal_boolean
+          }) do |f| %>
+    <%= render "/shared/error_messages", target: @order %>
+    <div class="order-info-container">
+      <h3>填写并核对订单信息</h3>
+      <div class="order-item-info">
+        <h4>收货人信息</h4>
+        <div class="item-info">
+          <div class="radio">
+            <label>
+                <input type="radio" name="optionsRadios" value="me" checked>
+                配送给自己
+              </label>&nbsp;&nbsp;
+              <label>
+                  <input type="radio" name="optionsRadios" value="other">
+                  配送给他人
+              </label>
+          </div>
+          
+          <div class="deliver-info" style="margin-top: 20px; margin-left: -40px;">
+            <div class="form-group">
+              <%= f.label :mobile, "* 收货人手机", class: "control-label col-sm-2" %>
+              <div class="col-sm-3">
+                <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: current_user.mobile, disabled: true %>
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <%= f.label :apartment_id, "* 收货人小区", class: "control-label col-sm-2" %>
+              <div class="col-sm-4">
+                <% if current_user.apartment.present? %>
+                  
+                <% else %>
+                  <%= f.select :apartment_id, Apartment.opened.map { |a| [a.name, a.id] }, { prompt: "--请选择您所在的小区--", selected: Apartment.opened.include?(current_user.apartment_id) }, { class: "form-control", onchange: "updateButtonState();" } %>
+                  <div class="col-sm-2">
+                    <a class="btn btn-warning" data-user-id="<%= current_user.id %>"
+                       onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="order-item-info">
+        <h4>支付及配送方式</h4>
+        <div class="item-info">
+          目前只支持货到付款<br>
+          每天18:00-21:00之间配送
+        </div>
+      </div>
+      <div class="order-item-info">
+        <h4>商品清单</h4>
+        <div class="item-info">
+          <table class="table common-table">
+            <tr class="table-head">
+              <th>商品名称</th>
+              <th>规格</th>
+              <th>单价（元）</th>
+              <th>数量</th>
+              <th>总价（元）</th>
+            </tr>
+            <% @cart.line_items.each do |line_item| %>
+            <tr>
+              <td width="40%" class="item-title">
+                <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product) %>
+                <span class="product-title"><%= link_to line_item.product.title, product_path(line_item.product) %></span>
+              </td>
+              <td width="10%"><%= line_item.product.units %></td>
+              <td width="10%"><%= product_price_tag(line_item.product.low_price) %></td>
+              <td width="15%"><%= line_item.quantity %></td>
+              <td width="10%"><%= product_price_tag(line_item.total_price) %></td>
+            </tr>
+            <% end %>
+          </table>
+          
+          
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :note, "备注信息", class: "control-label col-sm-2 col-sm-offset-5" %>
+          <div class="col-sm-5">
+            <%= f.text_field :note, placeholder: "提醒注意的事项 (选填)", class: "form-control" %>
+          </div>
+        </div>
+        
+        <div class="item-info" style="text-align:right">
+          <p>商品总额：￥<%= product_price_tag(@cart.total_price) %></p>
+          <p>抵扣：-￥<%= product_price_tag(0) %></p>
+          <p>订单总额：￥<%= product_price_tag(@cart.total_price) %></p>
+          <%= f.input :total_price, as: :hidden, value: @cart.total_price %>
+        </div>
+      </div>
+      <div class="order-footer">
+        <%= link_to "返回修改购物车", show_cart_path, class: "btn btn-default" %>&nbsp;&nbsp;<%= f.submit '确认下单', class: "btn btn-danger" %>
       </div>
     </div>
-    <div class="col-md-9">
-      <%= render "form" %>
-    </div>
-  </div>
+  <% end %>
+  
 </div>
+
+<% content_for :scripts do %>
+<script>
+$(function() {
+  $('input[name=optionsRadios]').change(function() {
+    // alert($(this).val());
+    if ($(this).val() == 'me') {
+      $('#order_mobile').attr("disabled", true);
+      $('#order_mobile').val("<%= current_user.mobile %>");
+    } else {
+      $('#order_mobile').removeAttr("disabled");
+      $('#order_mobile').val("");
+    }
+  });
+  
+  function updateButtonState() {
+    var select = $("#order_apartment_id");
+    if (select.val() == '') {
+      $("#save_address").attr("disabled", true);
+    } else {
+      $("#save_address").removeAttr("disabled");
+    }
+  }
+
+  updateButtonState();
+});
+</script>
 <% end %>
 
 

@@ -87,4 +87,39 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
   
+  helper_method :cart
+  def cart
+    current_cart
+  end
+  
+  private
+    def current_cart
+      if current_user.blank?
+        save_cart_to_session
+      else
+        cart = Cart.find_by(user_id: current_user.id)
+        if cart.blank?
+          cart = Cart.create(user_id: current_user.id)
+        end
+        
+        session_cart = Cart.find_by(id: session[:cart_id])
+        if session_cart and session_cart.line_items.any?
+          if cart.add_cart(session_cart)
+            session_cart.destroy
+            session[:cart_id] = nil
+          end
+        end
+        
+        cart
+      end
+    end
+    
+    def save_cart_to_session
+        Cart.find(session[:cart_id])
+      rescue ActiveRecord::RecordNotFound
+        cart = Cart.create
+        session[:cart_id] = cart.id
+        cart
+    end
+  
 end

@@ -151,11 +151,26 @@ body {
 
 .home-discount-products {
   margin-bottom: 30px;
-  .product-link {
+  .product-link {    
     display: block;
     color: rgb(83,83,83);
+    text-decoration: none;
+    height: auto;
   }
   .item {
+    border: 0;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+      -moz-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
+      -webkit-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
+      box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
+    }
+    
     background-color: white;
     .info {
       text-align: right;
@@ -259,13 +274,65 @@ body {
   }
 }
 
+.cart-result {
+  color: rgb(83,83,83);
+  padding: 10px;
+  &:hover{
+    text-decoration: none;
+    color: rgb(83,83,83);
+    border: 1px solid $common-border-color;
+    border-bottom: 1px solid rgb(251,251,251);
+  };
+  .cart-total {
+    font-family: Georgia, Times, "Times New Roman", serif;
+    font-size: 18px;
+  }
+}
+
+.common-table {
+  border: 1px solid rgb(213,213,213);
+  .table-head {
+    background-color: rgb(240,240,240);
+  }
+  th,td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  .item-title {
+    text-align: left;
+  }
+  
+  .cart-total-price {
+    text-align: right;
+    .numeric {
+      font-family: Georgia, Times, "Times New Roman", serif;
+      font-size: 24px;
+    }
+  }
+  
+}
+
 .product {
   .thumbnail {
-    border: 0;
+    border: 0;    
+    .item-link {
+      
+      &:hover {
+        text-decoration: none;
+      };
+    } 
     .suggest-icon {
       position: absolute;
       top: 0;
       right: 15px;
+    }
+    
+    &:hover {
+      cursor: pointer;
+      text-decoration: none;
+      -moz-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
+      -webkit-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
+      box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
     }
   }
   .caption {
@@ -296,18 +363,6 @@ body {
       }
     }
   }
-}
-
-.product-link {
-  text-decoration: none;
-  display: block;
-  &:hover {
-    text-decoration: none;
-    -moz-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-    -webkit-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-    box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-  }
-
 }
 
 .price-numeric {

@@ -1,29 +1,25 @@
 <% cache("#{product}/#{product.orders_count}") do %>
-<div class="product">
+<div class="product" onmouseover="javascript:$('#cart-btn-<%= product.id %>').show();" onmouseout="javascript:$('#cart-btn-<%= product.id %>').hide();">
   <div class="col-md-<%= controller_name == "home" ? 4 : 3 %>">
-    <a href="<%= product_path(product) %>" class="product-link">
     <div class="thumbnail">
-      <% if product.suggested? and controller_name != 'home' %>
-        <div class="suggest-icon"><%= image_tag 'suggest_icon.png' %></div>
-      <% end %>
-      <%= image_tag product.image.thumb, alt: product.title, class: "img-responsive" %>
-      <div class="caption">
-        <h6 class="name"><%= product.title %></h6>
-        <div class="price">
-          <span class="green">￥<span class="numeric"><%= number_with_precision(product.low_price, precision: 2) %></span></span>
-          <del class="text-muted">￥<%= number_with_precision(product.origin_price, precision: 2) %></del>
-          <span class="text-muted">（<%= product.units %>）</span>
+      <a href="<%= product_path(product) %>" class="item-link">
+        <%= image_tag product.image.thumb, alt: product.title, class: "img-responsive" %>
+        <div class="caption">
+          <h6 class="name"><%= product.title %></h6>
+          <div class="price">
+            <span class="green">￥<span class="numeric"><%= number_with_precision(product.low_price, precision: 2) %></span></span>
+            <del class="text-muted">￥<%= number_with_precision(product.origin_price, precision: 2) %></del>
+            <span class="text-muted">（<%= product.units %>）</span>
+          </div>
+          <div class="price-extra">
+            <div class="pull-right" style="display:none" id="cart-btn-<%= product.id %>">
+              <%= add_to_cart_tag product %>
+            </div>
+            <span class="purchased">已售<%= product.orders_count %>件</span>
+          </div>
         </div>
-        <div class="price-extra">
-          <span class="purchased">已售<%= product.orders_count %>件</span>
-        </div>
-          <!--div style="margin-top: 8px;">
-            <%= link_to "立即预订", new_product_order_path(product), class: "btn btn-success" %>
-          </div-->
-          
-      </div>
+      </a>
     </div>
-    </a>
   </div> 
 </div>
 <% end %>
