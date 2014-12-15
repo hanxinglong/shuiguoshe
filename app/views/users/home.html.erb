@@ -7,9 +7,6 @@
 <div class="user-today-orders">
   <h2>
     今日待处理订单
-    <span class="pull-right">
-      共计：<em style="color:red;"><%= render_orders_total_price(@orders) %></em> 元
-    </span>
   </h2>
   <div class="order-list">
     <%= render "/orders/order_list", cache_prefix: "user_#{current_user.mobile}_home_today_orders" %>

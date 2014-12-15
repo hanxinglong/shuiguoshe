@@ -124,7 +124,7 @@ $(document).ready(function () {
   $('input[name=optionsRadios]').change(function() {
     // alert($(this).val());
     if ($(this).val() == 'me') {
-      $('#order_mobile').attr("disabled", true);
+      $('#order_mobile').attr("readonly", true);
       $('#order_mobile').val("<%= current_user.mobile %>");
       
       <% if current_user.apartment_id.present? %>
@@ -144,7 +144,7 @@ $(document).ready(function () {
         $('#edit-user-apartment').html('<a class="btn btn-warning" data-user-id="<%= current_user.id %>" onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>');
       <% end %>
     } else {
-      $('#order_mobile').removeAttr("disabled");
+      $('#order_mobile').removeAttr("readonly");
       $('#order_mobile').val("");
       $("#edit-user-apartment").html("");
       $("#order_apartment_id").removeAttr("disabled");
@@ -171,6 +171,7 @@ $(document).ready(function () {
 function updateApartment () {
     $('#edit-user-apartment').html('<a class="btn btn-warning" data-user-id="<%= current_user.id %>" onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>');
     $("#order_apartment_id").removeAttr("disabled");
+    $("#hide_order_apartment_input").html("");
 };
 
 </script>

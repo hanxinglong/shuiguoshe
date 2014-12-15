@@ -16,7 +16,7 @@
         
         <div class="list-group">
           <% 
-          @actions = %w(user_orders user_orders_incompleted user_orders_completed user_orders_canceled)
+          @actions = %w(user_orders user_orders_incompleted user_orders_completed user_orders_canceled user_show_order_detail)
            %>
           <a href="<%= orders_user_path %>" class="list-group-item <%= @actions.include?(@current) ? "active" : "" %>">
             我的订单

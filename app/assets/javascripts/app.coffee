@@ -18,6 +18,7 @@ window.App =
           $("#order_apartment_id").attr("disabled", true)
           # alert($("#user-edit-apartment").html());
           $("#order_apartment_id option").attr("user-apartment-id", address)
+          $("#hide_order_apartment_input").html("<input type=\"hidden\" name=\"order[apartment_id]\" value=\"#{address}\" />")
         else
           $("#order_apartment_id option").attr("user-apartment-id", '')
           App.alert("操作失败", $("#edit-user-apartment"))

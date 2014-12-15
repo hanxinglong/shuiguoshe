@@ -136,9 +136,6 @@ $gray-medium-light: #eaeaea;
     margin-bottom: 10px;
   }
   
-  .order-list {
-    border: 1px solid rgb(221,221,221);
-  }
 }
 
 .tab-head {
@@ -154,7 +151,7 @@ $gray-medium-light: #eaeaea;
 
 .tab-body {
   margin-top: 20px;
-  border: 1px solid $gray-medium-light;
+//  border: 1px solid $gray-medium-light;
 }
 
 // 用户积分

@@ -1,29 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="user-box">
+  <h2>订单详情
+  </h2>
+  <div class="order-detail">
+    <table class="table common-table">
+      <tr class="table-head">
+        <th>商品名称</th>
+        <th>规格</th>
+        <th>单价（元）</th>
+        <th>数量</th>
+        <th>总价（元）</th>
+      </tr>
+      <% @order.line_items.each do |line_item| %>
+      <tr>
+        <td width="40%" class="item-title">
+          <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product) %>
+          <span class="product-title"><%= link_to line_item.product.title, product_path(line_item.product) %></span>
+        </td>
+        <td width="10%"><%= line_item.product.units %></td>
+        <td width="10%"><%= product_price_tag(line_item.product.low_price) %></td>
+        <td width="15%"><%= line_item.quantity %></td>
+        <td width="10%"><%= product_price_tag(line_item.total_price) %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 
-<p>
-  <strong>Order no:</strong>
-  <%= @order.order_no %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @order.user_id %>
-</p>
-
-<p>
-  <strong>Product:</strong>
-  <%= @order.product_id %>
-</p>
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @order.quantity %>
-</p>
-
-<p>
-  <strong>Apartment:</strong>
-  <%= @order.apartment %>
-</p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+  <div style="text-align:right">
+    <%= link_to "返回", :back, class: "btn btn-success" %>
+  </div>
+</div>

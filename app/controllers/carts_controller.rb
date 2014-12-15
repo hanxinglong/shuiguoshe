@@ -5,6 +5,7 @@ class CartsController < ApplicationController
 
   def show
     @cart = current_cart
+    set_seo_meta('我的购物车')
     respond_with(@cart)
   end
 

@@ -2,9 +2,9 @@
 class OrdersController < ApplicationController
   before_filter :require_user
   before_filter :check_user
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show]
   
-  layout 'user_layout', only: [:search, :incompleted, :completed, :canceled, :cancel]
+  layout 'user_layout', only: [:search, :incompleted, :completed, :canceled, :cancel, :show]
 
   respond_to :html
   
@@ -19,8 +19,13 @@ class OrdersController < ApplicationController
     render :index
   end
   
+  def show
+    @current = 'user_show_order_detail'
+    set_seo_meta("订单详情")
+  end
+  
   def incompleted
-    @orders = current_user.orders.normal.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
+    @orders = current_user.orders.normal.order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders_incompleted'
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     set_seo_meta("我的待配送订单")
@@ -28,7 +33,7 @@ class OrdersController < ApplicationController
   end
   
   def completed
-    @orders = current_user.orders.completed.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
+    @orders = current_user.orders.completed.order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders_completed'
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     set_seo_meta("我的已完成订单")
@@ -36,7 +41,7 @@ class OrdersController < ApplicationController
   end
   
   def canceled
-    @orders = current_user.orders.canceled.includes(:product).order("created_at DESC").paginate page: params[:page], per_page: 10
+    @orders = current_user.orders.canceled.order("created_at DESC").paginate page: params[:page], per_page: 10
     @current = 'user_orders_canceled'
     
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
@@ -66,7 +71,7 @@ class OrdersController < ApplicationController
   
   def new
     @cart = current_cart
-    puts @cart
+    
     if @cart.line_items.empty?
       flash[:notice] = "购物车是空的"
       redirect_to root_url
@@ -102,21 +107,22 @@ class OrdersController < ApplicationController
     else
       # flash[:error] = @order.errors.full_messages.join(" ")
       # redirect_to 
-      puts @order.errors.full_messages.join(" ")
+      # puts @order.errors.full_messages.join(" ")
+      @cart = current_cart
       render action: :new
     end
     
   end
 
-  def update
-    @order.update(order_params)
-    respond_with(@order)
-  end
-
-  def destroy
-    @order.destroy
-    respond_with(@order)
-  end
+  # def update
+  #   @order.update(order_params)
+  #   respond_with(@order)
+  # end
+  # 
+  # def destroy
+  #   @order.destroy
+  #   respond_with(@order)
+  # end
 
   private
     def set_order
