@@ -67,3 +67,27 @@
     background-color: rgb(240,240,240);
   }
 }
+
+.quantity-ctrl {
+  display: inline-block;
+  border: 1px solid rgb(213,213,213);
+  .quantity {
+    padding: 3px 15px;
+  }
+  .reduce, .increase {
+    display: inline-block;
+    width: 26px;
+    padding: 3px 0;
+    color: rgb(83,83,83);
+    &:hover {
+      text-decoration: none;
+      cursor: pointer;
+    };
+  }
+  .reduce {
+    border-right: 1px solid rgb(213,213,213);
+  }
+  .increase {
+    border-left: 1px solid rgb(213,213,213);
+  }
+}

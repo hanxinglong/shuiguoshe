@@ -1,0 +1,11 @@
+$("#<%= @line_item_id %>").replaceWith("<%= j render @line_item %>");
+$("#cart-total-price").text("¥<%= product_price_tag(@cart.total_price) %>");
+var total = $("#cart-total-id").data("cart-total");
+<% if @type == '-1' %>
+  total = parseInt(total) - 1;
+<% else %>
+  total = parseInt(total) + 1;
+<% end %>
+
+$("#cart-total-id").data("cart-total", total);
+$("#cart-total-id").text(total);

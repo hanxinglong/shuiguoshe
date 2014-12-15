@@ -58,6 +58,47 @@ window.App =
         weight = 1
     $("#product-weight-#{id}").val(weight)
   
+  deleteItem: (el) ->
+    result = confirm("您确定吗？")
+    if !result
+      return false
+    
+    id = $(el).data("id")
+    $.ajax
+      url: "/line_items/#{id}"
+      type: "DELETE"
+  
+  reduceQuantity: (el) ->
+    id = $(el).data("id")
+    item = $("#line_item_quantity_#{id}")
+    quantity = item.text()
+    quantity = parseInt(quantity)
+    
+    if quantity == 1
+      $(el).attr("disabled", true)
+      return
+    
+    quantity -= 1
+    item.text(quantity)
+
+    $.ajax
+      url: "/line_items/#{id}"
+      type: "PATCH"
+      data: { type: '-1' }
+          
+  increaseQuantity: (el) ->
+    id = $(el).data("id")
+    item = $("#line_item_quantity_#{id}")
+    quantity = item.text()
+    quantity = parseInt(quantity)    
+    quantity += 1
+    item.text(quantity)
+    
+    $.ajax
+      url: "/line_items/#{id}"
+      type: "PATCH"
+      data: { type: '1' }
+          
   # 新建订单
   createOrder: (el) ->
     

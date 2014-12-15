@@ -1,11 +1,11 @@
-<tr>
+<tr id="line_item_<%= line_item.id %>">
   <td width="40%" class="item-title">
     <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product) %>
     <span class="product-title"><%= link_to line_item.product.title, product_path(line_item.product) %></span>
   </td>
   <td width="10%"><%= line_item.product.units %></td>
   <td width="10%"><%= product_price_tag(line_item.product.low_price) %></td>
-  <td width="15%"><%= line_item.quantity %></td>
+  <td width="15%"><%= render_item_quantity(line_item) %></td>
   <td width="10%"><%= product_price_tag(line_item.total_price) %></td>
-  <td width="5%"><%= link_to "删除", '#', class: "btn btn-sm btn-danger" %></td>
+  <td width="5%"><a onclick="App.deleteItem(this)" data-id="<%= line_item.id %>" class="btn btn-sm btn-danger">删除</a></td>
 </tr>

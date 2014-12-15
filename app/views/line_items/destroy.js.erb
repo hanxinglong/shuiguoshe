@@ -1,0 +1,12 @@
+$("#<%= @line_item_id %>").remove();
+$("#cart-total-price").text("¥<%= product_price_tag(@cart.total_price) %>");
+
+var total = $("#cart-total-id").data("cart-total");
+total = parseInt(total) - <%= @line_item.quantity %>;
+
+$("#cart-total-id").data("cart-total", total);
+$("#cart-total-id").text(total);
+
+<% if @cart.total_items == 0 %>
+$("#my-cart").replaceWith("<%= j render @cart %>");
+<% end %>

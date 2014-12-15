@@ -12,4 +12,17 @@ module LineItemsHelper
     
     html.html_safe
   end
+  
+  def render_item_quantity(item)
+    return "" if item.blank?
+    html = <<-HTML
+      <span class="quantity-ctrl">
+        <a onclick="App.reduceQuantity(this)" class="reduce" data-id="#{item.id}" id="reduce-#{item.id}" disabled>&#65293;</a>
+        <span class="quantity" id="line_item_quantity_#{item.id}" data-quantity="#{item.quantity}">#{item.quantity}</span>
+        <a onclick="App.increaseQuantity(this)" class="increase" data-id="#{item.id}" id="increase-#{item.id}">+</a>
+      </span>
+    HTML
+    
+    html.html_safe
+  end
 end

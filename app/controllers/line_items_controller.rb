@@ -37,13 +37,25 @@ class LineItemsController < ApplicationController
   end
 
   def update
-    @line_item.update(line_item_params)
+    @type = params[:type]
+    if params[:type] == '-1'
+      if @line_item.quantity > 1
+        @line_item.quantity -= 1
+        @line_item.save
+      end
+    elsif params[:type] == '1'
+      @line_item.quantity += 1
+      @line_item.save
+    end
     
+    @cart = current_cart
+    @line_item_id = "line_item_#{@line_item.id}"
   end
 
   def destroy
+    @line_item_id = "line_item_#{@line_item.id}"
+    @cart = current_cart
     @line_item.destroy
-    
   end
 
   private
