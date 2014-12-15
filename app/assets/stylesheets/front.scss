@@ -312,6 +312,14 @@ body {
   
 }
 
+.my-cart {
+  .common-table {
+    td {
+      vertical-align: middle;
+    }
+  }
+}
+
 .product {
   .thumbnail {
     border: 0;    

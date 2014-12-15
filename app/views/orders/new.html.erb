@@ -9,6 +9,7 @@
             boolean: :horizontal_boolean
           }) do |f| %>
     <%= render "/shared/error_messages", target: @order %>
+    
     <div class="order-info-container">
       <h3>填写并核对订单信息</h3>
       <div class="order-item-info">
@@ -29,28 +30,18 @@
             <div class="form-group">
               <%= f.label :mobile, "* 收货人手机", class: "control-label col-sm-2" %>
               <div class="col-sm-3">
-                <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: current_user.mobile, disabled: true %>
+                <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: current_user.mobile, readonly: true %>
               </div>
             </div>
           
             <div class="form-group">
               <%= f.label :apartment_id, "* 收货人小区", class: "control-label col-sm-2" %>
-              <div class="col-sm-4">
-                <% if current_user.apartment.present? %>
-                  
-                <% else %>
-                  <%= f.select :apartment_id, Apartment.opened.map { |a| [a.name, a.id] }, { prompt: "--请选择您所在的小区--", selected: Apartment.opened.include?(current_user.apartment_id) }, { class: "form-control", onchange: "updateButtonState();" } %>
-                  <div class="col-sm-2">
-                    <a class="btn btn-warning" data-user-id="<%= current_user.id %>"
-                       onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>
-                  </div>
-                <% end %>
-              </div>
+              <%= deliver_select_tag f %>
             </div>
+            
           </div>
-          
-        </div>
-      </div>
+        </div> <!-- end item-info -->
+      </div> <!-- end order-intem-info -->
       <div class="order-item-info">
         <h4>支付及配送方式</h4>
         <div class="item-info">
@@ -95,12 +86,21 @@
         
         <div class="item-info" style="text-align:right">
           <p>商品总额：￥<%= product_price_tag(@cart.total_price) %></p>
-          <p>抵扣：-￥<%= product_price_tag(0) %></p>
-          <p>订单总额：￥<%= product_price_tag(@cart.total_price) %></p>
-          <%= f.input :total_price, as: :hidden, value: @cart.total_price %>
+          <p>抵扣：-￥<span id="discount-price"><%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %></span></p>
+          <p>订单总额：￥<span id="order-total-price"><%= product_price_tag(order_total_price(@cart)) %></span></p>
+          <%= f.input :total_price, as: :hidden, input_html: { value: "#{product_price_tag(order_total_price(@cart))}" } %>
+          
+          <% if current_user.score > 0 %>
+          <div class="checkbox">
+              <label>
+                <input type="checkbox" data-current-score="<%= user_discount_score(@cart.total_price) %>" checked> 您目前的可用积分为<%= user_discount_score(@cart.total_price) %>，可以抵￥<%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %>
+              </label>
+              <input type="hidden" name="user_score" id="order_user_score" value="<%= user_discount_score(@cart.total_price) %>" />
+          </div>
+          <% end %>
         </div>
       </div>
-      <div class="order-footer">
+      <div class="order-item-info order-footer">
         <%= link_to "返回修改购物车", show_cart_path, class: "btn btn-default" %>&nbsp;&nbsp;<%= f.submit '确认下单', class: "btn btn-danger" %>
       </div>
     </div>
@@ -110,29 +110,69 @@
 
 <% content_for :scripts do %>
 <script>
-$(function() {
+
+$(document).ready(function () {
+
+  $("#order_apartment_id").change(function() {
+    if ($(this).val() == '') {
+      $("#save_address").attr("disabled", true);
+    } else {
+      $("#save_address").removeAttr("disabled");
+    }
+  });
+  
   $('input[name=optionsRadios]').change(function() {
     // alert($(this).val());
     if ($(this).val() == 'me') {
       $('#order_mobile').attr("disabled", true);
       $('#order_mobile').val("<%= current_user.mobile %>");
+      
+      <% if current_user.apartment_id.present? %>
+        $('#order_apartment_id').attr("disabled", true);
+      
+        $("#order_apartment_id option").filter(function(){
+            if ($(this).val() == $(this).attr("user-apartment-id")) {
+                $(this).attr("selected",true);
+            } else {
+                $(this).removeAttr("selected");
+            }
+        });
+      
+        $('#edit-user-apartment').html('<a class="btn btn-sm btn-success" onclick="updateApartment()">修改</a>');
+      <% else %>
+        $('#order_apartment_id').removeAttr("disabled");
+        $('#edit-user-apartment').html('<a class="btn btn-warning" data-user-id="<%= current_user.id %>" onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>');
+      <% end %>
     } else {
       $('#order_mobile').removeAttr("disabled");
       $('#order_mobile').val("");
+      $("#edit-user-apartment").html("");
+      $("#order_apartment_id").removeAttr("disabled");
     }
   });
   
-  function updateButtonState() {
-    var select = $("#order_apartment_id");
-    if (select.val() == '') {
-      $("#save_address").attr("disabled", true);
-    } else {
-      $("#save_address").removeAttr("disabled");
-    }
-  }
-
-  updateButtonState();
+  $('#new_order :checkbox').click(function() {
+      var $this = $(this);
+      if ($this.is(':checked')) {
+        $("#discount-price").text("<%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %>");
+        var order_total_price = "<%= product_price_tag(order_total_price(@cart)) %>";
+        $("#order_user_score").val("<%= user_discount_score(@cart.total_price) %>");
+      } else {
+        $("#discount-price").text("0.00");
+        var order_total_price = "<%= product_price_tag(@cart.total_price) %>";
+        $("#order_user_score").val("0");
+      }
+      $("#order-total-price").text(order_total_price);
+      $("#order_total_price").val(order_total_price);
+  });
+  
 });
+
+function updateApartment () {
+    $('#edit-user-apartment').html('<a class="btn btn-warning" data-user-id="<%= current_user.id %>" onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>');
+    $("#order_apartment_id").removeAttr("disabled");
+};
+
 </script>
 <% end %>
 

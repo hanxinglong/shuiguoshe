@@ -65,31 +65,45 @@ class OrdersController < ApplicationController
   end
   
   def new
-    @order = Order.new
     @cart = current_cart
+    puts @cart
+    if @cart.line_items.empty?
+      flash[:notice] = "购物车是空的"
+      redirect_to root_url
+      return 
+    end
+    
+    @order = Order.new
+    
     set_seo_meta("提交订单")    
     # respond_with(@order)
   end
 
   def create
-    @product = Product.find(params[:product_id])
-    unless @product.on_save
-      flash[:error] = "产品已经下架"
-      redirect_to @product
-      return
-    end
     
-    @order = @product.orders.new(order_params)
+    @order = Order.new(order_params)
     @order.user_id = current_user.id
-    @apartment = Apartment.find_by_id(@order.apartment_id)
+    @order.add_line_items_from_cart(current_cart)
+    
     if @order.save
-      @product.add_order_count
+      # 清空购物车
+      Cart.find_by(user_id: current_user.id).destroy
+      
+      score = params[:user_score].to_i
+      current_user.decrease_score(score)
+      # @product.add_order_count
+      @apartment = Apartment.find_by_id(@order.apartment_id)
       @apartment.add_order_count if @apartment
-      flash[:success] = "预订成功"
+      
+      @order.update_orders_count
+      
+      flash[:success] = "下单成功"
       redirect_to incompleted_orders_user_path
     else
-      flash[:error] = @order.errors.full_messages.join(" ")
-      redirect_to @product
+      # flash[:error] = @order.errors.full_messages.join(" ")
+      # redirect_to 
+      puts @order.errors.full_messages.join(" ")
+      render action: :new
     end
     
   end
@@ -110,6 +124,6 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:product_id, :quantity, :deliver_address, :deliver_time, :note, :state, :apartment_id)
+      params.require(:order).permit(:mobile, :total_price, :note, :state, :apartment_id)
     end
 end

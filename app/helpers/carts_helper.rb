@@ -1,7 +1,6 @@
 module CartsHelper
   def cart_tag
     if cart
-      puts cart
       if cart.line_items.empty?
         cart_total = 0
       else

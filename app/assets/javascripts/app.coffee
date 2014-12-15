@@ -11,7 +11,17 @@ window.App =
       url: "/users/#{id}/update_address"
       type: "PATCH"
       data: { address: "#{address}" }
-      # success: (re) ->
+      success: (re) ->
+        if re == "1"
+          # alert($("#user-edit-apartment").html());
+          $("#edit-user-apartment").html("<a onclick='updateApartment()' class='btn btn-sm btn-success'>修改</a>")
+          $("#order_apartment_id").attr("disabled", true)
+          # alert($("#user-edit-apartment").html());
+          $("#order_apartment_id option").attr("user-apartment-id", address)
+        else
+          $("#order_apartment_id option").attr("user-apartment-id", '')
+          App.alert("操作失败", $("#edit-user-apartment"))
+          # body...
         # alert(re)
         # $('.address-html-container').html(re)
   

@@ -33,6 +33,18 @@ class User < ActiveRecord::Base
   def apartment
     @apartment ||= Apartment.find_by_id(self.apartment_id).try(:name)
   end
+  
+  def decrease_score(s)
+    if s > 0
+      self.score -= s
+      if self.score < 0
+        self.score = 0
+      end
+      if self.save
+        ScoreTrace.create(score: s, summary: "抵扣￥#{product_price_tag(s/100.0)}", user_id: self.id)
+      end
+    end
+  end
 
   # 注册邮件提醒
   after_create :send_welcome_mail

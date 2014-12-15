@@ -6,4 +6,10 @@ class LineItem < ActiveRecord::Base
   def total_price
     product.low_price * quantity
   end
+  
+  def update_sales_count
+    product.orders_count += self.quantity
+    product.save
+  end
+  
 end

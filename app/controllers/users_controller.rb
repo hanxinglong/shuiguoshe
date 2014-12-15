@@ -33,9 +33,12 @@ class UsersController < ApplicationController
       return
     end
     
-    if not @user.save
-      @success = false
+    if @user.save
+      render text: "1"
+    else
+      render text: "-1"
     end
+    
   end
   
   def points
