@@ -1,0 +1,5 @@
+<table class="cart-table">
+  <% cart.line_items.each do |item| %>
+  <%= render 'carts/line_item', item: item %>
+  <% end %>
+</table>

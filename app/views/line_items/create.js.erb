@@ -1,8 +1,16 @@
 <% if @success %>
-var total = $("#cart-total-id").data("cart-total");
-total = total + 1;
-$("#cart-total-id").data("cart-total", total);
-$("#cart-total-id").text(total);
+
+// 计算购物车总数
+var total = $("#cart_2_total_items").data("cart-total");
+total = parseInt(total) + 1;
+$("#cart_2_total_items").data("cart-total", total);
+$("#cart_2_total_items").text(total);
+
+$("#cart_2_total_items_2").text(total);
+
+$("#cart_2_panel_body").html("<%= j render 'carts/cart_2' %>");
+$("#cart_2_total_price").text("<%= product_price_tag(cart.total_price) %>");
+
 <% else %>
 
 <% end %>

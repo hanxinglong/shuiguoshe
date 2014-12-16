@@ -1,12 +1,26 @@
-$("#<%= @line_item_id %>").remove();
-$("#cart-total-price").text("¥<%= product_price_tag(@cart.total_price) %>");
+<% @success %>
+// 删除自身
+$("#cart_1_<%= @line_item_id %>").remove();
+$("#cart_2_<%= @line_item_id %>").remove();
 
-var total = $("#cart-total-id").data("cart-total");
+// 计算购物车总数
+var total = $("#cart_2_total_items").data("cart-total");
 total = parseInt(total) - <%= @line_item.quantity %>;
 
-$("#cart-total-id").data("cart-total", total);
-$("#cart-total-id").text(total);
+$("#cart_2_total_items").data("cart-total", total);
+$("#cart_2_total_items").text(total);
 
-<% if @cart.total_items == 0 %>
-$("#my-cart").replaceWith("<%= j render @cart %>");
+$("#cart_2_total_items_2").text(total);
+
+// 计算购物车总价
+var totalPrice = <%= product_price_tag(cart.total_price) %>
+$("#cart_1_total_price").text(totalPrice);
+$("#cart_2_total_price").text(totalPrice);
+
+// 处理购物车为空
+if (total == 0) {
+  $("#my-cart").replaceWith("<%= j render 'carts/cart_1' %>");
+  $("#cart_2_panel_body").html("<%= j render 'carts/cart_2' %>");
+}
+
 <% end %>

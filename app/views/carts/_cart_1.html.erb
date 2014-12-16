@@ -1,7 +1,7 @@
 <div class="user-box container-box my-cart" id="my-cart">
   <h2>我的购物车</h2>
   
-  <% if @cart.line_items.empty? %>
+  <% if cart.line_items.empty? %>
     <div class="empty-cart">
       <table>
         <tr>
@@ -21,11 +21,11 @@
         <th>总价（元）</th>
         <th>操作</th>
       </tr>
-      <%= render @cart.line_items %>
+      <%= render cart.line_items %>
       <tr>
         <td colspan="6" class="table-head">
           <div class="cart-total-price">
-            总计（不含运费）：<span class="green numeric" id="cart-total-price">¥<%= product_price_tag(@cart.total_price) %></span>
+            总计（不含运费）：<span class="green">¥</span><span class="green numeric" id="cart_1_total_price"><%= product_price_tag(cart.total_price) %></span>
           </div>
         </td>
       </tr>

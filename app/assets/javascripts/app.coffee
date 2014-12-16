@@ -59,14 +59,16 @@ window.App =
     $("#product-weight-#{id}").val(weight)
   
   deleteItem: (el) ->
-    result = confirm("您确定吗？")
-    if !result
-      return false
+    # result = confirm("您确定吗？")
+    # if !result
+    #   return false
     
     id = $(el).data("id")
+    type = $(el).data("type")
     $.ajax
       url: "/line_items/#{id}"
       type: "DELETE"
+      data: { type: type }
   
   reduceQuantity: (el) ->
     id = $(el).data("id")
