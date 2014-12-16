@@ -25,6 +25,7 @@ class LineItemsController < ApplicationController
 
     @result_dom_id = "result-#{@product.id}"
     @item_id = "item-#{@product.id}"
+    @product_id = "product-#{@product.id}"
     
     @success = false
     if @line_item.save

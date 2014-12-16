@@ -1,4 +1,4 @@
-<% @success %>
+<% if @success %>
 // 删除自身
 $("#cart_1_<%= @line_item_id %>").remove();
 $("#cart_2_<%= @line_item_id %>").remove();
