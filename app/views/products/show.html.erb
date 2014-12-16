@@ -1,5 +1,5 @@
-<div class="user-box container-box">
-  <h2 style="margin-bottom: 10px;">开始预订</h2>
+<div class="user-box container-box" id="product-<%= @product.id %>">
+  <h2 style="margin-bottom: 10px;">产品详情</h2>
   <div class="product-info">
     <h3><%= @product.title %></h3>
     <div class="product-intro">
@@ -7,15 +7,26 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-3">
-      <%= image_tag @product.image_url(:thumb) %>
+    <div class="col-sm-5">
+      <%= image_tag @product.image_url(:large) %>
     </div>
-    <div class="col-md-9">
-      <div class="">
-          <span class="green">￥<span class="f30 price-numeric"><%= product_price_tag(@product.low_price) %></span></span>
-          <span class="text-muted f16"><del>￥<%= product_price_tag(@product.origin_price) %></del></span>
-          <span class="text-muted">（<%= @product.units %>）</span>
+    <div class="col-sm-7 product-detail">
+      <div class="item-line green f30 price-numeric">
+        ￥<%= product_price_tag(@product.low_price) %>
       </div>
+      <div class="item-line">
+        <div class="pull-right green f16">
+          <span id="timeLeft"></span>
+        </div>
+        <span class="text-muted f16"><del>市场价￥<%= product_price_tag(@product.origin_price) %></del></span>
+      </div>
+      <div class="item-line">
+        <span class="text-muted f16">规格：<%= @product.units %></span>
+      </div>   
+      <div class="item-line text-muted f14">
+        <%= render_deliver_info %>
+      </div>
+      <div class="item-line text-muted f16">已售<span class="green price-numeric f24"><%= @product.orders_count %></span>件</div>
       <%= add_to_cart_tag @product, "btn btn-success" %>
     </div>
   </div>
@@ -24,14 +35,14 @@
 <% content_for :scripts do %>
 <script>
 
-function updateButtonState() {
-  var select = $("#order_apartment_id");
-  if (select.val() == '') {
-    $("#save_address").attr("disabled", true);
-  } else {
-    $("#save_address").removeAttr("disabled");
-  }
-}
+// function updateButtonState() {
+//   var select = $("#order_apartment_id");
+//   if (select.val() == '') {
+//     $("#save_address").attr("disabled", true);
+//   } else {
+//     $("#save_address").removeAttr("disabled");
+//   }
+// }
 
 
 $(function() {
@@ -39,7 +50,7 @@ $(function() {
   <% if @product.discounted_at %>
   $("#timeLeft").countdown("<%= @product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") %>")
     .on('update.countdown', function(event) {
-      $(this).html(event.strftime('&nbsp;&nbsp;剩余' + '%D天%H小时%M分%S秒'));
+      $(this).html(event.strftime('<span class="glyphicon glyphicon-time"></span>' + '&nbsp;&nbsp;剩余' + '%D天%H小时%M分%S秒'));
     })
     .on('finish.countdown', function(event) {
       $("#submit-button").attr("disabled", true);

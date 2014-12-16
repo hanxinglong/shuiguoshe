@@ -29,8 +29,10 @@ class Order < ActiveRecord::Base
   # end
   
   def update_orders_count
-    line_items.each do |item|
-      item.update_sales_count
+    Product.transaction do
+      line_items.each do |item|
+        item.update_sales_count
+      end
     end
   end
   

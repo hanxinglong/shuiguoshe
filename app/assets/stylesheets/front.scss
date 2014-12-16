@@ -177,7 +177,7 @@ body {
     position: absolute;
     padding: 20px;
     z-index: -1;
-    right: 0;
+    right: -1px;
     top: 30px;
     width: 340px;
     border: 1px solid $common-border-color;
@@ -449,6 +449,16 @@ body {
         color: white;
       }
     }
+  }
+}
+
+.product-detail{
+  .item-line {
+    margin:0;
+    padding: 5px 0;
+    &:first-child {
+      padding-top: 0;
+    };
   }
 }
 
