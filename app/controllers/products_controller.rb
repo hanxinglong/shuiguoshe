@@ -17,8 +17,8 @@ class ProductsController < ApplicationController
     
     @products = @products.where(type_id: type_id)
     
-    @suggested_products = Product.suggest.where(type_id: params[:type_id])
-    @hot_products = Product.hot.where(type_id: params[:type_id])
+    # @suggested_products = Product.suggest.where(type_id: params[:type_id])
+    # @hot_products = Product.hot.where(type_id: params[:type_id])
     
     if params[:q] && params[:q].gsub(/\s+/, "").present?
       @products = @products.search(params[:q])
@@ -40,6 +40,8 @@ class ProductsController < ApplicationController
       @cache_prefix = "products_#{type_id}"
     end
     
+    fresh_when(etag: [@products, @cache_prefix, params[:q]])
+    
   end
   
   def show
@@ -50,6 +52,7 @@ class ProductsController < ApplicationController
     # @order = @product.orders.build
       render_404
     else
+      fresh_when etag: @product
       set_seo_meta(@product.title, '', @product.intro)
     end
   end

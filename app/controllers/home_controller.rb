@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @ads = SidebarAd.sorted.limit(4)
     @discounted_products = Product.saled.discounted
     @current = 'home_index'
+    fresh_when(etag: [@banners, @products, @suggest_products, @newsblasts, @ads, @discounted_products, @current, SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description])
     set_seo_meta(SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description)
   end
   
