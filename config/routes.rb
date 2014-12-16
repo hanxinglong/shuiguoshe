@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     end
   end
   resources :line_items
-  resources :carts, only: [:show, :destroy]
+  resources :carts, only: [:show]
   get '/cart' => 'carts#show', as: :show_cart
   
   get '/products/search' => 'products#index', as: :search_products
