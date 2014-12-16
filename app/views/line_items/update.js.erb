@@ -4,7 +4,7 @@ $("#cart_1_<%= @line_item_id %>").replaceWith("<%= j render @line_item %>");
 $("#cart_2_<%= @line_item_id %>").replaceWith("<%= j render 'carts/line_item', item: @line_item %>");
 
 // 更新总价
-var totalPrice = <%= product_price_tag(cart.total_price) %>
+var totalPrice = "<%= product_price_tag(cart.total_price) %>"
 $("#cart_1_total_price").text(totalPrice);
 $("#cart_2_total_price").text(totalPrice);
 

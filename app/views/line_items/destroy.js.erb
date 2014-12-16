@@ -13,7 +13,7 @@ $("#cart_2_total_items").text(total);
 $("#cart_2_total_items_2").text(total);
 
 // 计算购物车总价
-var totalPrice = <%= product_price_tag(cart.total_price) %>
+var totalPrice = "<%= product_price_tag(cart.total_price) %>"
 $("#cart_1_total_price").text(totalPrice);
 $("#cart_2_total_price").text(totalPrice);
 

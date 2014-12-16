@@ -6,7 +6,8 @@
     
       <%= link_to item.product.title, item.product %>
     <div class="text-muted">
-      <%= item.product.units %> &times; <%= item.quantity %>
+      <%= item.product.units %><br>
+      <%= product_price_tag(item.product.low_price) %> &times; <%= item.quantity %>
     </div>
     
   </td>
