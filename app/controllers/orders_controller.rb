@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   end
   
   def incompleted
-    @orders = current_user.orders.normal.order("created_at DESC")#.paginate page: params[:page], per_page: 10
+    @orders = current_user.orders.normal.order("created_at DESC").paginate page: params[:page], per_page: 30
     @current = 'user_orders_incompleted'
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     set_seo_meta("我的待配送订单")
