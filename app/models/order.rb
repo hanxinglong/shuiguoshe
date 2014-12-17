@@ -28,10 +28,10 @@ class Order < ActiveRecord::Base
   #   @apartment ||= Apartment.find_by_id(self.apartment_id).try(:name)
   # end
   
-  def update_orders_count
+  def update_orders_count(oper = 1)
     Product.transaction do
       line_items.each do |item|
-        item.update_sales_count
+        item.update_sales_count(oper)
       end
     end
   end

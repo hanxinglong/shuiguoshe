@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   
   get '/products/search' => 'products#index', as: :search_products
   
-  resources :orders, except: [:index, :update, :destroy, :edit] do    
+  resources :orders, except: [:index, :update, :destroy, :edit, :new] do    
     member do 
       patch :cancel
     end

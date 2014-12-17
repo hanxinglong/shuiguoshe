@@ -51,14 +51,23 @@ class OrdersController < ApplicationController
   
   def cancel
     @incompleted_orders_count = current_user.orders.normal.count
-    
+
     @order = current_user.orders.find(params[:id])
     @incompleted = params[:current] == 'user_orders_incompleted'
     
     @status = 1
-    if Time.now.strftime('%Y-%m-%d %H:%M:%S') < @order.created_at.strftime('%Y-%m-%d 23:59:59')
+    if @order.state?(:normal)
       if @order.cancel
         @status = 1
+        
+        # 当用户取消订单的时候，更新销售数据
+        @apartment = Apartment.find_by_id(@order.apartment_id)
+        if @apartment
+          @apartment.orders_count -= 1
+          @apartment.save
+        end
+        @order.update_orders_count(-1)
+        
       else
         @status = 0
       end
@@ -99,7 +108,7 @@ class OrdersController < ApplicationController
       # @product.add_order_count
       @apartment = Apartment.find_by_id(@order.apartment_id)
       @apartment.add_order_count if @apartment
-      
+
       @order.update_orders_count
       
       flash[:success] = "下单成功"
@@ -127,6 +136,9 @@ class OrdersController < ApplicationController
   private
     def set_order
       @order = current_user.orders.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.error("无效的订单ID:#{params[:id]}")
+      render_404
     end
 
     def order_params

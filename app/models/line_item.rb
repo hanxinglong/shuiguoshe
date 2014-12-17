@@ -7,8 +7,12 @@ class LineItem < ActiveRecord::Base
     product.low_price * quantity
   end
   
-  def update_sales_count
-    product.orders_count += self.quantity
+  def update_sales_count(oper)
+    if oper == 1
+      product.orders_count += self.quantity
+    elsif oper == -1
+      product.orders_count -= self.quantity
+    end
     product.save
   end
   

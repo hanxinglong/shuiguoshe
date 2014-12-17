@@ -1,8 +1,11 @@
 <% if @status == 1 %>
-$("#incompleted_orders_link").text("待配送(<%= @incompleted_orders_count > 0 ? @incompleted_orders_count - 1 : 0 %>)")
+$("#incompleted_orders_link").text("未完成(<%= @incompleted_orders_count > 0 ? @incompleted_orders_count - 1 : 0 %>)")
 <% if @incompleted %>
   $("#item-row-<%= @order.id %>").remove();
   $("#item-row-info-<%= @order.id %>").remove();
+  <% if @incompleted_orders_count == 0 %>
+    $.parseHTML('<tr><td colspan="8"><div class="text-center">没有记录!</div></td></tr>').appendTo($(".common-table"));
+  <% end %>
 <% else %>
   $("#item-row-<%= @order.id %>").replaceWith("<%= j render @order %>");
 <% end %>

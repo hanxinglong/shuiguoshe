@@ -128,7 +128,7 @@ $(document).ready(function () {
       $('#order_mobile').attr("readonly", true);
       $('#order_mobile').val("<%= current_user.mobile %>");
       
-      <% if current_user.apartment_id.present? %>
+      if ($('#order_apartment_id').data('current') != '') {
         $('#order_apartment_id').attr("disabled", true);
       
         $("#order_apartment_id option").filter(function(){
@@ -138,17 +138,34 @@ $(document).ready(function () {
                 $(this).removeAttr("selected");
             }
         });
+        
+        $("#hide_order_apartment_input").html('<input type="hidden" name="order[apartment_id]" value="' + $('#order_apartment_id').data('current') + '">');
       
         $('#edit-user-apartment').html('<a class="btn btn-sm btn-success" onclick="updateApartment()">修改</a>');
-      <% else %>
+      } else {
         $('#order_apartment_id').removeAttr("disabled");
+        
+        $("#order_apartment_id option").each(function(){
+          $(this).removeAttr("selected");
+        });
+        
         $('#edit-user-apartment').html('<a class="btn btn-warning" data-user-id="<%= current_user.id %>" onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>');
-      <% end %>
+        
+        $("#hide_order_apartment_input").html("");
+      }
+      
     } else {
       $('#order_mobile').removeAttr("readonly");
       $('#order_mobile').val("");
+      
       $("#edit-user-apartment").html("");
+      
       $("#order_apartment_id").removeAttr("disabled");
+      $("#order_apartment_id option").each(function(){
+        $(this).removeAttr("selected");
+      });
+      
+      $("#hide_order_apartment_input").html("");
     }
   });
   
