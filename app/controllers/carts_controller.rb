@@ -1,12 +1,12 @@
 class CartsController < ApplicationController
   before_action :require_user, only: [:show]
 
-  respond_to :html
+  # respond_to :html
 
   def show
-    @cart = current_cart
+    # @cart = current_cart
     set_seo_meta('我的购物车')
-    respond_with(@cart)
+    # respond_with(@cart)
   end
 
   def destroy

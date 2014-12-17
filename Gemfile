@@ -64,6 +64,8 @@ group :development do
 
   # if you are using RBENV
   gem 'capistrano-rbenv', "~> 2.0" 
+  
+  gem 'quiet_assets'
 end
 
 

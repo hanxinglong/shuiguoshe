@@ -5,6 +5,7 @@
   </div>
 </div>
 
+<% if @discounted_products.any? %>
 <div class="content-box">
   <h2>每周特惠<span class="f14 text-muted">（限周六、日配送）</span></h2>
   <div class="home-discount-products">
@@ -35,6 +36,7 @@
     </div>
   </div>
 </div>
+<% end %>
 
 <div class="row home-content-box">
   <div class="col-md-9">

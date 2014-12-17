@@ -95,9 +95,10 @@ class OrdersController < ApplicationController
 
   def create
     
+    @cart = current_cart
     @order = Order.new(order_params)
     @order.user_id = current_user.id
-    @order.add_line_items_from_cart(current_cart)
+    @order.add_line_items_from_cart(@cart)
     
     if @order.save
       # 清空购物车
@@ -114,10 +115,6 @@ class OrdersController < ApplicationController
       flash[:success] = "下单成功"
       redirect_to incompleted_orders_user_path
     else
-      # flash[:error] = @order.errors.full_messages.join(" ")
-      # redirect_to 
-      # puts @order.errors.full_messages.join(" ")
-      @cart = current_cart
       render action: :new
     end
     

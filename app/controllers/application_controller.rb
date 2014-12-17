@@ -102,7 +102,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :cart
   def cart
-    current_cart
+    @cart ||= current_cart
   end
   
   private
