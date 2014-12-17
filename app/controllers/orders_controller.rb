@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   end
   
   def incompleted
-    @orders = current_user.orders.normal.order("created_at DESC").paginate page: params[:page], per_page: 10
+    @orders = current_user.orders.normal.order("created_at DESC")#.paginate page: params[:page], per_page: 10
     @current = 'user_orders_incompleted'
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     set_seo_meta("我的待配送订单")
@@ -96,6 +96,11 @@ class OrdersController < ApplicationController
   def create
     
     @cart = current_cart
+    if @cart.line_items_count == 0
+      redirect_to checkout_path
+      return
+    end
+    
     @order = Order.new(order_params)
     @order.user_id = current_user.id
     @order.add_line_items_from_cart(@cart)

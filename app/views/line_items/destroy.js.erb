@@ -21,6 +21,9 @@ $("#cart_2_total_price").text(totalPrice);
 if (total == 0) {
   $("#my-cart").replaceWith("<%= j render 'carts/cart_1' %>");
   $("#cart_2_panel_body").html("<%= j render 'carts/cart_2' %>");
+  
+  $("#new_order_line_items").html("<%= j render 'orders/line_items' %>");
+  $('#new_order_submit').prop('disabled', true);
 }
 
 <% end %>

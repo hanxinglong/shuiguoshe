@@ -1,14 +1,14 @@
 <% if @status == 1 %>
-$("#incompleted_orders_link").text("未完成(<%= @incompleted_orders_count > 0 ? @incompleted_orders_count - 1 : 0 %>)")
-<% if @incompleted %>
-  $("#item-row-<%= @order.id %>").remove();
-  $("#item-row-info-<%= @order.id %>").remove();
-  <% if @incompleted_orders_count == 0 %>
-    $.parseHTML('<tr><td colspan="8"><div class="text-center">没有记录!</div></td></tr>').appendTo($(".common-table"));
+  $("#incompleted_orders_link").text("未完成(<%= @incompleted_orders_count > 0 ? @incompleted_orders_count - 1 : 0 %>)")
+  <% if @incompleted %>
+    $("#item-row-<%= @order.id %>").remove();
+    $("#item-row-info-<%= @order.id %>").remove();
+    <% if @incompleted_orders_count == 0 %>
+      $("#orders_list_table").html("<%= j render 'orders/order_list2' %>");
+    <% end %>
+  <% else %>
+    $("#item-row-<%= @order.id %>").replaceWith("<%= j render @order %>");
   <% end %>
-<% else %>
-  $("#item-row-<%= @order.id %>").replaceWith("<%= j render @order %>");
-<% end %>
 <% elsif @status == -1 %>
 console.log("非法操作");
 <% end %>
