@@ -132,8 +132,9 @@ $(document).ready(function () {
         $('#order_apartment_id').attr("disabled", true);
       
         $("#order_apartment_id option").filter(function(){
+          // alert($(this).attr("user-apartment-id"));
             if ($(this).val() == $(this).attr("user-apartment-id")) {
-                $(this).attr("selected",true);
+                $(this).prop("selected",true);
             } else {
                 $(this).removeAttr("selected");
             }
