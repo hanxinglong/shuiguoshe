@@ -30,8 +30,8 @@ class Cart < ActiveRecord::Base
     line_items.to_a.sum { |item| item.total_price }  
   end
   
-  def total_items
-    line_items.sum(:quantity)
+  def update_items_count(counter)
+    self.update_attribute('line_items_count', counter.to_i + self.line_items_count)
   end
   
 end

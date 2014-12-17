@@ -1,4 +1,4 @@
-<% if cart.total_items > 0 %>
+<% if cart.line_items_count > 0 %>
   <%= render 'carts/line_items' %>
 <% else %>
 <div class="empty-cart-tip">

@@ -1,7 +1,7 @@
 <div class="user-box container-box my-cart" id="my-cart">
   <h2>我的购物车</h2>
   
-  <% if cart.line_items.empty? %>
+  <% if cart.line_items_count == 0 %>
     <div class="empty-cart">
       <table>
         <tr>

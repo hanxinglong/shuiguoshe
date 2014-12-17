@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
   def new
     @cart = current_cart
     
-    if @cart.line_items.empty?
+    if @cart.line_items_count == 0
       flash[:notice] = "购物车是空的"
       redirect_to root_url
       return 

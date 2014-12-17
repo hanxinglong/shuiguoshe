@@ -30,6 +30,7 @@ class LineItemsController < ApplicationController
     @success = false
     if @line_item.save
       @success = true
+      @cart.update_items_count(1)
       # render text: "1"
     else
       # render text: "-1"
@@ -45,12 +46,14 @@ class LineItemsController < ApplicationController
         @line_item.quantity -= 1
         if @line_item.save
           @success = true
+          cart.update_items_count(-1)
         end
       end
     elsif params[:type] == '1'
       @line_item.quantity += 1
       if @line_item.save
         @success = true
+        cart.update_items_count(1)
       end
     end
     
@@ -60,7 +63,10 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item_id = "line_item_#{@line_item.id}"
     @success = true
-    unless @line_item.destroy
+    if @line_item.destroy
+      @success = true
+      cart.update_items_count(- @line_item.quantity)
+    else
       @success = false
     end
   end
