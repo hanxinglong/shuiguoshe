@@ -88,6 +88,7 @@
           <p>商品总额：￥<%= product_price_tag(@cart.total_price) %></p>
           <p>抵扣：-￥<span id="discount-price"><%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %></span></p>
           <p>订单总额：￥<span id="order-total-price"><%= product_price_tag(order_total_price(@cart)) %></span></p>
+          <%= f.input :discount_price, as: :hidden, input_html: { value: "#{product_price_tag(user_discount_score(@cart.total_price) / 100.0)}" } %>
           <%= f.input :total_price, as: :hidden, input_html: { value: "#{product_price_tag(order_total_price(@cart))}" } %>
           
           <% if current_user.score > 0 %>
@@ -153,17 +154,22 @@ $(document).ready(function () {
   
   $('#new_order :checkbox').click(function() {
       var $this = $(this);
+      var order_total_price = '0.00';
+      var order_discount_price = '0.00';
       if ($this.is(':checked')) {
         $("#discount-price").text("<%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %>");
-        var order_total_price = "<%= product_price_tag(order_total_price(@cart)) %>";
+        order_total_price = "<%= product_price_tag(order_total_price(@cart)) %>";
+        order_discount_price = $("#discount-price").text();
         $("#order_user_score").val("<%= user_discount_score(@cart.total_price) %>");
       } else {
         $("#discount-price").text("0.00");
-        var order_total_price = "<%= product_price_tag(@cart.total_price) %>";
+        // order_total_price = "<%= product_price_tag(@cart.total_price) %>";
         $("#order_user_score").val("0");
       }
       $("#order-total-price").text(order_total_price);
       $("#order_total_price").val(order_total_price);
+      
+      $("#order_discount_price").val(order_discount_price);
   });
   
 });

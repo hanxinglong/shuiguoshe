@@ -60,6 +60,8 @@ Rails.application.routes.draw do
       member do
         patch :cancel
         patch :complete
+        patch :prepare_deliver
+        patch :deliver
       end
       collection do
         get :search

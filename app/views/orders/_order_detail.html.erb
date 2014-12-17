@@ -1,6 +1,6 @@
-<% cache(["user_#{current_user.mobile}", order, can_cancel?(order), @current]) do %>
+<% cache(["user_#{current_user.mobile}", order]) do %>
 <tr class="order-info" id="item-row-info-<%= order.id %>">
-  <td colspan="7" style="text-align:left;">
+  <td colspan="8" style="text-align:left;">
     订单号：<%= order.order_no %>
   </td>
 </tr>
@@ -9,6 +9,7 @@
     <%= link_to "查看订单下的商品", order, class: "order-detail-link" %>
   </td>
   <td>￥<%= product_price_tag(order.total_price) %></td>
+  <td>-￥<%= product_price_tag(order.discount_price) %></td>
   <td><%= order.mobile %></td>
   <td><%= order.apartment.name %></td>
   <td><%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>

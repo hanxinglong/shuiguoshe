@@ -150,6 +150,12 @@ body {
     }
   }
   
+  .cart-result {
+    &:active {
+      text-decoration: none; 
+    }
+  }
+  
   .cart-result-hover {
     text-decoration: none;
     color: rgb(83,83,83);

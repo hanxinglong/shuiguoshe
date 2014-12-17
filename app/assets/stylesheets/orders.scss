@@ -60,6 +60,11 @@
     &:last-child {
       border: 0;
     };
+    .product-title {
+      a {
+        color: rgb(83,83,83);
+      }
+    }
   }
   .order-footer {
     text-align: right;

@@ -17,7 +17,7 @@
           <div class="pull-right" style="font-size: 12px;">
             <ul class="nav nav-pills" role="tablist">
               <li role="presentation" class="<%= controller_name == "orders" and action_name == "index" ? "active" : "" %>"><%= link_to "全部", cpanel_orders_path %></li>
-              <li role="presentation" class="<%= controller_name == "orders" and action_name == "today_normal" ? "active" : "" %>"><%= link_to "待配送", today_normal_cpanel_orders_path %></li>
+              <li role="presentation" class="<%= controller_name == "orders" and action_name == "today_normal" ? "active" : "" %>"><%= link_to "未完成", today_normal_cpanel_orders_path %></li>
               <li role="presentation" class="<%= controller_name == "orders" and action_name == "completed" ? "active" : "" %>"><%= link_to "已完成", completed_cpanel_orders_path %></li>
               <li role="presentation" class="<%= controller_name == "orders" and action_name == "canceled" ? "active" : "" %>"><%= link_to "已取消", canceled_cpanel_orders_path %></li>
             </ul>
@@ -30,18 +30,16 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>订单号</th>
-          <th>商品</th>
-          <th>数量(斤)</th>
-          <th>单价(元/斤)</th>
-          <th>总价(元)</th>
-          <th>订货人</th>
-          <th>配送时间</th>
-          <th>配送地址</th>
-          <th>下单时间</th>
+          <th>订单信息</th>
+          <th>订单实付(元)</th>
+          <th>抵扣(元)</th>
+          <th>收货人手机</th>
+          <th>收货人小区</th>
+          <th>下单日期</th>
+          <th>下单人</th>
           <th>订单状态</th>
           <th>备注</th>
-          <th></th>
+          <th>操作</th>
         </tr>
       </thead>
 
@@ -49,22 +47,26 @@
         <% @orders.each do |order| %>
           <tr>
             <td><%= order.order_no %></td>
-            <td><%= order.product.title %></td>
-            <td><%= order.quantity %></td>
-            <td><%= order.product.origin_price %></td>
-            <td><%= order.total_price %></td>
-            <td><%= order.user.mobile %></td>
-            <td><%= order.deliver_time %></td>
-            <td><%= order.deliver_address %></td>
+            <td>￥<%= format("%.2f", order.total_price) %></td>
+            <td>-￥<%= format("%.2f", order.discount_price) %></td>
+            <td><%= order.mobile %></td>
+            <td><%= order.apartment.try(:name) %></td>
             <td><%= order.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            <td><%= order.user.mobile %></td>
             <td><%= render_order_state(order) %></td>
             <td><%= order.note %></td>
             <td>
               <% if order.can_cancel? %>
                 <%= link_to "取消", cancel_cpanel_order_path(order), class: "btn btn-primary btn-xs", method: :patch, confirm: "你确定吗？" %>
               <% end %>
+              <% if order.can_prepare_deliver? %>
+                <%= link_to "准备配送", prepare_deliver_cpanel_order_path(order), class: "btn btn-primary btn-xs", method: :patch, confirm: "你确定吗？" %>
+              <% end %>
+              <% if order.can_deliver? %>
+                <%= link_to "开始配送", deliver_cpanel_order_path(order), class: "btn btn-primary btn-xs", method: :patch, confirm: "你确定吗？" %>
+              <% end %>
               <% if order.can_complete? %>
-                <%= link_to "完成", complete_cpanel_order_path(order), class: "btn btn-success btn-xs", method: :patch, confirm: "你确定吗？" %>
+                <%= link_to "确认收货", complete_cpanel_order_path(order), class: "btn btn-success btn-xs", method: :patch, confirm: "你确定吗？" %>
               <% end %>
             </td>
           </tr>

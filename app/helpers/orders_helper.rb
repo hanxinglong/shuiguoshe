@@ -17,7 +17,11 @@ module OrdersHelper
     return "" if order.blank?
     
     if order.normal?
-      content_tag :span, "待配送", class: "label label-warning", style: "font-size: 14px;"
+      content_tag :span, "待配送", class: "label label-default", style: "font-size: 14px;"
+    elsif order.prepare_delivering?
+      content_tag :span, "配送准备", class: "label label-warning", style: "font-size: 14px;"
+    elsif order.delivering?
+      content_tag :span, "配送中", class: "label label-info", style: "font-size: 14px;"
     elsif order.canceled?
       content_tag :span, "已取消", class: "label label-danger", style: "font-size: 14px;"
     elsif order.completed?

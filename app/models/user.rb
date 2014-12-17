@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
         self.score = 0
       end
       if self.save
-        ScoreTrace.create(score: s, summary: "抵扣￥#{product_price_tag(s/100.0)}", user_id: self.id)
+        ScoreTrace.create(score: s, summary: "抵扣￥#{format("%.2f", (s/100.0))}", user_id: self.id)
       end
     end
   end

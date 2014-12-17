@@ -130,6 +130,6 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:mobile, :total_price, :note, :state, :apartment_id)
+      params.require(:order).permit(:mobile, :total_price, :discount_price, :note, :state, :apartment_id)
     end
 end
