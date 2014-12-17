@@ -32,13 +32,26 @@ module OrdersHelper
   def can_cancel?(order)
     return false if order.blank?
     
-    ( order.can_cancel? and
-      ( Time.now.strftime("%Y-%m-%d %H:%M:%S") < order.created_at.strftime("%Y-%m-%d 23:59:59") ) and
-      owner?(order) )
+    ( order.can_cancel? and order.state?(:normal) )
   end
   
   def order_total_price(cart)
     cart.total_price - ( user_discount_score(cart.total_price) / 100.0 )
+  end
+  
+  def order_breadcrumb_tag(order)
+    return '' if order.blank?
+    return %(<a href="#{orders_user_path}">所有订单</a> &gt;).html_safe if params[:tab] == 'all'
+    
+    if %w(prepare_delivering delivering normal).include?(order.state)
+      %(<a href="#{incompleted_orders_user_path}">未完成</a> &gt; ).html_safe
+    elsif order.state?(:completed)
+      %(<a href="#{completed_orders_user_path}">已完成</a> &gt; ).html_safe
+    elsif order.state?(:canceled)
+      %(<a href="#{canceled_orders_user_path}">已取消</a> &gt; ).html_safe
+    else
+      ''
+    end
   end
   
 end

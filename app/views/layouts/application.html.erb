@@ -18,6 +18,13 @@
   
   <%= render 'layouts/header' %>
   <div class="container">
+    <% if content_for?(:sitemap) %>
+    <div class="user-box container-box sitemap">
+      <h2><a href="<%= root_path %>">首页</a> &gt;
+        <%= yield :sitemap %>
+      </h2>
+    </div>
+    <% end %>
     <%= notice_message %>
     <%= content_for?(:content) ? yield(:content) : yield %>
     <%= debug(params) if Rails.env.development? %>

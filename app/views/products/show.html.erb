@@ -1,5 +1,8 @@
+<% content_for :sitemap do %>
+  <a href="<%= products_path(type_id: @product.type_id) %>"><%= @type %></a> &gt; <span class="current"><%= @product.title %></span>
+<% end %>
+
 <div class="user-box container-box" id="product-<%= @product.id %>">
-  <h2 style="margin-bottom: 10px;">产品详情</h2>
   <div class="product-info">
     <h3><%= @product.title %></h3>
     <div class="product-intro">

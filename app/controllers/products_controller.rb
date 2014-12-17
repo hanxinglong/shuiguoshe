@@ -54,6 +54,13 @@ class ProductsController < ApplicationController
     else
       fresh_when etag: @product
       set_seo_meta(@product.title, '', @product.intro)
+      
+      if @product.type_id == 1
+        @type = '水果'
+      else
+        @type = '干果'
+      end
+      
     end
   end
 

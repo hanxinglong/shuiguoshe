@@ -6,7 +6,7 @@
 </tr>
 <tr id="item-row-<%= order.id %>">
   <td>
-    <%= link_to "查看订单下的商品", order, class: "order-detail-link" %>
+    <%= link_to "查看订单下的商品", order_path(order, tab: @tag), class: "order-detail-link" %>
   </td>
   <td>￥<%= product_price_tag(order.total_price) %></td>
   <td>-￥<%= product_price_tag(order.discount_price) %></td>
