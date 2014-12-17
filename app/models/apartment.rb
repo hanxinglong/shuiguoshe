@@ -11,9 +11,9 @@ class Apartment < ActiveRecord::Base
   end
   
   def self.opened
-    Rails.cache.fetch("apartment:apartment_collection:#{CacheVersion.last_apartment_updated_at}") do
+    # Rails.cache.fetch("apartment:apartment_collection:#{CacheVersion.last_apartment_updated_at}") do
       where(:is_open => true)
-    end
+    # end
   end
   
 end
