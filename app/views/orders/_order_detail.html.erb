@@ -1,4 +1,4 @@
-<% cache(["user_#{current_user.mobile}", order]) do %>
+<% cache(["user_#{current_user.mobile}", order, @current]) do %>
 <tr class="order-info" id="item-row-info-<%= order.id %>">
   <td colspan="8" style="text-align:left;">
     订单号：<%= order.order_no %>
