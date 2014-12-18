@@ -82,7 +82,7 @@ class Order < ActiveRecord::Base
           # 更新库存
           product.update_attribute('stock_count', product.stock_count - 1) if product.stock_count > 0
           # 更新用户的积分
-          current_user.update_score(product.discount_score, "购买产品") if ( product.discount_score > 0 and current_user )
+          user.update_score(product.discount_score, "购买产品") if ( product.discount_score > 0 and current_user )
         end
       end # each end
     end # transaction
