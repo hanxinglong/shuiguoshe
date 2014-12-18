@@ -70,6 +70,7 @@ class LineItemsController < ApplicationController
 
   def destroy
     @line_item_id = "line_item_#{@line_item.id}"
+    @order_line_item_id = "order_line_item_#{@line_item.id}"
     
     @success = true
     if @line_item.destroy

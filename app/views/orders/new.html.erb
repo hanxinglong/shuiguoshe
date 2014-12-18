@@ -63,8 +63,8 @@
         </div>
         
         <div class="item-info" style="text-align:right">
-          <p>商品总额：￥<%= product_price_tag(@cart.total_price) %></p>
-          <p>抵扣：-￥<span id="discount-price"><%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %></span></p>
+          <p>商品总额：￥<span id="all-products-total-price"><%= product_price_tag(@cart.total_price) %></span></p>
+          <p>抵扣：-￥<span id="discount-price" data-discount-price="<%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %>"><%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %></span></p>
           <p>订单总额：￥<span id="order-total-price"><%= product_price_tag(order_total_price(@cart)) %></span></p>
           <%= f.input :discount_price, as: :hidden, input_html: { value: "#{product_price_tag(user_discount_score(@cart.total_price) / 100.0)}" } %>
           <%= f.input :total_price, as: :hidden, input_html: { value: "#{product_price_tag(order_total_price(@cart))}" } %>
@@ -72,7 +72,7 @@
           <% if current_user.score > 0 %>
           <div class="checkbox">
               <label>
-                <input type="checkbox" data-current-score="<%= user_discount_score(@cart.total_price) %>" checked> 您目前的可用积分为<%= user_discount_score(@cart.total_price) %>，可以抵￥<%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %>
+                <input type="checkbox" data-current-score="<%= user_discount_score(@cart.total_price) %>" checked> 您目前的可用积分为<span id="user-current-score" data-user-current-score="<%= user_discount_score(@cart.total_price) %>"><%= user_discount_score(@cart.total_price) %></span>，可以抵￥<span id="user-current-discount-price"><%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %></span>
               </label>
               <input type="hidden" name="user_score" id="order_user_score" value="<%= user_discount_score(@cart.total_price) %>" />
           </div>
@@ -150,22 +150,25 @@ $(document).ready(function () {
   
   $('#new_order :checkbox').click(function() {
       var $this = $(this);
-      var order_total_price = '0.00';
-      var order_discount_price = '0.00';
       if ($this.is(':checked')) {
-        $("#discount-price").text("<%= product_price_tag(user_discount_score(@cart.total_price) / 100.0) %>");
-        order_total_price = "<%= product_price_tag(order_total_price(@cart)) %>";
-        order_discount_price = $("#discount-price").text();
-        $("#order_user_score").val("<%= user_discount_score(@cart.total_price) %>");
+        $("#discount-price").text($("#discount-price").data("discount-price"));
+        $("#order_user_score").val(parseInt($("#user-current-score").data("user-current-score")));
       } else {
         $("#discount-price").text("0.00");
-        // order_total_price = "<%= product_price_tag(@cart.total_price) %>";
         $("#order_user_score").val("0");
       }
-      $("#order-total-price").text(order_total_price);
-      $("#order_total_price").val(order_total_price);
       
-      $("#order_discount_price").val(order_discount_price);
+      $("#order_discount_price").val($("#discount-price").text());
+      
+      var products_total_price = $("#all-products-total-price").text();
+      var discount_price = $("#order_discount_price").val();
+      
+      var total_price = (parseFloat(products_total_price) - parseFloat(discount_price)).toFixed(2);
+      
+      // input hide
+      $("#order_total_price").val(total_price);
+      $("#order-total-price").text($("#order_total_price").val());
+      // input hide
   });
   
 });

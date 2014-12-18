@@ -80,9 +80,9 @@ class Order < ActiveRecord::Base
         product = item.product
         if product.present?
           # 更新库存
-          product.update_attribute('stock_count', product.stock_count - 1) if product.stock_count > 0
+          product.update_attribute('stock_count', product.stock_count - item.quantity) if product.stock_count > 0
           # 更新用户的积分
-          user.update_score(product.discount_score, "购买产品") if ( product.discount_score > 0 and user )
+          user.update_score(product.discount_score * item.quantity, "购买产品") if ( product.discount_score > 0 and user )
         end
       end # each end
     end # transaction

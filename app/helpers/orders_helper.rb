@@ -36,6 +36,7 @@ module OrdersHelper
   end
   
   def order_total_price(cart)
+    return 0 if cart.total_price == 0
     cart.total_price - ( user_discount_score(cart.total_price) / 100.0 )
   end
   

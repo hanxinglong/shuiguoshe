@@ -12,7 +12,7 @@
     </tr>
   <% else %>
   <% @cart.line_items.each do |line_item| %>
-    <tr>
+    <tr id="order_line_item_<%= line_item.id %>">
       <td width="40%" class="item-title">
         <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product) %>
         <span class="product-title"><%= link_to line_item.product.title, product_path(line_item.product) %></span>

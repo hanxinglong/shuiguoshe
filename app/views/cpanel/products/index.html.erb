@@ -11,6 +11,7 @@
           <th>产品图片</th>
           <th>标题</th>
           <th>子标题</th>
+          <th>库存</th>
           <th>简介</th>
           <th>水果社价</th>
           <th>市场价</th>
@@ -25,6 +26,7 @@
             <td><%= render_product_icon(product) %></td>
             <td><%= product.title %></td>
             <td><%= product.subtitle %></td>
+            <td><%= product.stock_count %></td>
             <td width="25%"><%= product.intro %></td>
             <td><%= product.low_price %></td>
             <td><%= product.origin_price %></td>
