@@ -1,0 +1,10 @@
+$nature-green: rgb(99,185,76);
+$medium-red: rgb(60,155,0);
+$light-gray: #777;
+$gray-medium-light: #eaeaea;
+$common-border-color: rgb(204,204,204);
+
+.product .subtitle, .product-detail .subtitle {
+  color: $nature-green;
+  font-size: 14px;
+}

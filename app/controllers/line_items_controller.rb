@@ -19,8 +19,13 @@ class LineItemsController < ApplicationController
   end
 
   def create
-    @cart = current_cart
+    
     @product = Product.find(params[:product_id])
+    if @product.stock_count <= 0
+      return false
+    end
+    
+    @cart = current_cart
     @line_item = @cart.add_product(@product)
 
     @result_dom_id = "result-#{@product.id}"

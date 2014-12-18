@@ -27,6 +27,9 @@
         origin_price: "市场价"
         units: "计量单位"
         discounted_at: "活动截止时间"
+        discount_score: '赠送积分'
+        stock_count: '库存'
+        delivered_at: '配送时间'
       apartment:
         name: "小区名字"
         address: "小区地址"

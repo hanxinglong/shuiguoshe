@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
   
   has_many :orders
   has_many :line_items
+  belongs_to :sale
   
   scope :saled, -> { where(on_sale: true) }
   scope :search, -> keyword { where('title like :keyword or subtitle like :keyword or intro like :keyword', { keyword: "%#{keyword}%" }) }
@@ -14,8 +15,13 @@ class Product < ActiveRecord::Base
   scope :discounted, -> { where(is_discount: true).where('discounted_at > ?', Time.now).limit(3) }
   
   validates :title, :image, :low_price, :type_id, :origin_price, :units, presence: true
+  
   validates :low_price, :origin_price, format: { with: /\A\d+\.\d{1,}\z/, message: "不正确的价格" }
   validates :low_price, :origin_price, numericality: { greater_than: 0 }
+  
+  validates :discount_score, :stock_count, format: { with: /\d+/, message: "必须是整数" }
+  validates :discount_score, :stock_count, numericality: { greater_than: 0 }
+  
   validates :discounted_at, presence: true, if: Proc.new { |a| a[:is_discount] }#:required_discount?
   
   validate :origin_price_greater_than_low_price

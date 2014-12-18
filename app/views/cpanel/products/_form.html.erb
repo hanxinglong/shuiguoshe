@@ -22,6 +22,9 @@
     <%= f.input :units, label: "计量单位" %>
     <%= f.input :subtitle, label: "产品子标题" %>
     <%= f.input :intro, label: "产品描述" %>
+    <%= f.input :discount_score, label: "赠送积分", placeholder: '300' %>
+    <%= f.input :stock_count, label: "库存" %>
+    <%= f.input :delivered_at, as: :string, label: "配送时间", placeholder: '2014-01-01 00:00:00 ( 可以不设置 )' %>
     <%= f.input :is_discount, label: "是否属于特惠预订产品", input_html: { onchange: "javascript: $('#discounted_at_area').toggle();" } %>
     <div id="discounted_at_area" style="display: <%= @product.is_discount ? "" : "none" %>">
       <%= f.input :discounted_at, as: :string, placeholder: '2014-01-01 00:00:00', label: "活动结束时间", required: true, input_html: { value: "#{@product.discounted_at ? @product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") : "" }" } %>

@@ -2,13 +2,21 @@ module LineItemsHelper
   def add_to_cart_tag(product, class_name = "btn btn-sm btn-success")
     return "" if product.blank?
     
-    html = <<-HTML
-      <div class="btn-wrapper">
-        <a onclick="App.addToCart(this)" data-product-id="#{product.id}" class="#{class_name}" id="item-#{product.id}">加入购物车</a>
-        <div id="result-#{product.id}" class="add-to-cart-result"></div>
-      </div>
-      
-    HTML
+    if product.stock_count == 0
+      class_names = class_name.split(' ').delete('btn-success')
+      class_names << 'btn-warning'
+      html = <<-HTML
+        <div class="btn-wrapper">
+          <a class="#{class_names.join(' ')}" disabled>此商品已售完</a>
+        </div>
+      HTML
+    else
+      html = <<-HTML
+        <div class="btn-wrapper">
+          <a onclick="App.addToCart(this)" data-product-id="#{product.id}" class="#{class_name}" id="item-#{product.id}">加入购物车</a>
+        </div>
+      HTML
+    end
     
     html.html_safe
   end
