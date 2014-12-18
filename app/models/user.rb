@@ -33,18 +33,6 @@ class User < ActiveRecord::Base
   def apartment
     @apartment ||= Apartment.find_by_id(self.apartment_id).try(:name)
   end
-  
-  def decrease_score(s)
-    if s > 0
-      self.score -= s
-      if self.score < 0
-        self.score = 0
-      end
-      if self.save
-        ScoreTrace.create(score: s, summary: "抵扣￥#{format("%.2f", (s/100.0))}", user_id: self.id)
-      end
-    end
-  end
 
   # 注册邮件提醒
   after_create :send_welcome_mail
@@ -52,7 +40,7 @@ class User < ActiveRecord::Base
     # 生成token
     update_private_token
     # 赠送积分
-    update_score
+    update_score(1000, '成功注册')
     # 发送欢迎邮件
     # UserMailer.welcome(self.id).deliver
   end
@@ -70,12 +58,23 @@ class User < ActiveRecord::Base
     Setting.admin_emails.include?(self.email)
   end
   
-  def update_score
-    default_score = 1000
-    self.score += default_score
-    if self.save
-      # 生成积分交易记录
-      ScoreTrace.create!(score: default_score, summary: "成功注册，赠送#{default_score}积分", user_id: self.id)
+  # 更新积分
+  def update_score(ss, msg = '')
+    summary = msg.blank? ? '' : "#{msg}, "
+    if ss > 0
+      # 赠送积分
+      if self.update_attribute('score', self.score + ss)
+        # 生成积分交易记录
+        ScoreTrace.create!(score: ss, summary: "#{summary}赠送#{ss}积分", user_id: self.id)
+      end
+    else
+      if ( self.score + ss ) >= 0
+        # 抵扣积分
+        if self.update_attribute('score', self.score + ss)
+          # 生成积分交易记录
+          ScoreTrace.create!(score: -ss, summary: "#{summary}抵扣￥#{format("%.2f", (s/100.0))}", user_id: self.id)
+        end
+      end
     end
   end
 

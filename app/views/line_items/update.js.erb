@@ -1,3 +1,5 @@
+$("#<%= @oper_id %>").data("loading", '0');
+
 <% if @success %>
 // 更新条目的信息
 $("#cart_1_<%= @line_item_id %>").replaceWith("<%= j render @line_item %>");

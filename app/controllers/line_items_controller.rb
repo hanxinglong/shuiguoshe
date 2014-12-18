@@ -46,7 +46,9 @@ class LineItemsController < ApplicationController
   def update
     @type = params[:type]
     @success = false
+    
     if params[:type] == '-1'
+      @oper_id = "reduce-#{@line_item.id}"
       if @line_item.quantity > 1
         @line_item.quantity -= 1
         if @line_item.save
@@ -55,6 +57,7 @@ class LineItemsController < ApplicationController
         end
       end
     elsif params[:type] == '1'
+      @oper_id = "increase-#{@line_item.id}"
       @line_item.quantity += 1
       if @line_item.save
         @success = true

@@ -110,7 +110,7 @@ class OrdersController < ApplicationController
       Cart.find_by(user_id: current_user.id).destroy
       
       score = params[:user_score].to_i
-      current_user.decrease_score(score)
+      current_user.update_score(-score, '提交订单')
       # @product.add_order_count
       @apartment = Apartment.find_by_id(@order.apartment_id)
       @apartment.add_order_count if @apartment

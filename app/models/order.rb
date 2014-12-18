@@ -46,6 +46,8 @@ class Order < ActiveRecord::Base
     state :canceled
     state :completed
     
+    after_transition :delivering => :completed, :do => :update_product_infos
+    
     event :prepare_deliver do
       transition :normal => :prepare_delivering
     end
@@ -71,6 +73,20 @@ class Order < ActiveRecord::Base
   # def total_price
   #   line_items.to_a.sum { |item| item.total_price }
   # end
+  
+  def update_product_infos
+    Product.transaction do
+      line_items.each do |item|
+        product = item.product
+        if product.present?
+          # 更新库存
+          product.update_attribute('stock_count', product.stock_count - 1) if product.stock_count > 0
+          # 更新用户的积分
+          current_user.update_score(product.discount_score, "购买产品") if ( product.discount_score > 0 and current_user )
+        end
+      end # each end
+    end # transaction
+  end
   
   def self.search(keyword)
     if keyword.gsub(/\s+/, "").present?

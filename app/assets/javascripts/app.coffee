@@ -30,7 +30,7 @@ window.App =
   addToCart: (el) ->
     loading = $(el).data("loading")
     if loading == '1'
-      return
+      return false
     
     $(el).data("loading", '1')
     
@@ -72,7 +72,7 @@ window.App =
     
     loading = $(el).data("loading")
     if loading == '1'
-      return
+      return false
     
     $(el).data("loading", '1')
     
@@ -84,6 +84,13 @@ window.App =
       data: { type: type }
   
   reduceQuantity: (el) ->
+    
+    loading = $(el).data("loading")
+    if loading == '1'
+      return false
+    
+    $(el).data("loading", '1')
+    
     id = $(el).data("id")
     item = $("#line_item_quantity_#{id}")
     quantity = item.text()
@@ -102,6 +109,13 @@ window.App =
       data: { type: '-1' }
           
   increaseQuantity: (el) ->
+    
+    loading = $(el).data("loading")
+    if loading == '1'
+      return false
+    
+    $(el).data("loading", '1')
+    
     id = $(el).data("id")
     item = $("#line_item_quantity_#{id}")
     quantity = item.text()
@@ -122,6 +136,12 @@ window.App =
     result = confirm("您确定吗？")
     if !result
       return false
+      
+    loading = $(el).data("loading")
+    if loading == '1'
+      return false
+    
+    $(el).data("loading", '1')
     
     id = $(el).data("id")
     current = $(el).data("current")
