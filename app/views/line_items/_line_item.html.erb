@@ -7,5 +7,5 @@
   <td width="10%"><%= product_price_tag(line_item.product.low_price) %></td>
   <td width="15%"><%= render_item_quantity(line_item) %></td>
   <td width="10%"><%= product_price_tag(line_item.total_price) %></td>
-  <td width="5%"><a onclick="App.deleteItem(this)" data-id="<%= line_item.id %>" data-type="1" class="btn btn-sm btn-danger">删除</a></td>
+  <td width="5%"><a onclick="App.deleteItem(this)" data-id="<%= line_item.id %>" data-loading="0" data-type="1" class="btn btn-sm btn-danger">删除</a></td>
 </tr>

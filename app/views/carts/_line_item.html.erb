@@ -13,6 +13,6 @@
   </td>
   <td width="20%" style="text-align: right">
     <div class="text-muted"><%= product_price_tag(item.total_price) %></div>
-    <a onclick="App.deleteItem(this)" data-id="<%= item.id %>" data-type="2" class="btn btn-xs btn-danger" style="color:white;">删除</a>
+    <a onclick="App.deleteItem(this)" data-id="<%= item.id %>" data-type="2" data-loading="0" class="btn btn-xs btn-danger" style="color:white;">删除</a>
   </td>
 </tr>

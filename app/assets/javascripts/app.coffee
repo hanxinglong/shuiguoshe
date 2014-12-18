@@ -28,6 +28,12 @@ window.App =
         # $('.address-html-container').html(re)
   
   addToCart: (el) ->
+    loading = $(el).data("loading")
+    if loading == '1'
+      return
+    
+    $(el).data("loading", '1')
+    
     pid = $(el).data("product-id")
     $.ajax
       url: "/line_items"
@@ -63,6 +69,12 @@ window.App =
     # result = confirm("您确定吗？")
     # if !result
     #   return false
+    
+    loading = $(el).data("loading")
+    if loading == '1'
+      return
+    
+    $(el).data("loading", '1')
     
     id = $(el).data("id")
     type = $(el).data("type")

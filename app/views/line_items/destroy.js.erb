@@ -1,3 +1,5 @@
+$("#<%= @line_item_id %>").data("loading", '0');
+
 <% if @success %>
 // 删除自身
 $("#cart_1_<%= @line_item_id %>").remove();
