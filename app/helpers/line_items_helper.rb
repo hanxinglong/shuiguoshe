@@ -13,7 +13,7 @@ module LineItemsHelper
     else
       html = <<-HTML
         <div class="btn-wrapper">
-          <a onclick="App.addToCart(this)" data-product-id="#{product.id}" class="#{class_name}" id="item-#{product.id}">加入购物车</a>
+          <a onclick="App.addToCart(this)" data-product-id="#{product.id}" class="#{class_name}" id="item-#{product.id}" data-disable-with="正在添加...">加入购物车</a>
         </div>
       HTML
     end
