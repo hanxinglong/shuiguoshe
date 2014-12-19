@@ -15,7 +15,8 @@ window.App =
         if re == "1"
           # alert($("#user-edit-apartment").html());
           $("#edit-user-apartment").html("<a onclick='updateApartment()' class='btn btn-sm btn-success'>修改</a>")
-          $("#order_apartment_id").attr("disabled", true)
+          # $("#order_apartment_id").attr("disabled", true)
+          $('#order_apartment_id').prop('disabled', true).trigger("chosen:updated");
           $("#order_apartment_id").data("current", address)
           # alert($("#user-edit-apartment").html());
           $("#order_apartment_id option").attr("user-apartment-id", address)

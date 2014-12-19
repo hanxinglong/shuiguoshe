@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require jquery.countdown.min
 //= require turbolinks
+//= require jquery.chosen
 //= require_tree .
 
 $(function(){
@@ -32,4 +33,6 @@ $("#scrolltop").click(function(){
     });
 });
 
-
+$(document).ready(function() {
+  $("select").chosen({"search_contains": true, "no_results_text":"没有找到", "placeholder_text_single":"请选择小区"});
+});

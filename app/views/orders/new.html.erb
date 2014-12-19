@@ -107,26 +107,32 @@ $(document).ready(function () {
       $('#order_mobile').val("<%= current_user.mobile %>");
       
       if ($('#order_apartment_id').data('current') != '') {
-        $('#order_apartment_id').attr("disabled", true);
+        // $('#order_apartment_id').attr("disabled", true);
+        $('#order_apartment_id').prop('disabled', true).trigger("chosen:updated");
+        var index = parseInt($('#order_apartment_id').data('current'));
+        $('#order_apartment_id').prop('selectedIndex', index - 1).trigger("chosen:updated");
       
-        $("#order_apartment_id option").filter(function(){
-          // alert($(this).attr("user-apartment-id"));
-            if ($(this).val() == $(this).attr("user-apartment-id")) {
-                $(this).prop("selected",true);
-            } else {
-                $(this).removeAttr("selected");
-            }
-        });
+        // $("#order_apartment_id option").filter(function(){
+        //   // alert($(this).attr("user-apartment-id"));
+        //     if ($(this).val() == $(this).attr("user-apartment-id")) {
+        //         $(this).prop("selected",true);
+        //     } else {
+        //         $(this).removeAttr("selected");
+        //     }
+        // });
         
         $("#hide_order_apartment_input").html('<input type="hidden" name="order[apartment_id]" value="' + $('#order_apartment_id').data('current') + '">');
       
         $('#edit-user-apartment').html('<a class="btn btn-sm btn-success" onclick="updateApartment()">修改</a>');
       } else {
-        $('#order_apartment_id').removeAttr("disabled");
+        // $('#order_apartment_id').removeAttr("disabled");
         
-        $("#order_apartment_id option").each(function(){
-          $(this).removeAttr("selected");
-        });
+        // $("#order_apartment_id option").each(function(){
+        //   $(this).removeAttr("selected");
+        // });
+        $('#order_apartment_id').prop('disabled', false).trigger("chosen:updated");
+        $('#order_apartment_id').prop('selectedIndex', '-1').trigger("chosen:updated");
+        
         
         $('#edit-user-apartment').html('<a class="btn btn-warning" data-user-id="<%= current_user.id %>" onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>');
         
@@ -138,14 +144,20 @@ $(document).ready(function () {
       $('#order_mobile').val("");
       
       $("#edit-user-apartment").html("");
-      
-      $("#order_apartment_id").removeAttr("disabled");
-      $("#order_apartment_id option").each(function(){
-        $(this).removeAttr("selected");
-      });
+      // $("#order_apartment_id").removeAttr("disabled");
+      // $("#order_apartment_id option").each(function(){
+      //   $(this).removeAttr("selected");
+      // });
       
       $("#hide_order_apartment_input").html("");
+      
+      // $("#order_apartment_id").prop("disabled",false).trigger("liszt:updated");
+      $('#order_apartment_id').prop('disabled', false).trigger("chosen:updated");
+      $('#order_apartment_id').prop('selectedIndex', '-1').trigger("chosen:updated");
     }
+    
+    // $("select").trigger("chzn:updated");
+    
   });
   
   $('#new_order :checkbox').click(function() {
@@ -175,7 +187,9 @@ $(document).ready(function () {
 
 function updateApartment () {
     $('#edit-user-apartment').html('<a class="btn btn-warning" data-user-id="<%= current_user.id %>" onclick="App.doSaveAddress(this)" id="save_address">保存到配送设置</a>');
-    $("#order_apartment_id").removeAttr("disabled");
+    // $("#order_apartment_id").removeAttr("disabled");
+    $('#order_apartment_id').prop('disabled', false).trigger("chosen:updated");
+    
     $("#hide_order_apartment_input").html("");
 };
 

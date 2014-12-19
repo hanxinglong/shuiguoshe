@@ -1,5 +1,6 @@
 /*
  *= require application
+ *= require jquery.chosen
  *= require orders
  *= require users
  *= require apartments
@@ -120,11 +121,6 @@ body {
 
 .vertical-center {
   line-height: 120px;
-}
-
-.cart {
-  background: image_url('cart.png') left center no-repeat;
-  padding-left: 30px;
 }
 
 #carousel-ads {
