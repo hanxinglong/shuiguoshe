@@ -8,6 +8,7 @@
       order: "订单"
       banner: "横幅广告"
       sidebar_ad: "边栏广告"
+      sale: "卖场"
     attributes:
       user:
         mobile: "手机"
@@ -48,6 +49,15 @@
         image: "广告图片"
       sidebar_ad:
         image: "广告图片"
+      sale:
+        cover_image: "封面图片"
+        title: "大标题"
+        subtitle: "2级标题"
+        ad_image: "广告图片"
+        background_color: "背景颜色"
+        logo: "卖场Logo"
+        closed_at: "活动截止日期"
+        
     errors:
       models:
         user: "用户"

@@ -1,0 +1,23 @@
+<% content_for :sale_ad do %>
+<div class="sale-banner" style="background: url('<%= @sale.ad_image.normal %>') center no-repeat; margin: 0 auto; margin-top: -2px;">
+  
+</div>
+<% end %>
+
+<div class="row container-box">  
+  <div class="col-md-12">
+    
+    <div class="sale-heading">
+      <%= image_tag @sale.logo.normal %>
+      <span class="sale-title"><%= @sale.title %></span>
+    </div>
+    
+    <% if @products.any? %>
+    <% cache cache_key_for(@cache_prefix, @products) do %>
+      <%= render_grid_for @products, 4 %>
+    <% end %>
+    <% else %>
+      没有找到相关记录!
+    <% end %>
+  </div>
+</div>

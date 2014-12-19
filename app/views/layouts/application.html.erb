@@ -9,6 +9,7 @@
   <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
   <meta name='viewport' content='width=1170'><!-- non responsive -->
   <%= stylesheet_link_tag  'front', 'data-turbolinks-track' => true %>
+  <%= yield(:styles) %>
   <link rel="shortcut icon" href="<%= asset_path("favicon.ico") %>" />
   
   <%= csrf_meta_tags %>
@@ -17,6 +18,8 @@
 <body>
   
   <%= render 'layouts/header' %>
+  <%= yield(:sale_ad) if content_for?(:sale_ad) %>
+  
   <div class="container">
     <% if content_for?(:sitemap) %>
     <div class="user-box container-box sitemap">

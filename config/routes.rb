@@ -37,7 +37,9 @@ Rails.application.routes.draw do
       # get :search
     end
   end
-  resources :line_items
+  
+  resources :sales, only: [:show]
+  resources :line_items, only: [:create, :update, :destroy]
   resources :carts, only: [:show]
   get '/cart' => 'carts#show', as: :show_cart
   
@@ -73,6 +75,7 @@ Rails.application.routes.draw do
     
     resources :banners
     resources :newsblasts
+    resources :sales
     resources :sidebar_ads
     
     resources :products do

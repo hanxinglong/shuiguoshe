@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="order-item-info order-footer">
-        <%= link_to "返回修改购物车", show_cart_path, class: "btn btn-default" %>&nbsp;&nbsp;<%= f.submit '确认下单', class: "btn btn-danger", id: 'new_order_submit' %>
+        <%= link_to "返回修改购物车", show_cart_path, class: "btn btn-default" %>&nbsp;&nbsp;<%= f.submit '确认下单', class: "btn btn-danger", id: 'new_order_submit', 'data-disable-with' => '正在下单...' %>
       </div>
     </div>
   <% end %>

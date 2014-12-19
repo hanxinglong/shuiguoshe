@@ -35,3 +35,14 @@ class Cart < ActiveRecord::Base
   end
   
 end
+
+# == Schema Information
+#
+# Table name: carts
+#
+#  id               :integer          not null, primary key
+#  created_at       :datetime
+#  updated_at       :datetime
+#  user_id          :integer
+#  line_items_count :integer          default(0)
+#

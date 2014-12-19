@@ -17,3 +17,17 @@ class Apartment < ActiveRecord::Base
   end
   
 end
+
+# == Schema Information
+#
+# Table name: apartments
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  address      :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  image        :string(255)
+#  is_open      :boolean          default(FALSE)
+#  orders_count :integer          default(0)
+#

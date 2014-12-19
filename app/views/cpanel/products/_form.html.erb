@@ -8,7 +8,9 @@
   <%= render "/shared/error_messages", target: @product %>
 
   <div class="col-md-6 col-md-offset-3">
-    <%= f.input :type_id, collection: ProductType.all.map { |t| [t.name, t.id] }, prompt: "--请选择产品类型--", label: "类别ID" %>
+    <%= f.input :type_id, collection: ProductType.all.map { |t| [t.name, t.id] }, prompt: "--请选择产品类型--", label: "产品类别" %>
+    <%= f.input :sale_id, collection: Sale.all.map { |s| [s.title, s.id] }, prompt: "--请选择卖场--", label: "所属卖场" %>
+        
     <%= f.input :title, label: "产品标题" %>
     <%- if @product.image.small %>
       <div class="col-sm-10 col-sm-offset-3">

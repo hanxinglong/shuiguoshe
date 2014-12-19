@@ -1,4 +1,5 @@
 # coding: utf-8
+
 class Product < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   
@@ -20,7 +21,7 @@ class Product < ActiveRecord::Base
   validates :low_price, :origin_price, numericality: { greater_than: 0 }
   
   validates :discount_score, :stock_count, format: { with: /\d+/, message: "必须是整数" }
-  validates :discount_score, :stock_count, numericality: { greater_than: 0 }
+  validates :discount_score, :stock_count, numericality: { greater_than_or_equal_to: 0 }
   
   validates :discounted_at, presence: true, if: Proc.new { |a| a[:is_discount] }#:required_discount?
   
@@ -54,3 +55,30 @@ class Product < ActiveRecord::Base
   end
   
 end
+
+# == Schema Information
+#
+# Table name: products
+#
+#  id             :integer          not null, primary key
+#  type_id        :integer
+#  title          :string(255)
+#  intro          :string(255)
+#  image          :string(255)
+#  low_price      :decimal(8, 2)    default(0.0)
+#  origin_price   :decimal(8, 2)    default(0.0)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  subtitle       :string(255)
+#  on_sale        :boolean          default(TRUE)
+#  orders_count   :integer          default(0)
+#  suggested_at   :datetime
+#  units          :string(255)
+#  note           :string(255)
+#  is_discount    :boolean          default(FALSE)
+#  discounted_at  :datetime
+#  discount_score :integer          default(0)
+#  delivered_at   :datetime
+#  stock_count    :integer          default(10000)
+#  sale_id        :integer
+#

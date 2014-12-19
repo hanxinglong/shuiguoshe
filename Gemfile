@@ -66,6 +66,8 @@ group :development do
   gem 'capistrano-rbenv', "~> 2.0" 
   
   gem 'quiet_assets'
+  
+  gem 'annotate', '~> 2.6.5'
 end
 
 
