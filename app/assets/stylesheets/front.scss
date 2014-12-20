@@ -40,6 +40,15 @@ body {
 //  }
 //}
 
+.logo_bar_box {
+  padding: 15px 0 17px 0;
+  .logo {
+    display: block;
+    width: 193px;
+    height: 60px;
+  }
+}
+
 .green {
   color: $nature-green;
 }
@@ -166,7 +175,7 @@ body {
     position: absolute;
     padding: 20px;
     z-index: -1;
-    right: 0;
+    right: 0px;
     top: 32px;
     width: 340px;
     border: 1px solid $common-border-color;
@@ -611,4 +620,10 @@ body {
   p {
     font-weight: bold;
   }
+}
+
+.hotline {
+  color: white; 
+  font-weight: bold; 
+  font-size: 16px;
 }
