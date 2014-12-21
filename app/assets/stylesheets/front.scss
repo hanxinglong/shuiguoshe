@@ -15,7 +15,7 @@ $gray-medium-light: #eaeaea;
 $common-border-color: rgb(204,204,204);
 
 body {
-  color: rgb(83,83,83);
+  color: rgb(50,50,50);
 }
 
 // 关闭响应式设计
@@ -147,7 +147,7 @@ body {
   z-index: 2000;
   
   .cart-result {
-    color: rgb(83,83,83);
+    color: rgb(50,50,50);
     padding: 10px;
     z-index: 1;
     .cart-total {
@@ -164,7 +164,7 @@ body {
   
   .cart-result-hover {
     text-decoration: none;
-    color: rgb(83,83,83);
+    color: rgb(50,50,50);
     border: 1px solid $common-border-color;
     border-bottom: 1px solid rgb(250,250,250);
   }
@@ -179,7 +179,7 @@ body {
     top: 32px;
     width: 340px;
     border: 1px solid $common-border-color;
-    color: rgb(83,83,83);
+    color: rgb(50,50,50);
     
     .cart-panel-head {
       font-size: 16px;
@@ -201,7 +201,7 @@ body {
           vertical-align: middle;
           padding: 10px 0;
           a {
-            color: rgb(83,83,83);
+            color: rgb(50,50,50);
           }
         }
       }
@@ -237,7 +237,7 @@ body {
   margin-bottom: 30px;
   .product-link {    
     display: block;
-    color: rgb(83,83,83);
+    color: rgb(50,50,50);
     text-decoration: none;
     height: auto;
   }
@@ -312,7 +312,7 @@ body {
     font-size: 14px;
   }
   a {
-    color: rgb(83,83,83);
+    color: rgb(50,50,50);
   }
 }
 
@@ -328,7 +328,7 @@ body {
   .sale-title {
     padding-left: 20px;
     font-size: 20px;
-    color: rgb(83,83,83);
+    color: rgb(50,50,50);
   }
 }
 
@@ -348,8 +348,8 @@ body {
     h2 {
       margin: 0;
       font-size: 20px;
-      color: $nature-green;
-      border-top: 1px solid $nature-green;
+      color: rgb(50,50,50);
+      border-top: 2px solid $nature-green;
       padding: 10px 0;
     }
     .items {
@@ -369,7 +369,7 @@ body {
         a, a:hover {
           display: block;
           cursor: pointer;
-          color: rgb(83,83,83);
+          color: rgb(50,50,50);
           text-decoration: none;
         }
         
@@ -490,7 +490,7 @@ body {
   }
   .item-title {
     .product-title a {
-      color: rgb(83,83,83);
+      color: rgb(50,50,50);
     }
   }
 }
@@ -520,7 +520,7 @@ body {
   }
   .caption {
     .name {
-      color: rgb(83,83,83);
+      color: rgb(50,50,50);
       font-size: 16px;
     }
     .price {
