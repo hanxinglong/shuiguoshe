@@ -1,5 +1,9 @@
 <% content_for :sitemap do %>
-  <a href="<%= products_path(type_id: @product.type_id) %>"><%= @type %></a> &gt; <span class="current"><%= @product.title %></span>
+  <% if @product.sale.present? %>
+    <a href="<%= sale_path(@product.sale) %>"><%= @product.sale.title %></a> &gt; <span class="current"><%= @product.title %></span>
+  <% else %>
+    <a href="<%= category_items_path(@product.type_id) %>"><%= @type %></a> &gt; <span class="current"><%= @product.title %></span>
+  <% end %>
 <% end %>
 
 <div class="user-box container-box" id="product-<%= @product.id %>">

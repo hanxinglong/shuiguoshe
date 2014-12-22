@@ -26,10 +26,10 @@
             <td><%= image_tag sale.cover_image.small %></td>
             <td><%= sale.title %></td>
             <td><%= sale.subtitle %></td>
-            <td><%= image_tag sale.logo.small %></td>
+            <td><%= image_tag sale.logo.logo_small %></td>
             <td><%= sale.closed_at.strftime("%Y-%m-%d") if sale.closed_at %></td>
             <td><p style="width: 80px; height: 40px; line-height: 40px; text-align: center; background-color: <%= sale.background_color %>"><%= sale.background_color %></p></td>
-            <td><%= image_tag sale.ad_image.small %></td>
+            <td><%= image_tag sale.ad_image.ad_small %></td>
             <td>
               <%= link_to '编辑', edit_cpanel_sale_path(sale), class: "btn btn-xs btn-default" %>
               <%= link_to '删除', [:cpanel, sale], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>

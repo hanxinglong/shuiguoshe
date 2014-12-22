@@ -420,6 +420,16 @@ body {
   }
 }
 
+.home-today-products-container {
+  margin: 0;
+  h2 {
+    font-size: 20px;
+    color: rgb(50,50,50);
+    margin: 0;
+    padding: 10px 0;
+  }
+}
+
 .sidebar-right {
   margin: 0;
   padding: 0;
@@ -475,6 +485,10 @@ body {
     }
   }
   
+}
+
+.sale_ad {
+  height: 360px;
 }
 
 .my-cart {

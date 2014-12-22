@@ -23,17 +23,17 @@
     <%= f.input :background_color, label: "卖场背景颜色", placeholder: "#000000" %>
     <%= f.input :closed_at, as: :string, label: "活动截止时间", placeholder: "2015-01-01 00:00:00" %>
     
-    <%- if @sale.ad_image.small %>
+    <%- if @sale.ad_image.ad_small %>
       <div class="col-sm-10 col-sm-offset-3">
-        <%= image_tag @sale.ad_image.small if @sale.ad_image.small.present?  %>
+        <%= image_tag @sale.ad_image.ad_small if @sale.ad_image.ad_small.present?  %>
       </div>
     <%- end %>
     <%= f.input :ad_image, label: "卖场广告" %>
     <%= f.hidden_field :ad_image_cache %>
     
-    <%- if @sale.logo.small %>
+    <%- if @sale.logo.logo_small %>
       <div class="col-sm-10 col-sm-offset-3">
-        <%= image_tag @sale.logo.small if @sale.logo.small.present?  %>
+        <%= image_tag @sale.logo.logo_small if @sale.logo.logo_small.present?  %>
       </div>
     <%- end %>
     <%= f.input :logo, label: "卖场Logo" %>

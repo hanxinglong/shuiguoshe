@@ -31,14 +31,19 @@ Rails.application.routes.draw do
   
   patch '/users/:user_id/update_address' => 'users#update_address'
   
-  resources :products, only: [:index, :show] do
-    resources :orders, only: [:new, :create]
-    collection do
-      # get :search
-    end
-  end
+  # resources :products, only: [:index, :show] do
+  #   resources :orders, only: [:new, :create]
+  #   collection do
+  #     # get :search
+  #   end
+  # end
   
-  resources :sales, only: [:show]
+  # resources :sales, only: [:show]
+  
+  get '/sale-:id' => 'sales#show', as: :sale
+  get '/items/category/:type_id' => 'products#index', as: :category_items
+  get '/item-:id' => 'products#show', as: :product
+  
   resources :line_items, only: [:create, :update, :destroy]
   resources :carts, only: [:show]
   get '/cart' => 'carts#show', as: :show_cart

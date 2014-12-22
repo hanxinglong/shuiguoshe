@@ -1,8 +1,14 @@
+<% content_for :sale_ad do %>
+  <div class="sale_ad" style="background: url('<%= @sale.ad_image.url(:ad_normal) %>') center no-repeat">
+    
+  </div>
+<% end %>
+
 <div class="row container-box">  
   <div class="col-md-12">
     
     <div class="sale-heading">
-      <%= image_tag @sale.logo.normal %>
+      <%= image_tag @sale.logo.logo_normal %>
       <span class="sale-title"><%= @sale.title %></span>
     </div>
     

@@ -3,6 +3,7 @@ class NewsblastsController < ApplicationController
 
   def show
     fresh_when @newsblast
+    set_seo_meta(@newsblast.title)
   end
 
   private

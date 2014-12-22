@@ -2,11 +2,11 @@
 
 class SaleAdImageUploader < BaseUploader
 
-  version :small do
+  version :ad_small do
     process resize_to_limit: [nil, 60]
   end
   
-  version :normal do
+  version :ad_normal do
     process resize_to_limit: [nil, 360]
   end
 
