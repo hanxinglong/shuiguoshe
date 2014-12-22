@@ -58,7 +58,7 @@
 $(function() {
   
   <%
-    @time = @product.discounted_at || @product.sale.closed_at
+    @time = @product.discounted_at || @product.sale.try(:closed_at)
    %>
   
   <% if @time %>
