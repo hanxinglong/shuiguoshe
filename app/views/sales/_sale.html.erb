@@ -8,7 +8,7 @@
             <span class="name"><%= sale.title %></span>
         </div>
         <div class="pull-right">
-            <span class="time-left pull-left">剩余11天</span>
+            <span class="time-left pull-left">剩余<%= render_distance_days(sale) %>天</span>
             <span class="discount pull-left"><%= raw sale.subtitle %></span>
         </div>
     </div>

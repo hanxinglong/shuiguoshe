@@ -57,8 +57,12 @@
 
 $(function() {
   
-  <% if @product.discounted_at %>
-  $("#timeLeft").countdown("<%= @product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") %>")
+  <%
+    @time = @product.discounted_at || @product.sale.closed_at
+   %>
+  
+  <% if @time %>
+  $("#timeLeft").countdown("<%= @time.strftime("%Y-%m-%d %H:%M:%S") %>")
     .on('update.countdown', function(event) {
       $(this).html(event.strftime('<span class="glyphicon glyphicon-time"></span>' + '&nbsp;&nbsp;剩余' + '%D天%H小时%M分%S秒'));
     })
