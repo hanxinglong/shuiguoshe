@@ -3,11 +3,11 @@
 class BannerUploader < BaseUploader
 
   version :small do
-    process resize_to_fill: [81, 40]
+    process resize_to_limit: [nil, 40]
   end
   
   version :normal do
-    process resize_to_fill: [1920, 360]
+    process resize_to_limit: [nil, 360]
   end
 
   def filename
