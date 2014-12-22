@@ -1,4 +1,4 @@
-<% cache("#{product}/#{product.orders_count}") do %>
+<% cache("#{product.id}_#{product.orders_count}") do %>
 <div class="product" onmouseover="$(this).find('#cart-btn-<%= product.id %>').show();" onmouseout="$(this).find('#cart-btn-<%= product.id %>').hide();">
   <div class="col-md-<%= controller_name == "home" ? 4 : 3 %>" id="product-<%= product.id %>">
     <div class="thumbnail">

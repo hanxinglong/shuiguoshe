@@ -19,6 +19,7 @@
   
   <%= render 'layouts/header' %>
   <%= yield(:sale_ad) if content_for?(:sale_ad) %>
+  <%= yield(:home_banner) if content_for?(:home_banner) %>
   
   <div class="container">
     <% if content_for?(:sitemap) %>

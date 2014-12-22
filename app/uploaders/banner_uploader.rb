@@ -7,7 +7,7 @@ class BannerUploader < BaseUploader
   end
   
   version :normal do
-    process resize_to_fill: [692, 342]
+    process resize_to_fill: [1920, 360]
   end
 
   def filename

@@ -60,6 +60,7 @@ module UsersHelper
   end
   
   def user_discount_score(total_price)
+    return 0 if current_user.blank?
     return (total_price * 50).to_i if total_price * 100 < current_user.score * 2
     return current_user.score
   end
