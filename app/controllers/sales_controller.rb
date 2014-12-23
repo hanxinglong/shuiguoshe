@@ -8,6 +8,7 @@ class SalesController < ApplicationController
       render_404
     else
       set_seo_meta(@sale.title, @products.map { |p| p.title }.join(', '))
+      fresh_when(etag: [@sale, @products])
     end
     
   end
