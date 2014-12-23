@@ -1,3 +1,4 @@
+<% cache line_item do %>
 <tr id="cart_1_line_item_<%= line_item.id %>">
   <td width="40%" class="item-title">
     <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product) %>
@@ -9,3 +10,4 @@
   <td width="10%"><%= product_price_tag(line_item.total_price) %></td>
   <td width="5%"><a onclick="App.deleteItem(this)" data-id="<%= line_item.id %>" id="cart_1_line_item_<%= line_item.id %>_link" data-loading="0" data-type="1" class="btn btn-sm btn-danger">删除</a></td>
 </tr>
+<% end %>

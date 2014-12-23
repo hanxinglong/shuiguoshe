@@ -13,6 +13,7 @@ class Cart < ActiveRecord::Base
   
   def add_cart(other_cart)
     if other_cart and other_cart.line_items.any?
+      total_item = 0
       other_cart.line_items.each do |item|
         current_item = line_items.find_by(product_id: item.product.id)
         if current_item
@@ -21,7 +22,9 @@ class Cart < ActiveRecord::Base
           current_item = line_items.build(product_id: item.product.id, quantity: item.quantity)
         end
         current_item.save
+        total_item += item.quantity
       end
+      self.update_attribute('line_items_count', self.line_items_count + total_item)
     end
     return true
   end

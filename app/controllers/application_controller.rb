@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
   end
   
   def fresh_when(opts = {})
-    # return
+    return
     # return if Rails.env.production?
     opts[:etag] ||= []
     # 保证 etag 参数是 Array 类型

@@ -1,6 +1,6 @@
 class LineItem < ActiveRecord::Base
   belongs_to :product
-  belongs_to :cart
+  belongs_to :cart, inverse_of: :line_items,  touch: true
   belongs_to :order
   
   def total_price

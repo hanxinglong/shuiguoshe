@@ -36,3 +36,16 @@ $("#scrolltop").click(function(){
 $(document).ready(function() {
   $("select").chosen({"search_contains": true, "no_results_text":"没有找到", "placeholder_text_single":"请选择小区"});
 });
+
+$("#u-cart-result, #cart-panel").on("mouseover", function() {
+  $(".hover-mask").show();
+  $("#cart-panel").show();
+  $("#u-cart-result").addClass("cart-result-hover");
+  // $("#cart-result-container").addClass("cart-result-container");
+});
+$("#u-cart-result, #cart-panel").on("mouseout", function() {
+  $(".hover-mask").hide();
+  $("#cart-panel").hide();
+  $('#u-cart-result').removeClass("cart-result-hover");
+  // $("#cart-result-container").removeClass("cart-result-container");
+});

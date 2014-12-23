@@ -12,6 +12,7 @@
     </div>
   
   <% else %>
+  <% cache ["cart1_#{current_user.try(:id)}_line_items", cart.line_items] do %>
     <table class="table common-table">
       <tr class="table-head">
         <th>商品名称</th>
@@ -30,6 +31,7 @@
         </td>
       </tr>
     </table>
+    <% end %>
     <div class="text-right">
       <%= link_to "提交订单", checkout_path, class: "btn btn-success" %>
     </div>
