@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
     # 赠送积分
     update_score(1000, '成功注册')
     # 发送欢迎邮件
-    # UserMailer.welcome(self.id).deliver
+    UserMailer.welcome(self.id).deliver
   end
 
   def update_with_password(params = {})
