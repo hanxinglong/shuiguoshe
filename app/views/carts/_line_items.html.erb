@@ -1,4 +1,4 @@
-<% cache ["cart2_#{current_user.try(:id)}_line_items", cart.line_items] do %>
+<% cache ["cart2_#{current_user.try(:id)}_line_items", cart.line_items.map { |a| "#{a.id}-#{a.quantity}" }] do %>
 <table class="cart-table">
   <% cart.line_items.each do |item| %>
   <%= render 'carts/line_item', item: item %>

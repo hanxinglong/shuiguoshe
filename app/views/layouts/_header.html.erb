@@ -1,4 +1,14 @@
-<% cache ["#{current_user.try(:id)}_#{current_user.try(:admin?)}", cart.line_items] do %>
+<% 
+if params[:type_id]
+  type = params[:type_id].to_i
+  if type > 2 or type < 1
+    type = 1
+  end
+else
+  type = 0
+end
+ %>
+<% cache ["#{current_user.try(:id)}_#{current_user.try(:admin?)}_#{controller_name}_#{type}", cart.line_items] do %>
 <%= render '/layouts/topbar' %> <!-- topbar -->
 
 <%= render '/layouts/logo_bar' %>
