@@ -1,4 +1,4 @@
-<% cache sale do %>
+<% cache [sale, render_distance_days(sale)] do %>
 <div class="sale-item clearfix">
   <a href="<%= sale_path(sale) %>" target="_blank">
     <%= image_tag sale.cover_image.large, style: "width: 690px; height: 250px;" %>
