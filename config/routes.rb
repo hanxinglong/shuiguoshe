@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  require 'api_v1'
   root 'home#index'
   
   get '/help'  => 'home#help', as: :help
@@ -106,6 +107,8 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  mount Shuiguoshe::APIV1 => '/'
   
   match '*path', via: :all, to: 'home#error_404'
   

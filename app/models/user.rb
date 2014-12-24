@@ -83,9 +83,21 @@ class User < ActiveRecord::Base
     self.update_attribute(:private_token, random_key)
   end
   # 
-  # def ensure_private_token!
-  #   self.update_private_token if self.private_token.blank?
-  # end
+  def ensure_private_token!
+    self.update_private_token if self.private_token.blank?
+  end
+  
+  def as_json(options)
+    {
+      mobile: self.mobile,
+      token: self.private_token || "",
+      avatar: {
+        normal: "#{Setting.domain}/#{self.avatar.url(:normal)}",
+        small: "#{Setting.domain}/#{self.avatar.url(:small)}"
+      },
+      score: self.score
+    }
+  end
             
 end
 
