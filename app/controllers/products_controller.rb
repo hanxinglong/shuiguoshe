@@ -15,33 +15,36 @@ class ProductsController < ApplicationController
     
     params[:type_id] = type_id
     
-    @products = @products.where(type_id: type_id)
-    
-    # @suggested_products = Product.suggest.where(type_id: params[:type_id])
-    # @hot_products = Product.hot.where(type_id: params[:type_id])
-    
-    if params[:q] && params[:q].gsub(/\s+/, "").present?
-      @products = @products.search(params[:q])
-      keyword = params[:q].gsub(/\s+/, "")
-      if @products.size > 0
-        set_seo_meta("#{keyword} - 商品搜索", "#{keyword}", "在#{Setting.app_name}中找到了#{@products.size}件#{keyword}的类似商品，其中包括了“#{@products.map(&:title).join('、')}”等类型的#{keyword}的商品。")
-        @cache_prefix = "products_#{type_id}_#{keyword}"
-      else
-        set_seo_meta("#{keyword} - 商品搜索")
-        @cache_prefix = "products_#{type_id}"
-      end
+    @products = @products.where(type_id: type_id).order("created_at DESC")
+
+    if type_id == 1
+      set_seo_meta('当季水果，新鲜水果订购区', @products.map(&:title).join('、'), SiteConfig.fruit_meta_description)
     else
-      if type_id == 1
-        set_seo_meta('当季水果，新鲜水果订购区', @products.map(&:title).join('、'), SiteConfig.fruit_meta_description)
-      else
-        set_seo_meta('各种干果、坚果订购区', @products.map(&:title).join('、'), SiteConfig.nut_meta_description)
-      end
-      
-      @cache_prefix = "products_#{type_id}"
+      set_seo_meta('各种干果、坚果订购区', @products.map(&:title).join('、'), SiteConfig.nut_meta_description)
+    end
+
+    @cache_prefix = "products_#{type_id}"
+    
+    fresh_when(etag: [@products, @cache_prefix])
+  end
+  
+  def search
+    
+    keyword = params[:q].gsub(/\s+/, "")
+    
+    @products = Product.saled.no_discount.search(keyword)
+    
+    if @products.size > 0
+      set_seo_meta("#{keyword} - 商品搜索", "#{keyword}", "在#{Setting.app_name}中找到了#{@products.size}件#{keyword}的类似商品，其中包括了“#{@products.map(&:title).join('、')}”等类型的#{keyword}的商品。")
+      @cache_prefix = "products_search_results_#{keyword}"
+    else
+      set_seo_meta("#{keyword} - 商品搜索")
+      @cache_prefix = "products_search_no_results_#{keyword}"
     end
     
-    fresh_when(etag: [@products, @cache_prefix, params[:q]])
-    
+    fresh_when(etag: [@products, @cache_prefix, keyword])
+    # render :index
+        
   end
   
   def show

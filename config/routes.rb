@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   resources :carts, only: [:show]
   get '/cart' => 'carts#show', as: :show_cart
   
-  get '/products/search' => 'products#index', as: :search_products
+  get '/search' => 'products#search', as: :search
   
   resources :orders, except: [:index, :update, :destroy, :edit, :new] do    
     member do 

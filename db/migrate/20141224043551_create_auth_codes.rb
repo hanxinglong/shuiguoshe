@@ -8,6 +8,5 @@ class CreateAuthCodes < ActiveRecord::Migration
       t.timestamps
     end
     add_index :auth_codes, :code, unique: true
-    add_index :auth_codes, :mobile, unique: true
   end
 end
