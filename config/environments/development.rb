@@ -16,7 +16,15 @@ Rails.application.configure do
   config.cache_store = [:dalli_store, "127.0.0.1", { namespace: "shuiguoshe_v1", compress: true }]
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  
+  config.action_mailer.default_url_options = { host: Setting.domain }
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.smtp_settings = { 
+    address: Setting.mail_domain, 
+    domain:  Setting.domain, 
+    port:    25 
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

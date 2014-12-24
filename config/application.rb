@@ -29,6 +29,10 @@ module Shuiguoshe
     config.i18n.default_locale = "zh-CN"
     config.encoding = "utf-8"
     
+    config.to_prepare {
+      Devise::Mailer.layout "mailer"
+    }
+    
     config.middleware.use Rack::Deflater
     
   end

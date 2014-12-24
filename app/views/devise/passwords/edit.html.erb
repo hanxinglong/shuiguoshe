@@ -1,41 +1,30 @@
 <div class="row">
-  <div class="col-md-8">
-    <div class="box">
-      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class:'form-horizontal' }) do |f| %>
+  <div class="col-md-12">
+    <div class="user-login-form">
+      <h2>修改密码</h2>
+      <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class:'form-horizontal' },
+      wrapper: :horizontal_form,
+      wrapper_mappings: {
+        check_boxes: :horizontal_radio_and_checkboxes,
+        radio_buttons: :horizontal_radio_and_checkboxes,
+        file: :horizontal_file_input,
+        boolean: :horizontal_boolean
+      }) do |f| %>
         <%= render "shared/error_messages", target: resource %>
-        <fieldset>
-          <legend>修改密码</legend>
-          <%= f.hidden_field :reset_password_token %>
-          <div class="form-group">
-            <%= f.label :password, "新密码", class: "col-sm-2 control-label" %>
-            <div class="col-sm-9">
-              <%= f.password_field :password, autofocus: true, autocomplete: "off", class:"form-control" %>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <%= f.label :password_confirmation, "确认新密码", class: "col-sm-2 control-label" %>
-            <div class="col-sm-9">
-              <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control" %>
-            </div>
-          </div>
+        <%= f.hidden_field :reset_password_token %>
+        <%= f.input :password, label: "新密码", autofocus: true, autocomplete: "off", input_html: { style: "width: 300px;"} %>
+        <%= f.input :password_confirmation, label: "确认新密码", input_html: { style: "width: 300px;"} %>
 
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-9">
-              <%= f.submit "修改我的密码", class: "btn btn-primary" %>
-            </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <%= f.submit "修改我的密码", class: "btn btn-success" %>
           </div>
-
-        </fieldset>
+        </div>
       <% end %>
     </div>
   </div>
-  <div class="col-md-4">
-    <div class="box">
-      <%= render "devise/shared/links" %>
-    </div>
-  </div>
 </div>
+
 
 
 
