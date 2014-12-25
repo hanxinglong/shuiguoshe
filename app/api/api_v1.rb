@@ -1,18 +1,16 @@
 # coding: utf-8
 require "helpers"
+require "entities"
+
 require "users_api"
+require "banners_api"
+require "messages_api"
+require "carts_api"
+require "products_api"
 
 module Shuiguoshe
   
   # order
-  # message
-  # score
-  # update profile
-  # cart
-  # banner
-  # discount
-  # sale
-  # sale/prod
   # submit order
   
   ####################################################################
@@ -30,6 +28,10 @@ module Shuiguoshe
   # 108: 重置密码失败
   # 109: 旧密码不正确
   # 110: 修改密码失败
+  # 111: 购物车是空的
+  # 112: 产品已售完
+  # 113: 加入购物车失败
+  # 114: 更新购买项数量失败
   ####################################################################
   class APIV1 < Grape::API
     version 'v1'
@@ -48,5 +50,9 @@ module Shuiguoshe
     helpers APIHelpers
     
     mount Shuiguoshe::UsersAPI
+    mount Shuiguoshe::BannersAPI
+    mount Shuiguoshe::MessagesAPI
+    mount Shuiguoshe::CartsAPI
+    mount Shuiguoshe::ProductsAPI
   end
 end

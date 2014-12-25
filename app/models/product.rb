@@ -54,6 +54,46 @@ class Product < ActiveRecord::Base
     self.suggested_at.present?
   end
   
+  def as_json(options)
+    json = {
+      id: self.id,
+      title: self.title || "",
+      subtitle: self.subtitle || "",
+      intro: self.intro || "",
+      thumb_image: thumb_image_url,
+      low_price: format("%.2f", self.low_price),
+      origin_price: format("%.2f", self.origin_price),
+      unit: self.units || "",
+      orders_count: self.orders_count,
+    }
+    json[:discounted_at] = self.discounted_at.strftime("%Y-%m-%d %H:%M:%S") if self.discounted_at
+    json
+  end
+  
+  def delivered_time
+    if self.delivered_at
+      self.delivered_at.strftime("%Y-%m-%d %H:%M:%S")
+    else
+      ""
+    end
+  end
+  
+  def thumb_image_url
+    if self.image
+      self.image.url(:thumb) || ""
+    else
+      ""
+    end
+  end
+  
+  def large_image_url
+    if self.image
+      self.image.url(:large) || ""
+    else
+      ""
+    end
+  end
+  
 end
 
 # == Schema Information

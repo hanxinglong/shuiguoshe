@@ -4,6 +4,25 @@ class Banner < ActiveRecord::Base
   mount_uploader :image, BannerUploader
   
   scope :sorted, -> { order("sort ASC, created_at DESC") }
+  
+  def as_json(options)
+    {
+      id: self.id,
+      title: self.title || "",
+      subtitle: self.subtitle || "",
+      intro: self.intro || "",
+      image: image_url,#self.image.url(:small), 
+      link: self.url || ""
+    }
+  end
+  
+  def image_url
+    if self.image
+      self.image.url(:small) || ""
+    else
+      ""
+    end
+  end
 end
 
 # == Schema Information

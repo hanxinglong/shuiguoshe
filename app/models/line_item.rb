@@ -18,10 +18,26 @@ class LineItem < ActiveRecord::Base
   
   def as_json(options)
     {
-      item_id: product.it, 
-      item_title: product.title || "",
-      item_icon_url: Setting.domain + '/' + product.image.url(:small),
+      id: self.id,
+      pid: product.id,  # 产品id
+      title: product.title || "", # 产品标题
+      icon_url: product_image_url,#product.image.url(:small), # 产品icon
+      quantity: self.quantity, # 购买数量
+      price: format("%.2f", product.low_price), # 我的价格
+      total_price: format("%.2f", total_price)
     }
+  end
+  
+  def product_image_url
+    if self.product.blank?
+      ""
+    else
+      if self.product.image.blank?
+        ""
+      else
+        self.product.image.url(:small) || ""
+      end
+    end
   end
   
 end

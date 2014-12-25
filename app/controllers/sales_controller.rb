@@ -3,7 +3,7 @@ class SalesController < ApplicationController
   def show
     begin
       @sale = Sale.includes(:products).find(params[:id])
-      @products = @sale.products
+      @products = @sale.products.saled
     rescue ActiveRecord::RecordNotFound
       render_404
     else

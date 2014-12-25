@@ -8,6 +8,49 @@ class Sale < ActiveRecord::Base
   mount_uploader :logo, SaleLogoUploader
   
   scope :recent, -> { order('created_at DESC') }
+  
+  def as_json(options)
+    {
+      id: self.id,
+      title: self.title || "",
+      subtitle: self.subtitle || "",
+      closed_at: closed_time,
+      logo_url: logo_url,
+      cover_image_url: cover_image_url
+    }
+  end
+  
+  def closed_time
+    if self.closed_at
+      self.closed_at.strftime("%Y-%m-%d %H:%M:%S")
+    else
+      ""
+    end
+  end
+  
+  def logo_url
+    if self.logo
+      self.logo.url(:logo_small) || ""
+    else
+      ""
+    end
+  end
+  
+  def ad_image_url
+    if self.ad_image
+      self.ad_image.url(:ad_small) || ""
+    else
+      ""
+    end
+  end
+  
+  def cover_image_url
+    if self.cover_image
+      self.cover_image.url(:small) || ""
+    else
+      ""
+    end
+  end
 end
 
 # == Schema Information
