@@ -3,6 +3,18 @@ require "helpers"
 require "users_api"
 
 module Shuiguoshe
+  
+  # order
+  # message
+  # score
+  # update profile
+  # cart
+  # banner
+  # discount
+  # sale
+  # sale/prod
+  # submit order
+  
   ####################################################################
   # code状态码
   # 0: 表示成功
