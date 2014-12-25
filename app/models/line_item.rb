@@ -16,6 +16,14 @@ class LineItem < ActiveRecord::Base
     product.save
   end
   
+  def as_json(options)
+    {
+      item_id: product.it, 
+      item_title: product.title || "",
+      item_icon_url: Setting.domain + '/' + product.image.url(:small),
+    }
+  end
+  
 end
 
 # == Schema Information

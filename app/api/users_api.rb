@@ -213,7 +213,26 @@ module Shuiguoshe
         user = authenticate!
         
         { code: 0, message: "ok", data: user }
-      end # end 
+      end # end me
+      
+      params do
+        requires :token, type: String, desc: "token"
+      end
+      get :cart do
+        user = authenticate!
+        cart = Cart.find_by(user_id: user.id)
+        if cart.blank?
+          cart = Cart.create!(user_id: user.id)
+        end
+        
+        if cart.line_items_count == 0
+          return { code: 111, message: "购物车是空的" }
+        end
+        
+        line_items = cart.line_items
+        { code: 0, message: "ok", data: line_items }
+        
+      end
     end # end user
     
   end # end class
