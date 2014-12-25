@@ -8,52 +8,39 @@ module Shuiguoshe
     # 102 不正确的手机号
     # 103 密码太短
     
-    # use Rack::Session::Cookie, :secret => "1175ebb529d2cc7b6523755577dc298fba3a8587b01242751bf6c4d285b4178fc71616e9ea830a078a5f4cd3c5e33822fa008ae4bb4dc512028dc3a8da24c8f4" 
-    
-    use Warden::Manager do |manager|
-      manager.default_strategies :password
-      manager.failure_app = Shuiguoshe::UsersAPI
-    end
-    # 
-    # Warden::Manager.serialize_into_session { |user| user.id }
-    # Warden::Manager.serialize_from_session { |id| User.find(id) }
-    # 
-    # Warden::Strategies.add(:password) do
-    #   
-    #   def valid?
-    #     params['login'] && params['password']
-    #   end
-    #   
-    #   def authenticate!
-    #     user = User.where(["mobile = :value OR lower(email) = :value", { value: params['login'].downcase }]).first
-    #     if user && user.authenticate(params['password'])
-    #       success! user
-    #     else
-    #       fail!("登录名或密码不正确")
-    #     end
-    #   end
-    #   
-    # end
-    
     resource :auth_codes do  
       
       # 获取验证码
+      # api: domain/v1/auth_codes
+      # params: { mobile:'', type:1,2,3 }
       params do
         requires :mobile, type: String
+        requires :type, type: Integer # 1 表示注册获取验证码 2 表示重置密码获取验证码 3 表示修改密码获取验证码
       end
       post '/' do
         unless check_mobile(params[:mobile])
-          return { code: 102, message: "不正确的手机号" }
+          return { code: 100, message: "不正确的手机号" }
         end
         
+        unless %W(1 2 3).include?(params[:type].to_s)
+          return { code: -1, message: "不正确的type参数" }
+        end
+        
+        type = params[:type].to_i
         user = User.find_by(mobile: params[:mobile])
-        if user.present?
-          return { code: 100, message: "#{params[:mobile]}已经注册" }
+        if type == 1    # 注册
+          if user.present?
+            return { code: 101, message: "#{params[:mobile]}已经注册" }
+          end
+        else # 重置密码和修改密码
+          if user.blank?
+            return { code: 102, message: "#{params[:mobile].gsub(/\s+/,"")}未注册" }
+          end
         end
         
-        code = AuthCode.where('mobile = ? and verified = ?', params[:mobile], true).first
+        code = AuthCode.where('mobile = ? and verified = ? and c_type = ?', params[:mobile], true, type).first
         if code.blank?
-          code = AuthCode.create!(mobile: params[:mobile])
+          code = AuthCode.create!(mobile: params[:mobile], c_type: type)
         end
 
         if code
@@ -63,7 +50,7 @@ module Shuiguoshe
             if resp['code'] == 0
               { code: 0, message: "ok" }
             else
-              { code: 101, message: '发送失败' }
+              { code: 103, message: '获取验证码失败' }
             end
           }
         end
@@ -74,31 +61,33 @@ module Shuiguoshe
     
     resource :account do
       # 用户注册
+      # api: domain/v1/account/sign_up
+      # params: { mobile: '', code: '', password: '' }
       params do
         requires :mobile, type: String, desc: "用户手机"
         requires :code, type: String, desc: "验证码"
         requires :password, type: String, desc: "密码"
       end
       
-      post "/" do
+      post "/sign_up" do
         
         unless check_mobile(params[:mobile])
-          return { code: 102, message: "不正确的手机号" }
+          return { code: 100, message: "不正确的手机号" }
         end
         
         user = User.find_by(mobile: params[:mobile])
         if user.present?
-          return { code: 100, message: "#{params[:mobile]}已经注册" }
+          return { code: 101, message: "#{params[:mobile]}已经注册" }
         end
         
         ac = AuthCode.where('mobile = ? and code = ? and verified = ?', params[:mobile], params[:code], true).first
         
         if ac.blank?
-          return { code: 105, message: "验证码无效" }
+          return { code: 104, message: "验证码无效" }
         end
         
         if params[:password].length < 6
-          return { code: 103, message: "密码太短，至少为6位" }
+          return { code: 105, message: "密码太短，至少为6位" }
         end
         
         @user = User.new(email: "#{params[:mobile].gsub(/\s+/,"")}@shuiguoshe.com", mobile: params[:mobile].gsub(/\s+/, ''), password: params[:password], password_confirmation: params[:password])
@@ -106,14 +95,16 @@ module Shuiguoshe
           warden.set_user(@user)
           @user.ensure_private_token!
           ac.update_attribute('verified', false)
-          { code: 0, message: "ok", data: @user }
+          { code: 0, message: "ok", data: { token: @user.private_token || "" } }
         else
-          { code: 104, message: "注册失败" }
+          { code: 106, message: "用户注册失败" }
         end
         
       end # end reg
       
       # 用户登录
+      # api: domain/v1/account/login
+      # params: { login: '', password: '' }
       params do
         requires :login, type: String, desc: "登录名"
         requires :password, type: String, desc: "密码"
@@ -122,18 +113,20 @@ module Shuiguoshe
       post '/login' do
         user = User.where(["mobile = :value OR lower(email) = :value", { value: params[:login].downcase }]).first
         unless user
-          return { code: 201, message: "登录用户不存在" } 
+          return { code: 102, message: "用户未注册" } 
         end
         
-        if warden.authenticate!(:password)
-          { code: 0, message: "ok", data: user }
+        if user.valid_password?(params[:password])
+          { code: 0, message: "ok", data: { token: user.private_token || "" } }
         else
-          { code: 202, message: "登录密码不正确" }
+          { code: 107, message: "登录密码不正确" }
         end
         
       end # end login
       
       # 退出登录
+      # api: domain/v1/account/logout
+      # params: { token: '' }
       params do
         requires :token, type: String
       end
@@ -145,6 +138,8 @@ module Shuiguoshe
       end # end logout
       
       # 重置密码
+      # api: domain/v1/account/password/reset
+      # params: { code: '', mobile: '', password: '' }
       params do
         requires :code, type: String
         requires :mobile, type: String
@@ -152,31 +147,33 @@ module Shuiguoshe
       end
       post '/password/reset' do
         unless check_mobile(params[:mobile])
-          return { code: 102, message: "不正确的手机号" }
+          return { code: 100, message: "不正确的手机号" }
         end
         @user = User.find_by(mobile: params[:mobile])
         if @user.blank?
-          return { code: 203, message: "用户未注册" }
+          return { code: 102, message: "#{params[:mobile]}未注册" }
         end
         
         ac = AuthCode.where('mobile = ? and code = ? and verified = ?', params[:mobile],params[:code],true).first
         if ac.blank?
-          return { code: 105, message: "验证码无效" }
+          return { code: 104, message: "验证码无效" }
         end
         
         if params[:password].length < 6
-          return { code: 103, message: "密码太短，至少为6位" }
+          return { code: 105, message: "密码太短，至少为6位" }
         end
         
         if @user.update_attribute(:password, params[:password])
           { code: 0, message: "ok" }
         else
-          { code: 204, message: "重置密码失败" } 
+          { code: 108, message: "重置密码失败" } 
         end
         
       end # end reset password
       
       # 修改密码
+      # api: domain/v1/account/password/update
+      # params: { code: '', password: '', old_password: '' }
       params do
         requires :code, type: String
         requires :password, type: String, desc: "new password"
@@ -185,23 +182,23 @@ module Shuiguoshe
       post '/password/update' do
         user = authenticate!
         
-        unless warden.try(:authenticate, params[:old_password])
-          return { code: 205, message: "旧密码不正确" }
+        unless user.valid_password?(params[:old_password])
+          return { code: 109, message: "旧密码不正确" }
         end
         
-        ac = AuthCode.where('mobile = ? and code = ? and verified = ?', params[:mobile],params[:code],true).first
+        ac = AuthCode.where('mobile = ? and code = ? and verified = ?', user.mobile,params[:code],true).first
         if ac.blank?
-          return { code: 105, message: "验证码无效" }
+          return { code: 104, message: "验证码无效" }
         end
         
         if params[:password].length < 6
-          return { code: 103, message: "密码太短，至少为6位" }
+          return { code: 105, message: "密码太短，至少为6位" }
         end
         
         if user.update_attribute(:password, params[:password])
           { code: 0, message: "ok" }
         else
-          { code: 206, message: "未知原因的修改密码失败" }
+          { code: 110, message: "修改密码失败" }
         end
         
       end # end update password
@@ -209,6 +206,14 @@ module Shuiguoshe
     end # end account
     
     resource :user do
+      params do
+        requires :token, type: String, desc: "token"
+      end
+      get :me do
+        user = authenticate!
+        
+        { code: 0, message: "ok", data: user }
+      end # end 
     end # end user
     
   end # end class

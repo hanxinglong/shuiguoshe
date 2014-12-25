@@ -1,5 +1,5 @@
 class AuthCode < ActiveRecord::Base
-  validates :mobile, presence: true, uniqueness: true
+  validates :mobile, presence: true
   
   before_create :generate_code
   def generate_code
