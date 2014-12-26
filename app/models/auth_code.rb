@@ -3,8 +3,6 @@ class AuthCode < ActiveRecord::Base
   
   before_create :generate_code
   def generate_code
-    begin
-      self.code = rand.to_s[2..7]
-    end while self.class.exists?(code: self.code)
+    self.code = rand.to_s[2..7]
   end
 end

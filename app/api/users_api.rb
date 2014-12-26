@@ -43,16 +43,8 @@ module Shuiguoshe
           code = AuthCode.create!(mobile: params[:mobile], c_type: type)
         end
 
-        if code
-          RestClient.post('http://yunpian.com/v1/sms/send.json', "apikey=7612167dc8177b2f66095f7bf1bca49d&mobile=#{params[:mobile]}&text=您的验证码是#{code.code}【水果社】") { |response, request, result, &block|
-            # puts response
-            resp = JSON.parse(response)
-            if resp['code'] == 0
-              { code: 0, message: "ok" }
-            else
-              { code: 103, message: '获取验证码失败' }
-            end
-          }
+        if code          
+          return send_sms(params[:mobile], "您的验证码是#{code.code}【水果社】", "获取验证码失败")
         end
         
       end # end post create_code
@@ -67,7 +59,6 @@ module Shuiguoshe
         requires :mobile, type: String, desc: "用户手机"
         requires :code, type: String, desc: "验证码"
         requires :password, type: String, desc: "密码"
-        optional :invite_code, type: String, desc: "邀请码"
       end
       
       post "/sign_up" do
@@ -230,7 +221,7 @@ module Shuiguoshe
         if user.save
           { code: 0, message: "ok" }
         else
-          { code: 116, message: user.errors.full_messages.join("\n") }
+          { code: 116, message: user.errors.full_messages.join(",") }
         end
       end
       
@@ -248,16 +239,64 @@ module Shuiguoshe
         if user.save
           { code: 0, message: "ok" }
         else
-          { code: 116, message: user.errors.full_messages.join("\n") }
+          { code: 116, message: user.errors.full_messages.join(",") }
         end
       end
       
       # 邀请用户，送积分
       params do
-        
+        requires :token, type: String, desc: "Token"
+        requires :mobile, type: String, desc: "被邀请人手机号"
       end
       post '/invite' do
+        user = authenticate!
+        
+        if user.mobile == params[:mobile]
+          return { code: 119, message: "不能邀请自己" }
+        end
+        
+        invite = Invite.where('invitee_mobile = ? and user_id = ?', params[:mobile], user.id).first
+        if invite and invite.verified == false
+          return { code: 117, message: "用户已经被邀请过" }
+        end
+        
+        if invite.blank?
+          invite = Invite.new(invitee_mobile: params[:mobile], user_id: user.id, code: SecureRandom.hex(3))
+          unless invite.save
+            return { code: 118, message: invite.errors.full_messages.join(",") }
+          end
+        end
+        
+        # 发短信
+        return send_sms(invite.invitee_mobile, "激活码是#{invite.code}。如非本人操作，请致电18048553687【水果社】", "获取邀请码失败")
+        
+      end # end invite
+      
+      params do
+        requires :token, type: String, desc: "Token"
+        requires :code, type: String, desc: "邀请码"
       end
+      post '/invite/active' do
+        user = authenticate!
+        
+        invite = Invite.where(invitee_mobile: user.mobile, code: params[:code]).first
+        if invite.blank?
+          return { code: 404, message: "不正确的邀请码" }
+        end
+        
+        if invite.verified == false
+          return { code: 120, message: "邀请码已经被激活" }
+        end
+        
+        if invite.update_attribute(:verified, false)
+          user.update_score(500, '激活邀请码')
+          invite.user.update_score(500, "邀请用户#{user.mobile}")
+          { code: 0, message: "ok" }
+        else
+          { code: 121, message: "激活邀请码失败" }
+        end
+        
+      end # end active
 
     end # end user
     

@@ -9,6 +9,7 @@
       banner: "横幅广告"
       sidebar_ad: "边栏广告"
       sale: "卖场"
+      invite: "邀请"
     attributes:
       user:
         mobile: "手机"
@@ -57,6 +58,10 @@
         background_color: "背景颜色"
         logo: "卖场Logo"
         closed_at: "活动截止日期"
+      invite:
+        code: "邀请码"
+        invitee_mobile: "被邀请人手机"
+        user_id: "邀请人"
         
     errors:
       models:

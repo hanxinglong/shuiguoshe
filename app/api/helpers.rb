@@ -49,6 +49,18 @@ module Shuiguoshe
     
     end
     
+    def send_sms(mobile, text, error_msg)
+      RestClient.post('http://yunpian.com/v1/sms/send.json', "apikey=7612167dc8177b2f66095f7bf1bca49d&mobile=#{mobile}&text=#{text}") { |response, request, result, &block|
+        # puts response
+        resp = JSON.parse(response)
+        if resp['code'] == 0
+          { code: 0, message: "ok" }
+        else
+          { code: 103, message: error_msg }
+        end
+      }
+    end
+    
     def authenticate!
       error!({"error" => "401 Unauthorized"}, 401) unless current_user
       current_user

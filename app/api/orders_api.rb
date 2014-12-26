@@ -89,7 +89,7 @@ module Shuiguoshe
       
           { code: 0, message: "ok" }
         else
-          { code: 115, message: @order.errors.full_messages.join("\n") }
+          { code: 115, message: @order.errors.full_messages.join(",") }
         end
       end
       
