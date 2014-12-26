@@ -16,6 +16,24 @@ class Apartment < ActiveRecord::Base
     # end
   end
   
+  def as_json(options)
+    {
+      id: self.id,
+      name: self.name || "",
+      address: self.address || "",
+      orders_count: self.orders_count,
+      image: image_url
+    }
+  end
+  
+  def image_url
+    if self.image
+      self.image.url(:small) || ""
+    else
+      ""
+    end
+  end
+  
 end
 
 # == Schema Information

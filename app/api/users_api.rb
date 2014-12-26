@@ -67,6 +67,7 @@ module Shuiguoshe
         requires :mobile, type: String, desc: "用户手机"
         requires :code, type: String, desc: "验证码"
         requires :password, type: String, desc: "密码"
+        optional :invite_code, type: String, desc: "邀请码"
       end
       
       post "/sign_up" do
@@ -215,13 +216,47 @@ module Shuiguoshe
         { code: 0, message: "ok", data: user }
       end # end me
       
-      # 更新用户资料
+      # 更新用户头像
       params do
         requires :token, type: String, desc: "token"
+        requires :avatar
+      end
+      post '/update_avatar' do
+        user = authenticate!
+        if params[:avatar]
+          user.avatar = params[:avatar]
+        end
+        
+        if user.save
+          { code: 0, message: "ok" }
+        else
+          { code: 116, message: user.errors.full_messages.join("\n") }
+        end
       end
       
-      post '/update_profile' do
-        # TODO
+      # 更新配送信息
+      params do
+        requires :token, type: String, desc: "token"
+        requires :apartment_id, type: Integer, desc: "配送小区"
+      end
+      post '/update_apartment' do
+        user = authenticate!
+        if params[:apartment_id]
+          user.apartment_id = params[:apartment_id]
+        end
+        
+        if user.save
+          { code: 0, message: "ok" }
+        else
+          { code: 116, message: user.errors.full_messages.join("\n") }
+        end
+      end
+      
+      # 邀请用户，送积分
+      params do
+        
+      end
+      post '/invite' do
       end
 
     end # end user

@@ -94,9 +94,9 @@ $(document).ready(function () {
 
   $("#order_apartment_id").change(function() {
     if ($(this).val() == '') {
-      $("#save_address").attr("disabled", true);
+      $("#save_address").attr("disabled", true).trigger("chosen:updated");
     } else {
-      $("#save_address").removeAttr("disabled");
+      $("#save_address").removeAttr("disabled").trigger("chosen:updated");
     }
   });
   

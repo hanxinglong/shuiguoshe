@@ -7,6 +7,8 @@ require "banners_api"
 require "messages_api"
 require "carts_api"
 require "products_api"
+require "apartments_api"
+require "orders_api"
 
 module Shuiguoshe
   
@@ -32,6 +34,8 @@ module Shuiguoshe
   # 112: 产品已售完
   # 113: 加入购物车失败
   # 114: 更新购买项数量失败
+  # 115: 下单失败
+  # 116: 修改用户资料失败
   ####################################################################
   class APIV1 < Grape::API
     version 'v1'
@@ -54,5 +58,7 @@ module Shuiguoshe
     mount Shuiguoshe::MessagesAPI
     mount Shuiguoshe::CartsAPI
     mount Shuiguoshe::ProductsAPI
+    mount Shuiguoshe::ApartmentsAPI
+    mount Shuiguoshe::OrdersAPI
   end
 end

@@ -96,6 +96,23 @@ class Order < ActiveRecord::Base
       
   end
   
+  def as_json(options)
+    {
+      id: self.id,
+      order_no: self.order_no || "",
+      state: self.state || "",
+      ordered_at: self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+    }
+  end
+  
+  def apartment_name
+    if self.apartment
+      self.apartment.name || ""
+    else
+      ""
+    end
+  end
+  
 end
 
 # coding: utf-8
