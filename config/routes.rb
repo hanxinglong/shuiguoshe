@@ -108,9 +108,9 @@ Rails.application.routes.draw do
     end
   end
   
-  constraints :subdomain => "api" do
+  # constraints :subdomain => "api" do
     mount Shuiguoshe::APIV1 => '/'
-  end
+  # end
   
   match '*path', via: :all, to: 'home#error_404'
   
