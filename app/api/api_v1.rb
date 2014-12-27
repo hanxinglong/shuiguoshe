@@ -43,6 +43,7 @@ module Shuiguoshe
   # 121: 激活邀请码失败
   ####################################################################
   class APIV1 < Grape::API
+    prefix :api
     version 'v1'
     format :json
     
