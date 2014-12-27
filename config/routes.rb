@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   require 'api_v1'
   root 'home#index'
   
-  constraints :subdomain => "api" do
-    mount Shuiguoshe::APIV1 => '/'
-  end
+  # constraints :subdomain => "api" do
+    # mount Shuiguoshe::APIV1 => '/'
+  # end
   
   get '/help'  => 'home#help', as: :help
   get '/about' => 'home#about', as: :about
@@ -111,6 +111,8 @@ Rails.application.routes.draw do
       end
     end
   end
+  
+  mount Shuiguoshe::APIV1 => '/'
   
   match '*path', via: :all, to: 'home#error_404'
   
