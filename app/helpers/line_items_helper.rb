@@ -11,11 +11,20 @@ module LineItemsHelper
         </div>
       HTML
     else
-      html = <<-HTML
-        <div class="btn-wrapper">
-          <a onclick="App.addToCart(this)" data-product-id="#{product.id}" class="#{class_name}" id="item-#{product.id}" data-loading="0">加入购物车</a>
-        </div>
-      HTML
+      if product.discounted_at.blank? or product.discounted_at > Time.now
+        html = <<-HTML
+          <div class="btn-wrapper">
+            <a onclick="App.addToCart(this)" data-product-id="#{product.id}" class="#{class_name}" id="item-#{product.id}" data-loading="0">加入购物车</a>
+          </div>
+        HTML
+      else
+        html = <<-HTML
+          <div class="btn-wrapper">
+            <a class="btn btn-sm btn-warning" disabled>活动已结束,不支持预订</a>
+          </div>
+        HTML
+      end
+      
     end
     
     html.html_safe

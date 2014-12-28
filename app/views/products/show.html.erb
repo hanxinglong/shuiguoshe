@@ -67,9 +67,10 @@ $(function() {
       $(this).html(event.strftime('<span class="glyphicon glyphicon-time"></span>' + '&nbsp;&nbsp;剩余' + '%D天%H小时%M分%S秒'));
     })
     .on('finish.countdown', function(event) {
-      $("#submit-button").attr("disabled", true);
-      $("#submit-button").attr("class", "btn btn-warning");
-      $("#submit-button").text("活动已结束,不支持预订");
+      $el = $("#item-<%= @product.id %>");
+      $el.attr("disabled", true);
+      $el.attr("class", "btn btn-warning");
+      $el.text("活动已结束,不支持预订");
       $(this).text("");
     });
   <% end %>
