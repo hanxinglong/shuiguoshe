@@ -17,21 +17,25 @@ class HomeController < ApplicationController
   
   def about
     @current = 'home_about'
+    fresh_when(etag: [@current, SiteConfig.about_html])
     set_seo_meta('关于水果社')
   end
   
   def order_help
     @current = 'order_help'
+    fresh_when(etag: [@current])
     set_seo_meta('帮助中心')
   end
   
   def pay_help
     @current = 'pay_help'
+    fresh_when(etag: [@current])
     set_seo_meta('帮助中心')
   end
   
   def deliver_help
     @current = 'deliver_help'
+    fresh_when(etag: [@current])
     set_seo_meta('帮助中心')
   end
   

@@ -93,6 +93,7 @@ class ApplicationController < ActionController::Base
     # 加入flash, 确保当前页面刷新后flash不会再出现
     opts[:etag] << flash
     # 所有 etag 保持一天
+    opts[:etag] << SiteConfig.welcome_html
     opts[:etag] << Date.current
     super(opts)
   end
