@@ -60,6 +60,9 @@ Rails.application.routes.draw do
   
   resources :apartments, only: [:index]
   resources :newsblasts, path: "news", only: [:show]
+  resources :invites, only: [:new, :create, :update]
+  get '/invite/active' => 'invites#active', as: :active_invite
+  patch '/invite/active_code' => 'invites#update', as: :active_code_invite
   
   namespace :cpanel do
     root 'home#index'

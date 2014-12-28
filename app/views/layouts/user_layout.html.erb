@@ -3,17 +3,6 @@
   <div class="col-sm-2">
     <div class="slide-left">
         <h2><%= link_to "我的账户", home_user_path, class: "user-home" %></h2>
-        <!--ul class="nav">
-          <li class="<%= @current == 'user_orders' ? "active" : "" %>"><a href="<%= orders_user_path %>">我的订单</a></li>
-          <li class="<%= @current == 'user_points' ? "active" : "" %>"><%= link_to "我的积分", points_user_path %></li>
-          <li class="last <%= @current == 'user_message_new' ? "active" : "" %>"><%= link_to "我有话说", new_message_path %></li>
-        </ul>
-        <ul class="nav">
-          <li class="<%= @current == 'user_edit_profile' ? "active" : "" %>"><%= link_to "基本资料", edit_user_registration_path, class: "active" %></li>
-          <li class="<%= @current == 'user_edit_pwd' ? "active" : "" %>"><%= link_to "修改密码", edit_user_registration_path(by: 'pwd') %></li>
-          <li class="<%= @current == 'user_edit_other' ? "active" : "" %>"><%= link_to "配送设置", edit_user_path %></li>
-        </ul-->
-        
         <div class="list-group">
           <% 
           @actions = %w(user_orders user_orders_incompleted user_orders_completed user_orders_canceled user_show_order_detail)
@@ -26,6 +15,12 @@
           </a>
           <a href="<%= new_message_path %>" class="list-group-item <%= @current == 'user_message_new' ? "active" : "" %>">
             我有话说
+          </a>
+          <a href="<%= new_invite_path %>" class="list-group-item <%= @current == 'user_invite_new' ? "active" : "" %>">
+            邀请朋友
+          </a>
+          <a href="<%= active_invite_path %>" class="list-group-item <%= @current == 'user_invite_active' ? "active" : "" %>">
+            激活邀请
           </a>
         </div>
         <div class="list-group">

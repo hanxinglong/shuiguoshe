@@ -255,6 +255,10 @@ module Shuiguoshe
           return { code: 119, message: "不能邀请自己" }
         end
         
+        if User.find_by(mobile: params[:mobile])
+          return { code: 101, message: "该用户已经注册了" }
+        end
+        
         invite = Invite.where('invitee_mobile = ? and user_id = ?', params[:mobile], user.id).first
         if invite and invite.verified == false
           return { code: 117, message: "用户已经被邀请过" }
