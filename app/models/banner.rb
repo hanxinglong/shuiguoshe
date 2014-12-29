@@ -18,7 +18,7 @@ class Banner < ActiveRecord::Base
   
   def image_url
     if self.image
-      self.image.url(:small) || ""
+      self.image.url(:normal) || ""
     else
       ""
     end
