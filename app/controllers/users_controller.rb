@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   
   def home
     @orders = current_user.orders.normal.order("created_at DESC").paginate page: params[:page], per_page: 10
+    fresh_when(etag: [@orders])
     set_seo_meta("个人主页")
   end
   
@@ -44,6 +45,7 @@ class UsersController < ApplicationController
   def points
     @traces = ScoreTrace.where(user_id: current_user.id).order("created_at DESC").paginate page: params[:page], per_page: 30
     @current = 'user_points'
+    fresh_when(etag: [@traces, @current])
     set_seo_meta("我的积分")
   end
   
@@ -52,6 +54,7 @@ class UsersController < ApplicationController
     @current = 'user_orders'   
     @tag = 'all'
     @cache_prefix = "user_#{current_user.mobile}-#{@current}" 
+    fresh_when(etag: [@orders, @current])
     set_seo_meta("我的订单")
   end
 end

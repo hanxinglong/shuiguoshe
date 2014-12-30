@@ -30,6 +30,7 @@ class OrdersController < ApplicationController
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     set_seo_meta("我的待配送订单")
     render :index
+    # fresh_when(etag: [@orders, @current])
   end
   
   def completed
@@ -38,6 +39,7 @@ class OrdersController < ApplicationController
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     set_seo_meta("我的已完成订单")
     render :index
+    # fresh_when(etag: [@orders, @current])
   end
   
   def canceled
@@ -47,6 +49,7 @@ class OrdersController < ApplicationController
     @cache_prefix = "user_#{current_user.mobile}-#{@current}"
     set_seo_meta("我的已取消订单")
     render :index
+    # fresh_when(etag: [@orders, @current])
   end
   
   def cancel
