@@ -2,7 +2,7 @@ class NewsblastsController < ApplicationController
   before_action :set_newsblast, only: [:show]
 
   def show
-    fresh_when @newsblast
+    fresh_when(etag: [@newsblast])
     set_seo_meta(@newsblast.title)
   end
 
