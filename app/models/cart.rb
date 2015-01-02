@@ -37,6 +37,10 @@ class Cart < ActiveRecord::Base
     self.update_attribute('line_items_count', counter.to_i + self.line_items_count)
   end
   
+  def my_cache_key
+    line_items.map { |a| "#{a.id}-#{a.quantity}-#{a.product.try(:updated_at)}" }
+  end
+  
 end
 
 # == Schema Information

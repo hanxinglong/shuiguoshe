@@ -12,7 +12,7 @@
     </div>
   
   <% else %>
-  <% cache ["cart1_#{current_user.try(:id)}_line_items", cart.line_items] do %>
+  <% cache ["cart1_#{current_user.try(:id)}_line_items", cart.my_cache_key] do %>
     <table class="table common-table">
       <tr class="table-head">
         <th>商品名称</th>

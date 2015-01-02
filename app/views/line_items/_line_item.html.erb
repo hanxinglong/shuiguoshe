@@ -1,4 +1,4 @@
-<% cache line_item do %>
+<% cache [line_item, line_item.product.updated_at] do %>
 <tr id="cart_1_line_item_<%= line_item.id %>">
   <td width="40%" class="item-title">
     <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product) %>

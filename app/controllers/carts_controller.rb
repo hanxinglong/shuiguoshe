@@ -6,7 +6,7 @@ class CartsController < ApplicationController
   def show
     # @cart = current_cart
     # @line_items = cart.line_items.includes(:product)
-    fresh_when(etag: cart.line_items)
+    fresh_when(etag: cart.my_cache_key)
     set_seo_meta('我的购物车')
     # respond_with(@cart)
   end
