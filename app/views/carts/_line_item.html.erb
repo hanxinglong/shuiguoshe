@@ -1,11 +1,11 @@
 <% cache [item.id, item.quantity, item.product.updated_at] do %>
 <tr id="cart_2_line_item_<%= item.id %>">
   <td width="20%">
-    <%= link_to image_tag(item.product.image.url(:small)), item.product %>
+    <%= link_to image_tag(item.product.image.url(:small)), item.product, title: item.product.title, target: "_blank" %>
   </td>
   <td width="55%" class="item-title">
     
-      <%= link_to item.product.title, item.product %>
+      <%= link_to item.product.title, item.product, title: item.product.title, target: "_blank" %>
     <div class="text-muted">
       <%= item.product.units %><br>
       <%= product_price_tag(item.product.low_price) %> &times; <%= item.quantity %>

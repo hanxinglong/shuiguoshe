@@ -12,8 +12,8 @@
       <% @order.line_items.each do |line_item| %>
       <tr>
         <td width="40%" class="item-title">
-          <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product) %>
-          <span class="product-title"><%= link_to line_item.product.title, product_path(line_item.product), style:"color:rgb(50,50,50)" %></span>
+          <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product), title: line_item.product.title, target: "_blank" %>
+          <span class="product-title"><%= link_to line_item.product.title, product_path(line_item.product), style:"color:rgb(50,50,50)", title: line_item.product.title, target: "_blank" %></span>
         </td>
         <td width="10%"><%= line_item.product.units %></td>
         <td width="10%"><%= product_price_tag(line_item.product.low_price) %></td>

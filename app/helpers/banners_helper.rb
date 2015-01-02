@@ -10,7 +10,7 @@ module BannersHelper
     return "" if banner.blank?
     return "" if banner.image.blank?
     
-    img = image_tag banner.image.url(:normal), class: "img-responsive"
+    img = image_tag banner.image.url(:normal), class: "img-responsive", alt: banner.title
     
     if banner.url.blank?
       img

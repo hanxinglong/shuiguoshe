@@ -1,8 +1,8 @@
 <% content_for :sitemap do %>
   <% if @product.sale.present? %>
-    <a href="<%= sale_path(@product.sale) %>"><%= @product.sale.title %></a> &gt; <span class="current"><%= @product.title %></span>
+    <a href="<%= sale_path(@product.sale) %>" title="<%= @product.sale.title %>"><%= @product.sale.title %></a> &gt; <span class="current"><%= @product.title %></span>
   <% else %>
-    <a href="<%= category_items_path(@product.type_id) %>"><%= @type %></a> &gt; <span class="current"><%= @product.title %></span>
+    <a href="<%= category_items_path(@product.type_id) %>" title="<%= @type %>"><%= @type %></a> &gt; <span class="current"><%= @product.title %></span>
   <% end %>
 <% end %>
 
@@ -15,7 +15,7 @@
   </div>
   <div class="row">
     <div class="col-sm-5">
-      <%= image_tag @product.image_url(:large) %>
+      <%= image_tag @product.image_url(:large), alt: @product.title %>
     </div>
     <div class="col-sm-7 product-detail">
       <div class="item-line green f30 price-numeric">

@@ -37,7 +37,7 @@
         <% @discounted_products.each do |product| %>
           <% cache product do %>
           <div class="col-xs-4 col-md-4">
-            <a href="<%= product_path(product) %>" class="product-link" target="_blank">
+            <a href="<%= product_path(product) %>" title="<%= product.title %>" class="product-link" target="_blank">
               <div class="item clearfix">
                 <div class="info pull-right">
                   <div class="title"><%= product.title %></div>
@@ -49,7 +49,7 @@
                   </div>
                   <div class="countdown" data-countdown="<%= product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") %>"></div>
                 </div>
-                <%= image_tag product.image.url(:thumb) %>
+                <%= image_tag product.image.url(:thumb), alt: product.title %>
               </div>
             </a>
           </div>
