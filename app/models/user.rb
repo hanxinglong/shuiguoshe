@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   end
   
   def admin?
-    Setting.admin_emails.include?(self.email)
+    Setting.admin_emails.include?(self.email) or ( SiteConfig.admin_users.split(",").include?(self.email) if SiteConfig.admin_users )
   end
   
   # 更新积分

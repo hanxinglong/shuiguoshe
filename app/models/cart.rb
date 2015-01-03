@@ -38,7 +38,7 @@ class Cart < ActiveRecord::Base
   end
   
   def my_cache_key
-    line_items.map { |a| "#{a.id}-#{a.quantity}-#{a.product.try(:updated_at)}" }
+    line_items.map { |a| "#{a.id}-#{a.quantity}-#{a.product_updated_at}" }
   end
   
 end

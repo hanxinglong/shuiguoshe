@@ -16,6 +16,14 @@ class LineItem < ActiveRecord::Base
     product.save
   end
   
+  def product_updated_at
+    if product
+      product.updated_at.strftime("%Y%m%d%H%M%S")
+    else
+      ""
+    end
+  end
+  
   def as_json(options)
     {
       id: self.id,
