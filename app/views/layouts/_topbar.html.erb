@@ -2,10 +2,11 @@
   <div class="container">
     <div class="topbar-box">
       <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <%= raw SiteConfig.welcome_html %>
+          <span style="padding-left: 20px;">预订电话：18048553687</span>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-6">
           <div style="text-align:right;">
             <% if current_user %>
               <%= render '/users/user_signed_in' %>
