@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     else
       "application"
     end
-    
   end
     
   before_action do

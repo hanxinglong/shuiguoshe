@@ -1,0 +1,48 @@
+/*
+ *= require application
+ *= require jquery.chosen
+ *= require_self
+ */
+
+html {
+  width: 100%;
+}
+
+body {
+  width: 100%;
+  padding-top: 40px;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto;
+  width: 50px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.sales {
+  margin-bottom: 10px;
+  .sale {
+    background-color: rgb(235,235,235);
+    padding: 10px;
+    text-align: center;
+    margin-top: 8px;
+  }
+  
+  .col-xs-6 {
+    
+  }
+  .last {
+    
+  }
+}
+
+
+#footer {
+  margin: 0 auto;
+  border: 0;
+  p {
+    text-align: center;
+  }
+}

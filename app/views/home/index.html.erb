@@ -28,6 +28,21 @@
   <% end %>
 </div>
 
+<% if mobile? %>
+<div class="container">
+  <div class="row sales">
+    <% @sales.each_with_index do |sale,index| %>
+    <div class="col-xs-6 <%= index % 2 == 0 ? "last" : "" %>">
+      <div class="sale">
+        <%= sale.title %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<% if not mobile? %>
 <% if @discounted_products.any? %>
 <div class="home-today-products-container">
   <h2>今日特卖区</h2>
@@ -80,7 +95,7 @@
     </div>
   </div>
 </div>
-
+<% end %>
 <% content_for :scripts do %>
 <script>
 $(function() {
