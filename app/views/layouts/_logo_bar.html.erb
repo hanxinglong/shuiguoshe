@@ -1,16 +1,17 @@
 <div class="container">
   <div class="row logo_bar_box">
-    <div class="col-md-4">
+    <div class="col-md-8">
       <a class="logo" href="/"><%= image_tag 'logo.png', alt: "水果社" %></a>
+      <div class="nav-menu">
+        <%= link_to "首页", root_path, class: "active" %><span class="vertical-divider">|</span>
+        <%= link_to "水果", root_path, class: "" %><span class="vertical-divider">|</span>
+        <%= link_to "干果", root_path, class: "" %><span class="vertical-divider">|</span>
+        <%= link_to "套餐", root_path, class: "" %>
+      </div>
     </div>
-  
-    <div class="col-md-5 col-md-offset-1" style="padding-top:17px;">
-      <%= form_tag search_path, method: 'get', class: "form-inline" do %>
-      <%= text_field_tag :q, params[:q], class: "form-control", placeholder: "请输入商品名称或商品描述", style: "width: 70%" %>
-      <button type="submit" class="btn btn-sm btn-success">搜索</button>
-      <% end %>
+    <div class="col-md-2">
+      
     </div>
-    
     <div class="col-md-2">
       <div class="pull-right order-btn-box" id="cart-mini">
         <div class="u-show-cart">

@@ -31,8 +31,8 @@
     <%= notice_message %>
     <%= content_for?(:content) ? yield(:content) : yield %>
     <%= debug(params) if Rails.env.development? %>
-    <%= render 'layouts/footer' %>
   </div>
+  <%= render 'layouts/footer' %>
   
   <div id="scrolltop" style="display: none;">返回顶部</div>
   
