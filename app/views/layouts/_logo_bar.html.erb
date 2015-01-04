@@ -1,18 +1,42 @@
+<% 
+if params[:type_id]
+  type = params[:type_id].to_i
+  if type > 2 or type < 1
+    type = 1
+  end
+else
+  type = 0
+end
+ %>
+<div id="header">
 <div class="container">
   <div class="row logo_bar_box">
-    <div class="col-md-8">
+    <div class="col-md-7">
       <a class="logo" href="/"><%= image_tag 'logo.png', alt: "水果社" %></a>
       <div class="nav-menu">
-        <%= link_to "首页", root_path, class: "active" %><span class="vertical-divider">|</span>
-        <%= link_to "水果", root_path, class: "" %><span class="vertical-divider">|</span>
-        <%= link_to "干果", root_path, class: "" %><span class="vertical-divider">|</span>
+        <%= link_to "首页", root_path, class: "#{@current == 'home_index' ? "active" : ""}" %><span class="vertical-divider">|</span>
+        <% ProductType.all_types.each do |type| %>
+          <%= link_to type.name, category_items_path(type), class: "#{controller_name == 'products' and params[:type_id].to_i == type.id ? "active" : ""}" %><span class="vertical-divider">|</span>
+        <% end %>
+        
         <%= link_to "套餐", root_path, class: "" %>
       </div>
     </div>
-    <div class="col-md-2">
-      
-    </div>
-    <div class="col-md-2">
+    <div class="col-md-5">
+      <div class="wechat pull-left">
+        <div class="u-show-wechat">
+          <span class="link-text" id="u-wechat">水果社官方微信</span>
+          <div class="hover-mask"></div>
+          <div class="wechat-panel" id="wechat-panel">
+            <p class="wechat-tip">
+              使用官方微信下单更便捷<br/>可随时查看订单状态
+            </p>
+            
+            <%= image_tag "wechat.jpg", alt: "水果社官方微信" %>
+            
+          </div>
+        </div>
+      </div>
       <div class="pull-right order-btn-box" id="cart-mini">
         <div class="u-show-cart">
           <%= cart_tag %>
@@ -40,4 +64,5 @@
     </div>
     
   </div>
+</div>
 </div>

@@ -3,17 +3,17 @@
  */
 
 $navbar-height: 40px;
-$nav-link-hover-bg: rgb(60,155,0);
-$nav-link-active-bg: $nav-link-hover-bg;
+//$nav-link-hover-bg: rgb(60,155,0);
+//$nav-link-active-bg: $nav-link-hover-bg;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "variables";
 
 $light-gray: #777;
 $gray-medium-light: #eaeaea;
 $gray-red: rgb(234,30,119);
 //$nature-green: rgb(99,185,76);
-$nature-green: rgb(7,156,22);
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -33,7 +33,7 @@ height: 100%;
 body {
 //  padding-top: 70px;
 //  padding-bottom: 50px;
-  background-color: rgb(251,251,251);
+  background-color: rgb(247,247,247);
   font-family: "Heiti SC Light","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
@@ -62,7 +62,7 @@ textarea {
   }
   
   .active {
-    background-color: $nav-link-hover-bg;
+    background-color: $nature-green;//$nav-link-hover-bg;
   }
   margin-bottom: 0;
 }

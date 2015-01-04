@@ -41,11 +41,19 @@ $("#u-cart-result, #cart-panel").on("mouseover", function() {
   $(".hover-mask").show();
   $("#cart-panel").show();
   $("#u-cart-result").addClass("cart-result-hover");
-  // $("#cart-result-container").addClass("cart-result-container");
 });
 $("#u-cart-result, #cart-panel").on("mouseout", function() {
   $(".hover-mask").hide();
   $("#cart-panel").hide();
   $('#u-cart-result').removeClass("cart-result-hover");
-  // $("#cart-result-container").removeClass("cart-result-container");
+});
+
+$("#u-wechat").on("mouseover", function() {
+  $(".hover-mask").show();
+  $("#wechat-panel").show();
+});
+
+$("#u-wechat").on("mouseout", function() {
+  $(".hover-mask").hide();
+  $("#wechat-panel").hide();
 });

@@ -1,4 +1,4 @@
-$nature-green: rgb(99,185,76);
+$nature-green: rgb(7,156,22);
 $medium-red: rgb(60,155,0);
 $light-gray: #777;
 $gray-medium-light: #eaeaea;
@@ -192,17 +192,17 @@ $gray-medium-light: #eaeaea;
   
   .list-group-item {
     &:hover {
-      background: rgb(60,155,0);
+      background-color: $nature-green;//rgb(60,155,0);
     };
   }
   
   a.active {
-    background-color: rgb(60,155,0);
+    background-color: $nature-green;
     &:hover {
-      background: rgb(60,155,0);
+      background-color: $nature-green;
     };
     &:active {
-      background: rgb(60,155,0);
+      background-color: $nature-green;
     };
   }
 }

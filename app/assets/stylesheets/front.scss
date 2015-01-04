@@ -1,6 +1,7 @@
 /*
  *= require application
  *= require jquery.chosen
+ *= require home
  *= require orders
  *= require users
  *= require apartments
@@ -8,14 +9,18 @@
  *= require_self
  */
 
-$nature-green: rgb(7,156,22);
-$medium-red: rgb(60,155,0);
-$light-gray: #777;
-$gray-medium-light: #eaeaea;
-$common-border-color: rgb(204,204,204);
+@import "variables";
 
-body {
-  color: rgb(245,245,245);
+
+#header {
+  background-color: white;
+}
+
+.btn-success {
+  background-color: $nature-green;
+  &:hover {
+    background-color: rgb(6,128,18);
+  };
 }
 
 // 关闭响应式设计
@@ -53,10 +58,11 @@ body {
     height: 70px;
     line-height: 70px;
     a {
-      padding: 5px 15px;
+      padding: 5px 15px 5px 10px;
       font-size: 18px;
       font-weight: bold;
-      color: rgb(110,110,110);
+      color: $common-black;
+      text-decoration: none;
       &.active {
         color: $nature-green;
       }
@@ -68,8 +74,7 @@ body {
     
     .vertical-divider {
       color: rgb(230,230,230);
-      padding: 0;
-      margin: 0;
+      font-size: 14px;
     }
     
   }
@@ -113,6 +118,9 @@ body {
 
 .container-box {
   margin-top: 20px;
+//  background-color: rgb(250,250,250);
+//  padding: 15px 0;
+//  padding-bottom: 0;
 }
 
 .topbar {
@@ -132,8 +140,7 @@ body {
   }
   
   a {
-//    color: rgb(100,100,100);
-color: white;
+    color: white;
   }
 
   .user-login {
@@ -160,15 +167,55 @@ color: white;
   line-height: 120px;
 }
 
-#carousel-ads {
-  margin: 0;
-//  margin-top: -22px;
-//  margin-bottom: 20px;
-}
+.wechat {
+  margin-top: 15px;
+  margin-left: 80px;
+  color: $common-black;
+//    text-decoration: none;
+  font-size: 18px;
+  .line {
+    padding-left: 12px;
+    font-size: 15px;
+    color: rgb(230,230,230);
+  }
+  .link-text{
+    padding: 10px;
+    font-size: 16px;
+    display: block;
+    z-index: 1;
+    &:hover {
+        cursor:pointer;
+        border: 1px solid $common-border-color;
+        border-bottom: 1px solid white;
+        background-color: white;
+    };
+  }
+  
+  .u-show-wechat {
+    position: relative;
+    z-index: 2000;
 
-//.order-head {
-//  border: 1px solid #ccc;
-//}
+    .wechat-panel {
+      z-index: -1;
+      display: none;
+      background-color: white;
+      position: absolute;
+      top: 43px;
+      left: 0;
+      border: 1px solid $common-border-color;
+      padding: 20px;
+      .wechat-tip {
+        font-size: 14px;
+        color: rgb(150,150,150);
+      }
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+    
+  }
+}
 
 .u-show-cart {
   position: relative;
@@ -176,8 +223,9 @@ color: white;
   
   .cart-result {
     display: block;
-    color: rgb(50,50,50);
+    color: $common-black;
     padding: 10px;
+    text-decoration: none;
     .hover-mask2 {
       position: absolute;
       bottom: 0;
@@ -185,7 +233,7 @@ color: white;
       height: 1px;
       width: 100%;
       display: none;
-      background-color: rgb(250,250,250);
+      background-color: white;
     }
     
     z-index: 1;
@@ -203,7 +251,8 @@ color: white;
   
   .cart-result-hover {
     text-decoration: none;
-    color: rgb(50,50,50);
+    color: $common-black;
+    background-color: white;
     border: 1px solid $common-border-color;
     border-bottom: 0;
     .hover-mask2 {
@@ -212,7 +261,7 @@ color: white;
   }
   
   .cart-panel {
-    background-color: rgb(250,250,250);
+    background-color: white;
     display: none;
     position: absolute;
     padding: 20px;
@@ -221,7 +270,7 @@ color: white;
     top: 45px;
     width: 340px;
     border: 1px solid $common-border-color;
-    color: rgb(50,50,50);
+    color: $common-black;
     
     .cart-panel-head {
       font-size: 16px;
@@ -262,92 +311,6 @@ color: white;
   }
 }
 
-.home-ads-container {
-  margin-bottom: 20px;
-//  #carousel-ads {
-//    width: 690px;
-//    height: 342px;
-//    float: left;
-//  }
-  .sidebar-ad-container {
-    border: 1px solid $nature-green;//$common-border-color;
-    border-top: 0;
-  }
-}
-
-.home-discount-products {
-  margin-bottom: 30px;
-  .product-link {    
-    display: block;
-    color: rgb(50,50,50);
-    text-decoration: none;
-    height: auto;
-  }
-  .item {
-    border: 0;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    
-    &:hover {
-      cursor: pointer;
-      text-decoration: none;
-      -moz-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-      -webkit-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-      box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-    }
-    
-    background-color: white;
-    .info {
-      text-align: right;
-      padding: 10px 10px 10px 0;
-      .title {
-        font-weight: bold;
-        font-size: 16px;
-      }
-      .purchased {
-        font-size: 15px;
-        margin-top: 8px;
-      }
-      .countdown {
-        font-size: 15px;
-      }
-    }
-    img {
-      display: block;
-      width: 120px;
-      height: 100px;
-      margin-top: 20px;
-      margin-left: 5px;
-    }
-    .numeric {
-      font-family: Georgia, Times, "Times New Roman", serif;
-      font-size: 24px;
-//        font-weight: bold;
-      color: $nature-green;
-    }
-  }
-}
-
-#carousel-ads .carousel-indicators {
-//  display: none;
-  li {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 1px;
-    text-indent: -999px;
-    cursor: pointer;
-    background-color: #fff;
-    border: 1px solid $nature-green;
-    border-radius: 10px;
-    &.active {
-      background-color: $nature-green;
-      border: 1px solid $nature-green;
-    }
-  }
-} 
-
 .sitemap {
   h2 {
     font-weight: normal;
@@ -378,80 +341,6 @@ color: white;
   }
 }
 
-// 首页相关css
-.home-content-box {
-  
-  .side-col {
-    float: left;
-    width: 290px;
-  }
-  
-  .sale-items-container {
-    width: 690px;
-    float: left;
-    margin-right: 14px;
-    
-    h2 {
-      margin: 0;
-      font-size: 20px;
-      color: rgb(50,50,50);
-      border-top: 2px solid $nature-green;
-      padding: 10px 0;
-    }
-    .items {
-      margin-top: 10px;
-      .sale-item {
-        margin-bottom: 20px;
-        margin-bottom: 20px;
-        background-color: #fff;
-        -moz-box-shadow: 0 2px 4px #e5e4e4;
-        -webkit-box-shadow: 0 2px 4px #e5e4e4;
-        box-shadow: 0 2px 4px #e5e4e4;
-        -moz-transition: all 0.3s ease-in-out;
-        -o-transition: all 0.3s ease-in-out;
-        -webkit-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out;
-        
-        a, a:hover {
-          display: block;
-          cursor: pointer;
-          color: rgb(50,50,50);
-          text-decoration: none;
-        }
-        
-        &:hover {
-          -moz-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-          -webkit-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-          box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-        };
-        
-        .desc-container {
-          height: 70px;
-          line-height: 70px;
-          font-size: 16px;
-          margin: 0px 10px;
-          overflow: hidden;
-          .name {
-            width: 350px;
-            margin-left: 20px;
-          }
-          .time-left {
-            width: 100px;
-          }
-          .discount {
-            margin-top: -3px;
-            width: 110px;
-            color: $nature-green;
-            .price {
-              font-family: Georgia, Times, "Times New Roman", serif;
-              font-size: 24px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
 .content-box {
   margin: 0;
   margin-bottom: 10px;
@@ -463,50 +352,6 @@ color: white;
     padding-top: 10px;
     margin-bottom: 20px;
     border-top: 2px solid $nature-green;
-  }
-}
-
-.home-today-products-container {
-  margin: 0;
-  h2 {
-    font-size: 20px;
-    color: rgb(50,50,50);
-    margin: 0;
-    padding: 10px 0;
-  }
-}
-
-.sidebar-right {
-  margin: 0;
-  padding: 0;
-  
-  .sidebar-right-box {
-    margin-bottom: 20px;
-    border: 1px solid $common-border-color;
-  }
-  
-  .newsblasts-list {
-//    border: 1px solid $gray-medium-light;
-    h2 {
-      margin: 0;
-      padding: 0;
-      padding: 10px;
-      border-bottom: 1px solid $common-border-color;
-      font-size: 18px;
-      background-color: rgb(241,241,241);
-      font-weight: bold;
-    }
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 10px 0;
-      li {
-        padding: 0 10px;
-        a {
-          color: black;
-        }
-      }
-    }
   }
 }
 
@@ -533,10 +378,6 @@ color: white;
   
 }
 
-.sale_ad {
-  height: 360px;
-}
-
 .my-cart {
   .common-table {
     td {
@@ -552,104 +393,6 @@ color: white;
     .product-title a {
       color: rgb(50,50,50);
     }
-  }
-}
-
-.product {
-  .thumbnail {
-    border: 0;    
-    .item-link {
-      
-      &:hover {
-        text-decoration: none;
-      };
-    } 
-    .suggest-icon {
-      position: absolute;
-      top: 0;
-      right: 15px;
-    }
-    
-    &:hover {
-      cursor: pointer;
-      text-decoration: none;
-      -moz-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-      -webkit-box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-      box-shadow: 0 0 6px 2px rgba(187, 187, 187, 0.75);
-    }
-  }
-  .caption {
-    .name {
-      color: rgb(50,50,50);
-      font-size: 16px;
-    }
-    .price {
-      .numeric {
-        font-family: Georgia, Times, "Times New Roman", serif;
-        font-size: 24px;
-//        font-weight: bold;
-        color: $nature-green;
-      }
-    }
-    .price-extra {
-//      text-align: right;
-      font-size: 14px;
-      del {
-        font-size: 14px;
-        color: rgb(107,107,107);
-      }
-      .purchased {
-        background-color: $nature-green;
-        padding: 2px;
-        font-size: 13px;
-        color: white;
-      }
-    }
-  }
-}
-
-.product-detail{
-  .item-line {
-    margin:0;
-    padding: 5px 0;
-    &:first-child {
-      padding-top: 0;
-    };
-  }
-}
-
-.price-numeric {
-  font-family: Georgia, Times, "Times New Roman", serif;
-}
-
-.product-info {
-  margin-bottom: 10px;
-}
-
-.sidebar-box {
-  border: 1px solid $common-border-color;
-  margin-bottom: 20px;
-//  padding-bottom: 10px;
-  h2 {
-    margin: 0;
-    padding: 10px;
-    border-bottom: 1px solid $common-border-color;
-    background-color: rgb(241,241,241);
-    font-size: 16px;
-    font-weight: bold;
-//    margin-bottom: 10px;
-  }
-  
-  .sidebar-items {
-    padding: 0 10px;
-  }
-  
-  .sidebar-item {
-    padding: 10px 0;
-    border-bottom: 1px dashed $common-border-color;
-    &:last-child {
-      border: 0;
-    };
   }
 }
 
@@ -680,10 +423,4 @@ color: white;
   p {
     font-weight: bold;
   }
-}
-
-.hotline {
-  color: white; 
-//  font-weight: bold; 
-//  font-size: 16px;
 }

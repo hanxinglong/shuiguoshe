@@ -17,7 +17,7 @@
         <div class="item <%= index == 0 ? "active" : "" %>">
           <%= render_banner_image(banner) %>
           <div class="carousel-caption">
-  
+            <a href="" class="btn btn-success btn-lg">88<span class="f16">元/月</span></a>
           </div>
         </div>
         <% end %>
@@ -76,25 +76,26 @@
 </div>
 <% end %>
 
-<div class="home-content-box clearfix">
-  <div class="sale-items-container">
-    <h2>鲜果专卖区</h2>
-    <div class="items">
-      <% cache cache_key_for('home_sales', @sales) do %>
-        <%= render @sales %>
-      <% end %>
+
+<div class="row home-content-box">
+  <div class="col-md-9">
+    <% if @products.any? %>
+    <% cache cache_key_for('home_hot_products', @products) do %>
+    <div class="content-box">
+      <h2>热门预订</h2>
+      <%= render_grid_for @products %>
     </div>
+    <% end %>
+    <% end %>
   </div>
-  <div class="side-col">
+  <div class="col-md-3">
     <div class="sidebar-right">
-      <div class="trust sidebar-right-box">
-        <%= image_tag 'trust.jpg', alt: "trust" %>
-      </div>
       <%= render 'newsblasts/newsblasts_list' %>
       <%= render 'sidebar_ads/ads_list' %>
     </div>
   </div>
 </div>
+
 <% end %>
 <% content_for :scripts do %>
 <script>
