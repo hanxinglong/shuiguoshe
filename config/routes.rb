@@ -45,6 +45,11 @@ Rails.application.routes.draw do
   get '/items/category/:type_id' => 'products#index', as: :category_items
   get '/item-:id' => 'products#show', as: :product
   
+  resources :user_steps
+  get '/account/forget_password' => 'user_steps#new', as: :forget_password
+  post '/account/forget_password' => 'user_steps#create', as: :forget_password_account
+  get '/account/forget_password/find' => 'user_steps#find', as: :find_password
+  
   resources :line_items, only: [:create, :update, :destroy]
   resources :carts, only: [:show]
   get '/cart' => 'carts#show', as: :show_cart

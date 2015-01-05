@@ -21,6 +21,7 @@ class AccountController < Devise::RegistrationsController
     
     # 删掉不需要的参数
     sign_up_params.delete(:code)
+    sign_up_params.delete(:code_type)
     sign_up_params.delete(:email)
     
     build_resource(sign_up_params)

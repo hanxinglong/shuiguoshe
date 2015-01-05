@@ -41,14 +41,14 @@ window.App =
       App.alert("手机号不能为空", $('#new_user'))
       return false
       
-    reg = /^(?:13\d|15[89])-?\d{5}(\d{3}|\*{3})$/
+    reg = /^1[3|4|5|8][0-9]\d{4,8}$/
     if not reg.test(mobile)
       App.alert("不正确的手机号", $('#new_user'))
       return false
       
     $(el).attr("disabled", true)
     $(el).data("loading", '1')
-    $(el).text('59秒重新获取')
+    $(el).text('59秒后重新获取')
     total = 58
     setTimeout (f = (->
       if total == -1
@@ -57,7 +57,7 @@ window.App =
         $(el).text("获取验证码")
         $(el).data("loading", '0')
         return
-      $(el).text((total--) + '秒重新获取')
+      $(el).text((total--) + '秒后重新获取')
       setTimeout(f, 1000)
       
         
@@ -69,7 +69,7 @@ window.App =
     $.ajax
       url: "http://shuiguoshe.com/api/v1/auth_codes"
       type: "POST"
-      data: { mobile: mobile, type: 1 }
+      data: { mobile: mobile, type: parseInt($("#user_code_type").val()) }
       success: (re) -> 
         # $(el).removeAttr("disabled")
         if re.code == 0

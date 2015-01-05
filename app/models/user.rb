@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          
   attr_accessor :login, :password_confirmation
   
-  attr_accessor :code
+  attr_accessor :code, :code_type
   
   mount_uploader :avatar, AvatarUploader
   
@@ -46,7 +46,7 @@ class User < ActiveRecord::Base
   
   def hack_mobile
     return "" if self.mobile.blank?
-    hack_mobile = self.mobile
+    hack_mobile = String.new(self.mobile)
     hack_mobile[3..6] = "****"
     hack_mobile
   end
