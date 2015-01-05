@@ -56,7 +56,11 @@ module Shuiguoshe
         if resp['code'] == 0
           { code: 0, message: "ok" }
         else
-          { code: 103, message: error_msg }
+          if resp['code'] == 9 or resp['code'] == 17
+            { code: 103, message: resp['msg'] }
+          else
+            { code: 103, message: error_msg }
+          end
         end
       }
     end

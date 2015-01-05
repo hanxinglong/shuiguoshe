@@ -3,27 +3,52 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:login]
+         :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:mobile]
          
   attr_accessor :login, :password_confirmation
   
+  attr_accessor :code
+  
   mount_uploader :avatar, AvatarUploader
   
-  ACCESSABLE_ATTRS = [:login, :mobile, :email, :by, :avatar, :password, :password_confirmation, :current_password]
+  ACCESSABLE_ATTRS = [:login, :mobile, :code, :by, :avatar, :password, :password_confirmation, :current_password]
   
   has_many :orders, dependent: :destroy
   
+  validates :mobile, presence: true
   validates :mobile, format: { with: /\A1[3|4|5|8][0-9]\d{4,8}\z/, message: "请输入11位正确手机号" }, length: { is: 11 }, 
-            :presence => true, :uniqueness => true
+            :uniqueness => true
+            
+
+  
+  # validate :check_auth_code
+  # def check_auth_code
+  #   
+  # end
   
   # 重写devise认证
-  def self.find_for_database_authentication(warden_conditions)
-    conditions = warden_conditions.dup
-    if login = conditions.delete(:login)
-      where(conditions).where(["mobile = :value OR lower(email) = :value", { value: login.downcase}]).first
-    else
-      where(conditions).first
-    end
+  # def self.find_for_database_authentication(warden_conditions)
+  #   conditions = warden_conditions.dup
+  #   if login = conditions.delete(:login)
+  #     where(conditions).where(["mobile = :value OR lower(email) = :value", { value: login.downcase}]).first
+  #   else
+  #     where(conditions).first
+  #   end
+  # end
+  
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
+  
+  def hack_mobile
+    return "" if self.mobile.blank?
+    hack_mobile = self.mobile
+    hack_mobile[3..6] = "****"
+    hack_mobile
   end
   
   def login
@@ -42,7 +67,7 @@ class User < ActiveRecord::Base
     # 赠送积分
     update_score(1000, '成功注册')
     # 发送欢迎邮件
-    UserMailer.welcome(self.id).deliver
+    # UserMailer.welcome(self.id).deliver
   end
 
   def update_with_password(params = {})

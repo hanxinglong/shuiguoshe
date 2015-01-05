@@ -5,9 +5,9 @@
       <%= notice_message %>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-horizontal" }) do |f| %>
           <div class="form-group">
-            <%= f.label :login, "手机/邮箱", class: "col-sm-3 control-label" %>
+            <%= f.label :mobile, "手机", class: "col-sm-3 control-label" %>
             <div class="col-sm-9">
-              <%= f.text_field :login, class: "form-control", placeholder: '请输入手机号或邮箱', autofocus:true, style: "width: 300px;" %>
+              <%= f.text_field :mobile, class: "form-control", placeholder: '请输入手机号', autofocus:true, style: "width: 300px;" %>
             </div>
           </div>
       

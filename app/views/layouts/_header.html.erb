@@ -15,7 +15,7 @@ else
 end
 
  %>
-<% cache ["#{current_user.try(:id)}_#{current_user.try(:admin?)}_#{controller_name}_#{type}_#{keyword}_#{@current}", cart.my_cache_key] do %>
+<% cache ["#{current_user.try(:mobile)}_#{current_user.try(:admin?)}_#{controller_name}_#{type}_#{keyword}_#{@current}", cart.my_cache_key] do %>
 <%= render '/layouts/topbar' %> <!-- topbar -->
 <%= render '/layouts/logo_bar' %>
 

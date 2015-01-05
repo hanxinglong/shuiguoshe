@@ -20,6 +20,7 @@ $gray-medium-light: #eaeaea;
   background-color: rgb(251,248,240);
   .user-login-form {
     padding: 10px 50px;
+    position: relative;
     h2 {
       padding: 10px 0;
       font-size: 18px;
@@ -31,6 +32,11 @@ $gray-medium-light: #eaeaea;
       color:red;
       font-size: 14px;
       padding-left: 10px;
+    }
+    .get-auth-code {
+      position: absolute;
+      right: 158px;
+      top: 175px;
     }
   }
   
@@ -98,7 +104,7 @@ $gray-medium-light: #eaeaea;
   clear: both;
   .user-intro {
     margin-left: 20px;
-    margin-top: -15px;
+//    margin-top: -15px;
     h3 {
       color: $nature-green;
     }

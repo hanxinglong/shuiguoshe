@@ -12,17 +12,31 @@
         }) do |f| %>
           
           <%= f.input :mobile, label: "手机", placeholder: "请输入11位正确的手机号", hint: "以便我们送货时联系您", input_html: { style: "width:300px;" } %>
-          <%= f.input :email, label: "邮箱", placeholder: "example@foo.com", hint: "密码忘记时，可以通过您的邮箱找回", input_html: { style: "width:300px;" } %>
-          <%= f.input :password, label: "密码", placeholder: "密码至少6位", input_html: { style: "width:300px;" } %>
-          <%= f.input :password_confirmation, label: "确认密码", placeholder: "请确保两次密码输入一致", input_html: { style: "width:300px;" } %>
+          <!--div class="form-group string required user_code">
+            <label class="string required control-label col-sm-3 control-label" for="user_code">
+              <abbr title="required">*</abbr> 验证码
+            </label>
+            <div class="col-sm-4">
+              <input class="string required form-control" id="user_code" name="user[code]" placeholder="请输入6位验证码" style="width:180px;" type="text" />
+            </div>
+            <div class="col-sm-3">
+              <a onclick="App.getCode(this)" class="btn btn-warning" id="auth_code">获取验证码</a>
+            </div>
+          </div-->
+            <%= f.input :code, label: "验证码", placeholder:"请输入6位验证码", input_html: { style: "width:180px;" }, required: true %>
+          <%= f.input :password, label: "密码", placeholder: "密码至少6位", input_html: { style: "width:300px;" }, required: true %>
+          <%= f.input :password_confirmation, label: "确认密码", placeholder: "请确保两次密码输入一致", input_html: { style: "width:300px;" }, required: true %>
 
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
               <button type="submit" class="btn btn-success">注册</button>
             </div>
           </div>
-      
       <% end %>
+      
+      <div class="get-auth-code">
+        <a onclick="App.getCode(this)" class="btn btn-warning" id="auth_code">获取验证码</a>
+      </div>
     </div>
     
   </div>

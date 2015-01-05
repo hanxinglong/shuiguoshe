@@ -1,6 +1,9 @@
 window.App =
   alert: (msg, to) ->
-    $(to).before("<div data-alert class='alert-message'><a class='close' href='#'>×</a>#{msg}</div>")
+    $(to).before("<div class='alert alert-danger'><a class='close' href='#' data-dismiss='alert'>×</a>#{msg}</div>")
+  
+  notice: (msg, to) ->
+    $(to).before("<div class='alert alert-success'><a class='close' href='#' data-dismiss='alert'>×</a>#{msg}</div>")
   
   doSaveAddress: (el) ->
     id = $(el).data("user-id")
@@ -27,6 +30,52 @@ window.App =
           # body...
         # alert(re)
         # $('.address-html-container').html(re)
+        
+  getCode: (el) ->
+    if $(el).data("loading") == '1'
+      return false
+      
+    mobile = $("#user_mobile").val()
+    blank_mobile = mobile.replace(/\s+/, "")
+    if blank_mobile.length == 0
+      App.alert("手机号不能为空", $('#new_user'))
+      return false
+      
+    reg = /^(?:13\d|15[89])-?\d{5}(\d{3}|\*{3})$/
+    if not reg.test(mobile)
+      App.alert("不正确的手机号", $('#new_user'))
+      return false
+      
+    $(el).attr("disabled", true)
+    $(el).data("loading", '1')
+    $(el).text('59秒重新获取')
+    total = 58
+    setTimeout (f = (->
+      if total == -1
+        clearInterval(f)
+        $(el).removeAttr("disabled")
+        $(el).text("获取验证码")
+        $(el).data("loading", '0')
+        return
+      $(el).text((total--) + '秒重新获取')
+      setTimeout(f, 1000)
+      
+        
+    )), 1000
+    # setTimeout =>
+
+    #     , 1000
+    
+    $.ajax
+      url: "http://shuiguoshe.com/api/v1/auth_codes"
+      type: "POST"
+      data: { mobile: mobile, type: 1 }
+      success: (re) -> 
+        # $(el).removeAttr("disabled")
+        if re.code == 0
+          App.notice("获取验证码成功", $('#new_user'))
+        else
+          App.alert(re.message, $('#new_user'))
   
   addToCart: (el) ->
     loading = $(el).data("loading")

@@ -36,14 +36,13 @@
       }) do |f| %>
   
       <%= render 'shared/error_messages', target: resource if params[:by].blank? %>
-        <%= f.input :mobile, label: "手机", input_html: { style: "width:300px;" } %>
+        <%= f.input :mobile, label: "手机", disabled: true, input_html: { style: "width:300px;", value: current_user.hack_mobile } %>
         <%- if resource.avatar %>
           <div class="col-sm-offset-3">
             <%= user_avatar_tag(resource,:big) %>
           </div>
         <%- end %>
         <%= f.input :avatar, label: "头像", input_html: { style: "width:300px;" } %>
-        <%= f.input :email, label: "邮箱", disabled: true, input_html: { style: "width:300px;" } %>
     
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">
