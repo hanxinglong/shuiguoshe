@@ -37,18 +37,20 @@
     </footer>
   <% else %>
   <div id="wrap">
-    <%= render 'layouts/header' %>
+    <div id="main">
+      <%= render 'layouts/header' %>
   
-    <div class="container">
-      <% if content_for?(:sitemap) %>
-      <div class="container-box sitemap">
-        <h2><a href="<%= root_path %>">首页</a> &gt;
-          <%= yield :sitemap %>
-        </h2>
+      <div class="container">
+        <% if content_for?(:sitemap) %>
+        <div class="container-box sitemap">
+          <h2><a href="<%= root_path %>">首页</a> &gt;
+            <%= yield :sitemap %>
+          </h2>
+        </div>
+        <% end %>
+        <%= notice_message %>
+        <%= content_for?(:content) ? yield(:content) : yield %>
       </div>
-      <% end %>
-      <%= notice_message %>
-      <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
   </div>
   <%= render 'layouts/footer' %>

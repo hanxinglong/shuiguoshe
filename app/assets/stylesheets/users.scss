@@ -172,6 +172,11 @@ $gray-medium-light: #eaeaea;
   }
 }
 
+.user-layout {
+  padding: 15px 0;
+  background-color: white;
+}
+
 .slide-left {
   border-bottom: none;
   .list-group-item {
@@ -214,5 +219,18 @@ $gray-medium-light: #eaeaea;
     &:hover {
       border: 0;
     };
+  }
+}
+
+.footer2 {
+  text-align: center;
+  margin-top: 30px;
+  color: rgb(166,166,166);
+  a {
+    color: rgb(166,166,166);
+  }
+  small, small a {
+    text-align: center;
+    color: rgb(150,150,150);
   }
 }
