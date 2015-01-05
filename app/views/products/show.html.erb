@@ -6,13 +6,8 @@
   <% end %>
 <% end %>
 
-<div class="user-box container-box" id="product-<%= @product.id %>">
-  <div class="product-info">
-    <h3><%= @product.title %></h3>
-    <div class="product-intro">
-      <%= @product.intro %>
-    </div>
-  </div>
+<div class="product-container-box" id="product-<%= @product.id %>">
+  <h1 class="f18"><%= @product.title %></h1>
   <div class="row">
     <div class="col-sm-5">
       <%= image_tag @product.image_url(:large), alt: @product.title %>
@@ -40,20 +35,29 @@
       <%= add_to_cart_tag @product, "btn btn-success" %>
     </div>
   </div>
+  
+  <div class="product-info">
+    <div class="product-intro">
+      <h2 class="f16">商品简介</h2>
+      <p><%= @product.intro %></p>
+    </div>
+    <% if @product.note %>
+      <div class="product-note">
+        <h2 class="f16">温馨提示</h2>
+        <p><%= @product.note %></p>
+      </div>
+    <% end %>
+  </div>
+  
+  <% if @product.summary_image.present? %>
+  <div class="summary-image">
+    <%= image_tag @product.summary_image.url(:normal) %>
+  </div>
+  <% end %>
 </div>
 
 <% content_for :scripts do %>
 <script>
-
-// function updateButtonState() {
-//   var select = $("#order_apartment_id");
-//   if (select.val() == '') {
-//     $("#save_address").attr("disabled", true);
-//   } else {
-//     $("#save_address").removeAttr("disabled");
-//   }
-// }
-
 
 $(function() {
   

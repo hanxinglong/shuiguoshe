@@ -32,6 +32,7 @@
         discount_score: '赠送积分'
         stock_count: '库存'
         delivered_at: '配送时间'
+        summary_image: "摘要图片"
       apartment:
         name: "小区名字"
         address: "小区地址"

@@ -73,5 +73,33 @@
 }
 
 .product-info {
-  margin-bottom: 10px;
+//  margin-bottom: 10px;
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
+  .product-intro, .product-note {
+    margin-top: 5px;
+    h2 {
+      padding: 10px 0;
+      border-bottom: 1px dashed $common-border-color;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.summary-image {
+  margin-top: 20px;
+  text-align: center;
+} 
+
+.product-container-box {
+  margin-top: 20px;
+  background-color: white;
+  padding: 15px 10px;
+  h1 {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 15px;
+  }
 }

@@ -2,6 +2,7 @@
 
 class Product < ActiveRecord::Base
   mount_uploader :image, ImageUploader
+  mount_uploader :summary_image, SummaryImageUploader
   
   has_many :orders
   has_many :line_items
