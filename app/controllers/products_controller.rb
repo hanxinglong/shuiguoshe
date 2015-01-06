@@ -3,24 +3,26 @@ class ProductsController < ApplicationController
   def index
     @products = Product.saled.no_discount
     
-    if params[:type_id]
-      type_id = params[:type_id].to_i
-    else
+    type_id = params[:type_id].to_i
+
+    if type_id < 1
       type_id = 1
     end
     
-    if type_id < 1 or type_id > 2
-      type_id = 1
+    if type_id > 3
+      type_id = 3
     end
     
     params[:type_id] = type_id
     
     @products = @products.where(type_id: type_id).order("created_at DESC")
-
-    if type_id == 1
-      set_seo_meta('当季水果，新鲜水果订购区', @products.map(&:title).join('、'), SiteConfig.fruit_meta_description)
-    else
-      set_seo_meta('各种干果、坚果订购区', @products.map(&:title).join('、'), SiteConfig.nut_meta_description)
+    
+    puts @products.count
+    
+    titles = SiteConfig.product_meta_titles.split('#') if SiteConfig.product_meta_titles
+    descriptions = SiteConfig.product_meta_descriptions.split('#') if SiteConfig.product_meta_descriptions
+    if titles and descriptions
+      set_seo_meta(titles[type_id - 1], @products.map(&:title).join('、'), descriptions[type_id - 1])
     end
 
     @cache_prefix = "products_#{type_id}"

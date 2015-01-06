@@ -3,15 +3,19 @@ $medium-red: rgb(60,155,0);
 $light-gray: #777;
 $gray-medium-light: #eaeaea;
 
+@import "variables";
+
 .user-box {
   h2 {
     font-size: 18px;
     margin:0;
     padding:0;
-    padding: 10px 0;
+    padding: 10px;
     
-    border-bottom: 2px solid $nature-green;
-    margin-bottom: 30px;
+    color: $common-black;
+//    border-bottom: 2px solid $nature-green;
+    margin-bottom: 20px;
+    background-color: white;
   }
 }
 
@@ -239,4 +243,20 @@ $gray-medium-light: #eaeaea;
     text-align: center;
     color: rgb(150,150,150);
   }
+}
+
+.step-info{
+  margin-top: 20px;
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: $common-black;
+  span {
+    padding: 0 10px;
+    &.current {
+      color: $nature-green;
+    }
+  }
+
 }

@@ -3,11 +3,11 @@
 class SidebarAdUploader < BaseUploader
 
   version :small do
-    process resize_to_limit: [144, nil]
+    process resize_to_limit: [113, nil]
   end
   
   version :normal do
-    process resize_to_limit: [288, nil]
+    process resize_to_limit: [226, nil]
   end
 
   def filename

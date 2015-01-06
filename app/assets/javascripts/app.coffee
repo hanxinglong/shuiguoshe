@@ -1,9 +1,9 @@
 window.App =
   alert: (msg, to) ->
-    $(to).before("<div class='alert alert-danger'><a class='close' href='#' data-dismiss='alert'>×</a>#{msg}</div>")
+    $(to).before("<div class='alert alert-danger' id='alert-comp'><a class='close' href='#' data-dismiss='alert'>×</a>#{msg}</div>")
   
   notice: (msg, to) ->
-    $(to).before("<div class='alert alert-success'><a class='close' href='#' data-dismiss='alert'>×</a>#{msg}</div>")
+    $(to).before("<div class='alert alert-success' id='notice-comp'><a class='close' href='#' data-dismiss='alert'>×</a>#{msg}</div>")
   
   doSaveAddress: (el) ->
     id = $(el).data("user-id")
@@ -32,6 +32,8 @@ window.App =
         # $('.address-html-container').html(re)
         
   getCode: (el) ->
+    $('#alert-comp').remove()
+    $('#notice-comp').remove()
     if $(el).data("loading") == '1'
       return false
       
@@ -50,21 +52,16 @@ window.App =
     $(el).data("loading", '1')
     $(el).text('59秒后重新获取')
     total = 58
-    setTimeout (f = (->
+    timer = setInterval (->
       if total == -1
-        clearInterval(f)
+        clearInterval(timer)
         $(el).removeAttr("disabled")
         $(el).text("获取验证码")
         $(el).data("loading", '0')
         return
-      $(el).text((total--) + '秒后重新获取')
-      setTimeout(f, 1000)
       
-        
-    )), 1000
-    # setTimeout =>
-
-    #     , 1000
+      $(el).text((total--) + '秒后重新获取')
+    ), 1000
     
     $.ajax
       url: "http://shuiguoshe.com/api/v1/auth_codes"
@@ -75,6 +72,10 @@ window.App =
         if re.code == 0
           App.notice("获取验证码成功", $('#new_user'))
         else
+          clearInterval(timer)
+          $(el).data("loading", '0')
+          $(el).removeAttr("disabled")
+          $(el).text("获取验证码")
           App.alert(re.message, $('#new_user'))
   
   addToCart: (el) ->

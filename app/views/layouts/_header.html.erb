@@ -1,21 +1,23 @@
 <% 
-if params[:type_id]
-  type = params[:type_id].to_i
-  if type > 2 or type < 1
-    type = 1
-  end
-else
-  type = 0
+
+type = params[:type_id].to_i
+
+if type < 1
+  type = 1
 end
 
-if params[:q]
-  keyword = params[:q].gsub(/\s+/, "")
-else
-  keyword = ""
+if type > 3
+  type = 3
 end
+
+# if params[:q]
+#   keyword = params[:q].gsub(/\s+/, "")
+# else
+#   keyword = ""
+# end
 
  %>
-<% cache ["#{current_user.try(:mobile)}_#{current_user.try(:admin?)}_#{controller_name}_#{type}_#{keyword}_#{@current}", cart.my_cache_key] do %>
+<% cache ["#{current_user.try(:mobile)}_#{current_user.try(:admin?)}_#{controller_name}_#{type}_#{@current}", cart.my_cache_key] do %>
 <%= render '/layouts/topbar' %> <!-- topbar -->
 <%= render '/layouts/logo_bar' %>
 

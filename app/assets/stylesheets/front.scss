@@ -75,6 +75,9 @@
     .vertical-divider {
       color: rgb(230,230,230);
       font-size: 14px;
+      &:last-child {
+        display: none;
+      };
     }
     
   }
@@ -353,9 +356,12 @@
     font-weight: bold;
     margin: 0;
     padding: 0;
-    padding-top: 10px;
-    margin-bottom: 20px;
-    border-top: 2px solid $nature-green;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: $common-black;
+    
+      background-color: white;
+//    border-top: 2px solid $nature-green;
   }
 }
 

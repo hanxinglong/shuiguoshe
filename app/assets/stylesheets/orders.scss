@@ -37,8 +37,13 @@
   }
 }
 
+#new_order {
+  padding-bottom: 20px;
+}
+
 .order-info-container {
   border: 1px solid rgb(213,213,213);
+  
   .common-table {
     td {
       vertical-align: middle;

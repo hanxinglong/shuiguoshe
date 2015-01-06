@@ -18,8 +18,6 @@ end
         <% ProductType.all_types.each do |type| %>
           <%= link_to type.name, category_items_path(type), class: "#{controller_name == 'products' and params[:type_id].to_i == type.id ? "active" : ""}" %><span class="vertical-divider">|</span>
         <% end %>
-        
-        <%= link_to "套餐", root_path, class: "" %>
       </div>
     </div>
     <div class="col-md-5">
