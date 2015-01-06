@@ -27,7 +27,18 @@
   
   <% if mobile? %>
     <nav class="navbar navbar-fixed-top " role="navigation">
-      <a class="logo" href="/">水果社</a>
+      <div class="row">
+        <div class="col-xs-2">
+          <a href="" class="navbar-button"><%= image_tag "user.png", style: "width: 24px; height: 23px" %></a>
+        </div>
+        <div class="col-xs-8">
+          <a class="logo" href="/">水果社</a>
+        </div>
+        <div class="col-xs-2" style="text-align:right">
+          <a href="" class="navbar-button"><%= image_tag "cart-mobile.png", style: "width: 24px; height: 23px" %></a>
+        </div>
+      </div>
+      
     </nav>
     <%= yield %>
     <footer id="footer">
