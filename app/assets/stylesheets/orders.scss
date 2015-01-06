@@ -3,6 +3,7 @@
 .orders {
   padding:0;
   .common-table {
+    background-color: white;
     tr.order-info {
       background-color: rgb(248,248,248);
     }
@@ -22,6 +23,7 @@
 
 .order-detail {
   .common-table {
+    background-color: white;
     td {
       vertical-align: middle;
       text-align: center;
@@ -55,8 +57,9 @@
 
 .order-info-container {
   border: 1px solid rgb(213,213,213);
-  
+  background-color: white;
   .common-table {
+    background-color: white;
     td {
       vertical-align: middle;
     }

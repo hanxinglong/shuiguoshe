@@ -133,6 +133,11 @@ $gray-medium-light: #eaeaea;
   }
 }
 
+#new_message, #new_invite, #edit_user, #edit_user_20 {
+  background-color: white;
+  padding: 20px 0 5px 0;
+}
+
 .user-today-orders {
   clear: both;
 //  border: 1px solid $gray-medium-light;
@@ -148,6 +153,11 @@ $gray-medium-light: #eaeaea;
     margin-bottom: 10px;
   }
   
+}
+
+.user-side-right {
+//  background-color: white;
+//  padding: 10px;
 }
 
 .tab-head {

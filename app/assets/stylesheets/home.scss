@@ -209,8 +209,10 @@
       list-style: none;
       margin: 0;
       padding: 10px 0;
+      background-color: white;
       li {
         padding: 0 10px;
+        font-size: 13px;
         a {
           color: $common-black;
         }
