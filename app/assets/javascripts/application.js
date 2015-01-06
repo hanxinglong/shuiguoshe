@@ -48,12 +48,14 @@ $("#u-cart-result, #cart-panel").on("mouseout", function() {
   $('#u-cart-result').removeClass("cart-result-hover");
 });
 
-$("#u-wechat").on("mouseover", function() {
+$("#u-wechat, #wechat-panel").on("mouseover", function() {
   $(".hover-mask").show();
   $("#wechat-panel").show();
+  $("#u-wechat").addClass("link-text-hover");
 });
 
-$("#u-wechat").on("mouseout", function() {
+$("#u-wechat, #wechat-panel").on("mouseout", function() {
   $(".hover-mask").hide();
   $("#wechat-panel").hide();
+  $("#u-wechat").removeClass("link-text-hover");
 });

@@ -170,8 +170,8 @@
 }
 
 .wechat {
-  margin-top: 15px;
-  margin-left: 80px;
+  margin-top: 13px;
+  margin-left: 150px;
   color: $common-black;
 //    text-decoration: none;
   font-size: 18px;
@@ -181,16 +181,19 @@
     color: rgb(230,230,230);
   }
   .link-text{
+    background: image-url('icon-weixin.png') 10px center no-repeat;
     padding: 10px;
+    text-indent: 30px;
     font-size: 16px;
     display: block;
     z-index: 1;
-    &:hover {
-        cursor:pointer;
-        border: 1px solid $common-border-color;
-        border-bottom: 1px solid white;
-        background-color: white;
-    };
+  }
+  
+  .link-text-hover {
+    cursor:pointer;
+    border: 1px solid $common-border-color;
+    border-bottom: 1px solid white;
+    background-color: white;
   }
   
   .u-show-wechat {
@@ -206,8 +209,13 @@
       left: 0;
       border: 1px solid $common-border-color;
       padding: 20px;
+      &:hover {
+        cursor:default;
+      };
       .wechat-tip {
-        font-size: 14px;
+        width: 150px;
+        font-size: 13px;
+//        padding-right: 20px;
         color: rgb(150,150,150);
       }
       img {
