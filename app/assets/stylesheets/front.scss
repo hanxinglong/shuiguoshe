@@ -416,10 +416,12 @@
 }
 
 .help-section {
+  background-color: white;
   border: 1px solid $common-border-color;
   padding-bottom: 60px;
   h2 {
     border-bottom: 1px solid $common-border-color;
+    background-color: rgb(245,245,245);
   }
   ul {
     list-style: none;
@@ -435,6 +437,11 @@
       }
     }
   }
+}
+
+.help-detail-section {
+  background-color: white;
+  padding: 10px 10px 0 10px;
 }
 
 .help-item {
