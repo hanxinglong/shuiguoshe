@@ -24,7 +24,9 @@ $gray-medium-light: #eaeaea;
   background-color: rgb(251,248,240);
   .user-login-form {
     padding: 10px 50px;
-    position: relative;
+    #new_user {
+      position: relative;
+    }
     h2 {
       padding: 10px 0;
       font-size: 18px;
@@ -39,8 +41,8 @@ $gray-medium-light: #eaeaea;
     }
     .get-auth-code {
       position: absolute;
-      right: 158px;
-      top: 175px;
+      right: 118px;
+      top: 84px;
     }
   }
   
