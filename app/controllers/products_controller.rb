@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     end
 
     @cache_prefix = "products_#{type_id}"
-    
+    @current = 'products_index'
     fresh_when(etag: [@products, @cache_prefix])
     
   end
@@ -59,11 +59,8 @@ class ProductsController < ApplicationController
       fresh_when etag: @product
       set_seo_meta(@product.title, '', @product.intro)
       
-      if @product.type_id == 1
-        @type = '水果'
-      else
-        @type = '干果'
-      end
+      types = ProductType.all_types.map { |t| t.name }
+      @type = types[@product.type_id - 1]
       
     end
   end
