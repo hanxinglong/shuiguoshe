@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   layout 'help_layout', only: [:order_help, :pay_help, :deliver_help]
   def index
     @banners = Banner.sorted.limit(4)
-    @products = Product.hot.saled.order("created_at DESC").limit(6)
+    @products = Product.hot.saled.no_discount.order("created_at DESC").limit(6)
     # @suggest_products = Product.suggest.limit(6)
     
     @sales = Sale.recent
