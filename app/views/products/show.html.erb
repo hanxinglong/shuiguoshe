@@ -1,3 +1,82 @@
+<% if mobile? %>
+  <% content_for :left_bar_button do %>
+    <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
+  <% end %>
+
+  <% content_for :right_bar_button do %>
+    <a href="<%= root_path %>" class="navbar-button right home"></a>
+  <% end %>
+  
+  <div class="container">
+    <div class="product-detail">
+      <div class="large-image">
+        <%= image_tag @product.image_url(:large), alt: @product.title, class: "img-responsive" %>
+      </div>
+      <h1 class="title"><%= @product.title %></h1>
+      
+      <div class="price-extra">
+        <div class="row">
+          <div class="col-xs-6">
+            <span class="low-price">￥<%= product_price_tag(@product.low_price) %></span>
+            <span class="origin-price"><del>￥<%= product_price_tag(@product.origin_price) %></del></span>
+          </div>
+          <div class="col-xs-6 time-left">
+            <span id="timeLeft"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="extra-info">
+        <div class="item-line score">
+          <%= render_discount_score(@product) %>
+        </div>
+        <div class="item-line">
+          规格：<span class="text-muted"><%= @product.units %></span>
+        </div>   
+        <div class="item-line">
+          <span class="text-muted small"><%= render_deliver_info(@product) %></span>
+        </div>
+        <div class="item-line">已售<span class="price-numeric"><%= @product.orders_count %></span>件</div>
+      </div>
+      
+      <div class="extra-summary">
+        <% if @product.intro.present? %>
+          <div class="item-extra-info">
+            <h2>商品简介</h2>
+            <p><%= @product.intro %></p>
+          </div>
+        <% end %>
+        <% if @product.note.present? %>
+          <div class="item-extra-info">
+            <h2>温馨提示</h2>
+            <p><%= @product.note %></p>
+          </div>
+        <% end %>
+  
+        <% if @product.summary_image.present? %>
+          <div class="item-extra-info">
+            <%= image_tag @product.summary_image.url(:normal), class: "img-responsive" %>
+          </div>
+        <% end %>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <div class="bottom-buttons">
+    <div class="row">
+      <div class="col-xs-6 button-container first">
+        <a href="<%= show_cart_path %>" class="show-cart"></a>
+      </div>
+      <div class="col-xs-6 button-container">
+        <%= link_to "加入购物车", "#" %>
+      </div>
+    </div>
+  </div>
+  
+<% else %>
+
 <% content_for :sitemap do %>
   <% if @product.sale.present? %>
     <a href="<%= sale_path(@product.sale) %>" title="<%= @product.sale.title %>"><%= @product.sale.title %></a> &gt; <span class="current"><%= @product.title %></span>
@@ -10,7 +89,7 @@
   <h1 class="f18"><%= @product.title %></h1>
   <div class="row">
     <div class="col-sm-5">
-      <%= image_tag @product.image_url(:large), alt: @product.title %>
+      <%= image_tag @product.image_url(:large), alt: @product.title, class: "img-responsive" %>
     </div>
     <div class="col-sm-7 product-detail">
       <div class="item-line green f30 price-numeric">
@@ -55,6 +134,8 @@
   </div>
   <% end %>
 </div>
+
+<% end %>
 
 <% content_for :scripts do %>
 <script>

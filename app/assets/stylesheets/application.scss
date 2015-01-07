@@ -50,6 +50,13 @@ body:before {
   margin-top: -32767px;
 };
 
+.btn-success {
+  background-color: $nature-green;
+  &:hover {
+    background-color: rgb(6,128,18);
+  };
+}
+
 #main {
   overflow: auto;
   padding-bottom: 170px;

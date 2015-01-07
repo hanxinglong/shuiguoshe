@@ -7,7 +7,7 @@
           <div class="titile-info">
             <h1 class="title"><%= truncate(item.title, length: 8) %></h6>
           </div>
-          <div class="text-muted small-text units">（<%= item.units %>）</div>
+          <div class="text-muted small-text units"><%= item.units %></div>
           <div class="price">
             <span class="green">￥<span class="numeric"><%= number_with_precision(item.low_price, precision: 2) %></span></span>
             <del class="text-muted small-text">￥<%= number_with_precision(item.origin_price, precision: 2) %></del>
