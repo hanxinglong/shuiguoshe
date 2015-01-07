@@ -79,7 +79,6 @@ class ApplicationController < ActionController::Base
   end
   
   def fresh_when(opts = {})
-    return 
     return if Rails.env.development?
     # return if Rails.env.production?
     opts[:etag] ||= []
