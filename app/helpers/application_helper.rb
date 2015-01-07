@@ -24,8 +24,9 @@ module ApplicationHelper
   end
   
   def cache_key_for(prefix = '', array = [])
-    return [prefix, "empty"] if array.blank?
-    [prefix, array.map(&:updated_at).max.strftime("%Y%m%d%H%M%S")]
+    return [prefix, "empty"] if array.empty?
+    #[prefix, array.map(&:updated_at).max.strftime("%Y%m%d%H%M%S")]
+    [prefix, array]
   end
   
   # state: true, yes_uri: "/cpanel/users/1/block", yes_text: "禁用", no_uri: "/cpanel/users/1/unblock", no_text: "启用"
