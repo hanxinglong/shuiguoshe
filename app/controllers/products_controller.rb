@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
     @cache_prefix = "products_#{type_id}"
     
     fresh_when(etag: [@products, @cache_prefix])
-    puts @products.map { |p| "#{p.title} - #{p.id}" }
+    # puts @products.map { |p| "#{p.title} - #{p.id}" }
   end
   
   def search
