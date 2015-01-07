@@ -116,11 +116,13 @@
   </div>
   
   <div class="product-info">
+    <% if @product.intro.present? %>
     <div class="product-intro">
       <h2 class="f16">商品简介</h2>
       <p><%= @product.intro %></p>
     </div>
-    <% if @product.note %>
+    <% end %>
+    <% if @product.note.present? %>
       <div class="product-note">
         <h2 class="f16">温馨提示</h2>
         <p><%= @product.note %></p>

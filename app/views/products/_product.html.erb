@@ -2,7 +2,7 @@
 <div class="product" onmouseover="$(this).find('#cart-btn-<%= product.id %>').show();" onmouseout="$(this).find('#cart-btn-<%= product.id %>').hide();">
   <div class="col-md-<%= controller_name == "home" ? 4 : 3 %>" id="product-<%= product.id %>">
     <div class="thumbnail">
-      <a href="<%= product_path(product) %>" class="item-link" target="_blank" title="<%= product.title %>">
+      <a href="<%= product_path(product) %>" class="item-link" target="<%= mobile? ? "" : "_blank" %>" title="<%= product.title %>">
         <%= image_tag product.image.thumb, alt: product.title, class: "img-responsive" %>
         <div class="caption">
           <h6 class="name"><%= product.title %></h6>
