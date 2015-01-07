@@ -17,8 +17,6 @@ class ProductsController < ApplicationController
     
     @products = @products.where(type_id: type_id).order("created_at DESC")
     
-    puts @products.count
-    
     titles = SiteConfig.product_meta_titles.split('#') if SiteConfig.product_meta_titles
     descriptions = SiteConfig.product_meta_descriptions.split('#') if SiteConfig.product_meta_descriptions
     if titles and descriptions
@@ -28,6 +26,7 @@ class ProductsController < ApplicationController
     @cache_prefix = "products_#{type_id}"
     
     fresh_when(etag: [@products, @cache_prefix])
+    puts @products.map { |p| "#{p.title} - #{p.id}" }
   end
   
   def search

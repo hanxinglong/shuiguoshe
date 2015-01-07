@@ -38,7 +38,7 @@ class Product < ActiveRecord::Base
     if line_items.empty?
       return true
     else
-      errors.add(:base, '改产品已经被添加到了购物车，不能被删除')
+      errors.add(:base, '该产品已经被添加到了购物车，不能被删除')
       return false
     end
   end
