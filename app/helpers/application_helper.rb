@@ -70,6 +70,22 @@ module ApplicationHelper
     html.html_safe
   end
   
+  def render_mobile_grid_for(collection, partial, cell_count = 2)
+    html = ""
+    collection.each_with_index do |item, index|
+      if index % cell_count == 0
+        html += '<div class="row">'
+      end
+      
+      html += render partial, item: item, index: index
+      
+      if index % cell_count == cell_count -1 or index == collection.size - 1
+        html += '</div>'
+      end
+    end
+    html.html_safe
+  end
+  
   MOBILE_USER_AGENTS =  'palm|blackberry|nokia|phone|midp|mobi|symbian|chtml|ericsson|minimo|' +
                         'audiovox|motorola|samsung|telit|upg1|windows ce|ucweb|astel|plucker|' +
                         'x320|x240|j2me|sgh|portable|sprint|docomo|kddi|softbank|android|mmp|' +

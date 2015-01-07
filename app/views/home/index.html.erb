@@ -30,16 +30,24 @@
 
 <% if mobile? %>
 <div class="container">
-  <div class="row sales">
-    <% @sales.each_with_index do |sale,index| %>
-    <div class="col-xs-6 <%= index % 2 == 0 ? "last" : "" %>">
-      <div class="sale">
-        <%= sale.title %>
-      </div>
+  <div class="row product_types">
+    <% ProductType.all_types.each do |type| %>
+    <div class="col-sm-4 col-xs-4">
+      <%= link_to type.name, category_items_path(type) %>
     </div>
     <% end %>
   </div>
 </div>
+
+<div class="container">
+  <div class="home-hot-sales">
+    <h2>热门预订</h2>
+    <div class="items-list">
+      <%= render_mobile_grid_for(@products, "/products/product_mobile") %>
+    </div>
+  </div>
+</div>
+
 <% end %>
 
 <% if not mobile? %>
@@ -75,7 +83,6 @@
   </div>
 </div>
 <% end %>
-
 
 <div class="row home-content-box">
   <div class="col-md-9">

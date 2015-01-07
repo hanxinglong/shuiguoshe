@@ -4,6 +4,8 @@
  *= require_self
  */
 
+@import "variables";
+
 html {
   width: 100%;
 }
@@ -11,6 +13,13 @@ html {
 body {
   width: 100%;
   padding-top: 40px;
+  background-color: white;
+  
+  color: rgb(80,80,80);
+}
+
+a {
+  color: rgb(80,80,80);
 }
 
 .navbar-button {
@@ -25,9 +34,8 @@ body {
   }
   
   &.right {
-//    text-align: right;
-float: right;
-margin-right: 5px;
+    float: right;
+    margin-right: 5px;
   }
   &.left {
     margin-left: 5px;
@@ -41,6 +49,72 @@ margin-right: 5px;
   height: 40px;
   line-height: 40px;
   text-align: center;
+}
+
+.product_types {
+  margin-top: 0.8em;
+  .col-xs-6 {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  a {
+    display: block;
+    background-color: rgb(235,235,235);
+    text-align: center;
+    font-size: 1.2em;
+    padding: 5px 1.2em;
+    color: rgb(80,80,80);
+  }
+}
+
+.home-hot-sales {
+  h2 {
+    font-size: 1.2em;
+    color: rgb(80,80,80);
+  }
+  .col-xs-6 {
+    &.odd {
+      padding-left: 5px;
+      padding-right: 10px;
+    }
+    
+    &.even {
+      padding-left: 10px;
+      padding-right: 5px;
+    }
+  }
+}
+
+.items-list {
+  .product {
+    .title {
+      color: black;
+      font-size: 90%;
+      margin: 0;
+      margin-top: 10px;
+      width: 70%;
+    }
+    .price {
+      margin-top: 5px;
+    }
+    .green {
+      color: $nature-green;
+    }
+    .numeric {
+      font-size: 1em;
+    }
+    .small-text {
+      font-size: 0.8em;
+    }
+    .units {
+      width: 30%;
+      text-align: right;
+    }
+    .purchased {
+      background-color: $nature-green;
+      color: white;
+    }
+  }
 }
 
 .sales {
