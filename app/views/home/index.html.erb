@@ -1,3 +1,13 @@
+<% if mobile? %>
+  <% content_for :left_bar_button do %>
+    <a href="<%= home_user_path %>" class="navbar-button left user"></a>
+  <% end %>
+
+  <% content_for :right_bar_button do %>
+    <a href="<%= show_cart_path %>" class="navbar-button right cart"></a>
+  <% end %>
+<% end %>
+
 <div class="home-ads-container">
   <% cache cache_key_for('carousel_ads', @banners) do %>
   <div id="carousel-ads" class="carousel slide" data-ride="carousel">
@@ -42,9 +52,13 @@
 <div class="container">
   <div class="home-hot-sales">
     <h2>热门预订</h2>
-    <div class="items-list">
-      <%= render_mobile_grid_for(@products, "/products/product_mobile") %>
-    </div>
+    <% if @products.any? %>
+      <% cache cache_key_for('home_hot_items_mobile', @products) do %>
+      <div class="items-list">
+        <%= render_mobile_grid_for(@products, "/products/product_mobile") %>
+      </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
 

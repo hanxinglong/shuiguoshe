@@ -5,9 +5,9 @@
         <a href="<%= product_path(item) %>" class="item-link" title="<%= item.title %>">
           <%= image_tag item.image.thumb, alt: item.title, class: "img-responsive" %>
           <div class="titile-info">
-            <div class="text-muted small-text units pull-right">(<%= item.units %>装)</div>
-            <h1 class="title"><%= truncate(item.title, length: 7) %></h6>
+            <h1 class="title"><%= truncate(item.title, length: 8) %></h6>
           </div>
+          <div class="text-muted small-text units">（<%= item.units %>）</div>
           <div class="price">
             <span class="green">￥<span class="numeric"><%= number_with_precision(item.low_price, precision: 2) %></span></span>
             <del class="text-muted small-text">￥<%= number_with_precision(item.origin_price, precision: 2) %></del>

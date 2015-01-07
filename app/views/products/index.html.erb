@@ -1,3 +1,25 @@
+<% if mobile? %>
+  <% if mobile? %>
+    <% content_for :left_bar_button do %>
+      <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
+    <% end %>
+
+    <% content_for :right_bar_button do %>
+      <a href="<%= root_path %>" class="navbar-button right home"></a>
+    <% end %>
+  <% end %>
+  <div class="container">
+    <div class="items-list" style="margin-top: 20px">
+      <% if @products.any? %>
+      <% cache cache_key_for(@cache_prefix, @products) do %>
+        <%= render_mobile_grid_for @products, "/products/product_mobile" %>
+      <% end %>
+      <% else %>
+        没有记录!
+      <% end %>
+    </div>
+  </div>
+<% else %>
 <div class="row container-box">  
   <div class="col-md-12">
     <% if @products.any? %>
@@ -7,5 +29,7 @@
     <% else %>
       没有记录!
     <% end %>
+    </div>
   </div>
-</div>
+<% end %>
+

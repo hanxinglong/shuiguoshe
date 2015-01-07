@@ -12,10 +12,16 @@ html {
 
 body {
   width: 100%;
-  padding-top: 40px;
+  padding-top: 44px;
+  padding-top: 4.4rem;
   background-color: white;
   
   color: rgb(80,80,80);
+}
+
+.navbar {
+  height: 44px;
+  height: 4.4rem;
 }
 
 a {
@@ -24,91 +30,134 @@ a {
 
 .navbar-button {
   display: block;
-  height: 24px;
-  margin-top: 8px;
-  width: 24px;
-  img {
-    display: block;
-    width: 24px;
-    height: 23px;
-  }
+  height: 44px;
+  height: 4.4rem;
+//  margin-top: 8px;
+//  margin-top: 0.8rem;
+  width: 45px;
+  width: 4.5rem;
   
   &.right {
     float: right;
     margin-right: 5px;
+    margin-right: 0.5rem;
   }
   &.left {
     margin-left: 5px;
+    margin-left: 0.5rem;
   }
+}
+
+.user {
+  background: image-url("user.png") center center no-repeat;
+}
+
+.cart {
+  background: image-url("cart-mobile.png") center center no-repeat;
+}
+
+.back {
+  background: image-url("back.png") center center no-repeat;
+}
+
+.home {
+  background: image-url("home.png") center center no-repeat;
 }
 
 .logo {
   display: block;
   margin: 0 auto;
   width: 150px;
-  height: 40px;
-  line-height: 40px;
+  width: 15rem;
+  height: 44px;
+  height: 4.4rem;
+  line-height: 44px;
+  line-height: 4.4rem;
   text-align: center;
 }
 
 .product_types {
-  margin-top: 0.8em;
+  margin-top: 8px;
+  margin-top: 0.8rem;
   .col-xs-6 {
     padding-left: 5px;
+    padding-left: 0.5rem;
+
     padding-right: 5px;
+    padding-right: 0.5rem;
   }
   a {
+    text-decoration: none;
     display: block;
     background-color: rgb(235,235,235);
     text-align: center;
-    font-size: 1.2em;
-    padding: 5px 1.2em;
+    font-size: 18px;
+    font-size: 1.8rem;
+    padding: 5px 14px;
+    padding: 0.5rem 1.4rem;
     color: rgb(80,80,80);
   }
 }
 
 .home-hot-sales {
   h2 {
-    font-size: 1.2em;
+    font-size: 18px;
+    font-size: 1.8rem;
     color: rgb(80,80,80);
-  }
-  .col-xs-6 {
-    &.odd {
-      padding-left: 5px;
-      padding-right: 10px;
-    }
-    
-    &.even {
-      padding-left: 10px;
-      padding-right: 5px;
-    }
   }
 }
 
-.items-list {
+.items-list {  
   .product {
+    a {
+      text-decoration: none;
+    }
+    .col-xs-6 {
+      &.odd {
+        padding-left: 5px;
+        padding-left: 0.5rem;
+        padding-right: 10px;
+        padding-right: 1rem;
+      }
+    
+      &.even {
+        padding-left: 10px;
+        padding-left: 1rem;
+        padding-right: 5px;
+        padding-right: 0.5rem;
+      }
+    }
+    
     .title {
       color: black;
-      font-size: 90%;
+      font-size: 16px;
+      font-size: 1.6rem;
+//      font-size: 90%;
       margin: 0;
       margin-top: 10px;
-      width: 70%;
+      margin-top: 1rem;
+      width: 100%;
     }
-    .price {
-      margin-top: 5px;
-    }
+
     .green {
       color: $nature-green;
     }
     .numeric {
-      font-size: 1em;
+      font-size: 16px;
+      font-size: 1.6rem;
     }
     .small-text {
-      font-size: 0.8em;
+      font-size: 12px;
+      font-size: 1.2rem;
     }
     .units {
-      width: 30%;
-      text-align: right;
+      margin-top: 5px;
+      margin-top: 0.5rem;
+      font-size: 14px;
+      font-size: 1.4rem;
+//      width: 30%;
+//      background:red;
+//      text-align: right;
     }
     .purchased {
       background-color: $nature-green;
@@ -119,11 +168,14 @@ a {
 
 .sales {
   margin-bottom: 10px;
+  margin-bottom: 1rem;
   .sale {
     background-color: rgb(235,235,235);
     padding: 10px;
+    padding: 1rem;
     text-align: center;
     margin-top: 8px;
+    margin-top: 0.8rem;
   }
   
   .col-xs-6 {
@@ -138,6 +190,10 @@ a {
 #footer {
   margin: 0 auto;
   border: 0;
+  margin-top: 20px;
+  margin-top: 2rem;
+  padding-bottom: 40px;
+  padding-bottom: 4rem;
   p {
     text-align: center;
   }
