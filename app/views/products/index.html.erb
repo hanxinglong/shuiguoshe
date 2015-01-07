@@ -10,7 +10,7 @@
   <div class="container">
     <div class="items-list" style="margin-top: 20px">
       <% if @products.any? %>
-      <% cache cache_key_for(@cache_prefix, @products) do %>
+      <% cache cache_key_for("#{@cache_prefix}_mobile", @products) do %>
         <%= render_mobile_grid_for @products, "/products/product_mobile" %>
       <% end %>
       <% else %>
