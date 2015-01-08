@@ -95,7 +95,6 @@ window.App =
           
         else
           
-    
   checkValue: (el) ->
     reg = /^[+]?(([1-9]\d*[.]?)|(0.))(\d{0,2})?$/
     value = $(el).val()
