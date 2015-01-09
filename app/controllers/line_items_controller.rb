@@ -44,6 +44,11 @@ class LineItemsController < ApplicationController
   end
 
   def update
+    
+    if current_user.id != @line_item.cart.user_id
+      return false
+    end
+    
     @type = params[:type]
     @success = false
     
@@ -69,6 +74,10 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
+    if current_user.id != @line_item.cart.user_id
+      return false
+    end
+    
     @line_item_id = "line_item_#{@line_item.id}"
     @order_line_item_id = "order_line_item_#{@line_item.id}"
     

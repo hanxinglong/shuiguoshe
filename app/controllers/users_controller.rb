@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   
   def update_address
     @success = true
-    @user = User.find_by_id(params[:user_id])
+    @user = current_user #User.find_by_id(params[:user_id])
     @user.apartment_id = params[:address].to_i
     if @user.apartment_id.blank?
       return

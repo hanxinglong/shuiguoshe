@@ -35,6 +35,11 @@ module OrdersHelper
     ( order.can_cancel? and order.state?(:normal) )
   end
   
+  def can_complete?(order)
+    return false if order.blank?
+    ( order.can_complete? and order.state?(:delivering) )
+  end
+  
   def order_total_price(cart)
     return 0 if cart.total_price == 0
     cart.total_price - ( user_discount_score(cart.total_price) / 100.0 )

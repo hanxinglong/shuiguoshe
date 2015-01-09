@@ -181,6 +181,25 @@ window.App =
   # 新建订单
   createOrder: (el) ->
     
+  
+  # 完成订单
+  completeOrder: (el) ->
+    loading = $(el).data("loading")
+    if loading == '1'
+      return false
+    
+    $(el).data("loading", '1')
+    
+    id = $(el).data("id")
+    current = $(el).data("current")
+    
+    $.ajax
+      url: "/orders/#{id}/complete"
+      type: "PATCH"
+      data: { 'current': current }
+      
+    
+    
   # 取消订单
   cancelOrder: (el) ->
     result = confirm("您确定吗？")
