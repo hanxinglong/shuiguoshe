@@ -1,5 +1,6 @@
 # coding: utf-8
 class Cpanel::SalesController < Cpanel::ApplicationController
+  before_action :check_is_super_manager
   before_action :set_sale, only: [:show, :edit, :update, :destroy, :open, :close]
 
   def index

@@ -1,5 +1,7 @@
 # coding: utf-8
 class Cpanel::ApartmentsController < Cpanel::ApplicationController
+  before_action :check_is_admin, except: [:destroy]
+  before_action :check_is_super_manager
   before_action :set_apartment, only: [:show, :edit, :update, :destroy, :open, :close]
 
   def index

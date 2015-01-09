@@ -28,7 +28,9 @@
             <td><%= banner.intro %></td>
             <td>
               <%= link_to '编辑', edit_cpanel_banner_path(banner), class: "btn btn-xs btn-default" %>
+              <% if current_user.super_manager? %>
               <%= link_to '删除', [:cpanel, banner], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+              <% end %>
             </td>
           </tr>
         <% end %>

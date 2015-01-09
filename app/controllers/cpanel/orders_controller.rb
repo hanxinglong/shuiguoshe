@@ -1,6 +1,6 @@
 # coding: utf-8
 class Cpanel::OrdersController < Cpanel::ApplicationController
-  
+  before_action :check_is_admin, except: [:destroy]
   before_action :set_order, only: [:cancel, :complete, :prepare_deliver, :deliver]
   
   def index

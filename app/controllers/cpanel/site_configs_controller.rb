@@ -1,6 +1,8 @@
 class Cpanel::SiteConfigsController < Cpanel::ApplicationController
+  before_action :check_is_admin, only: [:index]
+  before_action :check_is_super_manager
   before_action :set_site_config, only: [:show, :edit, :update, :destroy]
-
+  
   respond_to :html
 
   def index
@@ -40,4 +42,5 @@ class Cpanel::SiteConfigsController < Cpanel::ApplicationController
     def site_config_params
       params.require(:site_config).permit(:key, :value, :description)
     end
+    
 end

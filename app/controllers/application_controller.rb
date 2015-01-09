@@ -93,6 +93,7 @@ class ApplicationController < ActionController::Base
     opts[:etag] << flash
     # 所有 etag 保持一天
     opts[:etag] << SiteConfig.welcome_html
+    opts[:etag] << SiteConfig.contact_us
     opts[:etag] << Date.current
     super(opts)
   end

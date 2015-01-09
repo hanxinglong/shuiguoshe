@@ -52,7 +52,7 @@
             <td><%= order.mobile %></td>
             <td><%= order.apartment.try(:name) %></td>
             <td><%= order.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
-            <td><%= order.user.mobile %></td>
+            <td><%= order.user.try(:mobile) %></td>
             <td><%= render_order_state(order) %></td>
             <td><%= order.note %></td>
             <td>
@@ -75,6 +75,6 @@
     </table>
   </div>
   
-  <div class="center"><%= will_paginate @orders %></div>
+  <div class="text-center"><%= will_paginate @orders, renderer: BootstrapPagination::Rails %></div>
   
 </div>

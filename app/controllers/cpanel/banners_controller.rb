@@ -1,4 +1,5 @@
 class Cpanel::BannersController < Cpanel::ApplicationController
+  before_action :check_destroy_authorize, except: [:destroy]
   before_action :set_banner, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -44,4 +45,5 @@ class Cpanel::BannersController < Cpanel::ApplicationController
     def banner_params
       params.require(:banner).permit(:title, :subtitle, :intro, :image, :url, :sort)
     end
+    
 end

@@ -79,8 +79,23 @@ class User < ActiveRecord::Base
     end
   end
   
+  # 超级管理员
+  def super_manager?
+    Setting.admin_users.include?(self.mobile)
+  end
+  # 管理员拥有所有权限
   def admin?
-    Setting.admin_users.include?(self.mobile) or ( SiteConfig.admin_users.split(",").include?(self.mobile) if SiteConfig.admin_users )
+    super_manager? or ( SiteConfig.admin_users.split(",").include?(self.mobile) if SiteConfig.admin_users )
+  end
+  
+  # 站点数据编辑人员
+  def site_editor?
+    admin? or ( SiteConfig.site_editors.split(",").include?(self.mobile) if SiteConfig.site_editors )
+  end
+  
+  # 市场推广
+  def marketer? 
+    admin? or ( SiteConfig.marketers.split(",").include?(self.mobile) if SiteConfig.marketers )
   end
   
   # 更新积分

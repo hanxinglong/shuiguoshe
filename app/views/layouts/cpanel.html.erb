@@ -38,13 +38,25 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="/cpanel">首页</a></li>
+            <% if current_user.admin? %>
             <li><%= link_to "站点配置", cpanel_site_configs_path %></li>
+            <% end %>
             <li><%= link_to '产品种类', cpanel_product_types_path %></li>
+            <% if current_user.super_manager? %>
             <li><%= link_to '卖场', cpanel_sales_path %></li>
+            <% end %>
+            <% if current_user.site_editor? %>
             <li><%= link_to '产品', cpanel_products_path %></li>
+            <% end %>
+            <% if current_user.admin? %>
             <li><%= link_to '小区', cpanel_apartments_path %></li>
+            <% end %>
+            <% if current_user.admin? %>
             <li><%= link_to "用户", cpanel_users_path %></li>
+            <% end %>
+            <% if current_user.admin? %>
             <li><%= link_to "订单", cpanel_orders_path %></li>
+            <% end %>
             <li><%= link_to "Banner", cpanel_banners_path %></li>
             <li><%= link_to "边栏广告", cpanel_sidebar_ads_path %></li>
             <li><%= link_to "公告", cpanel_newsblasts_path %></li>

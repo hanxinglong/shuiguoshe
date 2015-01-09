@@ -1,7 +1,9 @@
 # coding: utf-8
 class Cpanel::ProductTypesController < Cpanel::ApplicationController
+  before_action :check_is_admin, except: [:destroy]
   before_action :set_product_type, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_is_super_manager
+  
   def index
     @product_types = ProductType.order('created_at desc').paginate page: params[:page], per_page: 30
   end

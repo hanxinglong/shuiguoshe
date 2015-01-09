@@ -26,7 +26,9 @@
             <td><%= newsblast.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
             <td>
               <%= link_to '编辑', edit_cpanel_newsblast_path(newsblast), class: "btn btn-xs btn-default" %>
+              <% if current_user.super_manager? %>
               <%= link_to '删除', [:cpanel, newsblast], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+              <% end %>
             </td>
           </tr>
         <% end %>

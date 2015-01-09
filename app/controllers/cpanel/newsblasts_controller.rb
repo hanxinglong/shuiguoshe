@@ -1,4 +1,5 @@
 class Cpanel::NewsblastsController < Cpanel::ApplicationController
+  before_action :check_destroy_authorize, except: [:destroy]
   before_action :set_newsblast, only: [:show, :edit, :update, :destroy]
   
   def index

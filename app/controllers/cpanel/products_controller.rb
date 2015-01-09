@@ -1,5 +1,8 @@
 # coding: utf-8
 class Cpanel::ProductsController < Cpanel::ApplicationController
+  before_action :check_is_site_editor, except: [:destroy, :unsuggest, :suggest, :upshelf, :downshelf]
+  before_action :check_is_admin, except: [:destroy]
+  before_action :check_is_super_manager
   before_action :set_product, only: [:show, :edit, :update, :destroy, :upshelf, :downshelf, :unsuggest, :suggest]
 
   def index
