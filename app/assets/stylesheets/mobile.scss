@@ -205,6 +205,16 @@ a {
   }
 }
 
+.cart-total-price {
+  font-size: 14px;
+  font-size: 1.4rem;
+  padding-left: 10px;
+  .green {
+    color: $nature-green;
+  }
+}
+
+
 .product-detail {
   .large-image {
     margin-bottom: 20px;

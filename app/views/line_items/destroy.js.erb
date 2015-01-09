@@ -57,7 +57,11 @@ $("#user-current-discount-price").text($("#discount-price").data("discount-price
 
 // 处理购物车为空
 if (total == 0) {
+  <% if mobile? %>
+  $("#my-cart").replaceWith("<%= j render 'carts/cart_mobile' %>");
+  <% else %>
   $("#my-cart").replaceWith("<%= j render 'carts/cart_1' %>");
+  <% end %>
   $("#cart_2_panel_body").html("<%= j render 'carts/cart_2' %>");
   
   $("#new_order_line_items").html("<%= j render 'orders/line_items' %>");

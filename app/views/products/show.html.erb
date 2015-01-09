@@ -66,11 +66,15 @@
   
   <div class="bottom-buttons">
     <div class="row">
-      <div class="col-xs-6 button-container first">
-        <a href="<%= show_cart_path %>" class="show-cart"></a>
+      <div class="col-xs-6">
+        <div class="button-container first">
+          <a href="<%= show_cart_path %>" class="show-cart"></a>
+        </div>
       </div>
-      <div class="col-xs-6 button-container">
-        <a onclick="App.addToCart(this)" data-product-id="<%= @product.id %>" id="item-<%= @product.id %>" data-loading="0">加入购物车</a>
+      <div class="col-xs-6">
+        <div class="button-container">
+          <a onclick="App.addToCart(this)" data-product-id="<%= @product.id %>" id="item-<%= @product.id %>" data-loading="0">加入购物车</a>
+        </div>
       </div>
     </div>
   </div>

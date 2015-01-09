@@ -32,7 +32,7 @@
           <%= yield :left_bar_button %>
         </div>
         <div class="col-xs-8">
-          <a class="logo" href="/">水果社</a>
+          <a class="logo" href="/"><%= content_for?(:mobile_title) ? yield(:mobile_title) : "水果社" %></a>
         </div>
         <div class="col-xs-2">
           <%= yield :right_bar_button %>
