@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   resources :orders, except: [:index, :update, :destroy, :edit, :new] do    
     member do 
       patch :cancel
+      # patch :complete
     end
   end
   get '/checkout' => 'orders#new', as: :checkout

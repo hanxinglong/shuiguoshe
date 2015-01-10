@@ -13,9 +13,6 @@
       <% if can_cancel?(order) %>
         <a onclick="App.cancelOrder(this)" data-remote="true" id="item-row-<%= order.id %>-td" data-current="<%= @current %>" data-id="<%= order.id %>" class="btn btn-danger btn-sm">取消订单</a>
       <% end %>
-      <% if can_complete?(order) %>
-        <a onclick="App.completeOrder(this)" data-remote="true" id="item-row-<%= order.id %>-td" data-current="<%= @current %>" data-id="<%= order.id %>" class="btn btn-success btn-sm">确认收货</a>
-      <% end %>
     <% end %>
   </td>
 </tr>
