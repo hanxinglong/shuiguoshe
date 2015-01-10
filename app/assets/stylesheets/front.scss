@@ -48,13 +48,16 @@
 .logo_bar_box {
   padding: 15px 0 17px 0;
   .logo {
+    padding: 0;
+    margin: 0;
     display: block;
+    margin-top: -10px;
     width: 185px;
     height: 68px;
     float: left;
   }
   .nav-menu {
-    margin-left: 200px;
+    margin-left: 190px;
     height: 70px;
     line-height: 70px;
     a {
