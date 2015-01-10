@@ -5,6 +5,11 @@ $gray-medium-light: #eaeaea;
 
 @import "variables";
 
+.user-navbar {
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 10px 0 20px 0;
+}
 .user-box {
   h2 {
     font-size: 18px;
