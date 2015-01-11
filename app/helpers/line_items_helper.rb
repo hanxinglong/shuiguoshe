@@ -34,7 +34,7 @@ module LineItemsHelper
     return "" if item.blank?
     html = <<-HTML
       <span class="quantity-ctrl">
-        <a onclick="App.reduceQuantity(this)" class="reduce" data-loading='0' data-id="#{item.id}" id="reduce-#{item.id}" disabled>&#65293;</a>
+        <a onclick="App.reduceQuantity(this)" class="reduce #{item.quantity == 1 ? "disabled" : ""}" data-loading='0' data-id="#{item.id}" id="reduce-#{item.id}" disabled>&#65293;</a>
         <span class="quantity" id="line_item_quantity_#{item.id}" data-quantity="#{item.quantity}">#{item.quantity}</span>
         <a onclick="App.increaseQuantity(this)" class="increase" data-loading='0' data-id="#{item.id}" id="increase-#{item.id}">+</a>
       </span>

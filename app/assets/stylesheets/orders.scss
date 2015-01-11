@@ -103,6 +103,9 @@
   .quantity {
     padding: 3px 15px;
   }
+  .disabled {
+    background-color: rgb(235,235,235);
+  }
   .reduce, .increase {
     display: inline-block;
     width: 26px;

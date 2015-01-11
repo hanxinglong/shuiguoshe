@@ -2,7 +2,11 @@ $("#<%= @oper_id %>").data("loading", '0');
 
 <% if @success %>
 // 更新条目的信息
+<% if mobile? %>
+$("#cart_1_<%= @line_item_id %>").replaceWith("<%= j render 'line_items/line_item_mobile', line_item: @line_item %>");
+<% else %>
 $("#cart_1_<%= @line_item_id %>").replaceWith("<%= j render @line_item %>");
+<% end %>
 $("#cart_2_<%= @line_item_id %>").replaceWith("<%= j render 'carts/line_item', item: @line_item %>");
 
 // 更新总价
@@ -23,4 +27,5 @@ $("#cart_2_total_items").data("cart-total", total);
 $("#cart_2_total_items").text(total);
 
 $("#cart_2_total_items_2").text(total);
+
 <% end %>
