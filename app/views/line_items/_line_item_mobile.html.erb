@@ -1,3 +1,4 @@
+<% cache [line_item.id, line_item.quantity, line_item.product_updated_at] do %>
 <tr id="cart_1_line_item_<%= line_item.id %>" class="cart-line-item">
   <td width="30%">
     <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product), title: line_item.product.title %>
@@ -25,3 +26,4 @@
     </div>
   </td>
 </tr>
+<% end %>

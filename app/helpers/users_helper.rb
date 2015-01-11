@@ -45,11 +45,11 @@ module UsersHelper
     end
     
     html = <<-HTML
-    <div class="col-sm-4">
+    <div class="col-sm-4 col-xs-6">
        #{select_html}
        #{hide_html}
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-2 col-xs-6">
       <div id="edit-user-apartment">
         #{edit_html}
       </div>

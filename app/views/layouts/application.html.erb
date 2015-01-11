@@ -13,6 +13,7 @@
     <meta content='True' name='HandheldFriendly' />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="apple-touch-icon-precomposed" href="<%= asset_path("favicon.ico") %>" />
+    <%= yield :styles %>
   <% else %>
     <meta name='viewport' content='width=1170'><!-- non responsive -->
     <%= stylesheet_link_tag  'front', 'data-turbolinks-track' => true %>
