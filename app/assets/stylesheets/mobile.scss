@@ -401,6 +401,37 @@ color: white;
   -o-border-radius: 0;
 }
 
+.user-info {
+  margin: 0;
+  text-align: center;
+  height: 213px;
+  background: image-url('user-head-bg.jpg') center center no-repeat;
+  color: white;
+  img {
+    margin-top: 20px;
+  }
+  .mobile {
+    margin-top: 10px;
+  }
+}
+
+.order-info {  
+  .order-states {
+    list-style: none;
+    padding: 10px 0;
+    border-bottom: 1px solid rgb(235,235,235);
+    li {
+      float: left;
+      margin-right: 40px;
+      border-right: 1px solid rgb(235,235,235);
+      text-align: center;
+    }
+    .order-state {
+      text-align: center;
+    }
+  }
+}
+
 .sales {
   margin-bottom: 10px;
   margin-bottom: 1rem;
