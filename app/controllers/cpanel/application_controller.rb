@@ -37,7 +37,7 @@ class Cpanel::ApplicationController < ApplicationController
     end
     
     def check_destroy_authorize
-      unless current_user.super_manager?
+      unless current_user.admin?
         render_404
       end
     end
