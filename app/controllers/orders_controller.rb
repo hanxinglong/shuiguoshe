@@ -120,6 +120,8 @@ class OrdersController < ApplicationController
 
       @order.update_orders_count
       
+      current_user.update_attribute(:apartment_id, @apartment.id)
+      
       flash[:success] = "下单成功"
       redirect_to incompleted_orders_user_path
     else
