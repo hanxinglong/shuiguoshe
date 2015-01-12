@@ -1,3 +1,42 @@
+<% if mobile? %>
+
+<% content_for :left_bar_button do %>
+  <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
+<% end %>
+
+<% content_for :right_bar_button do %>
+  <a href="<%= root_path %>" class="navbar-button right home"></a>
+<% end %>
+
+<div class="container">
+  <div class="points">
+    <div class="alert alert-warning" role="alert" style="margin-top: 20px;">
+      每100积分可以抵扣1.00元，但是积分不能全部用来抵扣一次购物。
+    </div>
+  
+    <h2 class="green">目前的积分为：<%= current_user.score %></h2>
+    
+    <h4>积分使用记录：</h4>
+    
+    <% @traces.each do |trace| %>
+      <div class="row">
+        <div class="col-xs-2">
+          <%= "#{trace.oper_type}#{trace.score}" %>
+        </div>
+        <div class="col-xs-5">
+          <%= trace.summary %>
+        </div>
+        <div class="col-xs-5">
+          <%= trace.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+        </div>
+      </div>
+    <% end %>
+    
+  </div>
+</div>
+
+
+<% else %>
 <div class="user-box">
   <h2>我的积分</h2>
   <div class="alert alert-warning" role="alert" style="margin-top: 20px;">
@@ -30,3 +69,4 @@
     <div class="text-center"><%= will_paginate @traces, renderer: BootstrapPagination::Rails %></div>
   </div>
 </div>
+<% end %>

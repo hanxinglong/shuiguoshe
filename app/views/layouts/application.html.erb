@@ -41,6 +41,10 @@
       </div>
       
     </nav>
+    <div class="container">
+      <%= notice_message if action_name != 'home' %>
+    </div>
+    
     <%= yield %>
     <div id="scrolltop" style="display: none;">返回顶部</div>
     <footer id="footer">

@@ -1,5 +1,41 @@
 <div class="user-box">
   <% if params[:by] == 'pwd' %>
+  
+  <% if mobile? %>
+  <% content_for :mobile_title do %>
+  修改密码
+  <% end %>
+
+  <% content_for :left_bar_button do %>
+    <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
+  <% end %>
+
+  <% content_for :right_bar_button do %>
+    <a href="<%= root_path %>" class="navbar-button right home"></a>
+  <% end %>
+  
+  <div class="container">
+    <div class="user-login-form">
+      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name, by: :pwd), 
+        html: { method: :put, class: '' },
+        wrapper_mappings: {
+          check_boxes: :horizontal_radio_and_checkboxes,
+          radio_buttons: :horizontal_radio_and_checkboxes,
+          file: :horizontal_file_input,
+          boolean: :horizontal_boolean
+        }) do |f| %>
+        <input type="hidden" name="by" value="pwd" />
+        <%= f.input :current_password, label: false, placeholder: "旧密码" %>
+        <%= f.input :password, label:false,placeholder: "新密码" %>
+        <%= f.input :password_confirmation,label: false,placeholder: "确认新密码" %>
+      
+
+        <%= f.submit "修改密码", class: "btn btn-success btn-block", disable_with: '保存中...' %>
+      <% end %>
+    </div>
+  </div>
+  
+  <% else %>
     <h2>修改密码</h2>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name, by: :pwd), 
       html: { method: :put, class: 'form-horizontal' },
@@ -23,7 +59,47 @@
           </div>
         </div>
     <% end %>
+    <% end %>
   <% else %>
+    
+    <% if mobile? %>
+    
+    <% content_for :mobile_title do %>
+    基本资料设置
+    <% end %>
+
+    <% content_for :left_bar_button do %>
+      <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
+    <% end %>
+
+    <% content_for :right_bar_button do %>
+      <a href="<%= root_path %>" class="navbar-button right home"></a>
+    <% end %>
+    
+    <div class="container">
+      <div class="user-login-form">
+        <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), 
+          html: { method: :put, class: '', enctype:  "multipart/form-data" },
+          wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            # file: :horizontal_file_input,
+            boolean: :horizontal_boolean
+          }) do |f| %>
+            
+            <%- if resource.avatar %>
+              <div class="col-xs-offset-3">
+                <%= user_avatar_tag(resource,:big) %>
+              </div>
+            <%- end %>
+            <%= f.input :avatar, label: false %>
+    
+            <%= f.submit "更新资料", class: "btn btn-success btn-block", disable_with:'保存中...' %>
+        <% end %>
+      </div>
+    </div>
+    
+    <% else %>
     <h2>基本资料设置</h2>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), 
       html: { method: :put, class: 'form-horizontal', enctype:  "multipart/form-data" },
@@ -49,6 +125,7 @@
             <%= f.submit "更新资料", class: "btn btn-success", disable_with:'保存中...' %>
           </div>
         </div>
+    <% end %>
     <% end %>
   <% end %>
 </div>

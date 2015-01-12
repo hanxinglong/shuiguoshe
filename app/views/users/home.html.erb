@@ -14,7 +14,7 @@
 
 <div class="user-info">
   <p class="sign-out"><%= link_to "退出登录", destroy_user_session_path, method: :delete, class: "btn btn-xs btn-danger" %></p>
-  <%= user_avatar_tag(current_user, :big) %>
+  <%= link_to user_avatar_tag(current_user, :big), edit_user_registration_path %>
   <div class="mobile"><%= current_user.hack_mobile %></div>
   <div class="score">积分：<%= current_user.score %></div>
 </div>
@@ -63,7 +63,7 @@
     
     <div class="row">
       <div class="col-xs-9">
-        <%= link_to "邀请朋友" %>
+        <%= link_to "邀请朋友", new_invite_path %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -72,7 +72,7 @@
     
     <div class="row">
       <div class="col-xs-9">
-        <%= link_to "激活邀请" %>
+        <%= link_to "激活邀请", active_invite_path %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -81,7 +81,7 @@
     
     <div class="row">
       <div class="col-xs-9">
-        <%= link_to "有话要说" %>
+        <%= link_to "有话要说", new_message_path %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -93,7 +93,7 @@
   <div class="item-info">
     <div class="row">
       <div class="col-xs-9">
-        <%= link_to "基本资料", points_user_path %>
+        <%= link_to "基本资料", edit_user_registration_path %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -102,7 +102,7 @@
     
     <div class="row">
       <div class="col-xs-9">
-        <%= link_to "修改密码" %>
+        <%= link_to "修改密码", edit_user_registration_path(by: 'pwd') %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -111,7 +111,7 @@
     
     <div class="row">
       <div class="col-xs-9">
-        <%= link_to "配送设置" %>
+        <%= link_to "配送设置", edit_user_path %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>

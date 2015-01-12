@@ -1,3 +1,39 @@
+<% if mobile? %>
+
+<% content_for :mobile_title do %>
+激活邀请
+<% end %>
+
+<% content_for :left_bar_button do %>
+  <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
+<% end %>
+
+<% content_for :right_bar_button do %>
+  <a href="<%= root_path %>" class="navbar-button right home"></a>
+<% end %>
+
+<div class="container">
+  <div class="alert alert-warning" role="alert" style="margin-top: 20px;" id="user-alert-warning">
+    成功激活别人对您的邀请，那么您和您的朋友都将获得500积分，可以抵扣5元。
+  </div>
+  
+  <%= simple_form_for(@invite, url: active_code_invite_path, html: { class: "", method: :patch },
+          wrapper_mappings: {
+            check_boxes: :horizontal_radio_and_checkboxes,
+            radio_buttons: :horizontal_radio_and_checkboxes,
+            file: :horizontal_file_input,
+            boolean: :horizontal_boolean
+          }) do |f| %>
+
+      <%= f.input :code, label: false, placeholder:"请输入6位激活码" %>
+    
+      <button type="submit" class="btn btn-success btn-block" data-disable_with="正在提交...">激活</button>
+    
+  <% end %>
+  
+</div>
+
+<% else %>
 <div class="user-box">
   <h2>激活邀请</h2>
   <div class="alert alert-warning" role="alert" style="margin-top: 20px;" id="user-alert-warning">
@@ -21,3 +57,4 @@
     
   <% end %>
 </div>
+<% end %>

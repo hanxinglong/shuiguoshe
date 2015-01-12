@@ -108,14 +108,14 @@ class User < ActiveRecord::Base
       # 赠送积分
       if self.update_attribute('score', self.score + ss)
         # 生成积分交易记录
-        ScoreTrace.create!(score: ss, summary: "#{summary}赠送#{ss}积分", user_id: self.id)
+        ScoreTrace.create!(oper_type: '+', score: ss, summary: "#{summary}赠送#{ss}积分", user_id: self.id)
       end
     else
       if ( self.score + ss ) >= 0
         # 抵扣积分
         if self.update_attribute('score', self.score + ss)
           # 生成积分交易记录
-          ScoreTrace.create!(score: -ss, summary: "#{summary}抵扣￥#{format("%.2f", (-ss/100.0))}", user_id: self.id)
+          ScoreTrace.create!(oper_type: '-', score: -ss, summary: "#{summary}抵扣￥#{format("%.2f", (-ss/100.0))}", user_id: self.id)
         end
       end
     end
