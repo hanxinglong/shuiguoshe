@@ -414,6 +414,9 @@ a {
 }
 
 .user-info {
+  a {
+    text-decoration: none;
+  }
   margin: 0;
   text-align: center;
   height: 213px;
@@ -491,6 +494,13 @@ a {
 input[type="text"], input[type="email"], input[type="search"], input[type="password"], input[type="textarea"] {
 	-webkit-appearance: caret;
 	-moz-appearance: caret; /* mobile firefox too! */
+}
+
+.orders {
+  margin-top: 20px;
+  .order-state {
+    margin-right: 5px;
+  }
 }
 
 .user-login-form {

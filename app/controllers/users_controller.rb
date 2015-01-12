@@ -64,6 +64,7 @@ class UsersController < ApplicationController
     @tag = 'all'
     @cache_prefix = "user_#{current_user.mobile}-#{@current}" 
     fresh_when(etag: [@orders, @current])
+    @mobile_title = "全部订单"
     set_seo_meta("我的订单")
   end
 end

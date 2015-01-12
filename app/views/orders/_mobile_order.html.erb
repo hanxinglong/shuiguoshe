@@ -1,0 +1,39 @@
+<div class="panel panel-default" id="item-row-<%= order.id %>">
+  <div class="panel-heading">
+    订单号：<%= order.order_no %>
+  </div>
+  <div class="panel-body">
+    <% order.line_items.each do |item| %>
+    <div class="row">
+      <div class="col-xs-3">
+        <%= link_to image_tag(item.product.image.url(:small)), item.product %>
+      </div>
+      <div class="col-xs-5">
+        <%= link_to item.product.title, item.product %>
+        <div class="text-muted">
+          ￥<%= product_price_tag(item.product.low_price) %> × <%= item.quantity %>
+        </div>
+      </div>
+      <div class="col-xs-4" style="text-align:right">
+        ￥<%= product_price_tag(item.total_price) %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <div class="panel-footer clearfix">
+    <div class="created-at pull-left">
+      <%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+    </div>
+    <div class="cancel-order pull-right">
+      <% if owner?(order) %>
+        <% if can_cancel?(order) %>
+          <a onclick="App.cancelOrder(this)" data-remote="true" id="item-row-<%= order.id %>-td" data-current="<%= @current %>" data-id="<%= order.id %>" class="btn btn-danger btn-xs">取消订单</a>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="order-state pull-right">
+      <%= render_order_state(order, 13) %>
+    </div>
+    
+  </div>
+</div>

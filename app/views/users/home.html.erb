@@ -32,13 +32,13 @@
       <div class="col-xs-4">
         <div class="order-state">
           <p><%= @completed_count %></p>
-          <p>已完成</p>
+          <%= link_to "已完成", completed_orders_user_path %>
         </div>
       </div>
       <div class="col-xs-4">
         <div class="order-state">
           <p><%= @canceled_count %></p>
-          <p>已取消</p>
+          <%= link_to "已取消", canceled_orders_user_path %>
         </div>
       </div>
     </div>

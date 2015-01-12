@@ -1,3 +1,9 @@
+<% if mobile? %>
+
+<%= render "orders/mobile_order_list" %>
+
+<% else %>
+
 <%= render '/orders/tab_head' %>
 
 <div class="tab-body">
@@ -5,3 +11,4 @@
 </div>
 
 <div class="center"><%= will_paginate @orders, renderer: BootstrapPagination::Rails %></div>
+<% end %>

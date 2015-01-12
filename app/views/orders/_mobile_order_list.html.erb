@@ -1,0 +1,23 @@
+<% content_for :mobile_title do %>
+<%= @mobile_title %>
+<% end %>
+
+<% content_for :left_bar_button do %>
+  <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
+<% end %>
+
+<% content_for :right_bar_button do %>
+  <a href="<%= root_path %>" class="navbar-button right home"></a>
+<% end %>
+
+<div class="container">
+  <div class="orders" id="mobile-orders">
+    <% if @orders.empty? %>
+    暂无订单
+    <% else %>
+      <% @orders.each do |order| %>
+        <%= render "orders/mobile_order", order: order %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

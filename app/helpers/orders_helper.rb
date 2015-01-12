@@ -13,19 +13,19 @@ module OrdersHelper
     
   end
   
-  def render_order_state(order)
+  def render_order_state(order, size = 14)
     return "" if order.blank?
     
     if order.normal?
-      content_tag :span, "待配送", class: "label label-default", style: "font-size: 14px;"
+      content_tag :span, "待配送", class: "label label-default", style: "font-size: #{size}px;"
     elsif order.prepare_delivering?
-      content_tag :span, "配送准备", class: "label label-warning", style: "font-size: 14px;"
+      content_tag :span, "配送准备", class: "label label-warning", style: "font-size: #{size}px;"
     elsif order.delivering?
-      content_tag :span, "配送中", class: "label label-info", style: "font-size: 14px;"
+      content_tag :span, "配送中", class: "label label-info", style: "font-size: #{size}px;"
     elsif order.canceled?
-      content_tag :span, "已取消", class: "label label-danger", style: "font-size: 14px;"
+      content_tag :span, "已取消", class: "label label-danger", style: "font-size: #{size}px;"
     elsif order.completed?
-      content_tag :span, "已完成", class: "label label-success", style: "font-size: 14px;"
+      content_tag :span, "已完成", class: "label label-success", style: "font-size: #{size}px;"
     end
   end
   
