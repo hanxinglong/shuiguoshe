@@ -79,8 +79,9 @@ a {
   line-height: 4.4rem;
   text-align: center;
   text-decoration: none;
-  font-size: 20px;
-  font-size: 2rem;
+  font-size: 18px;
+  font-size: 1.8rem;
+  color: white;
 }
 
 .product_types {
@@ -379,24 +380,31 @@ a {
   background-color: white;
   width: 100%;
   margin-bottom: 20px;
+  margin-bottom: 2rem;
   padding: 10px;
+  padding: 1rem;
   
   .deliver-caption {
     margin: 0;
     padding: 0;
     border-bottom: 1px solid rgb(235,235,235);
     padding: 10px;
+    padding: 1rem;
     padding-left: 0;
     margin-bottom: 10px;
+    margin-bottom: 1rem;
   }
 }
 
 .submit-button {
   background-color: $nature-green;
   height: 44px;
+  height: 4.4rem;
   line-height: 44px;
+  line-height: 4.4rem;
   padding: 0 10px;
-color: white;
+  padding: 0 1rem;
+  color: white;
   border: 0;
   border-radius: 0;
   -webkit-border-radius: 0;
@@ -409,24 +417,71 @@ color: white;
   margin: 0;
   text-align: center;
   height: 213px;
+  height: 21.3rem;
   background: image-url('user-head-bg.jpg') center center no-repeat;
   color: white;
+  position: relative;
+  .sign-out {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
   img {
     margin-top: 20px;
+    margin-top: 2rem;
   }
   .mobile {
     margin-top: 10px;
+    margin-top: 1rem;
   }
 }
 
-.order-info {  
-  margin-top: 10px;
+.item-info {
+  margin-top: 30px;
+  margin-top: 3rem;
+  .row {
+    &:first-child {
+      border-top: 1px solid rgb(235,235,235);
+    };
+  }
+  &:last-child {
+    margin-bottom: 20px;
+    margin-bottom: 2rem;
+  }
+//  .arrow {
+//    background: image-url('arrow.png') center center no-repeat;
+//    display: block;
+//    width: 14px;
+//    height: 24px;
+//  }
+}
+
+.order-info, .item-info {  
+//  margin-top: 10px;
+//  border-bottom: 1px solid rgb(235,235,235);
+  .row {
+    border-bottom: 1px solid rgb(235,235,235);
+    padding: 10px 0;
+    padding: 1rem 0;
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
   .col-xs-4 {
     border-right: 1px solid rgb(235,235,235);
   }
   .order-state {
     text-align: center;
+    font-size: 18px;
+    font-size: 1.8rem;
   }
+  
+  .all-orders {
+    padding: 10px 0;
+    padding: 1rem 0;
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  
 }
 
 input[type="text"], input[type="email"], input[type="search"], input[type="password"] {
@@ -436,7 +491,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 
 .user-login-form {
   padding-top: 20px;
-  
+  padding-top: 2rem;
   ul {
     list-style: none;
   }
@@ -454,31 +509,11 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 
 .links {
   padding-top: 10px;
+  padding-top: 1rem;
   a {
     text-decoration: underline;
   }
 }
-
-.sales {
-  margin-bottom: 10px;
-  margin-bottom: 1rem;
-  .sale {
-    background-color: rgb(235,235,235);
-    padding: 10px;
-    padding: 1rem;
-    text-align: center;
-    margin-top: 8px;
-    margin-top: 0.8rem;
-  }
-  
-  .col-xs-6 {
-    
-  }
-  .last {
-    
-  }
-}
-
 
 #footer {
   margin: 0 auto;

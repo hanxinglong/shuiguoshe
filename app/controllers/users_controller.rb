@@ -6,8 +6,17 @@ class UsersController < ApplicationController
   
   def home
     @orders = current_user.orders.normal.order("created_at DESC").paginate page: params[:page], per_page: 10
-    fresh_when(etag: [@orders])
-    set_seo_meta("个人主页")
+    
+    if mobile? 
+      @incompleted_count = current_user.orders.normal.count
+      @completed_count = current_user.orders.completed.count
+      @canceled_count = current_user.orders.canceled.count
+      fresh_when(etag: [@orders, @incompleted_count, @completed_count, @canceled_count])
+    else
+      fresh_when(etag: [@orders])
+      set_seo_meta("个人主页")
+    end
+    
   end
   
   def edit

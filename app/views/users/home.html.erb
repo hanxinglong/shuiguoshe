@@ -13,6 +13,7 @@
 <% end %>
 
 <div class="user-info">
+  <p class="sign-out"><%= link_to "退出登录", destroy_user_session_path, method: :delete, class: "btn btn-xs btn-danger" %></p>
   <%= user_avatar_tag(current_user, :big) %>
   <div class="mobile"><%= current_user.hack_mobile %></div>
   <div class="score">积分：<%= current_user.score %></div>
@@ -21,30 +22,105 @@
 
 <div class="container">
   <div class="order-info">
-    <div class="row">
+    <div class="row order-states">
       <div class="col-xs-4">
         <div class="order-state">
-          <p>1</p>
-          <p>待发货</p>
+          <p><%= @incompleted_count %></p>
+          <%= link_to "待配送", incompleted_orders_user_path %>
         </div>
       </div>
       <div class="col-xs-4">
         <div class="order-state">
-          <p>1</p>
-          <p>待发货</p>
+          <p><%= @completed_count %></p>
+          <p>已完成</p>
         </div>
       </div>
       <div class="col-xs-4">
         <div class="order-state">
-          <p>1</p>
-          <p>待发货</p>
+          <p><%= @canceled_count %></p>
+          <p>已取消</p>
         </div>
       </div>
     </div>
+    
+    <div class="row all-orders">
+      <div class="col-xs-12">
+        <%= link_to "全部订单", orders_user_path %>
+      </div>
+    </div>
+    
   </div>
+  
+  <div class="item-info">
+    <div class="row">
+      <div class="col-xs-9">
+        <%= link_to "我的积分", points_user_path %>
+      </div>
+      <div class="col-xs-3">
+        <i class="arrow pull-right"></i>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-9">
+        <%= link_to "邀请朋友" %>
+      </div>
+      <div class="col-xs-3">
+        <i class="arrow pull-right"></i>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-9">
+        <%= link_to "激活邀请" %>
+      </div>
+      <div class="col-xs-3">
+        <i class="arrow pull-right"></i>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-9">
+        <%= link_to "有话要说" %>
+      </div>
+      <div class="col-xs-3">
+        <i class="arrow pull-right"></i>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="item-info">
+    <div class="row">
+      <div class="col-xs-9">
+        <%= link_to "基本资料", points_user_path %>
+      </div>
+      <div class="col-xs-3">
+        <i class="arrow pull-right"></i>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-9">
+        <%= link_to "修改密码" %>
+      </div>
+      <div class="col-xs-3">
+        <i class="arrow pull-right"></i>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-xs-9">
+        <%= link_to "配送设置" %>
+      </div>
+      <div class="col-xs-3">
+        <i class="arrow pull-right"></i>
+      </div>
+    </div>
+    
+  </div>
+  
 </div>
-
-<%= link_to "退出登录", destroy_user_session_path, method: :delete %>
 
 <% else %>
 <%= render "users/user_info" %>
