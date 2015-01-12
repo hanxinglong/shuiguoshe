@@ -50,13 +50,14 @@ class ProductsController < ApplicationController
   
   def show
     begin
-      @product = Product.find(params[:id])
+      @product = Product.includes(:photos).find(params[:id])
+      @photos = @product.photos.order('sort ASC')
     rescue ActiveRecord::RecordNotFound
       logger.error "Attempt to access invalid product #{params[:id]}"
     # @order = @product.orders.build
       render_404
     else
-      fresh_when etag: @product
+      fresh_when etag: [@product, @photos]
       set_seo_meta(@product.title, '', @product.intro)
       
       types = ProductType.all_types.map { |t| t.name }

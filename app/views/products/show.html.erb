@@ -40,12 +40,6 @@
       </div>
       
       <div class="extra-summary">
-        <% if @product.intro.present? %>
-          <div class="item-extra-info">
-            <h2>商品简介</h2>
-            <p><%= @product.intro %></p>
-          </div>
-        <% end %>
         <% if @product.note.present? %>
           <div class="item-extra-info">
             <h2>温馨提示</h2>
@@ -53,11 +47,15 @@
           </div>
         <% end %>
   
-        <% if @product.summary_image.present? %>
+        <% if @photos.any? %>
           <div class="item-extra-info">
-            <%= image_tag @product.summary_image.url(:normal), class: "img-responsive" %>
+            <h2>商品简介</h2>
+            <% @photos.each do |photo| %>
+            <%= image_tag photo.image.url(:normal), class: "img-responsive" %>
+            <% end %>
           </div>
         <% end %>
+        
       </div>
       
     </div>
@@ -120,25 +118,24 @@
   </div>
   
   <div class="product-info">
-    <% if @product.intro.present? %>
-    <div class="product-intro">
-      <h2 class="f16">商品简介</h2>
-      <p><%= @product.intro %></p>
-    </div>
-    <% end %>
     <% if @product.note.present? %>
       <div class="product-note">
         <h2 class="f16">温馨提示</h2>
         <p><%= @product.note %></p>
       </div>
     <% end %>
+    
+    <% if @photos.any? %>
+    <div class="product-intro">
+      <h2 class="f16">商品简介</h2>
+      <% @photos.each do |photo| %>
+      <%= image_tag photo.image.url(:normal), class: "img-responsive" %>
+      <% end %>
+    </div>
+    <% end %>
+    
   </div>
   
-  <% if @product.summary_image.present? %>
-  <div class="summary-image">
-    <%= image_tag @product.summary_image.url(:normal) %>
-  </div>
-  <% end %>
 </div>
 
 <% end %>
