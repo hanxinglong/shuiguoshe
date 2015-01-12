@@ -1,6 +1,5 @@
 class Cpanel::SiteConfigsController < Cpanel::ApplicationController
-  before_action :check_is_admin, only: [:index]
-  before_action :check_is_super_manager
+  before_action :check_is_super_manager, only: [:index]
   before_action :set_site_config, only: [:show, :edit, :update, :destroy]
   
   respond_to :html

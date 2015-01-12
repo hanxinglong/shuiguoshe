@@ -5,7 +5,6 @@
           file: :horizontal_file_input,
           boolean: :horizontal_boolean
         }) do |f| %>
-  <%= render "/shared/error_messages", target: @product %>
 
   <div class="col-md-6 col-md-offset-3">
     <%= f.input :type_id, collection: ProductType.all.map { |t| [t.name, t.id] }, prompt: "--请选择产品类型--", label: "产品类别" %>
