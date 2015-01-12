@@ -2,6 +2,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  acts_as_easy_captcha
+  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:mobile]
          
@@ -15,6 +17,7 @@ class User < ActiveRecord::Base
   
   has_many :orders, dependent: :destroy
   
+  # validate :valid_captcha?, :on => :create
   validates :mobile, presence: true
   validates :mobile, format: { with: /\A1[3|4|5|8][0-9]\d{4,8}\z/, message: "请输入11位正确手机号" }, length: { is: 11 }, 
             :uniqueness => true

@@ -26,12 +26,16 @@ body {
 
 a {
   color: rgb(80,80,80);
+  text-decoration: none;
 }
 
 .navbar-button {
   display: block;
   height: 44px;
   height: 4.4rem;
+  line-height: 44px;
+  line-height: 4.4rem;
+  text-decoration: none;
 //  margin-top: 8px;
 //  margin-top: 0.8rem;
   width: 45px;
@@ -416,19 +420,42 @@ color: white;
 }
 
 .order-info {  
-  .order-states {
+  margin-top: 10px;
+  .col-xs-4 {
+    border-right: 1px solid rgb(235,235,235);
+  }
+  .order-state {
+    text-align: center;
+  }
+}
+
+input[type="text"], input[type="email"], input[type="search"], input[type="password"] {
+	-webkit-appearance: caret;
+	-moz-appearance: caret; /* mobile firefox too! */
+}
+
+.user-login-form {
+  padding-top: 20px;
+  
+  ul {
     list-style: none;
-    padding: 10px 0;
-    border-bottom: 1px solid rgb(235,235,235);
-    li {
-      float: left;
-      margin-right: 40px;
-      border-right: 1px solid rgb(235,235,235);
-      text-align: center;
+  }
+  
+  .auth-code-container {
+    position: relative;
+    .get-auth-code {
+      position: absolute;
+      right: 0;
+      top: 0;
     }
-    .order-state {
-      text-align: center;
-    }
+  }
+  
+}
+
+.links {
+  padding-top: 10px;
+  a {
+    text-decoration: underline;
   }
 }
 

@@ -45,7 +45,7 @@ class AccountController < Devise::RegistrationsController
       end
     else
       clean_up_passwords(resource)
-      puts resource.errors.full_messages
+      # puts resource.errors.full_messages
       render :new
     end
   end

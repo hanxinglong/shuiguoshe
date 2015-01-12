@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  captcha_route
   require 'api_v1'
   root 'home#index'
     

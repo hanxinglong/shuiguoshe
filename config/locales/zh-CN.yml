@@ -19,6 +19,7 @@
         current_password: "旧密码"
         reset_password_token: "重置密码Token"
         avatar: "头像"
+        code: "手机验证码"
       product:
         type_id: "类别ID"
         title: "产品标题"

@@ -8,16 +8,24 @@ module Shuiguoshe
     # 102 不正确的手机号
     # 103 密码太短
     
+    # acts_as_easy_captcha
+    
     resource :auth_codes do  
       
       # 获取验证码
       # api: domain/v1/auth_codes
       # params: { mobile:'', type:1,2,3 }
       params do
+        requires :captcha, type: String
         requires :mobile, type: String
         requires :type, type: Integer # 1 表示注册获取验证码 2 表示重置密码获取验证码 3 表示修改密码获取验证码
       end
       post '/' do
+        
+        unless captcha_valid?(params[:captcha])
+          return { code: -2, message: "图片验证码不正确" }
+        end
+        
         unless check_mobile(params[:mobile])
           return { code: 100, message: "不正确的手机号" }
         end

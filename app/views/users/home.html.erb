@@ -18,28 +18,33 @@
   <div class="score">积分：<%= current_user.score %></div>
 </div>
 
-<div class="order-info clearfix">
-  <ul class="order-states clearfix">
-    <li>
-      <div class="order-state">
-        <p>1</p>
-        <p>待发货</p>
+
+<div class="container">
+  <div class="order-info">
+    <div class="row">
+      <div class="col-xs-4">
+        <div class="order-state">
+          <p>1</p>
+          <p>待发货</p>
+        </div>
       </div>
-    </li>
-    <li>
-      <div class="order-state">
-        <p>1</p>
-        <p>待发货</p>
+      <div class="col-xs-4">
+        <div class="order-state">
+          <p>1</p>
+          <p>待发货</p>
+        </div>
       </div>
-    </li>
-    <li>
-      <div class="order-state">
-        <p>1</p>
-        <p>待发货</p>
+      <div class="col-xs-4">
+        <div class="order-state">
+          <p>1</p>
+          <p>待发货</p>
+        </div>
       </div>
-    </li>
-  </ul>
+    </div>
+  </div>
 </div>
+
+<%= link_to "退出登录", destroy_user_session_path, method: :delete %>
 
 <% else %>
 <%= render "users/user_info" %>

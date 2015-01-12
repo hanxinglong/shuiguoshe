@@ -29,9 +29,6 @@ $gray-medium-light: #eaeaea;
   background-color: rgb(251,248,240);
   .user-login-form {
     padding: 10px 50px;
-    #new_user {
-      position: relative;
-    }
     h2 {
       padding: 10px 0;
       font-size: 18px;
@@ -44,11 +41,16 @@ $gray-medium-light: #eaeaea;
       font-size: 14px;
       padding-left: 10px;
     }
-    .get-auth-code {
-      position: absolute;
-      right: 108px;
-      top: 84px;
+    
+    .auth-code-container {
+      position: relative;
+      .get-auth-code {
+        position: absolute;
+        right: 110px;
+        top: 0;
+      }
     }
+    
   }
   
   .forget-password {

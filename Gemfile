@@ -22,6 +22,10 @@ gem 'bootstrap_helper', '4.2.3'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick','3.7.0', require: false
 
+# 验证码
+gem 'easy_captcha'
+gem 'rmagick'
+
 # YAML 配置信息
 gem 'settingslogic', '~> 2.0.9'
 
