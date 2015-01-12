@@ -88,6 +88,6 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
     end
 
     def product_params
-      params.require(:product).permit(:type_id, :title, :subtitle, :intro, :discount_score, :stock_count, :delivered_at, :image, :is_discount, :units, :image_cache, :low_price, :sale_id,:summary_image, :note, :origin_price, :discounted_at)
+      params.require(:product).permit(:type_id, :title, :subtitle, :intro, :discount_score, :stock_count, :delivered_at, :image, :is_discount, :units, :image_cache, :low_price, :sale_id,:summary_image, :note, :origin_price, :discounted_at, photos_attributes: [:image, :image_cache, :sort, :_destroy, :id])
     end
 end

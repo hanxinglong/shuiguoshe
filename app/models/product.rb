@@ -8,6 +8,9 @@ class Product < ActiveRecord::Base
   has_many :line_items
   belongs_to :sale
   
+  has_many :photos, dependent: :destroy
+  accepts_nested_attributes_for :photos, :allow_destroy => true#, reject_if: Proc.new { |attr| attr['image'].blank? }
+  
   scope :saled, -> { where(on_sale: true) }
   scope :search, -> keyword { where('title like :keyword or subtitle like :keyword or intro like :keyword', { keyword: "%#{keyword}%" }) }
   

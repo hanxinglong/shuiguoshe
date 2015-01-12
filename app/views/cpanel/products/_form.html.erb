@@ -11,6 +11,8 @@
     <%= f.input :sale_id, collection: Sale.all.map { |s| [s.title, s.id] }, prompt: "--请选择卖场--", label: "所属卖场" %>
         
     <%= f.input :title, label: "产品标题" %>
+    <%= f.input :subtitle, label: "产品子标题" %>
+        
     <%- if @product.image.small %>
       <div class="col-sm-10 col-sm-offset-3">
         <%= render_product_icon(@product) %>
@@ -18,12 +20,19 @@
     <%- end %>
     <%= f.input :image, label: "产品图片" %>
     <%= f.hidden_field :image_cache %>
+    
+    <%= f.simple_fields_for :photos do |b|  %>
+      <%= render "/cpanel/photos/form_fields", :f => b %>
+    <% end %>
+    
+    <div class="photo-fields">
+      <%= link_to_add_fields "添加产品简介图片", f, :photos %>
+    </div>
+    
     <%= f.input :low_price, label: "最低价" %>
     <%= f.input :origin_price, label: "市场价" %>
     <%= f.input :units, label: "计量单位" %>
-    <%= f.input :subtitle, label: "产品子标题" %>
-    <%= f.input :intro, label: "产品描述" %>
-    <%= f.input :summary_image, label: "产品摘要图片" %>
+    
     <%= f.input :discount_score, label: "赠送积分", placeholder: '300' %>
     <%= f.input :stock_count, label: "库存" %>
     <%= f.input :note, label: "温馨提示" %>
