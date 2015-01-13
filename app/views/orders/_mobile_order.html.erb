@@ -1,23 +1,25 @@
+<% cache(["mobile_user_#{current_user.mobile}", order, @current]) do %>
 <div class="panel panel-default" id="item-row-<%= order.id %>">
   <div class="panel-heading">
     订单号：<%= order.order_no %>
   </div>
   <div class="panel-body">
     <% order.line_items.each do |item| %>
-    <div class="row">
-      <div class="col-xs-3">
-        <%= link_to image_tag(item.product.image.url(:small)), item.product %>
-      </div>
-      <div class="col-xs-5">
-        <%= link_to item.product.title, item.product %>
-        <div class="text-muted">
-          ￥<%= product_price_tag(item.product.low_price) %> × <%= item.quantity %>
+      <div class="row">
+        <div class="col-xs-3">
+          <%= link_to image_tag(item.product.image.url(:small)), item.product %>
+        </div>
+        <div class="col-xs-5">
+          <%= link_to item.product.title, item.product %>
+          <div class="text-muted">
+            ￥<%= product_price_tag(item.product.low_price) %> × <%= item.quantity %>
+          </div>
+        </div>
+        <div class="col-xs-4" style="text-align:right">
+          ￥<%= product_price_tag(item.total_price) %>
         </div>
       </div>
-      <div class="col-xs-4" style="text-align:right">
-        ￥<%= product_price_tag(item.total_price) %>
-      </div>
-    </div>
+      <div class="item-line"></div>
     <% end %>
   </div>
   <div class="panel-footer clearfix">
@@ -37,3 +39,4 @@
     
   </div>
 </div>
+<% end %>

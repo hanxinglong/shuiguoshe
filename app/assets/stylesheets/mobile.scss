@@ -258,7 +258,7 @@ a {
   .time-left {
     font-size: 12px;
     font-size: 1.2rem;
-    text-align: right;
+//    text-align: right;
     color: black;
   }
   .item-line {
@@ -411,6 +411,7 @@ a {
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   -o-border-radius: 0;
+  z-index: 10;
 }
 
 .user-info {
@@ -498,6 +499,18 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 
 .orders {
   margin-top: 20px;
+  
+  .row {
+    padding: 5px 0;
+  }
+  .item-line {
+    border-bottom: 1px dashed #ccc;
+    padding: 0 20px;
+    
+    &:last-child {
+      border: 0;
+    };
+  }
   .order-state {
     margin-right: 5px;
   }

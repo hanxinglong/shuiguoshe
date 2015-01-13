@@ -3,7 +3,11 @@
 <% end %>
 
 <% content_for :left_bar_button do %>
+  <% if left == 'user' %>
+  <a href="<%= home_user_path %>" class="navbar-button left <%= left %>"></a>
+  <% else %>
   <a href="javascript:void(0)" onclick="javascript:history.go(-1)" class="navbar-button left <%= left %>"></a>
+  <% end %>
 <% end %>
 
 <% content_for :right_bar_button do %>

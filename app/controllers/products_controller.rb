@@ -25,6 +25,10 @@ class ProductsController < ApplicationController
 
     @cache_prefix = "products_#{type_id}"
     @current = 'products_index'
+    
+    types = ProductType.all_types.map { |t| t.name }
+    @type = types[type_id - 1]
+    
     fresh_when(etag: [@products, @cache_prefix])
     
   end
