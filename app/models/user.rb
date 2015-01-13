@@ -29,6 +29,11 @@ class User < ActiveRecord::Base
   #   
   # end
   
+  before_create :generate_email
+  def generate_email
+    self.email = "#{self.mobile}@shuiguoshe.com"
+  end
+  
   # 重写devise认证
   # def self.find_for_database_authentication(warden_conditions)
   #   conditions = warden_conditions.dup
