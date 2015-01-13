@@ -1,16 +1,6 @@
 <% if mobile? %>
 
-<% content_for :mobile_title do %>
-我的水果社
-<% end %>
-
-<% content_for :left_bar_button do %>
-  <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
-<% end %>
-
-<% content_for :right_bar_button do %>
-  <a href="<%= root_path %>" class="navbar-button right home"></a>
-<% end %>
+<%= render "layouts/mobile_navbar", left: "back", right: "home", title: "我的水果社" %>
 
 <div class="user-info">
   <p class="sign-out"><%= link_to "退出登录", destroy_user_session_path, method: :delete, class: "btn btn-xs btn-danger" %></p>

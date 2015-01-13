@@ -1,11 +1,7 @@
 <% if mobile? %>
-  <% content_for :left_bar_button do %>
-    <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
-  <% end %>
-
-  <% content_for :right_bar_button do %>
-    <a href="<%= root_path %>" class="navbar-button right home"></a>
-  <% end %>
+  
+  <%= render "layouts/mobile_navbar", left: "back", right: "home", title: "我的购物车" %>
+  
 <%= render 'cart_mobile' %>
 <% else %>
 <%= render 'cart_1' %>

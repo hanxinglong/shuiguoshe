@@ -1,17 +1,6 @@
 <% if mobile? %>
 
-  <% content_for :mobile_title do %>
-  找回密码
-  <% end %>
-
-
-  <% content_for :left_bar_button do %>
-    <a onclick="javascript:history.go(-1)" class="navbar-button left back"></a>
-  <% end %>
-
-  <% content_for :right_bar_button do %>
-    <a href="<%= new_user_session_path %>" class="navbar-button right home"></a>
-  <% end %>
+<%= render "layouts/mobile_navbar", left: "back", right: "home", title: "找回密码" %>
   
   <div class="container">
     <div class="user-login-form">
