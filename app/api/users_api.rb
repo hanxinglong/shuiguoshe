@@ -22,9 +22,9 @@ module Shuiguoshe
       end
       post '/' do
         
-        if session[:captcha].downcase != params[:captcha].downcase
-          return { code: -2, message: "图片验证码不正确" }
-        end
+        # if session[:captcha].downcase != params[:captcha].downcase
+        #   return { code: -2, message: "图片验证码不正确" }
+        # end
         
         unless check_mobile(params[:mobile])
           return { code: 100, message: "不正确的手机号" }

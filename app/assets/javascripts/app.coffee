@@ -43,10 +43,10 @@ window.App =
       App.alert("手机号不能为空", $('#new_user'))
       return false
     
-    captcha = $("#user_captcha").val()
-    if captcha.length == 0
-      App.alert("图片验证码不能为空", $('#new_user'))
-      return false
+    # captcha = $("#user_captcha").val()
+    # if captcha.length == 0
+    #   App.alert("图片验证码不能为空", $('#new_user'))
+    #   return false
       
     reg = /^1[3|4|5|8][0-9]\d{4,8}$/
     if not reg.test(mobile)
@@ -71,7 +71,7 @@ window.App =
     $.ajax
       url:  "http://shuiguoshe.com/api/v1/auth_codes"
       type: "POST"
-      data: { mobile: mobile, captcha: captcha, type: parseInt($("#user_code_type").val()) }
+      data: { mobile: mobile, captcha: '', type: parseInt($("#user_code_type").val()) }
       success: (re) -> 
         # $(el).removeAttr("disabled")
         

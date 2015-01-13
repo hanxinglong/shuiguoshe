@@ -65,12 +65,12 @@
               <%= f.input :code_type, as: :hidden, input_html: { value: "1" } %>
             </div>
             
-            <div class="captcha-code-container">
+            <!-- div class="captcha-code-container">
               <div class="captcha-container">
                 <%= captcha_tag id: "captcha" %><a onclick="refreshCode(this);">换一张</a>
               </div>
               <%= f.input :captcha, label: "图片验证码", placeholder: "输入图片验证码", input_html: { style: "width:150px;" }, required: true %>
-            </div>
+            </div -->
             
             <div class="auth-code-container">
               <%= f.input :code, label: "手机验证码", placeholder:"请输入6位验证码", input_html: { style: "width:150px;" }, required: true %>
