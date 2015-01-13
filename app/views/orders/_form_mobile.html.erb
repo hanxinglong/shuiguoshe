@@ -22,8 +22,8 @@ body {
       <div class="order-item-info">
         <h4 class="deliver-caption">收货信息</h4>
         <div class="item-info">
-          <p><strong>收货人手机：</strong><%= f.text_field :mobile, value: current_user.mobile, style: "width: 120px; padding: 3px;" %></p>
-          <p><strong>收货人小区：<%= f.select :apartment_id, @apartments, { selected: current_user.apartment_id, prompt: "请选择小区" }, { style: "width: 120px" } %></strong></p>
+          <p style="margin-bottom: 15px;"><strong>收货人手机：</strong><%= f.text_field :mobile, class: "form-control pull-right", value: current_user.mobile, style: "width: 120px; margin-right: 32%; margin-top: -10px;" %></p>
+          <p><strong>收货人小区：<%= f.select :apartment_id, @apartments, { selected: current_user.apartment_id, prompt: "请选择小区" }, { style: "width: 60%;" } %></strong></p>
         </div>
       </div> <!-- end item-info -->
     </div> <!-- end order-intem-info -->

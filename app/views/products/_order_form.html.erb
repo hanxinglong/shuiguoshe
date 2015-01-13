@@ -24,7 +24,7 @@
       </div>
       <% else %>
       <div class="col-sm-4">
-        <%= f.select :apartment_id, Apartment.opened.map { |a| [a.name, a.id] }, { prompt: "--请选择您所在的小区--" }, { class: "form-control", onchange: "updateButtonState();" } %>
+        <%= f.select :apartment_id, Apartment.opened.map { |a| ["#{a.name}（#{a.address}）", a.id] }, { prompt: "--请选择您所在的小区--" }, { class: "form-control", onchange: "updateButtonState();" } %>
       </div>
       <% if current_user %>
       <div class="col-sm-2">

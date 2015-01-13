@@ -94,7 +94,7 @@ class OrdersController < ApplicationController
     end
     
     @order = Order.new
-    @apartments = Apartment.opened.map { |a| [a.name, a.id] }
+    @apartments = Apartment.opened.map { |a| ["#{a.name}（#{a.address}）", a.id] }
     set_seo_meta("提交订单")    
     # respond_with(@order)
   end
