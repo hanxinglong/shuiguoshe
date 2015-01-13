@@ -69,11 +69,15 @@ window.App =
     ), 1000
     
     $.ajax
-      url:  "http://localhost:3000/api/v1/auth_codes"#"http://shuiguoshe.com/api/v1/auth_codes"
+      url:  "http://shuiguoshe.com/api/v1/auth_codes"
       type: "POST"
       data: { mobile: mobile, captcha: captcha, type: parseInt($("#user_code_type").val()) }
       success: (re) -> 
         # $(el).removeAttr("disabled")
+        
+        src = "http://shuiguoshe.com/captcha?i=" + new Date().getTime()
+        $("#captcha").prop('src', src)
+        
         if re.code == 0
           App.notice("获取验证码成功", $('#new_user'))
         else

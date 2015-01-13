@@ -16,7 +16,7 @@ EasyCaptcha.setup do |config|
 
   # Image
   config.image_height   = 30
-  config.image_width    = 90
+  config.image_width    = 80
   
   # configure generator
   config.generator :default do |generator|
@@ -36,7 +36,7 @@ EasyCaptcha.setup do |config|
     # generator.wave_amplitude         = (3..5)
 
     # Sketch
-    generator.sketch                 = false
+    generator.sketch                 = true
     generator.sketch_radius          = 0
     generator.sketch_sigma           = 0.5
 

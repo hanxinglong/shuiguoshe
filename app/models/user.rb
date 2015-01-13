@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
          
   attr_accessor :login, :password_confirmation
   
-  attr_accessor :code, :code_type
+  attr_accessor :code, :code_type, :captcha
   
   mount_uploader :avatar, AvatarUploader
   

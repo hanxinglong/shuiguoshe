@@ -48,7 +48,7 @@
           boolean: :horizontal_boolean
         }) do |f| %>
           
-          <%= f.input :mobile, label: "手机", placeholder: "请输入11位正确的手机号", hint: "以便我们送货时联系您", input_html: { style: "width:300px;" } %>
+          <%= f.input :mobile, label: "手机", placeholder: "请输入11位正确的手机号", input_html: { style: "width:300px;" } %>
           <!--div class="form-group string required user_code">
             <label class="string required control-label col-sm-3 control-label" for="user_code">
               <abbr title="required">*</abbr> 验证码
@@ -63,6 +63,13 @@
             
             <div style="display:none">
               <%= f.input :code_type, as: :hidden, input_html: { value: "1" } %>
+            </div>
+            
+            <div class="captcha-code-container">
+              <div class="captcha-container">
+                <%= captcha_tag id: "captcha" %><a onclick="refreshCode(this);">换一张</a>
+              </div>
+              <%= f.input :captcha, label: "图片验证码", placeholder: "输入图片验证码", input_html: { style: "width:150px;" }, required: true %>
             </div>
             
             <div class="auth-code-container">
@@ -96,7 +103,7 @@
 <% content_for :scripts do %>
 <script>
 function refreshCode(el) {
-  var src = "http://localhost:3000/captcha?i=" + new Date().getTime();
+  var src = "<%= root_url %>captcha?i=" + new Date().getTime();
   $("#captcha").prop('src', src);
 }
 </script>
