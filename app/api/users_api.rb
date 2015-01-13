@@ -16,7 +16,7 @@ module Shuiguoshe
       # api: domain/v1/auth_codes
       # params: { mobile:'', type:1,2,3 }
       params do
-        requires :captcha, type: String
+        # requires :captcha, type: String
         requires :mobile, type: String
         requires :type, type: Integer # 1 表示注册获取验证码 2 表示重置密码获取验证码 3 表示修改密码获取验证码
       end

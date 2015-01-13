@@ -71,7 +71,7 @@ window.App =
     $.ajax
       url:  "http://shuiguoshe.com/api/v1/auth_codes"
       type: "POST"
-      data: { mobile: mobile, captcha: '', type: parseInt($("#user_code_type").val()) }
+      data: { mobile: mobile, type: parseInt($("#user_code_type").val()) }
       success: (re) -> 
         # $(el).removeAttr("disabled")
         
