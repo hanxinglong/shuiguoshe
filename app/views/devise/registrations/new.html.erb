@@ -61,9 +61,6 @@
             </div>
           </div-->
             
-            <%= f.input :captcha %>
-            <p><%= captcha_tag id: "captcha" %> <a onclick="refreshCode(this)">刷新</a></p>
-            
             <div style="display:none">
               <%= f.input :code_type, as: :hidden, input_html: { value: "1" } %>
             </div>
