@@ -75,8 +75,8 @@ window.App =
       success: (re) -> 
         # $(el).removeAttr("disabled")
         
-        src = "http://shuiguoshe.com/captcha?i=" + new Date().getTime()
-        $("#captcha").prop('src', src)
+        # src = "http://shuiguoshe.com/captcha?i=" + new Date().getTime()
+        # $("#captcha").prop('src', src)
         
         if re.code == 0
           App.notice("获取验证码成功", $('#new_user'))
