@@ -12,6 +12,10 @@ module Shuiguoshe
       15
     end
     
+    def session
+      env[Rack::Session::Abstract::ENV_SESSION_KEY]
+    end
+    
     def page_size
       size = params[:size].to_i
       [size.zero? ? default_page_size : size, max_page_size].min
@@ -52,6 +56,7 @@ module Shuiguoshe
     def send_sms(mobile, text, error_msg)
       RestClient.post('http://yunpian.com/v1/sms/send.json', "apikey=7612167dc8177b2f66095f7bf1bca49d&mobile=#{mobile}&text=#{text}") { |response, request, result, &block|
         # puts response
+        session.delete(:captcha)
         resp = JSON.parse(response)
         if resp['code'] == 0
           { code: 0, message: "ok" }

@@ -11,7 +11,7 @@
           file: :horizontal_file_input,
           boolean: :horizontal_boolean
         }) do |f| %>
-      
+            
             <%= f.input :mobile, label: false, placeholder: '请输入手机号' %>
             
             <div class="auth-code-container">
@@ -60,6 +60,10 @@
               <a onclick="App.getCode(this)" class="btn btn-warning" id="auth_code">获取验证码</a>
             </div>
           </div-->
+            
+            <%= f.input :captcha %>
+            <p><%= captcha_tag id: "captcha" %> <a onclick="refreshCode(this)">刷新</a></p>
+            
             <div style="display:none">
               <%= f.input :code_type, as: :hidden, input_html: { value: "1" } %>
             </div>
@@ -90,4 +94,13 @@
     </div>
   </div>
 </div>
+<% end %>
+
+<% content_for :scripts do %>
+<script>
+function refreshCode(el) {
+  var src = "http://localhost:3000/captcha?i=" + new Date().getTime();
+  $("#captcha").prop('src', src);
+}
+</script>
 <% end %>

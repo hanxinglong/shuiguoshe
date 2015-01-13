@@ -22,7 +22,7 @@ module Shuiguoshe
       end
       post '/' do
         
-        unless captcha_valid?(params[:captcha])
+        if session[:captcha].downcase != params[:captcha].downcase
           return { code: -2, message: "图片验证码不正确" }
         end
         
