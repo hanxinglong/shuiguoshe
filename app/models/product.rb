@@ -36,6 +36,13 @@ class Product < ActiveRecord::Base
     end
   end
   
+  before_save :check_discount
+  def check_discount
+    if not self.is_discount
+      self.discounted_at = nil
+    end
+  end
+  
   before_destroy :ensure_not_referenced_by_any_line_item
   def ensure_not_referenced_by_any_line_item
     if line_items.empty?
