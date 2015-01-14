@@ -24,6 +24,10 @@ body {
   height: 4.4rem;
 }
 
+ul {
+  list-style: none;
+}
+
 a {
   color: rgb(80,80,80);
   text-decoration: none;
@@ -303,20 +307,39 @@ a {
   }
 }
 
+.mobile-cart-container {
+  margin: 0 auto;
+  .table {
+    tr {
+      border-bottom: 1px dashed #ccc;
+      &:last-child {
+        border: 0;
+      };
+      td {
+        border: 0;
+        padding: 15px 0;
+        padding: 1.5rem 0;
+      }
+    }
+  }
+
+}
+
 .cart-line-item {
   td {
     img {
-      margin-top: 20px;
-      margin-top: 2rem;
+//      margin-top: 20px;
+//      margin-top: 2rem;
     }
-    vertical-align: middle;
+    vertical-align: top;
     div {
       margin: auto;
     }
   }
   .product-title {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
+    font-size: 1.4rem;
+//    font-weight: bold;
   }
   .product-units {
     color: rgb(168,168,168);
@@ -354,8 +377,8 @@ a {
   }
   
   .total-price {
-    margin-top: 20px;
-    margin-top: 2rem;
+//    margin-top: 20px;
+//    margin-top: 2rem;
     font-size: 16px;
     font-size: 1.6rem;
     margin-bottom: 10px;
@@ -393,6 +416,44 @@ a {
     padding-left: 0;
     margin-bottom: 10px;
     margin-bottom: 1rem;
+  }
+}
+
+.new-order-container {
+  margin-top: 20px;
+  margin-top: 2rem;
+  h4 {
+    font-size: 16px;
+    font-size: 1.6rem;
+    margin: 0;
+  }
+  
+  .order-items {
+    tr {
+      border-bottom: 1px dashed #ccc;
+      &:last-child {
+        border: 0;
+      };
+      td {
+        border: 0;
+        vertical-align: top;
+        padding: 10px 0;
+      }
+    }
+  }
+  
+  .order-note {
+    margin-bottom: -12px;
+    margin-bottom: -1.2rem;
+  }
+  .order-price {
+    text-align: right;
+  }
+  
+  .order-score {
+    text-align: right;
+    font-size: 12px;
+    font-size: 1.2rem;
   }
 }
 
@@ -501,7 +562,7 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
   margin-top: 20px;
   
   .row {
-    padding: 5px 0;
+    padding: 10px 0;
   }
   .item-line {
     border-bottom: 1px dashed #ccc;
