@@ -9,8 +9,10 @@ class ProductsController < ApplicationController
       type_id = 1
     end
     
-    if type_id > 3
-      type_id = 3
+    @type = ProductType.all_types
+    
+    if type_id > @type.size
+      type_id = @type.size
     end
     
     params[:type_id] = type_id
