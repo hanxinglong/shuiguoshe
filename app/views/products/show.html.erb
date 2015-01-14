@@ -140,7 +140,7 @@ $(function() {
   
   <%
     @time = @product.discounted_at || @product.sale.try(:closed_at)
-   %>
+  %>
   
   <% if @time %>
   $("#timeLeft").countdown("<%= @time.strftime("%Y-%m-%d %H:%M:%S") %>")
@@ -150,7 +150,11 @@ $(function() {
     .on('finish.countdown', function(event) {
       $el = $("#item-<%= @product.id %>");
       $el.attr("disabled", true);
+      <% if mobile? %>
+      $el.parent().css("background-color", "rgb(240, 173, 78)");
+      <% else %>
       $el.attr("class", "btn btn-warning");
+      <% end %>
       $el.text("活动已结束,不支持预订");
       $(this).text("");
     });
