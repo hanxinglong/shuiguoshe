@@ -6,8 +6,10 @@ if type < 1
   type = 1
 end
 
-if type > 3
-  type = 3
+@types = ProductType.all_types
+
+if type > @types.size
+  type = @types.size
 end
 
 # if params[:q]
