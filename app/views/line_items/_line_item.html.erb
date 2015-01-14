@@ -1,8 +1,17 @@
 <% cache [line_item, line_item.product_updated_at] do %>
 <tr id="cart_1_line_item_<%= line_item.id %>">
-  <td width="40%" class="item-title">
-    <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product), title: line_item.product.title, target: "_blank" %>
-    <span class="product-title"><%= link_to line_item.product.title, product_path(line_item.product), title: line_item.product.title, target: "_blank" %></span>
+  <td width="40%">
+    <div class="item-title clearfix">
+      <div class="pull-left">
+        <%= link_to image_tag(line_item.product.image.url(:small)), product_path(line_item.product), title: line_item.product.title, target: "_blank" %>
+      </div>
+      <div class="pull-left extra-info">
+        <div class="product-title"><%= link_to line_item.product.title, product_path(line_item.product), title: line_item.product.title, target: "_blank" %></div>
+        <div class="green"><%= render_discount_score(line_item.product) %></div>
+      </div>
+    </div>
+    
+    
   </td>
   <td width="10%"><%= line_item.product.units %></td>
   <td width="10%"><%= product_price_tag(line_item.product.low_price) %></td>
