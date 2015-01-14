@@ -525,6 +525,16 @@ a {
 //  }
 }
 
+.all-orders, .item-info {
+  .cell {
+    display: block;
+    width: auto;
+    height: auto;
+  
+    text-decoration: none;
+  }
+}
+
 .order-info, .item-info {  
 //  margin-top: 10px;
 //  border-bottom: 1px solid rgb(235,235,235);
@@ -538,6 +548,14 @@ a {
   .col-xs-4 {
     border-right: 1px solid rgb(235,235,235);
   }
+  
+  .order-state-link {
+    display: block;
+    width: auto;
+    height: auto;
+    text-decoration: none;
+  }
+  
   .order-state {
     text-align: center;
     font-size: 18px;
@@ -545,8 +563,8 @@ a {
   }
   
   .all-orders {
-    padding: 10px 0;
-    padding: 1rem 0;
+//    padding: 10px 0;
+//    padding: 1rem 0;
     font-size: 18px;
     font-size: 1.8rem;
   }

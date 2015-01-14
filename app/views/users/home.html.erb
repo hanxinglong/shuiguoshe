@@ -14,37 +14,45 @@
   <div class="order-info">
     <div class="row order-states">
       <div class="col-xs-4">
-        <div class="order-state">
-          <p><%= @incompleted_count %></p>
-          <%= link_to "待配送", incompleted_orders_user_path %>
-        </div>
+        <a href="<%= incompleted_orders_user_path %>" class="order-state-link">
+          <div class="order-state">
+            <p><%= @incompleted_count %></p>
+            <p>待配送</p>
+          </div>
+        </a>
       </div>
       <div class="col-xs-4">
-        <div class="order-state">
-          <p><%= @completed_count %></p>
-          <%= link_to "已完成", completed_orders_user_path %>
-        </div>
+        <a href="<%= completed_orders_user_path %>" class="order-state-link">
+          <div class="order-state">
+            <p><%= @completed_count %></p>
+            <p>已完成</p>
+          </div>
+        </a>
       </div>
       <div class="col-xs-4">
-        <div class="order-state">
-          <p><%= @canceled_count %></p>
-          <%= link_to "已取消", canceled_orders_user_path %>
+        <a href="<%= canceled_orders_user_path %>" class="order-state-link">
+          <div class="order-state">
+            <p><%= @canceled_count %></p>
+            <p>已取消</p>
+          </div>
+        </a>
+      </div>
+    </div>
+    
+    <div class="all-orders">
+      <div class="row">
+        <div class="col-xs-12">
+          <%= link_to "全部订单", orders_user_path, class: "cell" %>
         </div>
       </div>
     </div>
     
-    <div class="row all-orders">
+  </div>
+  
+  <div class="item-info">
+    <div class="row">
       <div class="col-xs-12">
-        <%= link_to "全部订单", orders_user_path %>
-      </div>
-    </div>
-    
-  </div>
-  
-  <div class="item-info">
-    <div class="row">
-      <div class="col-xs-9">
-        <%= link_to "我的积分", points_user_path %>
+        <%= link_to "我的积分", points_user_path, class: "cell" %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -52,8 +60,8 @@
     </div>
     
     <div class="row">
-      <div class="col-xs-9">
-        <%= link_to "邀请朋友", new_invite_path %>
+      <div class="col-xs-12">
+        <%= link_to "邀请朋友", new_invite_path, class: "cell" %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -61,8 +69,8 @@
     </div>
     
     <div class="row">
-      <div class="col-xs-9">
-        <%= link_to "激活邀请", active_invite_path %>
+      <div class="col-xs-12">
+        <%= link_to "激活邀请", active_invite_path, class: "cell" %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -70,8 +78,8 @@
     </div>
     
     <div class="row">
-      <div class="col-xs-9">
-        <%= link_to "有话要说", new_message_path %>
+      <div class="col-xs-12">
+        <%= link_to "有话要说", new_message_path, class: "cell" %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -82,8 +90,8 @@
   
   <div class="item-info">
     <div class="row">
-      <div class="col-xs-9">
-        <%= link_to "基本资料", edit_user_registration_path %>
+      <div class="col-xs-12">
+        <%= link_to "基本资料", edit_user_registration_path, class: "cell" %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -91,8 +99,8 @@
     </div>
     
     <div class="row">
-      <div class="col-xs-9">
-        <%= link_to "修改密码", edit_user_registration_path(by: 'pwd') %>
+      <div class="col-xs-12">
+        <%= link_to "修改密码", edit_user_registration_path(by: 'pwd'), class: "cell" %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
@@ -100,8 +108,8 @@
     </div>
     
     <div class="row">
-      <div class="col-xs-9">
-        <%= link_to "配送设置", edit_user_path %>
+      <div class="col-xs-12">
+        <%= link_to "配送设置", edit_user_path, class: "cell" %>
       </div>
       <div class="col-xs-3">
         <i class="arrow pull-right"></i>
