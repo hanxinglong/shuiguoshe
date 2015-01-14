@@ -14,23 +14,24 @@
       <h3>填写并核对订单信息</h3>
       <div class="order-item-info">
         <h4>收货人信息</h4>
-        <div class="item-info">
-          <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" value="me" checked>
-                配送给自己
-              </label>&nbsp;&nbsp;
+        
+          <div class="item-info">
+            <!-- div class="radio">
               <label>
-                  <input type="radio" name="optionsRadios" value="other">
-                  配送给他人
-              </label>
-          </div>
-          
+                  <input type="radio" name="optionsRadios" value="me" checked>
+                  配送给自己
+                </label>&nbsp;&nbsp;
+                <label>
+                    <input type="radio" name="optionsRadios" value="other">
+                    配送给他人
+                </label>
+            </div -->
+                  
           <div class="deliver-info" style="margin-top: 20px; margin-left: -40px;">
             <div class="form-group">
               <%= f.label :mobile, "* 收货人手机", class: "control-label col-sm-2" %>
               <div class="col-sm-3">
-                <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: current_user.mobile, readonly: true %>
+                <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: current_user.mobile %>
               </div>
             </div>
           
