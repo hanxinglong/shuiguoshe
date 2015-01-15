@@ -46,7 +46,7 @@
       <tbody>
         <% @orders.each do |order| %>
           <tr>
-            <td><%= order.order_no %></td>
+            <td><%= link_to order.order_no, [:cpanel, order] %></td>
             <td>￥<%= format("%.2f", order.total_price) %></td>
             <td>-￥<%= format("%.2f", order.discount_price) %></td>
             <td><%= order.mobile %></td>

@@ -1,10 +1,14 @@
 # coding: utf-8
 class Cpanel::OrdersController < Cpanel::ApplicationController
   before_action :check_is_admin, except: [:destroy]
-  before_action :set_order, only: [:cancel, :complete, :prepare_deliver, :deliver]
+  before_action :set_order, only: [:cancel, :complete, :prepare_deliver, :deliver, :show]
   
   def index
     @orders = Order.includes(:user).order('created_at DESC').paginate page: params[:page], per_page: 30
+  end
+  
+  def show
+    
   end
   
   def search
