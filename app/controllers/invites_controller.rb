@@ -76,8 +76,8 @@ class InvitesController < ApplicationController
     end
     
     if invite.update_attribute(:verified, false)
-      current_user.update_score(500, '激活邀请码')
-      invite.user.update_score(500, "邀请用户#{current_user.mobile}")
+      current_user.update_score(SiteConfig.invite_score.to_i, '激活邀请码')
+      invite.user.update_score(SiteConfig.invite_score.to_i, "邀请用户#{current_user.mobile}")
       flash[:error] = "邀请码已经被激活"
       redirect_to active_invite_path
     else

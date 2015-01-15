@@ -301,8 +301,8 @@ module Shuiguoshe
         end
         
         if invite.update_attribute(:verified, false)
-          user.update_score(500, '激活邀请码')
-          invite.user.update_score(500, "邀请用户#{user.mobile}")
+          user.update_score(SiteConfig.invite_score.to_i, '激活邀请码')
+          invite.user.update_score(SiteConfig.invite_score.to_i, "邀请用户#{user.mobile}")
           { code: 0, message: "ok" }
         else
           { code: 121, message: "激活邀请码失败" }

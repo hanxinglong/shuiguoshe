@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="alert alert-warning" role="alert" style="margin-top: 20px;" id="user-alert-warning">
-    成功激活别人对您的邀请，那么您和您的朋友都将获得500积分，可以抵扣5元。
+    成功激活别人对您的邀请，那么您和您的朋友都将获得<%= SiteConfig.invite_score.to_i %>积分，可以抵扣<%= SiteConfig.invite_score.to_i / 100 %>元。
   </div>
   
   <%= simple_form_for(@invite, url: active_code_invite_path, html: { class: "", method: :patch },
@@ -27,7 +27,7 @@
 <div class="user-box">
   <h2>激活邀请</h2>
   <div class="alert alert-warning" role="alert" style="margin-top: 20px;" id="user-alert-warning">
-    成功激活别人对您的邀请，那么您和您的朋友都将获得500积分，可以抵扣5元。
+    成功激活别人对您的邀请，那么您和您的朋友都将获得<%= SiteConfig.invite_score.to_i %>积分，可以抵扣<%= SiteConfig.invite_score.to_i / 100 %>元。
   </div>
   <%= simple_form_for(@invite, url: active_code_invite_path, html: { class: "form-horizontal", method: :patch },wrapper: :horizontal_form,
           wrapper_mappings: {
