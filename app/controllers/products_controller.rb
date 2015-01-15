@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.saled.no_discount
+    @products = Product.saled.no_discount.order('sort ASC')
     
     type_id = params[:type_id].to_i
 
