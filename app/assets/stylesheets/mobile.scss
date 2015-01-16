@@ -596,6 +596,11 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
   .order-total {
     margin-top: 20px;
     margin-top: 2rem;
+    .discount-score-intro {
+      color: $nature-green;
+      font-size: 12px;
+      font-size: 1.2rem;
+    }
   }
 }
 

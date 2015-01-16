@@ -23,7 +23,10 @@
       <div class="item-line"></div>
     <% end %>
     <div class="order-total">
-      总计：￥<%= product_price_tag(order.total_price) %> <br/>抵扣：-￥<%= product_price_tag(order.discount_price) %>
+      总计：￥<%= product_price_tag(order.total_price) %> <br/>抵扣：-￥<%= product_price_tag(order.discount_price) %><br/>
+      <% if order.total_discount_score > 0 and not order.state?(:canceled) and not order.state?(:completed) %>
+      <span class="discount-score-intro">该订单完成后，赠送<%= order.total_discount_score %>积分</span>
+      <% end %>
     </div>
   </div>
   <div class="panel-footer clearfix">
