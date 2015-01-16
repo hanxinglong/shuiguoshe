@@ -7,10 +7,11 @@
         <div class="caption">
           <h6 class="name"><%= product.title %></h6>
           <%= render_product_subtitle(product) %>
+          <!--div class="item-units"><%= product.units %></div-->
           <div class="price">
             <span class="green">￥<span class="numeric"><%= number_with_precision(product.low_price, precision: 2) %></span></span>
             <del class="text-muted">￥<%= number_with_precision(product.origin_price, precision: 2) %></del>
-            <span class="text-muted">（<%= product.units %>）</span>
+            <span class="item-units">（<%= product.units %>）</span>
           </div>
           <div class="price-extra">
             <div class="pull-right" style="display:none" id="cart-btn-<%= product.id %>">

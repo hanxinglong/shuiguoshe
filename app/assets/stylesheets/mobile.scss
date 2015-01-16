@@ -586,12 +586,16 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
     border-bottom: 1px dashed #ccc;
     padding: 0 20px;
     
-    &:last-child {
-      border: 0;
-    };
+//    &:last-child {
+//      border: 0;
+//    };
   }
   .order-state {
     margin-right: 5px;
+  }
+  .order-total {
+    margin-top: 20px;
+    margin-top: 2rem;
   }
 }
 

@@ -12,7 +12,8 @@
         <div class="col-xs-5">
           <%= link_to item.product.title, item.product %>
           <div class="text-muted">
-            ￥<%= product_price_tag(item.product.low_price) %> × <%= item.quantity %>
+            <div><%= item.product.units %></div>
+            <div>￥<%= product_price_tag(item.product.low_price) %> × <%= item.quantity %></div>
           </div>
         </div>
         <div class="col-xs-4" style="text-align:right">
@@ -21,6 +22,9 @@
       </div>
       <div class="item-line"></div>
     <% end %>
+    <div class="order-total">
+      总计：￥<%= product_price_tag(order.total_price) %> <br/>抵扣：-￥<%= product_price_tag(order.discount_price) %>
+    </div>
   </div>
   <div class="panel-footer clearfix">
     <div class="created-at pull-left">
