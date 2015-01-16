@@ -22,14 +22,6 @@ module Shuiguoshe
       end
       post '/' do
         
-        # if session[:captcha].downcase != params[:captcha].downcase
-        #   return { code: -2, message: "图片验证码不正确" }
-        # end
-        
-        if session
-          
-        end
-        
         unless check_mobile(params[:mobile])
           return { code: 100, message: "不正确的手机号" }
         end
@@ -38,6 +30,7 @@ module Shuiguoshe
           return { code: -1, message: "不正确的type参数" }
         end
         
+        # 检查手机是否符合获取验证码的要求
         type = params[:type].to_i
         user = User.find_by(mobile: params[:mobile])
         if type == 1    # 注册
@@ -50,13 +43,54 @@ module Shuiguoshe
           end
         end
         
+        # 1分钟内多次提交检测
+        sym = "#{params[:mobile]}_#{params[:type]}".to_sym
+        if session[sym] and ( Time.now.to_i - session[sym].to_i ) < 60 + rand(3)
+          return { code: -5, message: "同一手机号1分钟内只能获取一次验证码，请稍后重试" }
+        end
+
+        session[sym] = Time.now.to_i
+        
+        # 同一手机一天最多获取5次验证码
+        log = SendSmsLog.where('mobile = ? and send_type = ?', params[:mobile], params[:type]).first
+        if log.blank?
+          log = SendSmsLog.create!(mobile: params[:mobile], send_type: params[:type], first_sms_sent_at: Time.now)
+        else
+          
+          dt = Time.now.to_i - log.first_sms_sent_at.to_i
+          
+          if dt > 24 * 3600 # 超过24小时都要重置发送记录
+            log.sms_total = 0
+            log.first_sms_sent_at = Time.now
+            log.save!
+          else 
+            # 24小时以内
+            if log.sms_total.to_i == 5 # 达到5次
+              return { code: -10, message: "同一手机号24小时内只能获取5次验证码，请稍后再试" }
+            end
+          end
+          
+        end
+              
+        # 获取验证码并发送
         code = AuthCode.where('mobile = ? and verified = ? and c_type = ?', params[:mobile], true, type).first
         if code.blank?
           code = AuthCode.create!(mobile: params[:mobile], c_type: type)
         end
 
         if code          
-          return send_sms(params[:mobile], "您的验证码是#{code.code}【水果社】", "获取验证码失败")
+          result = send_sms(params[:mobile], "您的验证码是#{code.code}【水果社】", "获取验证码失败")
+          if result['code'].to_i == 103
+            # 发送失败，更新每分钟发送限制
+            session.delete(sym)
+          end
+          if result['code'].to_i == 0
+            # 发送成功，更新发送日志
+            log.update_attribute(:sms_total, log.sms_total + 1)
+          end
+          result
+        else
+          { code: -100, message: "验证码生成错误，请重试" }
         end
         
       end # end post create_code

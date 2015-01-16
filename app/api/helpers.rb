@@ -58,14 +58,15 @@ module Shuiguoshe
         # puts response
         session.delete(:captcha)
         resp = JSON.parse(response)
+        puts resp
         if resp['code'] == 0
           { code: 0, message: "ok" }
         else
-          if resp['code'] == 9 or resp['code'] == 17
-            { code: 103, message: resp['msg'] }
-          else
-            { code: 103, message: error_msg }
-          end
+          # if resp['code'] == 9 or resp['code'] == 17
+          { code: 103, message: resp['msg'] }
+          # else
+          #   { code: 103, message: error_msg }
+          # end
         end
       }
     end
@@ -76,7 +77,8 @@ module Shuiguoshe
     end
     
     def check_mobile(mobile)
-      mobile.gsub(/\s+/, '') =~ /\A1[3|4|5|8][0-9]\d{4,8}\z/
+      return false if mobile.length != 11
+      mobile =~ /\A1[3|4|5|8][0-9]\d{4,8}\z/
     end
     
   end
