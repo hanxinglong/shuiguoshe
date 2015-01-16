@@ -24,8 +24,14 @@
 .order-detail {
   .common-table {
     background-color: white;
+    .product-info {
+      margin-left: 70px;
+      .product-score {
+        font-size: 13px;
+      }
+    }
     td {
-      vertical-align: middle;
+      vertical-align: top;
       text-align: center;
     }
     td.item-title {

@@ -39,6 +39,14 @@ class Order < ActiveRecord::Base
     self.today.count
   end
   
+  def total_discount_score
+    sum = 0
+    line_items.each do |item|
+      sum += item.product.discount_score
+    end
+    sum
+  end
+  
   state_machine initial: :normal do
     state :prepare_delivering
     state :delivering
