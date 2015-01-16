@@ -94,6 +94,8 @@ Rails.application.routes.draw do
     end
     
     resources :banners
+    resources :invites
+    resources :messages
     resources :newsblasts
     resources :sales
     resources :sidebar_ads

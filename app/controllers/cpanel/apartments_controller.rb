@@ -67,6 +67,6 @@ class Cpanel::ApartmentsController < Cpanel::ApplicationController
     end
 
     def apartment_params
-      params.require(:apartment).permit(:name, :address, :image, :image_cache)
+      params.require(:apartment).permit(:name, :address, :image, :image_cache, :sort)
     end
 end

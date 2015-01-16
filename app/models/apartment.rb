@@ -12,7 +12,7 @@ class Apartment < ActiveRecord::Base
   
   def self.opened
     # Rails.cache.fetch("apartment:apartment_collection:#{CacheVersion.last_apartment_updated_at}") do
-      where(:is_open => true)
+      where(:is_open => true).order('sort ASC, orders_count DESC')
     # end
   end
   

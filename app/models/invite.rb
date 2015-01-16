@@ -6,6 +6,8 @@ class Invite < ActiveRecord::Base
   
   belongs_to :user
   
+  scope :search, -> (keyword) { joins(:user).where('code like :value or invitee_mobile like :value or users.mobile like :value', { value: "%#{keyword}%" }) }
+  
   before_create :generate_code
   def generate_code
     begin

@@ -57,6 +57,8 @@
             <% if current_user.admin? %>
             <li><%= link_to "订单", cpanel_orders_path %></li>
             <% end %>
+            <li><%= link_to "邀请", cpanel_invites_path %></li>
+            <li><%= link_to "留言", cpanel_messages_path %></li>
             <li><%= link_to "Banner", cpanel_banners_path %></li>
             <li><%= link_to "边栏广告", cpanel_sidebar_ads_path %></li>
             <li><%= link_to "公告", cpanel_newsblasts_path %></li>

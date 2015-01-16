@@ -1,5 +1,9 @@
 class Message < ActiveRecord::Base
   validates :title, :body, presence: true
+  
+  def user_mobile
+    @mobile ||= User.find_by(id: self.user_id).try(:mobile)
+  end
 end
 
 # == Schema Information

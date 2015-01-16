@@ -26,6 +26,10 @@ module Shuiguoshe
         #   return { code: -2, message: "图片验证码不正确" }
         # end
         
+        if session
+          
+        end
+        
         unless check_mobile(params[:mobile])
           return { code: 100, message: "不正确的手机号" }
         end
@@ -313,4 +317,4 @@ module Shuiguoshe
     end # end user
     
   end # end class
-end # end module
+end # end module=======
