@@ -150,6 +150,11 @@ a {
       margin-top: 1rem;
       width: 100%;
     }
+    
+    .countdown {
+      font-size: 12px;
+      font-size: 1.2rem;
+    }
 
     .green {
       color: $nature-green;
@@ -220,6 +225,22 @@ a {
   padding-left: 10px;
   .green {
     color: $nature-green;
+  }
+}
+
+.home-discount-products-container {
+  h2 {
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  
+  .discount-item {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    
+    background-color: white;
   }
 }
 

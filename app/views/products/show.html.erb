@@ -150,13 +150,14 @@ $(function() {
     .on('finish.countdown', function(event) {
       $el = $("#item-<%= @product.id %>");
       $el.attr("disabled", true);
+      $el.prop("disabled", true);
       <% if mobile? %>
       $el.parent().css("background-color", "rgb(240, 173, 78)");
       <% else %>
       $el.attr("class", "btn btn-warning");
       <% end %>
       $el.text("活动已结束,不支持预订");
-      $(this).text("");
+      $(this).html('<span class="glyphicon glyphicon-time"></span>' + '&nbsp;&nbsp;剩余' + '00天00小时00分00秒');
     });
   <% end %>
   

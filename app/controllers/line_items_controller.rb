@@ -25,6 +25,10 @@ class LineItemsController < ApplicationController
       return false
     end
     
+    if @product.is_discount and @product.discounted_at and @product.discounted_at < Time.zone.now
+      return false
+    end
+    
     @cart = current_cart
     @line_item = @cart.add_product(@product)
 

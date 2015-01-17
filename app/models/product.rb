@@ -65,6 +65,10 @@ class Product < ActiveRecord::Base
     self.suggested_at.present?
   end
   
+  def in_discounting?
+    self.is_discount and self.discounted_at and self.discounted_at > Time.zone.now
+  end
+  
   def as_json(options)
     json = {
       id: self.id,
