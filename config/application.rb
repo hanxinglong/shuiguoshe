@@ -48,6 +48,8 @@ module Shuiguoshe
   end
 end
 
+ENV['RAILS_CACHE_ID'] = `git log --pretty=format:%h -n1`.strip
+
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
 
