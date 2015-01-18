@@ -39,17 +39,32 @@ class Cpanel::OrdersController < Cpanel::ApplicationController
   
   def prepare_deliver
     @order.prepare_deliver
-    redirect_to cpanel_orders_path
+    if params[:for] == 'home'
+      redirect_to cpanel_root_path
+    else
+      redirect_to cpanel_orders_path
+    end
+    
   end
   
   def deliver
     @order.deliver
-    redirect_to cpanel_orders_path
+    # redirect_to cpanel_orders_path
+    if params[:for] == 'home'
+      redirect_to cpanel_root_path
+    else
+      redirect_to cpanel_orders_path
+    end
   end
   
   def complete
     @order.complete
-    redirect_to cpanel_orders_path
+    # redirect_to cpanel_orders_path
+    if params[:for] == 'home'
+      redirect_to cpanel_root_path
+    else
+      redirect_to cpanel_orders_path
+    end
   end
   
   private

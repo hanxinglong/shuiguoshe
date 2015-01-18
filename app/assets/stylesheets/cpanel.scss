@@ -25,6 +25,7 @@ body {
 
 .orders {
   .table {
+    border: 0;
     tr {
       border-bottom: 1px dashed #ccc;
       &:last-child {
@@ -35,5 +36,12 @@ body {
       border: 0;
     }
     
+  }
+}
+
+.order-operation {
+  text-align: right;
+  > .btn {
+    margin-left: 20px;
   }
 }

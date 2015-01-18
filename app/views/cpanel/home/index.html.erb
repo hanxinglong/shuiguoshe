@@ -39,58 +39,26 @@
         
       </div>
       <div class="panel-footer">
-        订单总额：￥<%= product_price_tag(order.total_price) %>
-        <span class="pull-right">
-          下单日期：<%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-        </span>
+        收货人手机：<%= order.mobile %><br />
+        配送地址：<%= render_order_address(order) %>
+        <hr />
+        订单总额：￥<%= product_price_tag(order.total_price) %> 抵扣：-￥<%= product_price_tag(order.discount_price) %><br/>
+        下单日期：<%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %><br/>
+        订单状态：<%= render_order_state(order) %><br />
+        <div class="order-operation">
+          <% if order.can_prepare_deliver? %>
+            <%= link_to "准备配送", prepare_deliver_cpanel_order_path(order, for: 'home'), class: "btn btn-primary btn-sm", method: :patch, confirm: "你确定吗？" %>
+          <% end %>
+          <% if order.can_deliver? %>
+            <%= link_to "开始配送", deliver_cpanel_order_path(order, for: 'home'), class: "btn btn-primary btn-sm", method: :patch, confirm: "你确定吗？" %>
+          <% end %>
+          <% if order.can_complete? %>
+            <%= link_to "确认收货", complete_cpanel_order_path(order, for: 'home'), class: "btn btn-success btn-sm", method: :patch, confirm: "你确定吗？" %>
+          <% end %>
+        </div>
       </div>
     </div>
     <% end %>
-  </div>
-  
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">用户统计</h3>
-      </div>
-      <div class="panel-body">
-        用户总数：<%= User.count %>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">订单统计</h3>
-      </div>
-      <div class="panel-body">
-        <p>订单总数：<%= Product.count %></p>
-        <p>今日订单：<%= Order.today_count %></p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">产品统计</h3>
-      </div>
-      <div class="panel-body">
-        产品总数：<%= Product.count %>
-      </div>
-    </div>
-  </div>
-  
-  <div class="col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">小区信息统计</h3>
-      </div>
-      <div class="panel-body">
-        小区总数：<%= Apartment.count %>
-      </div>
-    </div>
   </div>
 
 </div>

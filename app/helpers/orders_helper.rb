@@ -29,6 +29,14 @@ module OrdersHelper
     end
   end
   
+  def render_order_address(order)
+    return "" if order.blank?
+    return "" if order.apartment.blank?
+    return "#{order.apartment.name}（#{order.note}）" if order.apartment.name == '其他'
+    
+    "#{order.apartment.name}（#{order.apartment.address}）"
+  end
+  
   def can_cancel?(order)
     return false if order.blank?
     
