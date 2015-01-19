@@ -6,7 +6,7 @@
       <% cache cache_key_for('home_discount_products', @discounted_products) do %>
         <% @discounted_products.each do |product| %>
           <% cache product do %>
-          <div class="col-xs-4 col-md-4">
+          <div class="col-xs-4 col-md-4 product-detail">
             <a href="<%= product_path(product) %>" title="<%= product.title %>" class="product-link" target="_blank">
               <div class="item clearfix">
                 <div class="item-avatar pull-left">

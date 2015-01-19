@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
   scope :suggest, -> { where.not(suggested_at: nil).order('suggested_at desc') }
   scope :hot, -> { where('orders_count > 0').order('orders_count desc').limit(5) }
   scope :no_discount, -> { where(is_discount: false) }
-  scope :discounted, -> { where('is_discount = ? and discounted_at > ?', true, Time.now).limit(3) }
+  scope :discounted, -> { where('is_discount = ? and discounted_at > ?', true, Time.now) }
   
   validates :title, :image, :low_price, :type_id, :origin_price, :units, presence: true
   
