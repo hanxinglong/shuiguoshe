@@ -18,7 +18,6 @@ module Shuiguoshe
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    
     config.autoload_paths += %W(#{config.root}/app/api)
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -48,7 +47,7 @@ module Shuiguoshe
   end
 end
 
-ENV['RAILS_CACHE_ID'] = '121811'
+ENV['RAILS_CACHE_ID'] = '521811'
 
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
