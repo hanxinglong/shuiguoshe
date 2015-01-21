@@ -57,6 +57,9 @@ class ProductsController < ApplicationController
   def show
     begin
       @product = Product.includes(:photos).find(params[:id])
+      unless @product.on_sale
+        render_404
+      end
       @photos = @product.photos.order('sort ASC')
     rescue ActiveRecord::RecordNotFound
       logger.error "Attempt to access invalid product #{params[:id]}"
