@@ -114,7 +114,7 @@
     <% if @product.note.present? %>
       <div class="product-note">
         <h2 class="f16">温馨提示</h2>
-        <p class="text-muted"><%= @product.note %></p>
+        <p class="text-muted"><%= raw @product.note %></p>
       </div>
     <% end %>
     
