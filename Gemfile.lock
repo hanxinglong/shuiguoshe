@@ -142,6 +142,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
     netrc (0.10.2)
+    newrelic_rpm (3.9.9.275)
     orm_adapter (0.5.0)
     quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
@@ -277,6 +278,7 @@ DEPENDENCIES
   jquery-rails
   mini_magick (= 3.7.0)
   mysql2
+  newrelic_rpm
   quiet_assets
   rack-cors
   rack-utf8_sanitizer

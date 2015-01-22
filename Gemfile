@@ -67,6 +67,8 @@ gem 'dalli'
 
 gem 'state_machine'
 
+gem 'newrelic_rpm'
+
 # Use Capistrano for deployment
 group :development do
   
