@@ -5,6 +5,34 @@ window.App =
   notice: (msg, to) ->
     $(to).before("<div class='alert alert-success' id='notice-comp'><a class='close' href='#' data-dismiss='alert'>×</a>#{msg}</div>")
   
+  likeable: (el) ->
+    likeable_type = $(el).data("type")
+    likeable_id = $(el).data("id")
+    if $(el).data("state") != "liked"
+      $.ajax
+        url: "/likes"
+        type: "POST"
+        data: 
+          type: likeable_type
+          id: likeable_id
+        success: (re) ->
+          if re == "1"
+            $(el).data("state", "liked").attr("class", "btn btn-danger").attr("title", "取消收藏").text("取消收藏")
+          else
+            App.alert("抱歉，系统异常，提交失败。", $('.product-container-box, .product-detail'))
+    else
+      $.ajax
+        url: "/likes/#{likeable_id}"
+        type: "DELETE"
+        data: 
+          type: likeable_type
+        success: (re) ->
+          if re == "1"
+            $(el).data("state", "").attr("class", "btn btn-warning").attr("title", "收藏").text("收藏")
+          else
+            App.alert("抱歉，系统异常，提交失败。", $('.product-container-box, .product-detail'))
+    false
+  
   doSaveAddress: (el) ->
     id = $(el).data("user-id")
     address = $("#order_apartment_id").val()

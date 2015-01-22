@@ -597,6 +597,32 @@ input[type="text"], input[type="email"], input[type="search"], input[type="passw
 	-moz-appearance: caret; /* mobile firefox too! */
 }
 
+.likes {
+  background-color: white;
+  padding: 10px 0;
+  .like-item {
+    padding: 10px 0;
+    a {
+      color: $common-black;
+      text-decoration: none;
+    }
+//    margin-: 20px;
+    border-bottom: 1px dashed #ccc;
+    &:last-child {
+      border: 0;
+    };
+  }
+}
+
+.like-button {
+  height: 44px;
+  line-height: 44px;
+  text-align: right;
+  .btn {
+    font-size: 13px;
+  }
+}
+
 .orders {
   margin-top: 20px;
   

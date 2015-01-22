@@ -24,6 +24,23 @@ $gray-medium-light: #eaeaea;
   }
 }
 
+.likes {
+  background-color: white;
+  padding: 20px;
+  .like-item {
+    padding: 10px 0;
+    a {
+      color: $common-black;
+      text-decoration: none;
+    }
+//    margin-: 20px;
+    border-bottom: 1px dashed #ccc;
+    &:last-child {
+      border: 0;
+    };
+  }
+}
+
 // 用户登录、注册
 .user-login-box {
   background-color: rgb(251,248,240);

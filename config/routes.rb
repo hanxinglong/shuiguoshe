@@ -18,11 +18,14 @@ Rails.application.routes.draw do
   resources :users, only: [:update]
   resources :messages, only: [:new, :create]
   
+  resources :likes
+  
   resource :user do
     get :home
     get :orders
     get :edit
     get :points
+    get :likes
     
     get '/orders/incompleted', as: :incompleted_orders
     get '/orders/completed'  , as: :completed_orders

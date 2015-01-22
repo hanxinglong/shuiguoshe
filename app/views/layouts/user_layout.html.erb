@@ -13,6 +13,9 @@
           <a href="<%= points_user_path %>" class="list-group-item <%= @current == 'user_points' ? "active" : "" %>">
             我的积分
           </a>
+          <a href="<%= likes_user_path %>" class="list-group-item <%= @current == 'user_likes' ? "active" : "" %>">
+            我的收藏
+          </a>
           <a href="<%= new_message_path %>" class="list-group-item <%= @current == 'user_message_new' ? "active" : "" %>">
             我有话说
           </a>

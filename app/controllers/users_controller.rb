@@ -51,6 +51,13 @@ class UsersController < ApplicationController
     
   end
   
+  def likes
+    @likes = current_user.likes.recent.products.paginate page: params[:page], per_page: 20
+    @current = 'user_likes'
+    fresh_when(etag: [@likes, @current])
+    set_seo_meta("我的收藏")
+  end
+  
   def points
     @traces = ScoreTrace.where(user_id: current_user.id).order("created_at DESC").paginate page: params[:page], per_page: 30
     @current = 'user_points'

@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   ACCESSABLE_ATTRS = [:login, :mobile, :code, :by, :avatar, :password, :password_confirmation, :current_password]
   
   has_many :orders, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   # validate :valid_captcha?, :on => :create
   validates :mobile, presence: true
@@ -145,6 +146,20 @@ class User < ActiveRecord::Base
       },
       score: self.score
     }
+  end
+  
+  # 收藏东西
+  def like(likeable)
+    Like.where(likeable_id: likeable.id,
+               likeable_type: likeable.class,
+               user_id: self.id).first_or_create
+  end
+  
+  # 取消收藏
+  def unlike(likeable)
+    Like.destroy_all(likeable_id: likeable.id,
+                     likeable_type: likeable.class,
+                     user_id: self.id)
   end
             
 end
