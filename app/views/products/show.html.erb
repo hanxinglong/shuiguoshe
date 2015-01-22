@@ -31,7 +31,10 @@
           规格：<span class="text-muted"><%= @product.units %></span>
         </div>   
         <div class="item-line">
-          <span class="text-muted small"><%= render_deliver_info(@product) %></span>
+          <span class="text-muted"><%= render_deliver_info(@product) %></span>
+        </div>
+        <div class="item-line">
+          <%= raw SiteConfig.deliver_intro %>
         </div>
         <div class="item-line">已售<span class="price-numeric"><%= @product.orders_count %></span>件</div>
       </div>
@@ -112,6 +115,10 @@
       <div class="item-line text-muted f14">
         配送：<%= render_deliver_info(@product) %>
       </div>
+      <div class="item-line">
+        <%= raw SiteConfig.deliver_intro %>
+      </div>
+      
       <div class="item-line text-muted f16">已售<span class="green price-numeric f24"><%= @product.orders_count %></span>件</div>
       
       <div class="clearfix">
