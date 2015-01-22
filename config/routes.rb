@@ -96,6 +96,8 @@ Rails.application.routes.draw do
       end
     end
     
+    resources :pages
+    
     resources :banners
     resources :invites
     resources :messages

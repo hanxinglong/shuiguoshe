@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   end
   
   def likes
-    @likes = current_user.likes.recent.products.paginate page: params[:page], per_page: 20
+    @likes = current_user.likes.recent.products#.paginate page: params[:page], per_page: 20
     @current = 'user_likes'
     fresh_when(etag: [@likes, @current])
     set_seo_meta("我的收藏")
