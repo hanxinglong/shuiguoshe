@@ -2,34 +2,21 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.saled.no_discount.order('sort ASC')
+    @products = @products.where(type_id: params[:type_id]).order("created_at DESC")
     
-    type_id = params[:type_id].to_i
+    # if @products.empty?
+    #   render_404
+    #   return
+    # end
+    
+    # titles = SiteConfig.product_meta_titles.split('#') if SiteConfig.product_meta_titles
+    # descriptions = SiteConfig.product_meta_descriptions.split('#') if SiteConfig.product_meta_descriptions
+    # if titles and descriptions
+    #   set_seo_meta(titles[type_id - 1], @products.map(&:title).join('、'), descriptions[type_id - 1])
+    # end
 
-    if type_id < 1
-      type_id = 1
-    end
-    
-    @type = ProductType.all_types
-    
-    if type_id > @type.size
-      type_id = @type.size
-    end
-    
-    params[:type_id] = type_id
-    
-    @products = @products.where(type_id: type_id).order("created_at DESC")
-    
-    titles = SiteConfig.product_meta_titles.split('#') if SiteConfig.product_meta_titles
-    descriptions = SiteConfig.product_meta_descriptions.split('#') if SiteConfig.product_meta_descriptions
-    if titles and descriptions
-      set_seo_meta(titles[type_id - 1], @products.map(&:title).join('、'), descriptions[type_id - 1])
-    end
-
-    @cache_prefix = "products_#{type_id}"
+    @cache_prefix = "products_#{params[:type_id]}"
     @current = 'products_index'
-    
-    types = ProductType.all_types.map { |t| t.name }
-    @type = types[type_id - 1]
     
     fresh_when(etag: [@products, @cache_prefix])
     
@@ -68,10 +55,6 @@ class ProductsController < ApplicationController
     else
       fresh_when etag: [@product, @photos]
       set_seo_meta(@product.title, '', @product.intro)
-      
-      types = ProductType.all_types.map { |t| t.name }
-      @type = types[@product.type_id - 1]
-      
     end
   end
 

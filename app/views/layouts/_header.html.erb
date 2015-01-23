@@ -1,25 +1,8 @@
 <% 
-
-type = params[:type_id].to_i
-
-if type < 1
-  type = 1
-end
-
 @types = ProductType.all_types
-
-if type > @types.size
-  type = @types.size
-end
-
-# if params[:q]
-#   keyword = params[:q].gsub(/\s+/, "")
-# else
-#   keyword = ""
-# end
-
- %>
-<% cache ["#{current_user.try(:mobile)}_#{current_user.try(:admin?)}_#{controller_name}_#{type}_#{@current}", cart.my_cache_key] do %>
+%>
+ 
+<% cache ["#{current_user.try(:mobile)}_#{current_user.try(:admin?)}_#{controller_name}_#{@current}_#{params[:type_id]}", cart.my_cache_key, @types] do %>
 <%= render '/layouts/topbar' %> <!-- topbar -->
 <%= render '/layouts/logo_bar' %>
 

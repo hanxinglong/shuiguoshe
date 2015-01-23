@@ -87,7 +87,7 @@
 <% else %>
 
 <% content_for :sitemap do %>
-    <a href="<%= category_items_path(@product.type_id) %>" title="<%= @type %>"><%= @type %></a> &gt; <span class="current"><%= @product.title %></span>
+    <a href="<%= category_items_path(@product.type_id) %>" title="<%= @product.product_type.try(:name) %>"><%= @product.product_type.try(:name) %></a> &gt; <span class="current"><%= @product.title %></span>
 <% end %>
 
 <div class="product-container-box" id="product-<%= @product.id %>">

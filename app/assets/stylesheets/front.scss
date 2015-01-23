@@ -50,6 +50,13 @@ ul {
 
 .logo_bar_box {
   padding: 15px 0 17px 0;
+  .col-md-7 {
+    margin-right: 0;
+    padding-right: 0;
+  }
+  .col-md-5 {
+    margin-left: 0;
+  }
   .logo {
     padding: 0;
     margin: 0;
@@ -60,12 +67,12 @@ ul {
     float: left;
   }
   .nav-menu {
-    margin-left: 190px;
+    margin-left: 190px; 
     height: 70px;
     line-height: 70px;
     a {
-      padding: 5px 15px 5px 10px;
-      font-size: 18px;
+      padding: 5px 8px 5px 3px;
+      font-size: 16px;
       font-weight: bold;
       color: $common-black;
       text-decoration: none;
@@ -80,7 +87,7 @@ ul {
     
     .vertical-divider {
       color: rgb(230,230,230);
-      font-size: 14px;
+      font-size: 13px;
       &:last-child {
         display: none;
       };

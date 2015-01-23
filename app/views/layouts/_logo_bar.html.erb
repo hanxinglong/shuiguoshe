@@ -1,13 +1,3 @@
-<% 
-if params[:type_id]
-  type = params[:type_id].to_i
-  if type > 2 or type < 1
-    type = 1
-  end
-else
-  type = 0
-end
- %>
 <div id="header">
 <div class="container">
   <div class="row logo_bar_box">
@@ -18,6 +8,8 @@ end
         <% ProductType.all_types.each do |type| %>
           <%= link_to type.name, category_items_path(type), class: "#{controller_name == 'products' and params[:type_id].to_i == type.id ? "active" : ""}" %><span class="vertical-divider">|</span>
         <% end %>
+        <%= link_to "自由组合", '#' %><span class="vertical-divider">|</span>
+        <%= link_to "水果计划", '#' %><span class="vertical-divider">|</span>
       </div>
     </div>
     <div class="col-md-5">

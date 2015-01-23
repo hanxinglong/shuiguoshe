@@ -1,6 +1,6 @@
 <% if mobile? %>
 
-<%= render "layouts/mobile_navbar", left: "back", right: "home", title: @type %>
+<%= render "layouts/mobile_navbar", left: "back", right: "home", title: @product.product_type.try(:name) %>
     
   <div class="container">
     <div class="items-list" style="margin-top: 20px">

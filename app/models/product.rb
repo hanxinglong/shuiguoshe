@@ -53,6 +53,10 @@ class Product < ActiveRecord::Base
     end
   end
   
+  def product_type
+    @type ||= ProductType.find_by(id: self.type_id)
+  end
+  
   def required_discount?
     self.is_discount
   end

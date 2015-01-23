@@ -1,4 +1,4 @@
-<% cache("#{item.updated_at.strftime("%Y%m%d%H%M%S")}_#{item.orders_count}_#{controller_name}") do %>
+<% cache("#{item.id}_#{item.updated_at.strftime("%Y%m%d%H%M%S")}_#{item.orders_count}_#{controller_name}") do %>
   <div class="product">
     <div class="col-xs-6 <%= index % 2 == 0 ? "even" : "odd" %>">
       <div class="thumbnail">
