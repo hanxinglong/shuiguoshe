@@ -71,8 +71,8 @@ ul {
     height: 70px;
     line-height: 70px;
     a {
-      padding: 5px 8px 5px 3px;
-      font-size: 16px;
+      padding: 5px 12px 5px 8px;
+      font-size: 18px;
       font-weight: bold;
       color: $common-black;
       text-decoration: none;
@@ -87,12 +87,11 @@ ul {
     
     .vertical-divider {
       color: rgb(230,230,230);
-      font-size: 13px;
+      font-size: 14px;
       &:last-child {
         display: none;
       };
     }
-    
   }
 }
 
