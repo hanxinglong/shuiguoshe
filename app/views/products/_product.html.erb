@@ -13,6 +13,9 @@
             <del class="text-muted">￥<%= number_with_precision(product.origin_price, precision: 2) %></del>
             <span class="item-units">（<%= product.units %>）</span>
           </div>
+          <% if product.is_discount and product.discounted_at > Time.now %>
+          <div class="countdown" data-id="<%= product.id %>" data-countdown="<%= product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") %>"></div>
+          <% end %>
           <div class="price-extra">
             <div class="pull-right" style="display:none" id="cart-btn-<%= product.id %>">
               <%= add_to_cart_tag product %>

@@ -115,9 +115,11 @@
       <div class="item-line text-muted f14">
         配送：<%= render_deliver_info(@product) %>
       </div>
+      <% if SiteConfig.deliver_intro %>
       <div class="item-line">
         <%= raw SiteConfig.deliver_intro %>
       </div>
+      <% end %>
       
       <div class="item-line text-muted f16">已售<span class="green price-numeric f24"><%= @product.orders_count %></span>件</div>
       
@@ -125,7 +127,7 @@
         <div class="pull-left">
           <%= add_to_cart_tag @product, "btn btn-success" %>
         </div>
-        <div style="margin-left: 120px;">
+        <div style="margin-left: 160px;">
           <% if current_user %>
             <%= likeable_tag @product %>
           <% end %>
@@ -182,7 +184,7 @@ $(function() {
       <% else %>
       $el.attr("class", "btn btn-warning");
       <% end %>
-      $el.text("活动已结束,不支持预订");
+      $el.text("活动已结束,不支持订购");
       $(this).html('<span class="glyphicon glyphicon-time"></span>' + '&nbsp;&nbsp;剩余' + '00天00小时00分00秒');
     });
   <% end %>

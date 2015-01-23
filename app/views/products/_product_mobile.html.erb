@@ -12,6 +12,9 @@
             <span class="green">￥<span class="numeric"><%= number_with_precision(item.low_price, precision: 2) %></span></span>
             <del class="text-muted small-text">￥<%= number_with_precision(item.origin_price, precision: 2) %></del>
           </div>
+          <% if item.is_discount and item.discounted_at > Time.now %>
+          <div class="countdown" data-countdown="<%= item.discounted_at.strftime("%Y-%m-%d %H:%M:%S") %>"></div>
+          <% end %>
           <div class="price-extra">
             <span class="purchased small-text">已售<%= item.orders_count %>件</span>
           </div>

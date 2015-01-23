@@ -33,6 +33,26 @@ $("#scrolltop").click(function(){
     });
 });
 
+$(function() {
+  $(".countdown").each(function(idx, item) {
+    var $item = $(item);
+    var name = '剩余';
+    // $item.countdown($item.data('countdown'), function(event) {
+    //   $(this).html(event.strftime(name + '%D天%H小时%M分%S秒'));
+    // });
+    $item.countdown($item.data('countdown'))
+    .on('update.countdown', function(event) {
+      $(this).html(event.strftime(name + '%D天%H小时%M分%S秒'));
+    })
+    .on('finish.countdown', function(event) {
+      $(this).html(event.strftime(name + '00天00小时00分00秒'));
+      $(".price-extra " + "#item-" + $item.data('id')).attr("class", "btn btn-sm btn-warning").attr("disabled", true).text("活动已结束");
+      
+    });
+    
+  });
+});
+
 $(document).ready(function() {
   $("select").chosen({"search_contains": true, "no_results_text":"没有找到", "placeholder_text_single":"请选择小区"});
 });
