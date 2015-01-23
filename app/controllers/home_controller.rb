@@ -1,15 +1,18 @@
 class HomeController < ApplicationController
   layout 'help_layout', only: [:order_help, :pay_help, :deliver_help]
   def index
+    
+    discount_size = mobile? ? 2 : 3
+    
     @banners = Banner.sorted.limit(4)
-    @products = Product.hot.saled.no_discount.order("sort ASC, created_at DESC").limit(6)
+    @products = Product.hot.saled.no_discount.order("sort ASC, id DESC").limit(6)
     # @suggest_products = Product.suggest.limit(6)
     
-    @sales = Sale.recent
+    # @sales = Sale.recent
     
     @newsblasts = Newsblast.sorted.limit(5)
     @ads = SidebarAd.sorted.limit(4)
-    @discounted_products = Product.saled.discounted.order("sort ASC")
+    @discounted_products = Product.saled.discounted.order("sort ASC, id DESC").limit(discount_size)
     @current = 'home_index'
     fresh_when(etag: [@banners, @sales, @newsblasts, @ads, @products,@discounted_products, @current, SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description])
     set_seo_meta(SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description)
