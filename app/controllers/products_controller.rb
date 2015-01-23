@@ -1,19 +1,24 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.saled.no_discount.order('sort ASC')
-    @products = @products.where(type_id: params[:type_id]).order("created_at DESC")
+    @type = ProductType.find_by(id: params[:type_id])
+    if @type.blank?
+      render_404
+      return
+    end
     
-    # if @products.empty?
-    #   render_404
-    #   return
-    # end
+    @products = Product.saled.where(type_id: params[:type_id])
+    if @type.name == "限时抢购"
+      @products = @products.discounted
+    else
+      @products = @products.no_discount
+    end
     
-    # titles = SiteConfig.product_meta_titles.split('#') if SiteConfig.product_meta_titles
-    # descriptions = SiteConfig.product_meta_descriptions.split('#') if SiteConfig.product_meta_descriptions
-    # if titles and descriptions
-    #   set_seo_meta(titles[type_id - 1], @products.map(&:title).join('、'), descriptions[type_id - 1])
-    # end
+    @products = @products.order("sort ASC, id DESC")
+        
+    set_seo_meta(SiteConfig.send("product_title_#{@type.id}"), 
+                @products.map(&:title).join('、'), 
+                SiteConfig.send("product_description_#{@type_id}"))
 
     @cache_prefix = "products_#{params[:type_id]}"
     @current = 'products_index'
