@@ -47,7 +47,7 @@ module Shuiguoshe
   end
 end
 
-ENV['RAILS_CACHE_ID'] = '184941'
+ENV['RAILS_CACHE_ID'] = '220941'
 
 I18n.config.enforce_available_locales = false
 I18n.locale = 'zh-CN'
