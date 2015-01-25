@@ -9,7 +9,7 @@ class Cpanel::ProductTypesController < Cpanel::ApplicationController
   end
 
   def show
-    
+    @products = Product.where(type_id: params[:id]).saled.order('sort ASC, id DESC').paginate page: params[:page], per_page: 20
   end
 
   def new

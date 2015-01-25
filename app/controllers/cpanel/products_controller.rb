@@ -33,7 +33,12 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
   def update
     if @product.update(product_params)
       flash[:notice] = "修改成功"
-      redirect_to cpanel_products_path
+      @type = ProductType.find_by(id: @product.type_id)
+      if @type.blank?
+        render_404
+      else
+        redirect_to [:cpanel, @type]
+      end
     else
       render :edit
     end
@@ -78,8 +83,14 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
   end
 
   def destroy
+    @type = ProductType.find_by(id: @product.type_id)
     @product.destroy
-    redirect_to cpanel_products_url
+    if @type.blank?
+      render_404
+    else
+      redirect_to [:cpanel, @type]
+    end
+    # redirect_to cpanel_products_url
   end
 
   private
