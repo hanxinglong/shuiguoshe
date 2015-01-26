@@ -1,7 +1,7 @@
 class ProductType < ActiveRecord::Base
   
   def self.all_types
-    @product_types = ProductType.all
+    @product_types = ProductType.order('sort ASC, id ASC')
   end
   
 end
