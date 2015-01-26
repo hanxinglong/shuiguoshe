@@ -10,11 +10,13 @@ class HomeController < ApplicationController
     
     # @sales = Sale.recent
     
+    @pages = Page.sorted.recent.limit(5)
+    
     @newsblasts = Newsblast.sorted.limit(5)
     @ads = SidebarAd.sorted.limit(4)
     @discounted_products = Product.saled.discounted.order("sort ASC, id DESC").limit(discount_size)
     @current = 'home_index'
-    fresh_when(etag: [@banners, @sales, @newsblasts, @ads, @products,@discounted_products, @current, SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description])
+    fresh_when(etag: [@banners, @sales, @newsblasts, @ads, @products,@pages,@discounted_products, @current, SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description])
     set_seo_meta(SiteConfig.home_title, SiteConfig.home_meta_keywords, SiteConfig.home_meta_description)
   end
   

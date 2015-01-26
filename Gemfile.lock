@@ -175,6 +175,10 @@ GEM
     rake (10.3.2)
     rdoc (4.1.2)
       json (~> 1.4)
+    redactor-rails (0.4.5)
+      devise
+      mime-types
+      orm_adapter
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     rest-client (1.7.2)
@@ -283,6 +287,7 @@ DEPENDENCIES
   rack-cors
   rack-utf8_sanitizer
   rails (= 4.1.6)
+  redactor-rails
   rest-client
   rmagick
   sass-rails (~> 4.0.3)

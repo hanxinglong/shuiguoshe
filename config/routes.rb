@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RedactorRails::Engine => '/redactor_rails'
   captcha_route
   require 'api_v1'
   root 'home#index'
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:update]
   resources :messages, only: [:new, :create]
+  resources :pages, path: "", only: [:show]
   
   resources :likes
   

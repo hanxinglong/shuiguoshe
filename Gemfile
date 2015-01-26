@@ -22,6 +22,8 @@ gem 'bootstrap_helper', '4.2.3'
 gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick','3.7.0', require: false
 
+gem 'redactor-rails'
+
 # 验证码
 gem 'easy_captcha'
 gem 'rmagick'

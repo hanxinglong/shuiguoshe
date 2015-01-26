@@ -195,21 +195,7 @@
   .sidebar-right-box {
     margin-bottom: 20px;
     border: 1px solid $common-border-color;
-  }
-  
-  .trust {
-    ul {
-      li {
-        color: $common-black;
-        .symbol {
-          font-size: 8px;
-        }
-      }
-    }
-  }
-  
-  .newsblasts-list {
-//    border: 1px solid $gray-medium-light;
+    
     h2 {
       margin: 0;
       padding: 0;
@@ -223,16 +209,36 @@
     ul {
       list-style: none;
       margin: 0;
-      padding: 10px 0;
+//      padding: 10px 0;
       background-color: white;
       li {
         padding: 0 10px;
         font-size: 13px;
-        a {
-          color: $common-black;
+        .item-line {
+          padding: 10px 0;
+          border-bottom: 1px dashed #ccc;
+          a {
+            color: $common-black;
+          }
+        }
+        .last {
+          border: 0;
+        }
+        
+      }
+    }
+  }
+  
+  .trust {
+    ul {
+      li {
+        color: $common-black;
+        .symbol {
+          font-size: 8px;
         }
       }
     }
   }
+  
 }
 

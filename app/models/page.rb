@@ -3,4 +3,5 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :slug
   
   scope :recent, -> { order('id desc') }
+  scope :sorted, -> { order('sort asc') }
 end

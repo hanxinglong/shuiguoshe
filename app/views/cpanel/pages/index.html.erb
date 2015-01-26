@@ -9,6 +9,7 @@
         <tr>
           <th>#</th>
           <th>标题</th>
+          <th>slug</th>
           <th>内容</th>
           <th>at</th>
           <th></th>
@@ -20,6 +21,7 @@
           <tr>
             <td><%= link_to page.id, [:cpanel, page] %></td>
             <td><%= page.title %></td>
+            <td><%= page.slug %></td>
             <td><%= page.body %></td>
             <td><%= page.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
             <td>
