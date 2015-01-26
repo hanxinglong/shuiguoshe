@@ -18,9 +18,9 @@ Rails.application.routes.draw do
   
   resources :users, only: [:update]
   resources :messages, only: [:new, :create]
-  resources :pages, path: "", only: [:show]
   
   resources :likes
+  resources :pages, path: "p", only: [:show]
   
   resource :user do
     get :home
@@ -132,7 +132,7 @@ Rails.application.routes.draw do
   end
   
   # constraints :subdomain => "api" do
-    mount Shuiguoshe::APIV1 => '/'
+  mount Shuiguoshe::APIV1 => '/'
   # end
   
   match '*path', via: :all, to: 'home#error_404'

@@ -6,7 +6,7 @@
       <% @pages.each_with_index do |page, index| %>
         <% cache page do %>
         <li><div class="item-line <%= index == @pages.size - 1 ? "last" : "" %>">
-          <%= link_to truncate(page.title, length: 20), page.slug, target: "_blank" %>
+          <%= link_to truncate(page.title, length: 20), page_path(page.slug), target: "_blank" %>
         </div></li>
         <% end %>
       <% end %>
