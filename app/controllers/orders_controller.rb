@@ -126,7 +126,7 @@ class OrdersController < ApplicationController
       # current_user.update_attribute(:apartment_id, @apartment.id)
       current_user.apartment_id = @apartment.id
       if @apartment.name == '其他'
-        current_user.deliver_address = @order.note
+        current_user.deliver_address = @order.note if @order.note.present?
       end
       current_user.save!
       

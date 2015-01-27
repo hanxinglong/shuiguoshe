@@ -32,7 +32,12 @@ module OrdersHelper
   def render_order_address(order)
     return "" if order.blank?
     return "" if order.apartment.blank?
-    return "#{order.apartment.name}（#{order.user.deliver_address}）" if order.user && order.apartment.name == '其他'
+    if order.apartment.name == '其他'
+      if order.user && order.user.deliver_address.present?
+        return "#{order.apartment.name}（#{order.user.deliver_address}）"
+      end
+      return "#{order.apartment.name}（#{order.note}）"
+    end
     
     "#{order.apartment.name}（#{order.apartment.address}）"
   end
