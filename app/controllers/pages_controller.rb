@@ -6,5 +6,6 @@ class PagesController < ApplicationController
       return
     end
     fresh_when(etag: [@page])
+    set_seo_meta(@page.title)
   end
 end
