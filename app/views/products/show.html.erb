@@ -42,8 +42,8 @@
       <div class="extra-summary">
         <% if @product.note.present? %>
           <div class="item-extra-info">
-            <h2>温馨提示</h2>
-            <p class="text-muted"><%= @product.note %></p>
+            <h2>小贴士</h2>
+            <div class="text-muted"><%= raw @product.note %></div>
           </div>
         <% end %>
   
@@ -141,8 +141,8 @@
   <div class="product-info">
     <% if @product.note.present? %>
       <div class="product-note">
-        <h2 class="f16">温馨提示</h2>
-        <p class="text-muted"><%= raw @product.note %></p>
+        <h2 class="f16">小贴士</h2>
+        <div class="text-muted"><%= raw @product.note %></div>
       </div>
     <% end %>
     
