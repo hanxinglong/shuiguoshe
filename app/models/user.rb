@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
     # 生成token
     update_private_token
     # 赠送积分
-    update_score(SiteConfig.sign_up_score.to_i, '成功注册') if SiteConfig.sign_up_score
+    update_score(SiteConfig.sign_up_score.to_i, '成功注册') if (SiteConfig.sign_up_score and SiteConfig.sign_up_score.to_i > 0)
     # 发送欢迎邮件
     # UserMailer.welcome(self.id).deliver
   end

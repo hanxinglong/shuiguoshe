@@ -86,7 +86,9 @@
     <div class="col-md-4">
       <div class="user-reg-info">
         <h3>还没有水果社账号？</h3>
+        <% if SiteConfig.sign_up_score and SiteConfig.sign_up_score.to_i > 0 %>
         <p>注册即送<%= SiteConfig.sign_up_score %>积分, 抵扣<%= SiteConfig.sign_up_score.to_i / 100 %>元</p>
+        <% end %>
         <%= link_to "立即注册", new_user_registration_path, class: "btn btn-success" %>
       </div>
     </div>
