@@ -1,5 +1,18 @@
 module Shuiguoshe
   class ProductsAPI < Grape::API
+    
+    # 产品类别
+    resource :catalogs do
+      # 获取所有卖场信息
+      get '/' do
+        @catalogs = ProductType.all_types
+        if @catalogs.empty?
+          return { code: 404, message: "数据为空" }
+        end
+        { code: 0, message: "ok", data: @catalogs }
+      end
+    end
+    
     # 卖场
     resource :sales do
       # 获取所有卖场信息

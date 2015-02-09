@@ -4,6 +4,13 @@ class ProductType < ActiveRecord::Base
     @product_types = ProductType.order('sort ASC, id ASC')
   end
   
+  def as_json(opts)
+    {
+      id: self.id,
+      name: self.name || "",
+    }
+  end
+  
 end
 
 # == Schema Information
