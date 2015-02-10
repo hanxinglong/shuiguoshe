@@ -58,6 +58,40 @@ module Shuiguoshe
         { code: 0, message: "ok", data: @items }
       end # end
       
+      # 获取热门订购商品
+      get '/hot' do
+        @items = Product.hot.saled.no_discount.order("sort ASC, id DESC").limit(6)
+        if @items.empty?
+          return { code: 404, message: "没有记录" }
+        end
+          
+        { code: 0, message: "ok", data: @items }
+        
+      end # end hot
+      
+      # 根据类别获取商品
+      get '/type-:id' do
+        @type = ProductType.find_by(id: params[:id])
+        if @type.blank?
+          return { code: 404, message: "没有该类别" }
+        end
+    
+        @products = Product.saled.where(type_id: @type.id)
+        if @type.name == "限时抢购"
+          @products = @products.discounted
+        else
+          @products = @products.no_discount
+        end
+    
+        @products = @products.order("sort ASC, id DESC")
+        
+        if @products.empty?
+          return { code: 404, message: "没有记录" }
+        end
+        
+        { code: 0, message: "ok", data: @products }
+      end
+      
       get '/:id' do
         @product = Product.find_by(id: params[:id])
         if @product.blank?
