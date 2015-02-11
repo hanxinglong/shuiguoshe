@@ -100,15 +100,11 @@ module Shuiguoshe
         
         { code: 0, message: "ok",
           data: {
-            title: @product.title || "",
-            intro: @product.intro || "",
             large_image: @product.large_image_url,
-            low_price: format("%.2f", @product.low_price),
-            origin_price: format("%.2f", @product.origin_price),
-            unit: @product.units || "",
-            orders_count: @product.orders_count,
+            note: @product.note || "",
             delivered_at: @product.delivered_time,
-            deliver_info: deliver_info_for(@product)
+            deliver_info: deliver_info_for(@product),
+            intro_images: @product.photos,
           } 
         }
       end # end

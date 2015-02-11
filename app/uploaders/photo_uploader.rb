@@ -2,6 +2,8 @@
 
 class PhotoUploader < BaseUploader
 
+  process :store_dimensions
+  
   version :small do
     process resize_to_limit: [82, nil]
   end
@@ -22,6 +24,13 @@ class PhotoUploader < BaseUploader
 
   def extension_white_list
     %w(jpg jpeg png)
+  end
+  
+  private
+  def store_dimensions
+    if file && model
+      model.width, model.height = ::MiniMagick::Image.open(file.file)[:dimensions]
+    end
   end
   
 end

@@ -6,4 +6,12 @@ class Photo < ActiveRecord::Base
   attr_accessor :image_cache
   
   validates :image, presence: true
+  
+  def as_json(opts)
+    {
+      url: self.image.url(:normal),
+      width: self.width || 0,
+      height: self.height || 0,
+    }
+  end
 end
