@@ -105,6 +105,7 @@ module Shuiguoshe
             delivered_at: @product.delivered_time,
             deliver_info: deliver_info_for(@product),
             intro_images: @product.photos,
+            likes_count: @product.likes_count,
           } 
         }
       end # end

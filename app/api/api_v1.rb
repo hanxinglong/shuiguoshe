@@ -9,6 +9,7 @@ require "carts_api"
 require "products_api"
 require "apartments_api"
 require "orders_api"
+require "likes_api"
 
 module Shuiguoshe
   
@@ -66,5 +67,6 @@ module Shuiguoshe
     mount Shuiguoshe::ProductsAPI
     mount Shuiguoshe::ApartmentsAPI
     mount Shuiguoshe::OrdersAPI
+    mount Shuiguoshe::LikesAPI
   end
 end

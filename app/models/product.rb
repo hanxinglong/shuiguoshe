@@ -85,6 +85,7 @@ class Product < ActiveRecord::Base
       unit: self.units || "",
       orders_count: self.orders_count,
       discount_score: self.discount_score,
+      likes_count: self.likes_count,
     }
     json[:discounted_at] = self.discounted_at.strftime("%Y-%m-%d %H:%M:%S") if self.discounted_at
     json
