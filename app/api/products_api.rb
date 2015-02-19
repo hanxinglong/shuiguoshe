@@ -106,6 +106,7 @@ module Shuiguoshe
             origin_price: @product.origin_price,
             units: @product.units,
             orders_count: @product.orders_count,
+            discount_score: @product.discount_score,
             large_image: @product.large_image_url,
             note: @product.note || "",
             delivered_at: @product.delivered_time,
