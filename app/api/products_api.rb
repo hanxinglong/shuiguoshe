@@ -100,6 +100,12 @@ module Shuiguoshe
         
         { code: 0, message: "ok",
           data: {
+            id: @product.id,
+            title: @product.title,
+            low_price: @product.low_price,
+            origin_price: @product.origin_price,
+            units: @product.units,
+            orders_count: @product.orders_count,
             large_image: @product.large_image_url,
             note: @product.note || "",
             delivered_at: @product.delivered_time,
