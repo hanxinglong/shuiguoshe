@@ -31,6 +31,7 @@ class LineItem < ActiveRecord::Base
       title: product.title || "", # 产品标题
       icon_url: product_image_url,#product.image.url(:small), # 产品icon
       quantity: self.quantity, # 购买数量
+      visible: self.visible,
       price: format("%.2f", product.low_price), # 我的价格
       total_price: format("%.2f", total_price)
     }

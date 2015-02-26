@@ -66,7 +66,10 @@ module Shuiguoshe
         old_count = item.quantity
         new_count = params[:quantity].to_i
         
-        if item.update_attribute(:quantity, new_count)
+        item.quantity = new_count
+        item.visible = true
+        
+        if item.save
           # 更新购物车总数
           current_cart.update_items_count(new_count - old_count)
           { code: 0, message: "ok", data: item }
@@ -146,6 +149,67 @@ module Shuiguoshe
         items.destroy_all
         { code: 0, message: "ok" }
       end # end delete_items
+      
+      # 更新购物项显示状态
+      params do
+        requires :token, type: String, desc: "token"
+        requires :id,    type: Integer, desc: "需要更新的项目id"
+        requires :state, type: String, desc: "状态" # 0表示不可见，1表示可见
+      end
+      post '/update_state' do
+        if not %w[0 1].include?(params[:state])
+          return { code: -1, message: "不正确的state参数" }
+        end
+        
+        line_item = current_cart.line_items.find_by(id: params[:id])
+        if line_item.blank?
+          return { code: 404, message: "未找到该购物项" }
+        end
+        
+        if params[:state] == '0'
+          state = false
+        else
+          state = true
+        end        
+        
+        line_item.visible = state
+        if line_item.save
+          { code: 0, message: "ok" }
+        else
+          { code: -1, message: "更新state失败" }
+        end
+      end # end update state
+      
+      # 更新所有的购物项显示状态
+      params do
+        requires :token, type: String, desc: "token"
+        requires :ids,    type: String, desc: "需要更新的所有项目id"
+        requires :state, type: String, desc: "状态" # 0表示不可见，1表示可见
+      end
+      post '/update_states' do
+        if not %w[0 1].include?(params[:state])
+          return { code: -1, message: "不正确的state参数" }
+        end
+        
+        ids = params[:ids].split(',')
+        puts ids
+        line_items = current_cart.line_items.where(id: ids)
+        if line_items.empty?
+          return { code: 404, message: "未找到该购物项" }
+        end
+        
+        if params[:state] == '0'
+          state = false
+        else
+          state = true
+        end        
+        
+        if line_items.update_all(visible: state)
+          { code: 0, message: "ok" }
+        else
+          { code: -1, message: "更新state失败" }
+        end
+      end # end update states
       
     end
   end
