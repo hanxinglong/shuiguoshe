@@ -44,7 +44,7 @@ class LineItem < ActiveRecord::Base
       if self.product.image.blank?
         ""
       else
-        self.product.image.url(:small) || ""
+        self.product.image.url(:thumb) || ""
       end
     end
   end
