@@ -75,11 +75,14 @@ module Shuiguoshe
         deliver_info_id = params[:deliver_info_id]
         params[:order_info].delete(:deliver_info_id)
         
-        @order = Order.new(params[:order_info])
+        @order = Order.new
+        @order.note = params[:order_info][:note]
+        @order.total_price = params[:order_info][:total_price]
+        @order.discount_price = params[:order_info][:discount_price]
         @order.user_id = user.id
         @order.add_line_items_from_cart(@cart)
         
-        if @order.save
+        if @order.save(validate: false)
           # 清空购物车
           Cart.find_by(user_id: user.id).destroy
           score = params[:score].to_i
