@@ -124,8 +124,8 @@ class OrdersController < ApplicationController
       @order.update_orders_count
       
       # current_user.update_attribute(:apartment_id, @apartment.id)
-      current_user.apartment_id = @apartment.id
-      if @apartment.name == '其他'
+      current_user.apartment_id = @apartment.id if @apartment
+      if @apartment && @apartment.name == '其他'
         current_user.deliver_address = @order.note if @order.note.present?
       end
       current_user.save!
