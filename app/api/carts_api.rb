@@ -16,6 +16,30 @@ module Shuiguoshe
     end # end user
     
     resource :cart do
+      # 获取购物车中的商品清单
+      params do
+        requires :token, type: String, desc: "token"
+      end
+      get '/items' do
+        @line_items = current_cart.line_items.where(visible: true).order("created_at DESC")
+        if @line_items.blank?
+          return { code: 404, message: "没有购物项" }
+        end
+        
+        deliver_info = DeliverInfo.where('user_id = ? and id = ?', current_user.id, current_user.current_deliver_info_id).first
+        
+        score = current_user.score
+        total_price = current_cart.total_price
+        if total_price * 100 < score * 2
+          score = (total_price * 50).to_i
+        end
+        
+        { code: 0, message: "ok", data: { 
+          user: { score: score, deliver_info: deliver_info || {}  }, 
+          cart: { total_price: format("%.2f",total_price), items: @line_items },
+          } }
+      end # end
+      
       # 加入购物车
       params do
         requires :token, type: String, desc: "token"

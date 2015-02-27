@@ -61,7 +61,7 @@ module Shuiguoshe
       # 4.下订单
       params do
         requires :token, type: String, desc: "Token"
-        requires :order_info, type: Hash, desc: "订单信息" # { mobile: '', note: '', apartment_id: 1, total_price: 0.0, discount_price: 0.0 } 
+        requires :order_info, type: Hash, desc: "订单信息" # { deliver_info_id: 1, note: '', total_price: 0.0, discount_price: 0.0 } 
         requires :score, type: Integer, desc: "用户抵扣积分"
       end
       post '/orders' do
@@ -71,6 +71,10 @@ module Shuiguoshe
         end
         
         user = authenticate!
+        
+        deliver_info_id = params[:deliver_info_id]
+        params[:order_info].delete(:deliver_info_id)
+        
         @order = Order.new(params[:order_info])
         @order.user_id = user.id
         @order.add_line_items_from_cart(@cart)
@@ -82,8 +86,8 @@ module Shuiguoshe
           
           user.update_score(-score, '提交订单')
           # @product.add_order_count
-          @apartment = Apartment.find_by_id(@order.apartment_id)
-          @apartment.add_order_count if @apartment
+          # @apartment = Apartment.find_by_id(@order.apartment_id)
+          # @apartment.add_order_count if @apartment
 
           @order.update_orders_count
       

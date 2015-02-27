@@ -347,6 +347,21 @@ module Shuiguoshe
         end
         
       end # end active
+      
+      # 更新收货信息
+      params do
+        requires :token, type: String, desc: "Token"
+        requires :deliver_info_id, type: Integer
+      end
+      
+      post '/update_deliver_info' do
+        user = authenticate!
+        if user.update_attribute(:current_deliver_info_id, params[:deliver_info_id])
+          { code: 0, message: "ok" }
+        else
+          { code: -1, message: "更新收货信息失败" }
+        end
+      end
 
     end # end user
     

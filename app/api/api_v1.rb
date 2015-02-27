@@ -10,6 +10,7 @@ require "products_api"
 require "apartments_api"
 require "orders_api"
 require "likes_api"
+require "deliver_infos_api"
 
 module Shuiguoshe
   
@@ -68,5 +69,6 @@ module Shuiguoshe
     mount Shuiguoshe::ApartmentsAPI
     mount Shuiguoshe::OrdersAPI
     mount Shuiguoshe::LikesAPI
+    mount Shuiguoshe::DeliverInfosAPI
   end
 end
