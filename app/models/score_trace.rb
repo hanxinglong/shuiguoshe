@@ -1,4 +1,13 @@
 class ScoreTrace < ActiveRecord::Base
+  def as_json(opts = {})
+    {
+      id: self.id,
+      oper_type: self.oper_type || "",
+      score: self.score,
+      summary: self.summary || "",
+      created_at: self.created_at.strftime("%Y-%m-%d %H:%M:%S")
+    }
+  end
 end
 
 

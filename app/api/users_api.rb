@@ -361,8 +361,27 @@ module Shuiguoshe
         else
           { code: -1, message: "更新收货信息失败" }
         end
+      end # end 更新收货信息
+      
+      # 获取积分信息
+      params do
+        requires :token, type: String
       end
-
+      get '/score_traces' do
+        user = authenticate!
+        items = ScoreTrace.where(user_id: user.id).order('id desc')
+        { code: 0, message: "ok", data: items }
+      end # end 获取积分
+      
+      # 我的收藏
+      params do
+        requires :token, type: String
+      end
+      get '/likes' do
+        user = authenticate!
+        { code: 0, messages: "ok", data: user.likes.order('id desc') }
+      end # end likes
+      
     end # end user
     
   end # end class
