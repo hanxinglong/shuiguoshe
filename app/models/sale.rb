@@ -9,7 +9,7 @@ class Sale < ActiveRecord::Base
   
   scope :recent, -> { order('created_at DESC') }
   
-  def as_json(options)
+  def as_json(options = {})
     {
       id: self.id,
       title: self.title || "",

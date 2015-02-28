@@ -5,7 +5,7 @@ class Banner < ActiveRecord::Base
   
   scope :sorted, -> { order("sort ASC, created_at DESC") }
   
-  def as_json(options)
+  def as_json(opts = {})
     {
       id: self.id,
       title: self.title || "",

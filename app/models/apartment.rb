@@ -16,7 +16,7 @@ class Apartment < ActiveRecord::Base
     # end
   end
   
-  def as_json(options)
+  def as_json(opts = {})
     {
       id: self.id,
       name: self.name || "",

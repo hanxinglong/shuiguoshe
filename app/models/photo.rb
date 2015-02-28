@@ -7,7 +7,7 @@ class Photo < ActiveRecord::Base
   
   validates :image, presence: true
   
-  def as_json(opts)
+  def as_json(opts = {})
     {
       url: self.image.url(:normal),
       width: self.width || 0,

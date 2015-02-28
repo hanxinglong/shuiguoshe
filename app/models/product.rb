@@ -73,7 +73,7 @@ class Product < ActiveRecord::Base
     self.is_discount and self.discounted_at and self.discounted_at > Time.zone.now
   end
   
-  def as_json(options)
+  def as_json(opts = {})
     json = {
       id: self.id,
       title: self.title || "",

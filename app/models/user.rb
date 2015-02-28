@@ -136,15 +136,16 @@ class User < ActiveRecord::Base
     self.update_private_token if self.private_token.blank?
   end
   
-  def as_json(options)
+  def as_json(options = {})
     {
+      id: self.id,
       mobile: self.mobile,
-      token: self.private_token || "",
-      avatar: {
-        normal: "#{Setting.domain}/#{self.avatar.url(:normal)}",
-        small: "#{Setting.domain}/#{self.avatar.url(:small)}"
-      },
-      score: self.score
+      # token: self.private_token || "",
+      avatar_url: self.avatar.url(:big) || "",
+      score: self.score,
+      delivering_orders_count: self.orders.normal.count,
+      completed_orders_count: self.orders.completed.count,
+      canceled_orders_count: self.orders.canceled.count,
     }
   end
   

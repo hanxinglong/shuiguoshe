@@ -5,11 +5,11 @@ class Order < ActiveRecord::Base
   
   has_many :line_items, dependent: :destroy
   
-  validates :apartment_id, :total_price, presence: true
+  validates :apartment_id, :total_price, presence: true, on: :create
   validates :mobile, format: { with: /\A1[3|4|5|8][0-9]\d{4,8}\z/, message: "请输入11位正确手机号" }, length: { is: 11 },
-            :presence => true
+            :presence => true, on: :create
             
-  validates :apartment_id, inclusion: { in: Apartment.opened.map { |a| a.id }, message: "%{value} 不是一个有效的值" }
+  validates :apartment_id, inclusion: { in: Apartment.opened.map { |a| a.id }, message: "%{value} 不是一个有效的值" }, on: :create
   
   before_create :create_order_no
   def create_order_no
@@ -104,13 +104,42 @@ class Order < ActiveRecord::Base
       
   end
   
-  def as_json(options)
+  def as_json(opts = {})    
     {
       id: self.id,
       order_no: self.order_no || "",
-      state: self.state || "",
+      state: order_state,
       ordered_at: self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+      total_price: format("%.2f", self.total_price),
+      delivered_at: deliver_info,
+      can_cancel: (self.can_cancel? and self.state?(:normal)),
+      items: self.line_items,
     }
+  end
+  
+  def order_state
+    if self.normal?
+      "待配送"
+    elsif self.prepare_delivering?
+      "配送准备"
+    elsif self.delivering?
+      "配送中"
+    elsif self.canceled?
+      "已取消"
+    elsif self.completed?
+      "已完成"
+    else
+      ""
+    end
+  end
+  
+  def deliver_info
+    order_time_line = SiteConfig.order_time_line || '12:00:00'
+    if self.created_at.strftime("%H:%M:%S") < order_time_line
+      "#{Time.zone.now.strftime("%Y-%m-%d")}（今天）18:00-21:00"
+    else
+      "#{(Time.zone.now + 1.day).strftime("%Y-%m-%d")}（明天）18:00-21:00"
+    end
   end
   
   def apartment_name

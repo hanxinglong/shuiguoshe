@@ -24,7 +24,7 @@ class LineItem < ActiveRecord::Base
     end
   end
   
-  def as_json(options)
+  def as_json(opts = {})
     {
       id: self.id,
       pid: product.id,  # 产品id

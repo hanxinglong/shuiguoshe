@@ -38,7 +38,7 @@ class Cpanel::OrdersController < Cpanel::ApplicationController
   end
   
   def prepare_deliver
-    @order.prepare_deliver
+    @order.prepare_deliver!
     if params[:for] == 'home'
       redirect_to cpanel_root_path
     else

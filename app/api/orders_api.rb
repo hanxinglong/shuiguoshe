@@ -20,15 +20,26 @@ module Shuiguoshe
       # 2.获取所有的订单
       params do
         requires :token, type: String, desc: "token"
-        requires :page, type: Integer, desc: "页码"
+        requires :filter, type: String, desc: "选择类型"
+        optional :page, type: Integer, desc: "页码"
       end
-      get '/orders/all' do
+      get '/orders' do
         user = authenticate!
-        @orders = user.orders.order("created_at DESC").paginate page: params[:page], per_page: page_size
-        if @orders.empty?
-          return { code: 404, message: "没有记录" }
+        @orders = user.orders.order("id desc")#.paginate page: params[:page], per_page: page_size
+        
+        unless %w[all completed canceled delivering].include?(params[:filter])
+          return { code: -1, message: "不正确的参数#{params[:filter]}" }
         end
         
+        sym = params[:filter]
+        if sym == 'delivering'
+          sym = 'normal'
+        end
+        
+        @orders = @orders.send(sym)
+        
+        page = params[:page].to_i < 1 ? 1 : params[:page].to_i
+        @orders = @orders.paginate page: page, per_page: page_size
         { code: 0, message: "ok", data: { total_pages: @orders.total_pages, total_records: @orders.total_entries, items: @orders } }
         
       end # end all
@@ -94,9 +105,36 @@ module Shuiguoshe
 
           @order.update_orders_count
       
-          { code: 0, message: "ok" }
+          { code: 0, message: "ok",
+             data:     {
+                 id: @order.id,
+                 order_no: @order.order_no || "",
+                 state: @order.state || "",
+                 ordered_at: @order.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                 total_price: format("%.2f", @order.total_price),
+                 delivered_at: @order.deliver_info,
+               }
+           }
         else
           { code: 115, message: @order.errors.full_messages.join(",") }
+        end
+      end # end 4
+      
+      # 5.取消订单
+      params do
+        requires :token, type: String, desc: "Token"
+      end
+      post '/orders/:id/cancel' do
+        user = authenticate!
+        order = Order.where('user_id = ? and id = ?', user.id, params[:id].to_i).first
+        if order.blank?
+          return { code: 404, message: "没找到订单" }
+        end
+        order.state = "canceled"
+        if order.save(validate:false)
+          { code: 0, message: "ok" }
+        else
+          { code: -1, message: "取消订单失败" }
         end
       end
       
