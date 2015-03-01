@@ -86,7 +86,7 @@ class OrdersController < ApplicationController
   
   def new
     @cart = current_cart
-    
+    puts '123'
     if @cart.line_items_count == 0
       flash[:notice] = "购物车是空的"
       redirect_to root_url
@@ -94,7 +94,15 @@ class OrdersController < ApplicationController
     end
     
     @order = Order.new
-    @apartments = Apartment.opened.map { |a| ["#{a.name}（#{a.address}）", a.id] }
+    @deliver_info = DeliverInfo.where('user_id = ? and id = ?', current_user.id, current_user.current_deliver_info_id).first
+    if @deliver_info.present?
+      @order.mobile = @deliver_info.mobile
+      @order.apartment_id = @deliver_info.apartment_id
+    else
+      @order.mobile = current_user.mobile
+    end
+    
+    # @apartments = Apartment.opened.map { |a| ["#{a.name}（#{a.address}）", a.id] }
     set_seo_meta("提交订单")    
     # respond_with(@order)
   end
@@ -111,6 +119,10 @@ class OrdersController < ApplicationController
     @order.user_id = current_user.id
     @order.add_line_items_from_cart(@cart)
     
+    @deliver_info = DeliverInfo.new
+    @deliver_info.mobile = @order.mobile
+    @deliver_info.apartment_id = @order.apartment_id
+    
     if @order.save
       # 清空购物车
       Cart.find_by(user_id: current_user.id).destroy
@@ -124,10 +136,12 @@ class OrdersController < ApplicationController
       @order.update_orders_count
       
       # current_user.update_attribute(:apartment_id, @apartment.id)
-      current_user.apartment_id = @apartment.id if @apartment
-      if @apartment && @apartment.name == '其他'
-        current_user.deliver_address = @order.note if @order.note.present?
-      end
+      # current_user.apartment_id = @apartment.id if @apartment
+      # if @apartment && @apartment.name == '其他'
+      #   current_user.deliver_address = @order.note if @order.note.present?
+      # end
+      info = DeliverInfo.where(user_id: current_user.id, mobile: @order.mobile, apartment_id: @order.apartment_id).first_or_create
+      current_user.current_deliver_info_id = info.id
       current_user.save!
       
       flash[:success] = "下单成功"
@@ -157,6 +171,6 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:mobile, :total_price, :discount_price, :note, :state, :apartment_id)
+      params.require(:order).permit(:mobile, :apartment_id, :total_price, :discount_price, :note, :state)
     end
 end

@@ -35,15 +35,15 @@ class Apartment < ActiveRecord::Base
   end
   
   def deliver_address(user)
-    if self.name == '其他'
-      if user and user.deliver_address.present?
-        "#{self.name} (#{user.deliver_address})"
-      else
-        "#{self.name}（#{self.address}）"
-      end
-    else
+    # if self.name == '其他'
+    #   if user and user.deliver_address.present?
+    #     "#{self.name} (#{user.deliver_address})"
+    #   else
+    #     "#{self.name}（#{self.address}）"
+    #   end
+    # else
       "#{self.name}（#{self.address}）"
-    end
+    # end
   end
   
 end

@@ -31,7 +31,7 @@
             <div class="form-group">
               <%= f.label :mobile, "* 收货人手机", class: "control-label col-sm-2" %>
               <div class="col-sm-3">
-                <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: current_user.mobile %>
+                <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: @order.mobile %>
               </div>
             </div>
           

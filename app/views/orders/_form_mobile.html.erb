@@ -20,14 +20,14 @@
           <div class="form-group">
             <%= f.label :mobile, "* 收货人手机", class: "control-label col-xs-12" %>
             <div class="col-xs-12">
-              <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: current_user.mobile %>
+              <%= f.text_field :mobile, placeholder: "输入11位正确手机号", class: "form-control", value: @order.mobile %>
             </div>
           </div>
         
           <div class="form-group">
             <%= f.label :apartment_id, "* 收货人小区", class: "control-label col-xs-12" %>
             <div class="col-xs-12">
-              <%= f.select :apartment_id, Apartment.opened.map { |a| [a.deliver_address(current_user), a.id] }, { prompt: "选择小区", selected: current_user.apartment_id}, { class: "form-control" } %>
+              <%= f.select :apartment_id, Apartment.opened.map { |a| [a.deliver_address(current_user), a.id] }, { prompt: "选择小区", selected: @order.apartment_id}, { class: "form-control" } %>
             </div>
             
           </div>

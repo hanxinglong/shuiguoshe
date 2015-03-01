@@ -5,11 +5,11 @@ class Order < ActiveRecord::Base
   
   has_many :line_items, dependent: :destroy
   
-  validates :apartment_id, :total_price, presence: true, on: :create
+  validates :apartment_id, :total_price, presence: true
   validates :mobile, format: { with: /\A1[3|4|5|8][0-9]\d{4,8}\z/, message: "请输入11位正确手机号" }, length: { is: 11 },
-            :presence => true, on: :create
+            :presence => true
             
-  validates :apartment_id, inclusion: { in: Apartment.opened.map { |a| a.id }, message: "%{value} 不是一个有效的值" }, on: :create
+  validates :apartment_id, inclusion: { in: Apartment.opened.map { |a| a.id }, message: "%{value} 不是一个有效的值" }
   
   before_create :create_order_no
   def create_order_no
@@ -26,6 +26,24 @@ class Order < ActiveRecord::Base
   # def apartment
   #   @apartment ||= Apartment.find_by_id(self.apartment_id).try(:name)
   # end
+  
+  def user_mobile
+    if self.mobile
+      self.mobile
+    else
+      info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
+      info.mobile
+    end
+  end
+  
+  def user_apartment_name
+    if self.apartment_id
+      self.apartment.name
+    else
+      info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
+      Apartment.find_by(id: info.apartment_id).try(:name)
+    end
+  end
   
   def update_orders_count(oper = 1)
     Product.transaction do
