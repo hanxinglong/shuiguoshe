@@ -143,6 +143,7 @@ class User < ActiveRecord::Base
       # token: self.private_token || "",
       avatar_url: self.avatar.url(:big) || "",
       score: self.score,
+      current_deliver_info_id: self.current_deliver_info_id,
       delivering_orders_count: self.orders.normal.count,
       completed_orders_count: self.orders.completed.count,
       canceled_orders_count: self.orders.canceled.count,

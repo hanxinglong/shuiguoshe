@@ -20,12 +20,18 @@ class AvatarUploader < BaseUploader
 
   def filename
     if super.present?
-      "avatar/#{model.id}.jpg"
+      "#{secure_token}.#{file.extension}"
     end
   end
-
+  
   def extension_white_list
     %w(jpg jpeg png)
   end
+  
+  protected
+    def secure_token
+      var = :"@#{mounted_as}_secure_token"
+      model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+    end
 
 end

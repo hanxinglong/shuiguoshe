@@ -40,7 +40,7 @@ module UsersHelper
     #   # hide_html = %(<div id="hide_order_apartment_input"><input type="hidden" name="order[apartment_id]" value="#{current_user.apartment_id}" /></div>)
     # else
       # edit_html = %(<a class="btn btn-sm btn-warning" data-user-id="#{current_user.id}" onclick="App.doSaveAddress(this)" id="save_address" disabled>保存到配送设置</a>)
-      select_html = f.select :apartment_id, Apartment.opened.map { |a| [a.deliver_address(current_user), a.id, 'user-apartment-id' => @order.apartment_id ] }, { prompt: "选择小区", selected: @order.apartment_id }, { class: "form-control" }
+      select_html = f.select :apartment_id, Apartment.opened.map { |a| [a.deliver_address(current_user), a.id, 'user-apartment-id' => f.object.apartment_id ] }, { prompt: "选择小区", selected: f.object.apartment_id }, { class: "form-control" }
       # hide_html = '<div id="hide_order_apartment_input"></div>'
     # end
     
