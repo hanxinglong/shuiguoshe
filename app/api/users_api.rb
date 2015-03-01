@@ -213,7 +213,8 @@ module Shuiguoshe
       # api: domain/v1/account/password/update
       # params: { code: '', password: '', old_password: '' }
       params do
-        requires :code, type: String
+        # requires :code, type: String
+        requires :token, type: String
         requires :password, type: String, desc: "new password"
         requires :old_password, type: String, desc: "old password"
       end
@@ -224,10 +225,10 @@ module Shuiguoshe
           return { code: 109, message: "旧密码不正确" }
         end
         
-        ac = AuthCode.where('mobile = ? and code = ? and verified = ?', user.mobile,params[:code],true).first
-        if ac.blank?
-          return { code: 104, message: "验证码无效" }
-        end
+        # ac = AuthCode.where('mobile = ? and code = ? and verified = ?', user.mobile,params[:code],true).first
+        # if ac.blank?
+        #   return { code: 104, message: "验证码无效" }
+        # end
         
         if params[:password].length < 6
           return { code: 105, message: "密码太短，至少为6位" }
