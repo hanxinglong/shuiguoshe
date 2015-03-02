@@ -91,6 +91,18 @@ class Product < ActiveRecord::Base
     json
   end
   
+  def end_discount_time
+    if self.discounted_at.blank?
+      ""
+    else
+      if self.discounted_at > Time.now
+        ( self.discounted_at - Time.now ).to_i.to_s
+      else
+        "0"
+      end
+    end
+  end
+  
   def delivered_time
     if self.delivered_at
       self.delivered_at.strftime("%Y-%m-%d %H:%M:%S")

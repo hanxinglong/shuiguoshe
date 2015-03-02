@@ -55,6 +55,10 @@ module Shuiguoshe
           return { code: 112, message: "产品已售完" }
         end
         
+        if @product.discounted_at and @product.discounted_at < Time.now
+          return { code: -2, message: "活动已结束，不支持购买" }
+        end
+        
         @cart = current_cart
         @line_item = current_cart.add_product(@product)
         

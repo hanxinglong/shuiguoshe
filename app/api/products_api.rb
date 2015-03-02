@@ -113,6 +113,7 @@ module Shuiguoshe
             deliver_info: deliver_info_for(@product),
             intro_images: @product.photos,
             likes_count: @product.likes_count,
+            discounted_at: @product.end_discount_time
           } 
         }
       end # end
