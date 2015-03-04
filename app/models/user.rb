@@ -136,6 +136,10 @@ class User < ActiveRecord::Base
     self.update_private_token if self.private_token.blank?
   end
   
+  def deliver_info
+    DeliverInfo.where(user_id: self.id, id: self.current_deliver_info_id).first
+  end
+  
   def as_json(options = {})
     {
       id: self.id,

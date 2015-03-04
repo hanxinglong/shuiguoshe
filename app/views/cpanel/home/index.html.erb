@@ -39,8 +39,8 @@
         
       </div>
       <div class="panel-footer">
-        收货人手机：<%= order.mobile %><br />
-        配送地址：<%= render_order_address(order) %>
+        收货人手机：<%= order.user_mobile %><br />
+        配送地址：<%= order.user_apartment_name %>
         <hr />
         订单总额：￥<%= product_price_tag(order.total_price) %> 抵扣：-￥<%= product_price_tag(order.discount_price) %><br/>
         下单日期：<%= order.created_at.strftime("%Y-%m-%d %H:%M:%S") %><br/>
