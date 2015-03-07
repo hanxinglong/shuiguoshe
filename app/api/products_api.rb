@@ -92,10 +92,24 @@ module Shuiguoshe
         { code: 0, message: "ok", data: @products }
       end
       
+      params do
+        optional :token, type: String
+      end
+      
       get '/:id' do
         @product = Product.find_by(id: params[:id])
         if @product.blank?
           return { code: 404, message: "没有找到记录" }
+        end
+        
+        user = User.find_by(private_token: params[:token])
+        
+        if user.blank?
+          like_count = 0
+        else
+          like_count = Like.where(likeable_id: @product.id,
+                     likeable_type: "Product",
+                     user_id: user.id).count
         end
         
         { code: 0, message: "ok",
@@ -112,7 +126,7 @@ module Shuiguoshe
             delivered_at: @product.delivered_time,
             deliver_info: deliver_info_for(@product),
             intro_images: @product.photos,
-            likes_count: @product.likes_count,
+            likes_count: like_count,
             discounted_at: @product.end_discount_time
           } 
         }
