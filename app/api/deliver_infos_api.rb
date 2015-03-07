@@ -14,12 +14,14 @@ module Shuiguoshe
       # 新建
       params do
         requires :token, type: String
-        requires :item, type: Hash # { mobile: xxx, apartment_id: 1, address: xxxx }
+        # requires :item, type: Hash # { mobile: xxx, apartment_id: 1, address: xxxx }
+        requires :mobile, type: String
+        requires :apartment_id, type: Integer
       end
       
       post '/' do
         user = authenticate!
-        DeliverInfo.where(user_id: user.id, apartment_id: params[:item][:apartment_id], mobile: params[:item][:mobile]).first_or_create!
+        DeliverInfo.where(user_id: user.id, apartment_id: params[:apartment_id], mobile: params[:mobile]).first_or_create!
         { code: 0, message: "ok" }
       end # end 新建
       

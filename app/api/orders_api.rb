@@ -72,7 +72,11 @@ module Shuiguoshe
       # 4.下订单
       params do
         requires :token, type: String, desc: "Token"
-        requires :order_info, type: Hash, desc: "订单信息" # { deliver_info_id: 1, note: '', total_price: 0.0, discount_price: 0.0 } 
+        # requires :order_info, type: Hash, desc: "订单信息" # { deliver_info_id: 1, note: '', total_price: 0.0, discount_price: 0.0 }
+        requires :deliver_info_id, type: Integer
+        requires :total_fee, type: String
+        requires :discount_fee, type: String
+        optional :note, type: String 
         requires :score, type: Integer, desc: "用户抵扣积分"
       end
       post '/orders' do
@@ -84,12 +88,11 @@ module Shuiguoshe
         user = authenticate!
         
         deliver_info_id = params[:deliver_info_id]
-        params[:order_info].delete(:deliver_info_id)
         
         @order = Order.new
-        @order.note = params[:order_info][:note]
-        @order.total_price = params[:order_info][:total_price]
-        @order.discount_price = params[:order_info][:discount_price]
+        @order.note = params[:note]
+        @order.total_price = params[:total_fee]
+        @order.discount_price = params[:discount_fee]
         @order.user_id = user.id
         @order.add_line_items_from_cart(@cart)
         
