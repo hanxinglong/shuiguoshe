@@ -1,9 +1,8 @@
 source 'http://rubygems.org'
 
-if RUBY_VERSION =~ /1.9/
-  Encoding.default_external = Encoding::UTF_8
-  Encoding.default_internal = Encoding::UTF_8
-end
+LANGUAGE="en_US.UTF-8"
+LANG="en_US.UTF-8"
+LC_ALL="en_US.UTF-8"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
