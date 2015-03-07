@@ -33,6 +33,7 @@ class LineItem < ActiveRecord::Base
       quantity: self.quantity, # 购买数量
       visible: self.visible,
       price: format("%.2f", product.low_price), # 我的价格
+      unit: product.units || "",
       total_price: format("%.2f", total_price)
     }
   end
