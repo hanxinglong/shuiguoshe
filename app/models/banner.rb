@@ -1,4 +1,7 @@
 class Banner < ActiveRecord::Base
+  
+  has_and_belongs_to_many :areas
+  
   validates :image, presence: true
   
   mount_uploader :image, BannerUploader

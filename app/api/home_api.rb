@@ -1,8 +1,21 @@
 module Shuiguoshe
   class HomeAPI < Grape::API
     resource :sections do
+      params do
+        optional :area_id, type: Integer, desc: "区域ID"
+      end
       get '/' do
-        @banners = Banner.sorted
+        area_id = params[:area_id].to_i
+        if area_id == 0
+          area_id = 1
+        end
+        
+        area = Area.opened.find_by(id: area_id)
+        if area.blank?
+          return { code: 404, message: "未找到该区域" }
+        end
+        
+        @banners = area.banners.sorted
         @catalogs = ProductType.all_types
         @items = Product.hot.saled.no_discount.order("sort ASC, id DESC").limit(6)
         

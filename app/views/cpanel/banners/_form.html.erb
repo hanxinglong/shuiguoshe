@@ -18,6 +18,8 @@
     <%= f.input :image, label: "广告图片" %>
     <%= f.hidden_field :image_cache %>
     
+    <%= f.association :areas, as: :check_boxes, label: "所属区域" %>
+    
     <%= f.input :url, label: "广告链接" %>
     <%= f.input :title, label: "广告标题" %>
     <%= f.input :subtitle, label: "广告子标题" %>

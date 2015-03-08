@@ -43,7 +43,7 @@ class Cpanel::BannersController < Cpanel::ApplicationController
     end
 
     def banner_params
-      params.require(:banner).permit(:title, :subtitle, :intro, :image, :url, :sort)
+      params.require(:banner).permit(:title, :subtitle, :intro, :image, :url, :sort, { :area_ids => [] })
     end
     
 end
