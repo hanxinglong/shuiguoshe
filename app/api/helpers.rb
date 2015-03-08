@@ -28,7 +28,8 @@ module Shuiguoshe
     
     def current_cart
       user = authenticate!
-      @cart ||= Cart.find_by(user_id: user.id) || Cart.create!(user_id: user.id)
+      area_id = params[:area_id]
+      @cart ||= Cart.find_by(user_id: user.id, area_id: area_id) || Cart.create!(user_id: user.id, area_id: area_id)
     end
     
     def deliver_info_for(product)

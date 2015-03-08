@@ -10,7 +10,7 @@ class ProductType < ActiveRecord::Base
   scope :sorted, -> { order('sort ASC, id ASC') }
   
   def self.all_types
-    @product_types = ProductType.order('sort ASC, id ASC')
+    @product_types = ProductType.where(area_id: 1).order('sort ASC, id ASC')
   end
   
   def area_info
