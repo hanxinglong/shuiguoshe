@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">区域列表</h3>
+    
+  </div>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>区域名字</th>
+          <th>区域地址</th>
+          <th>显示顺序</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @areas.each do |area| %>
+          <tr>
+            <td><%= link_to area.id, [:cpanel, area] %></td>
+            <td><%= area.name %></td>
+            <td><%= area.address %></td>
+            <td><%= area.sort %></td>
+            <td>
+              <%= state_link_to state: area.visible,
+                                yes_uri: "/cpanel/areas/#{area.id}/close", 
+                                yes_text: "关闭",
+                                no_uri: "/cpanel/areas/#{area.id}/open",
+                                no_text: "开放" %>
+              <%= link_to '编辑', edit_cpanel_area_path(area), class: "btn btn-xs btn-default" %>
+              <% if current_user.super_manager? %>
+              <%= link_to '删除', [:cpanel, area], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger" %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="text-center"><%= will_paginate @areas, renderer: BootstrapPagination::Rails %></div>
+  
+</div>
+
+<%= link_to '新建区域信息', new_cpanel_area_path, class: "btn btn-primary" %>
+

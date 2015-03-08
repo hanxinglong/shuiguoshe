@@ -98,6 +98,13 @@ Rails.application.routes.draw do
       end
     end
     
+    resources :areas do
+      member do
+        patch :open
+        patch :close
+      end
+    end
+    
     resources :pages
     
     resources :banners
