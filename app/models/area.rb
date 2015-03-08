@@ -4,6 +4,9 @@ class Area < ActiveRecord::Base
   
   has_and_belongs_to_many :banners
   
+  # 输入某个商家
+  belongs_to :seller, class_name: "User", foreign_key: "user_id"
+  
   scope :opened, -> { where(visible: true).recent }
   scope :recent, -> { order('sort ASC, id DESC') }
   
@@ -13,7 +16,16 @@ class Area < ActiveRecord::Base
       name: self.name || "",
       address: self.address || "",
       sort: self.sort,
+      # seller: self.seller.try(:mobile) || "",
     }
+  end
+  
+  def user_name
+    if seller
+      seller.mobile
+    else
+      ""
+    end
   end
   
   def sorted_types

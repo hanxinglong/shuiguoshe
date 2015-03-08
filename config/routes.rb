@@ -127,6 +127,8 @@ Rails.application.routes.draw do
       member do
         patch :block
         patch :unblock
+        patch :add_seller_role
+        patch :remove_seller_role
       end
     end
     resources :product_types

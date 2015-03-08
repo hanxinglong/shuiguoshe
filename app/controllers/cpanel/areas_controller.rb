@@ -67,6 +67,6 @@ class Cpanel::AreasController < Cpanel::ApplicationController
     end
 
     def area_params
-      params.require(:area).permit(:name, :address, :sort)
+      params.require(:area).permit(:name, :address, :sort, :user_id)
     end
 end

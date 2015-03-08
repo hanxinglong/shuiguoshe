@@ -30,6 +30,13 @@
             <td><%= user.sign_in_count %></td>
             <td>
               <% if current_user.admin? %>
+              <%= state_link_to state: user.is_seller,
+                                yes_uri: "/cpanel/users/#{user.id}/remove_seller_role", 
+                                yes_text: "取消卖家",
+                                no_uri: "/cpanel/users/#{user.id}/add_seller_role",
+                                no_text: "成为卖家" %>
+              <% end %>
+              <% if current_user.admin? %>
               <%= state_link_to state: user.verified,
                                 yes_uri: "/cpanel/users/#{user.id}/block", 
                                 yes_text: "禁用",

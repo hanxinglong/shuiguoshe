@@ -25,5 +25,5 @@ function add_fields(link, association, content) {
 }
 
 $(document).ready(function() {
-  $("select").chosen({"search_contains": true, "no_results_text":"没有找到", "placeholder_text_single":"请选择类别"});
+  $("select").chosen({"search_contains": true, "no_results_text":"没有找到", "placeholder_text_single":"--请选择--"});
 });

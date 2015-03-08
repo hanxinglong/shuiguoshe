@@ -10,6 +10,7 @@
           <th>#</th>
           <th>区域名字</th>
           <th>区域地址</th>
+          <th>所属商家</th>
           <th>显示顺序</th>
           <th></th>
         </tr>
@@ -21,6 +22,7 @@
             <td><%= link_to area.id, [:cpanel, area] %></td>
             <td><%= area.name %></td>
             <td><%= area.address %></td>
+            <td><%= area.user_name %></td>
             <td><%= area.sort %></td>
             <td>
               <%= state_link_to state: area.visible,

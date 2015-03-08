@@ -10,6 +10,7 @@
   <div class="col-md-6 col-md-offset-3">
     <%= f.input :name, label: "区域名字" %>    
     <%= f.input :address, label: "区域地址" %>
+    <%= f.association :seller, collection: User.sellers.map { |u| [u.mobile, u.id] }, label: "所属卖家" %>
     <%= f.input :sort, label: "显示顺序" %>
       
     <div class="form-group">
