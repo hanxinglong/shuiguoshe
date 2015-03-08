@@ -40,8 +40,8 @@
             <% if current_user.super_manager? %>
             <li><%= link_to "站点配置", cpanel_site_configs_path %></li>
             <% end %>
+            <% if current_user.admin? or current_user.is_seller %>
             <li><%= link_to '产品种类', cpanel_product_types_path %></li>
-            <% if current_user.site_editor? %>
             <li><%= link_to '产品', cpanel_products_path %></li>
             <% end %>
             <% if current_user.admin? %>
@@ -50,12 +50,16 @@
             <% if current_user.admin? %>
             <li><%= link_to "用户", cpanel_users_path %></li>
             <% end %>
-            <% if current_user.admin? %>
+            <% if current_user.admin? or current_user.is_seller %>
             <li><%= link_to "订单", cpanel_orders_path %></li>
             <% end %>
-            <li><%= link_to "留言", cpanel_messages_path %></li>
+            <% if current_user.admin? or current_user.is_seller %>
             <li><%= link_to "Banner", cpanel_banners_path %></li>
+            <% end %>
+            <% if current_user.admin? %>
+            <li><%= link_to "留言", cpanel_messages_path %></li>
             <li><%= link_to "服务区域", cpanel_areas_path %></li>
+            <% end %>
           </ul>
           <!--p class="navbar-text pull-right"><span class="label label-success">管理员 [<%= current_user.mobile %>]</span></p -->
         </div>

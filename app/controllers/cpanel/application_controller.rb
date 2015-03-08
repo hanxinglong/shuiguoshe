@@ -6,7 +6,7 @@ class Cpanel::ApplicationController < ApplicationController
   layout 'cpanel'
   
   def require_admin
-    unless current_user.admin?
+    unless current_user.admin? or current_user.is_seller # 管理员或者商家
       render_404
     end
   end

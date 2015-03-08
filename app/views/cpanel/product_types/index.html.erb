@@ -35,7 +35,7 @@
   
 </div>
 
-<% if current_user.admin? %>
+<% if current_user.admin? or current_user.is_seller %>
 <%= link_to '新建产品类别', new_cpanel_product_type_path, class: "btn btn-primary" %>
 <% end %>
 

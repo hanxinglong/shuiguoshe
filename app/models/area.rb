@@ -20,6 +20,16 @@ class Area < ActiveRecord::Base
     }
   end
   
+  def self.opened_areas_for(user)
+    if user.admin?
+      opened
+    elsif user.is_seller
+      opened.where(user_id: user.id)
+    else
+      []
+    end
+  end
+  
   def user_name
     if seller
       seller.mobile

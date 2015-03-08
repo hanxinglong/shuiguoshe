@@ -1,11 +1,16 @@
 # coding: utf-8
 class Cpanel::ProductTypesController < Cpanel::ApplicationController
-  before_action :check_is_admin, except: [:destroy]
   before_action :set_product_type, only: [:show, :edit, :update, :destroy]
   # before_action :check_is_super_manager
   
   def index
-    @product_types = ProductType.order('created_at desc').paginate page: params[:page], per_page: 30
+    if current_user.admin?
+      @product_types = ProductType.order('id desc')
+    else
+      areas = Area.opened.where(user_id: current_user.id)
+      @product_types = ProductType.where(area_id: areas.map { |a| a.id }).sorted
+    end
+    @product_types = @product_types.paginate page: params[:page], per_page: 30
   end
 
   def show
@@ -46,9 +51,19 @@ class Cpanel::ProductTypesController < Cpanel::ApplicationController
   private
     def set_product_type
       @product_type = ProductType.find(params[:id])
+      if current_user.is_seller
+        unless @product_type.area.seller == current_user
+          render_404
+        end
+      elsif current_user.admin?
+        return true
+      else
+        return false
+      end
     end
 
     def product_type_params
       params.require(:product_type).permit(:name, :sort, :area_id)
     end
+    
 end

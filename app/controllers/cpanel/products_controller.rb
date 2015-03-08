@@ -1,12 +1,17 @@
 # coding: utf-8
 class Cpanel::ProductsController < Cpanel::ApplicationController
-  before_action :check_is_site_editor, except: [:destroy, :unsuggest, :suggest, :upshelf, :downshelf]
-  before_action :check_is_admin, except: [:destroy]
   # before_action :check_is_super_manager
   before_action :set_product, only: [:show, :edit, :update, :destroy, :upshelf, :downshelf, :unsuggest, :suggest]
 
   def index
-    @products = Product.order('created_at desc').paginate page: params[:page], per_page: 30
+    if current_user.admin?
+      @products = Product.order('created_at desc')
+    else
+      areas = Area.opened.where(user_id: current_user.id)
+      @product_types = ProductType.includes(:products).where(area_id: areas.map { |a| a.id }).sorted
+      @products = Product.where(type_id: @product_types.map(&:id)).order('id desc')
+    end
+    @products = @products.paginate page: params[:page], per_page: 30
   end
 
   def show
@@ -37,7 +42,7 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
       if @type.blank?
         render_404
       else
-        redirect_to [:cpanel, @type]
+        redirect_to [:cpanel, @product]
       end
     else
       render :edit
@@ -96,6 +101,15 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
   private
     def set_product
       @product = Product.find(params[:id])
+      if current_user.is_seller
+        unless @product.product_type.area.seller == current_user
+          render_404
+        end
+      elsif current_user.admin?
+        return true
+      else
+        return false
+      end
     end
 
     def product_params
