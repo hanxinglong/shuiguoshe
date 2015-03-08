@@ -7,7 +7,7 @@
         }) do |f| %>
 
   <div class="col-md-6 col-md-offset-3">
-    <%= f.input :type_id, collection: ProductType.all.map { |t| [t.name, t.id] }, prompt: "--请选择产品类型--", label: "产品类别" %>
+    <%= f.input :type_id, collection: Area.opened, as: :grouped_select, group_method: :sorted_types, prompt: "--请选择产品类型--", label: "产品类别" %>
 
     <%= f.input :title, label: "产品标题" %>
     
@@ -39,10 +39,6 @@
     
     <%= f.input :stock_count, label: "库存" %>
     
-    <%= f.input :sale_id, collection: Sale.all.map { |s| [s.title, s.id] }, prompt: "--请选择卖场--", label: "所属卖场" %>
-    <%= f.input :subtitle, label: "产品子标题" %>
-    
-    <%= f.input :delivered_at, as: :string, label: "配送时间", placeholder: '2014-01-01 00:00:00 ( 可以不设置 )' %>
     <%= f.input :is_discount, label: "是否属于特惠预订产品", input_html: { onchange: "javascript: $('#discounted_at_area').toggle();" } %>
     <div id="discounted_at_area" style="display: <%= @product.is_discount ? "" : "none" %>">
       <%= f.input :discounted_at, as: :string, placeholder: '2014-01-01 00:00:00', label: "活动结束时间", required: true, input_html: { value: "#{@product.discounted_at ? @product.discounted_at.strftime("%Y-%m-%d %H:%M:%S") : "" }" } %>

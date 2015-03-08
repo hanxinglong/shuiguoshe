@@ -1,5 +1,7 @@
 class Area < ActiveRecord::Base
   
+  has_many :product_types, dependent: :destroy
+  
   has_and_belongs_to_many :banners
   
   scope :opened, -> { where(visible: true).recent }
@@ -12,5 +14,9 @@ class Area < ActiveRecord::Base
       address: self.address || "",
       sort: self.sort,
     }
+  end
+  
+  def sorted_types
+    self.product_types.sorted
   end
 end

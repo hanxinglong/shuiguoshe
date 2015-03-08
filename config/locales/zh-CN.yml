@@ -3,6 +3,7 @@
     models:
       user: "用户"
       product: "产品"
+      product_type: "产品类别"
       apartment: "小区"
       site_config: "站点配置"
       order: "订单"
@@ -34,6 +35,9 @@
         stock_count: '库存'
         delivered_at: '配送时间'
         summary_image: "摘要图片"
+      product_type:
+        name: "类别名称"
+        area_id: "所属区域"
       apartment:
         name: "小区名字"
         address: "小区地址"

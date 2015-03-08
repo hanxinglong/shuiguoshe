@@ -41,6 +41,13 @@ module ProductsHelper
     
   end
   
+  def render_product_type_select_tag(product)
+    return if product.blank?
+    grouped_collection_select :product, :type_id, Area.opened,
+                    :sorted_types, :name, :id, :name, {:value => product.type_id,
+                    :include_blank => true, :prompt => "选择类别"}, :style => "width:145px;"
+  end
+  
   def render_product_subtitle(product)
     return '' if product.blank?
     

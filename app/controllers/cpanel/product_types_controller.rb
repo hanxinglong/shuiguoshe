@@ -49,6 +49,6 @@ class Cpanel::ProductTypesController < Cpanel::ApplicationController
     end
 
     def product_type_params
-      params.require(:product_type).permit(:name, :sort)
+      params.require(:product_type).permit(:name, :sort, :area_id)
     end
 end

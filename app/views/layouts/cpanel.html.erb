@@ -8,7 +8,6 @@
     <title>水果社后台管理系统</title>
 
     <%= stylesheet_link_tag  'cpanel', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'cpanel', 'data-turbolinks-track' => true %>
     
     <link rel="shortcut icon" href="<%= asset_path("favicon.ico") %>" />
 
@@ -68,5 +67,6 @@
       <%= yield %>
     </div>
     
+    <%= javascript_include_tag 'cpanel', 'data-turbolinks-track' => true %>
   </body>
 </html>

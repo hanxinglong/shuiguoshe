@@ -16,8 +16,7 @@ module Shuiguoshe
         end
         
         @banners = area.banners.sorted
-        @catalogs = ProductType.all_types
-        @items = Product.hot.saled.no_discount.order("sort ASC, id DESC").limit(6)
+        @catalogs = area.product_types.sorted.includes(:hot_products)
         
         sections = []
         if @banners.any?
@@ -25,11 +24,12 @@ module Shuiguoshe
         end
         
         if @catalogs.any?
-          sections << { name: "分类选购",identifier: "catalogs", data_type: "Catalog", height: (@catalogs.count + 1) / 2 * 68 + 30, data: @catalogs }
-        end
-        
-        if @items.any?
-          sections << { name: "热门订购",identifier: "hot_items", data_type: "Item", height: ( ( @items.count + 1 ) / 2 * 250 + 30 + 20), data: @items }
+          
+          @catalogs.each do |cata|
+            
+            sections << { name: cata.name, identifier: "catalog-#{cata.id}", data_type: "Catalog", height: (cata.hot_products.size + 1) / 2 * 230 + 30, data: cata.hot_products }
+          end
+          
         end
         
         { code: 0, message: "ok", data: sections }
