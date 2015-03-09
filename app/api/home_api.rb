@@ -27,7 +27,7 @@ module Shuiguoshe
           
           @catalogs.each do |cata|
             
-            sections << { name: cata.name, identifier: "catalog-#{cata.id}", data_type: "Catalog", height: (cata.hot_products.size + 1) / 2 * 230 + 30, data: cata.hot_products }
+            sections << { name: cata.name, identifier: "catalog-#{cata.id}", data_type: "Item", height: (cata.hot_products.size + 1) / 2 * 247 + 30, data: cata.hot_products }
           end
           
         end
