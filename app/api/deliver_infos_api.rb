@@ -16,12 +16,16 @@ module Shuiguoshe
         requires :token, type: String
         # requires :item, type: Hash # { mobile: xxx, apartment_id: 1, address: xxxx }
         requires :mobile, type: String
-        requires :apartment_id, type: Integer
+        requires :area_id, type: Integer
+        optional :name, type: String
       end
       
       post '/' do
         user = authenticate!
-        DeliverInfo.where(user_id: user.id, apartment_id: params[:apartment_id], mobile: params[:mobile]).first_or_create!
+        di = DeliverInfo.where(user_id: user.id, area_id: params[:area_id], mobile: params[:mobile]).first
+        if di.blank?
+          DeliverInfo.create!(user_id: user.id, area_id: params[:area_id], mobile: params[:mobile], name: params[:name])
+        end
         { code: 0, message: "ok" }
       end # end 新建
       

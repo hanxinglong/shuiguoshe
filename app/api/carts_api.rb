@@ -26,7 +26,7 @@ module Shuiguoshe
           return { code: 404, message: "没有购物项" }
         end
         
-        deliver_info = DeliverInfo.where('user_id = ? and id = ?', current_user.id, current_user.current_deliver_info_id).first
+        deliver_info = DeliverInfo.where('user_id = ? and id = ?', current_user.id, current_user.current_area_id).first
         
         score = current_user.score
         total_price = current_cart.total_price
