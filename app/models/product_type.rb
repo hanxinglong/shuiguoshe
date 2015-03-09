@@ -3,7 +3,7 @@ class ProductType < ActiveRecord::Base
   belongs_to :area
   
   has_many :products, dependent: :destroy, foreign_key: "type_id"
-  has_many :hot_products, -> { saled.order('orders_count DESC, sort ASC, id DESC').limit(4) }, class_name: "Product", foreign_key: "type_id"
+  has_many :hot_products, -> { saled.order('sort ASC, orders_count DESC, id DESC').limit(4) }, class_name: "Product", foreign_key: "type_id"
   
   validates :name, :area_id, presence: true
   

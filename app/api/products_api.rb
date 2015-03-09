@@ -77,13 +77,13 @@ module Shuiguoshe
         end
     
         @products = Product.saled.where(type_id: @type.id)
-        if @type.name == "限时抢购"
-          @products = @products.discounted
-        else
-          @products = @products.no_discount
-        end
+        # if @type.name == "限时抢购"
+        #   @products = @products.discounted
+        # else
+        #   @products = @products.no_discount
+        # end
     
-        @products = @products.order("sort ASC, id DESC")
+        @products = @products.order("sort ASC, orders_count DESC, id DESC")
         
         if @products.empty?
           return { code: 404, message: "没有记录" }
