@@ -42,7 +42,7 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
       if @type.blank?
         render_404
       else
-        redirect_to [:cpanel, @product]
+        redirect_to cpanel_products_path
       end
     else
       render :edit

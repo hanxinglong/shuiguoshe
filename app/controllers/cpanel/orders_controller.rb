@@ -1,10 +1,15 @@
 # coding: utf-8
 class Cpanel::OrdersController < Cpanel::ApplicationController
-  before_action :check_is_admin, except: [:destroy]
+  # before_action :check_is_admin, except: [:destroy]
   before_action :set_order, only: [:cancel, :complete, :prepare_deliver, :deliver, :show]
   
   def index
-    @orders = Order.includes(:user).order('created_at DESC').paginate page: params[:page], per_page: 30
+    if current_user.admin?
+      @orders = Order.includes(:user)
+    else
+      @orders = current_user.orders
+    end
+    @orders = @orders.order('id DESC').paginate page: params[:page], per_page: 30
   end
   
   def show
@@ -12,23 +17,48 @@ class Cpanel::OrdersController < Cpanel::ApplicationController
   end
   
   def search
-    @orders = Order.search(params[:q]).order('created_at DESC').paginate page: params[:page], per_page: 30
+    if current_user.admin?
+      @orders = Order.search(params[:q])
+    else
+      @orders = current_user.orders.search(params[:q])
+    end
+    
+    @orders = @orders.order('id DESC').paginate page: params[:page], per_page: 30
     render :index
   end
   
   def today_normal
-    @orders = Order.normal.today.includes(:user).order('created_at DESC').paginate page: params[:page], per_page: 30
+    if current_user.admin?
+      @orders = Order.normal.today.includes(:user)
+    else
+      @orders = current_user.orders.normal.today.includes(:user)
+    end
+    @orders = @orders.order('created_at DESC').paginate page: params[:page], per_page: 30
     
     render :index
   end
   
   def completed
-    @orders = Order.completed.includes(:user).order('created_at DESC').paginate page: params[:page], per_page: 30
+    
+    if current_user.admin?
+      @orders = Order.completed.includes(:user)
+    else
+      @orders = current_user.orders.completed.includes(:user)
+    end
+    
+    @orders = @orders.order('created_at DESC').paginate page: params[:page], per_page: 30
     render :index
   end
   
   def canceled
-    @orders = Order.canceled.includes(:user).order('created_at DESC').paginate page: params[:page], per_page: 30
+    
+    if current_user.admin?
+      @orders = Order.canceled.includes(:user)
+    else
+      @orders = current_user.orders.canceled.includes(:user)
+    end
+    
+    @orders = @orders.order('created_at DESC').paginate page: params[:page], per_page: 30
     render :index
   end
 
@@ -69,7 +99,11 @@ class Cpanel::OrdersController < Cpanel::ApplicationController
   
   private
     def set_order
-      @order = Order.find(params[:id])
+      if current_user.admin?
+        @order = Order.find(params[:id])
+      else
+        @order = current_user.orders.find(params[:id])
+      end
     end
   
 end

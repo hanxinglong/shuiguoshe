@@ -1,9 +1,14 @@
 class Cpanel::BannersController < Cpanel::ApplicationController
-  before_action :check_destroy_authorize, except: [:destroy]
+  # before_action :check_destroy_authorize, except: [:destroy]
   before_action :set_banner, only: [:show, :edit, :update, :destroy]
 
   def index
-    @banners = Banner.sorted
+    if current_user.admin?
+      @banners = Banner.sorted
+    else
+      areas = Area.opened_areas_for(current_user)
+      @banners = Banner.joins(:areas).where('areas_banners.area_id = ?', areas.map(&:id)).sorted
+    end
   end
 
   def new
@@ -40,6 +45,15 @@ class Cpanel::BannersController < Cpanel::ApplicationController
   private
     def set_banner
       @banner = Banner.find(params[:id])
+      if not current_user.admin?
+        if @banner.areas.first.seller != current_user
+          render_404
+        else
+          return true
+        end
+      else
+        return true
+      end
     end
 
     def banner_params
