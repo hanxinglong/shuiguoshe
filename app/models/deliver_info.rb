@@ -13,20 +13,23 @@ class DeliverInfo < ActiveRecord::Base
       id: self.id,
       name: self.name || "",
       mobile: self.mobile || "",
-      address: user_address,
+      address: self.user_address,
     }
   end
   
   def user_address
-    if self.address
-      self.address
+    a = Area.find_by(id: area_id)
+    s = self.address || ""
+    if a.blank?
+      s
     else
-      a = Area.find_by(id: area_id)
-      if a.blank?
-        ""
+      if s.length > 0
+        "#{a.name}（#{s}）"
       else
         "#{a.name}（#{a.address}）"
       end
+      
     end
   end
+  
 end

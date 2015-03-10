@@ -3,10 +3,11 @@ module Shuiguoshe
     resource :deliver_infos do
       params do
         requires :token, type: String
+        requires :area_id, type: Integer
       end
       get '/' do
         user = authenticate!
-        @infos = DeliverInfo.where(user_id: user.id).order('id desc')
+        @infos = DeliverInfo.where(user_id: user.id, area_id: params[:area_id]).order('id desc')
         { code: 0, message: "ok", data: @infos }
         
       end
@@ -18,13 +19,14 @@ module Shuiguoshe
         requires :mobile, type: String
         requires :area_id, type: Integer
         optional :name, type: String
+        optional :address, type: String
       end
       
       post '/' do
         user = authenticate!
         di = DeliverInfo.where(user_id: user.id, area_id: params[:area_id], mobile: params[:mobile]).first
         if di.blank?
-          DeliverInfo.create!(user_id: user.id, area_id: params[:area_id], mobile: params[:mobile], name: params[:name])
+          DeliverInfo.create!(user_id: user.id, area_id: params[:area_id], mobile: params[:mobile], name: params[:name], address: params[:address])
         end
         { code: 0, message: "ok" }
       end # end 新建

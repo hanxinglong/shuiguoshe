@@ -250,8 +250,12 @@ module Shuiguoshe
       end
       get :me do
         user = authenticate!
-        
-        { code: 0, message: "ok", data: user }
+        default_info = UserDefaultDeliverInfo.where(user_id: user.id, area_id: params[:area_id]).first
+        jsonObj = user.as_json;
+        if default_info
+          jsonObj[:current_deliver_info_id] = default_info.current_deliver_info_id || ""
+        end
+        { code: 0, message: "ok", data: jsonObj }
       end # end me
       
       # 更新用户头像
@@ -353,15 +357,33 @@ module Shuiguoshe
       params do
         requires :token, type: String, desc: "Token"
         requires :deliver_info_id, type: Integer
+        requires :area_id, type: Integer
       end
       
       post '/update_deliver_info' do
         user = authenticate!
-        if user.update_attribute(:current_area_id, params[:deliver_info_id])
-          { code: 0, message: "ok" }
+        
+        info = UserDefaultDeliverInfo.where(user_id: user.id, area_id: params[:area_id]).first
+        if info.blank?
+          if UserDefaultDeliverInfo.create(user_id: user.id, area_id: params[:area_id], current_deliver_info_id: params[:deliver_info_id])
+            { code: 0, message: "ok" }
+          else
+            { code: -1, message: "更新收货信息失败" }
+          end
         else
-          { code: -1, message: "更新收货信息失败" }
+          info.current_deliver_info_id = params[:deliver_info_id]
+          if info.save
+            { code: 0, message: "ok" }
+          else
+            { code: -1, message: "更新收货信息失败" }
+          end
         end
+        
+        # if user.update_attribute(:current_area_id, params[:deliver_info_id])
+        #   { code: 0, message: "ok" }
+        # else
+        #   { code: -1, message: "更新收货信息失败" }
+        # end
       end # end 更新收货信息
       
       # 获取积分信息
