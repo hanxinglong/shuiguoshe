@@ -405,6 +405,23 @@ module Shuiguoshe
         { code: 0, messages: "ok", data: user.likes.order('id desc') }
       end # end likes
       
+      # 更新支付以及配送方式
+      params do
+        requires :token, type: String
+        requires :payment_type_id, type: Integer
+        requires :shipment_type_id, type: Integer
+      end
+      post '/update_payment_and_shipment_info' do
+        user = authenticate!
+        user.payment_type = params[:payment_type_id]
+        user.shipment_type = params[:shipment_type_id]
+        if user.save
+          { code: 0, message: "ok" }
+        else
+          { code: -1, message: "更新支付及配送方式失败" }
+        end
+      end
+      
     end # end user
     
   end # end class

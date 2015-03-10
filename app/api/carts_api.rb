@@ -39,9 +39,14 @@ module Shuiguoshe
           score = (total_price * 50).to_i
         end
         
+        @payment = PaymentType.find_by(id: current_user.payment_type)
+        @shipment = ShipmentType.find_by(id: current_user.shipment_type)
+        
         { code: 0, message: "ok", data: { 
           user: { score: score, deliver_info: deliver_info || {}  }, 
           cart: { total_price: format("%.2f",total_price), items: @line_items },
+          payment_info: @payment,
+          shipment_info: @shipment,
           } }
       end # end
       

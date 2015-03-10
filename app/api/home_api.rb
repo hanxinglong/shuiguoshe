@@ -35,6 +35,23 @@ module Shuiguoshe
         
         { code: 0, message: "ok", data: sections }
       end
-    end
+    end # end resource sections
+    
+    resource :payment_and_shipment_infos do
+      get '/' do
+        json = {}
+        @payment_types = PaymentType.order('sort ASC, id DESC')
+        if @payment_types.any?
+          json[:payment_type] = @payment_types.as_json
+        end
+        @shipment_types = ShipmentType.order('sort ASC, id DESC')
+        if @shipment_types.any?
+          json[:shipment_type] = @shipment_types.as_json
+        end
+        
+        { code: 0, message: "ok", data: json }
+        
+      end
+    end # end resources payment_and_shipment_infos
   end
 end
