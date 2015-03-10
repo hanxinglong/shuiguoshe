@@ -8,7 +8,7 @@
         <tr>
           <th>#</th>
           <th>类别名</th>
-          <th>所属区域</th>
+          <th>所属商家</th>
           <th></th>
         </tr>
       </thead>
@@ -18,7 +18,7 @@
           <tr>
             <td><%= link_to product_type.id, [:cpanel, product_type] %></td>
             <td><%= product_type.name %></td>
-            <td><%= product_type.area_info %></td>
+            <td><%= product_type.seller_name %></td>
             <td>
               <%= link_to '编辑', edit_cpanel_product_type_path(product_type), class: "btn btn-xs btn-default" %>
               <% if current_user.super_manager? %>

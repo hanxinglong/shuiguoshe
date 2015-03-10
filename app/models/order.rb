@@ -31,8 +31,9 @@ class Order < ActiveRecord::Base
     if self.mobile
       self.mobile
     else
-      info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
-      info.mobile
+      ""
+      # info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
+      # info.mobile
     end
   end
   
@@ -40,8 +41,9 @@ class Order < ActiveRecord::Base
     if self.apartment_id
       self.apartment.name
     else
-      info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
-      Apartment.find_by(id: info.apartment_id).try(:name)
+      ""
+      # info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
+      # Apartment.find_by(id: info.apartment_id).try(:name)
     end
   end
   

@@ -16,7 +16,8 @@ module Shuiguoshe
         end
         
         @banners = area.banners.sorted
-        @catalogs = area.product_types.sorted.includes(:hot_products)
+        
+        @catalogs = ProductType.where(seller_id: area.seller.id).sorted.includes(:hot_products)
         
         sections = []
         if @banners.any?

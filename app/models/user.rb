@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :orders, dependent: :destroy
   has_many :likes, dependent: :destroy
   
+  has_many :product_types, dependent: :destroy, source: "User", foreign_key: "seller_id"
+  
   scope :sellers, -> { where(verified: true, is_seller: true).order('id DESC') }
   
   # validate :valid_captcha?, :on => :create
@@ -46,6 +48,22 @@ class User < ActiveRecord::Base
   #     where(conditions).first
   #   end
   # end
+  
+  def self.sellers_for(user)
+    if user.admin?
+      sellers
+    else
+      user
+    end
+  end
+  
+  def to_s
+    mobile
+  end
+  
+  def sorted_types
+    self.product_types.sorted
+  end
   
   def email_required?
     false

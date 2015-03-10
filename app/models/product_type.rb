@@ -1,23 +1,23 @@
 class ProductType < ActiveRecord::Base
   
-  belongs_to :area
+  belongs_to :seller, class_name: "User", foreign_key: "seller_id"
   
   has_many :products, dependent: :destroy, foreign_key: "type_id"
   has_many :hot_products, -> { saled.order('sort ASC, orders_count DESC, id DESC').limit(4) }, class_name: "Product", foreign_key: "type_id"
   
-  validates :name, :area_id, presence: true
+  validates :name, :seller_id, presence: true
   
   scope :sorted, -> { order('sort ASC, id ASC') }
   
   def self.all_types
-    @product_types = ProductType.where(area_id: 1).order('sort ASC, id ASC')
+    @product_types = ProductType.where(seller_id: 1).order('sort ASC, id ASC')
   end
   
-  def area_info
-    if area.blank?
+  def seller_name
+    if seller.blank?
       ""
     else
-      "#{area.name}（#{area.address}）"
+      seller.mobile
     end
   end
   

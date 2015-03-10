@@ -37,7 +37,7 @@
         summary_image: "摘要图片"
       product_type:
         name: "类别名称"
-        area_id: "所属区域"
+        seller_id: "所属商家"
       apartment:
         name: "小区名字"
         address: "小区地址"

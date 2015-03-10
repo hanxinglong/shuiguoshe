@@ -7,7 +7,7 @@
         }) do |f| %>
 
   <div class="col-md-6 col-md-offset-3">
-    <%= f.input :type_id, collection: Area.opened_areas_for(current_user), as: :grouped_select, group_method: :sorted_types, prompt: "--请选择产品类型--", label: "产品类别" %>
+    <%= f.input :type_id, collection: User.sellers_for(current_user), as: :grouped_select, group_method: :sorted_types, prompt: "--请选择产品类型--", label: "产品类别" %>
 
     <%= f.input :title, label: "产品标题" %>
     

@@ -1,6 +1,6 @@
 class Area < ActiveRecord::Base
   
-  has_many :product_types, dependent: :destroy
+  # has_many :product_types, dependent: :destroy
   
   has_and_belongs_to_many :banners
   
@@ -38,7 +38,4 @@ class Area < ActiveRecord::Base
     end
   end
   
-  def sorted_types
-    self.product_types.sorted
-  end
 end
