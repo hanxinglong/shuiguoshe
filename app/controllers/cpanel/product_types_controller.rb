@@ -51,12 +51,12 @@ class Cpanel::ProductTypesController < Cpanel::ApplicationController
   private
     def set_product_type
       @product_type = ProductType.find(params[:id])
-      if current_user.is_seller
-        unless @product_type.area.seller == current_user
+      if current_user.admin?
+        return true
+      elsif current_user.is_seller
+        unless @product_type.seller == current_user
           render_404
         end
-      elsif current_user.admin?
-        return true
       else
         return false
       end
