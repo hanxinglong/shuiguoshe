@@ -43,6 +43,14 @@ class SiteConfig < ActiveRecord::Base
     deliver_time.split(',')
   end
   
+  def self.payment_types
+    SiteConfig.payment_types.split(',') if SiteConfig.payment_types
+  end
+  
+  def self.shipment_types
+    SiteConfig.shipment_types.split(',') if SiteConfig.payment_types
+  end
+  
 end
 
 # == Schema Information

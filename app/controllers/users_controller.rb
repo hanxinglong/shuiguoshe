@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    user_params = params.require(:user).permit(:deliver_time,:apartment_id)
+    user_params = params.require(:user).permit(:apartment_id)
     if current_user.update(user_params)
       flash[:success] = "修改成功"
       redirect_to edit_user_path
