@@ -14,7 +14,7 @@ set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 
 set :keep_releases, 5
 
-set :linked_files, %w{config/database.yml config/config.yml config/newrelic.yml}
+set :linked_files, %w{config/database.yml config/config.yml config/newrelic.yml config/rsa_private_key.txt}
 
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads}
 

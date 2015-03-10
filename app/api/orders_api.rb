@@ -117,8 +117,9 @@ module Shuiguoshe
             { code: 0, message: "ok",
                data: {
                  id: @order.id,
-                 partner: '2088102035519440',
-                 seller_id: '13684043430',
+                 partner: Setting.partner,
+                 seller_id: Setting.seller_id,
+                 private_key: Setting.private_key,
                  out_trade_no: @order.order_no,
                  subject: '1',
                  body: '我是测试数据',
@@ -129,8 +130,8 @@ module Shuiguoshe
                  _input_charset: 'utf-8',
                  it_b_pay: '30m',
                  show_url: 'm.alipay.com',
-                 sign: '签名字符串',
                  sign_type: 'RSA',
+                 
                  order_no: @order.order_no || "",
                  state: @order.state || "",
                  ordered_at: @order.created_at.strftime("%Y-%m-%d %H:%M:%S"),

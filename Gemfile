@@ -75,6 +75,8 @@ gem 'state_machine'
 
 gem 'newrelic_rpm'
 
+gem 'alipay', :github => 'chloerei/alipay'
+
 # Use Capistrano for deployment
 group :development do
   

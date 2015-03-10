@@ -1,6 +1,7 @@
 # coding: utf-8
 require "helpers"
 require "entities"
+require "setting"
 
 require "users_api"
 require "banners_api"

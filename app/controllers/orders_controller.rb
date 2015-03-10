@@ -153,7 +153,7 @@ class OrdersController < ApplicationController
   end
   
   def payment_notify
-    
+    render text: "success"
   end
 
   # def update
