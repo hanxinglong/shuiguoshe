@@ -31,20 +31,40 @@ class Order < ActiveRecord::Base
     if self.mobile
       self.mobile
     else
-      ""
-      # info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
-      # info.mobile
+      default_info = UserDefaultDeliverInfo.where(user_id: self.user.id, area_id: self.area_id).first
+      if default_info.blank?
+        ""
+      else
+        info = DeliverInfo.where(user_id: self.user.id, id: default_info.current_deliver_info_id).first
+        if info.blank?
+          ""
+        else
+          info.mobile
+        end
+      end
     end
   end
   
   def user_apartment_name
-    if self.apartment_id
-      self.apartment.name
-    else
+    
+    default_info = UserDefaultDeliverInfo.where(user_id: self.user.id, area_id: self.area_id).first
+    if default_info.blank?
       ""
-      # info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
-      # Apartment.find_by(id: info.apartment_id).try(:name)
+    else
+      info = DeliverInfo.where(user_id: self.user.id, id: default_info.current_deliver_info_id).first
+      if info.blank?
+        ""
+      else
+        info.user_address
+      end
     end
+    # if self.apartment_id
+    #   self.apartment.name
+    # else
+    #   ""
+    #   # info = DeliverInfo.where(user_id: self.user.id, id: self.user.current_deliver_info_id).first
+    #   # Apartment.find_by(id: info.apartment_id).try(:name)
+    # end
   end
   
   def update_orders_count(oper = 1)

@@ -20,6 +20,10 @@ class Area < ActiveRecord::Base
     }
   end
   
+  def add_order_count
+    self.class.increment_counter(:orders_count, self.id)
+  end
+  
   def self.opened_areas_for(user)
     if user.admin?
       opened

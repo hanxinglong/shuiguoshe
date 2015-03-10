@@ -73,11 +73,12 @@ module Shuiguoshe
       params do
         requires :token, type: String, desc: "Token"
         # requires :order_info, type: Hash, desc: "订单信息" # { deliver_info_id: 1, note: '', total_price: 0.0, discount_price: 0.0 }
-        requires :deliver_info_id, type: Integer
+        # requires :deliver_info_id, type: Integer
         requires :total_fee, type: String
         requires :discount_fee, type: String
         optional :note, type: String 
         requires :score, type: Integer, desc: "用户抵扣积分"
+        requires :area_id, type: Integer, desc: "区域id"
       end
       post '/orders' do
         @cart = current_cart
@@ -87,24 +88,28 @@ module Shuiguoshe
         
         user = authenticate!
         
-        deliver_info_id = params[:deliver_info_id]
+        # deliver_info_id = params[:deliver_info_id]
         
         @order = Order.new
         @order.note = params[:note]
         @order.total_price = params[:total_fee]
         @order.discount_price = params[:discount_fee]
         @order.user_id = user.id
+        @order.area_id = params[:area_id]
         @order.add_line_items_from_cart(@cart)
         
         if @order.save(validate: false)
           # 清空购物车
-          Cart.find_by(user_id: user.id).destroy
+          Cart.find_by(user_id: user.id, area_id: @order.area_id).destroy
           score = params[:score].to_i
           
           user.update_score(-score, '提交订单') if score > 0
           # @product.add_order_count
           # @apartment = Apartment.find_by_id(@order.apartment_id)
           # @apartment.add_order_count if @apartment
+          
+          @area = Area.find_by(id: @order.area_id)
+          @area.add_order_count if @area
 
           @order.update_orders_count
       
