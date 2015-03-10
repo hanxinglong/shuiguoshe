@@ -151,6 +151,10 @@ class OrdersController < ApplicationController
     end
     
   end
+  
+  def payment_notify
+    
+  end
 
   # def update
   #   @order.update(order_params)

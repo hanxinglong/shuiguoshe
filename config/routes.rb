@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/order_help' => 'home#order_help', as: :order_help
   get '/pay_help' => 'home#pay_help', as: :pay_help
   get '/deliver_help' => 'home#deliver_help', as: :deliver_help
+  
+  post '/payment_notify' => 'orders#payment_notify'
 
   devise_for :users, path: "account", controllers: {
     registrations: :account,

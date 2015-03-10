@@ -113,16 +113,44 @@ module Shuiguoshe
 
           @order.update_orders_count
       
-          { code: 0, message: "ok",
-             data:     {
+          if @order.user.payment_type == 1 # 在线支付
+            { code: 0, message: "ok",
+               data: {
                  id: @order.id,
+                 partner: '2088102035519440',
+                 seller_id: '13684043430',
+                 out_trade_no: @order.order_no,
+                 subject: '1',
+                 body: '我是测试数据',
+                 total_fee: '0.02',
+                 notify_url: 'http://shuiguoshe.com/payment_notify',
+                 service: 'mobile.securitypay.pay',
+                 payment_type: '1',
+                 _input_charset: 'utf-8',
+                 it_b_pay: '30m',
+                 show_url: 'm.alipay.com',
+                 sign: '签名字符串',
+                 sign_type: 'RSA',
                  order_no: @order.order_no || "",
                  state: @order.state || "",
                  ordered_at: @order.created_at.strftime("%Y-%m-%d %H:%M:%S"),
                  total_price: format("%.2f", @order.total_price),
                  delivered_at: @order.deliver_info,
-               }
-           }
+                }
+             }
+          else # 货到付款
+            { code: 0, message: "ok",
+               data: {
+                   id: @order.id,
+                   order_no: @order.order_no || "",
+                   state: @order.state || "",
+                   ordered_at: @order.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                   total_price: format("%.2f", @order.total_price),
+                   delivered_at: @order.deliver_info,
+                 }
+             }
+          end
+          
         else
           { code: 115, message: @order.errors.full_messages.join(",") }
         end
