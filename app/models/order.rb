@@ -99,7 +99,7 @@ class Order < ActiveRecord::Base
     end
     
     event :cancel do
-      transition :normal => :canceled
+      transition [:normal, :no_pay] => :canceled
     end
     
     event :complete do
@@ -107,7 +107,7 @@ class Order < ActiveRecord::Base
     end
     
     event :pay do
-      transition :no_pay => :normal
+      transition :no_pay => :prepare_delivering
     end
     
   end
@@ -153,8 +153,25 @@ class Order < ActiveRecord::Base
       ordered_at: self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
       total_price: format("%.2f", self.total_price),
       delivered_at: deliver_info,
-      can_cancel: (self.can_cancel? and self.state?(:normal)),
+      can_cancel: (self.can_cancel? and ( self.state?(:normal) or self.state?(:no_pay) )),
       items: self.line_items,
+      partner: Setting.partner,
+      seller_id: Setting.seller_id,
+      private_key: Setting.private_key,
+      out_trade_no: self.order_no,
+      subject: '1',
+      body: '我是测试数据',
+      total_fee: '0.02',
+      notify_url: 'http://shuiguoshe.com/payment_notify',
+      service: 'mobile.securitypay.pay',
+      payment_type: '1',
+      _input_charset: 'utf-8',
+      it_b_pay: '30m',
+      show_url: 'm.alipay.com',
+      sign_type: 'RSA',
+      shipment_info: self.shipment_info,
+      _payment_type: self.payment_type || "",
+      
     }
   end
   
