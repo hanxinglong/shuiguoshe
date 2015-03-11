@@ -137,6 +137,7 @@ module Shuiguoshe
                  ordered_at: @order.created_at.strftime("%Y-%m-%d %H:%M:%S"),
                  total_price: format("%.2f", @order.total_price),
                  delivered_at: @order.deliver_info,
+                 _payment_type: @order.user.payment_type || "",
                 }
              }
           else # 货到付款
@@ -148,6 +149,7 @@ module Shuiguoshe
                    ordered_at: @order.created_at.strftime("%Y-%m-%d %H:%M:%S"),
                    total_price: format("%.2f", @order.total_price),
                    delivered_at: @order.deliver_info,
+                   _payment_type: @order.user.payment_type || "",
                  }
              }
           end

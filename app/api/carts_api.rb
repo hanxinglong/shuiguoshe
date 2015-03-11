@@ -45,8 +45,8 @@ module Shuiguoshe
         { code: 0, message: "ok", data: { 
           user: { score: score, deliver_info: deliver_info || {}  }, 
           cart: { total_price: format("%.2f",total_price), items: @line_items },
-          payment_info: @payment,
-          shipment_info: @shipment,
+          payment_info: @payment || {},
+          shipment_info: @shipment || {},
           } }
       end # end
       
