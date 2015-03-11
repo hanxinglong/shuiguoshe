@@ -31,32 +31,26 @@ class Order < ActiveRecord::Base
     if self.mobile
       self.mobile
     else
-      default_info = UserDefaultDeliverInfo.where(user_id: self.user.id, area_id: self.area_id).first
-      if default_info.blank?
+      info = DeliverInfo.where(id: self.deliver_info_id).first
+      if info.blank?
         ""
       else
-        info = DeliverInfo.where(user_id: self.user.id, id: default_info.current_deliver_info_id).first
-        if info.blank?
-          ""
-        else
-          info.mobile
-        end
+        info.mobile
       end
     end
   end
   
   def user_apartment_name
     
-    default_info = UserDefaultDeliverInfo.where(user_id: self.user.id, area_id: self.area_id).first
-    if default_info.blank?
-      ""
-    else
-      info = DeliverInfo.where(user_id: self.user.id, id: default_info.current_deliver_info_id).first
-      if info.blank?
-        ""
+    info = DeliverInfo.where(id: self.deliver_info_id).first
+    if info.blank?
+      if self.apartment_id
+        self.apartment.name
       else
-        info.user_address
+        ""
       end
+    else
+      info.user_address
     end
     # if self.apartment_id
     #   self.apartment.name
