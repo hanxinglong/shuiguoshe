@@ -1,7 +1,8 @@
 # coding: utf-8
 class OrdersController < ApplicationController
-  before_filter :require_user
-  before_filter :check_user
+  before_filter :require_user, except: :alipay_notify
+  skip_before_filter :verify_authenticity_token, :only => [:alipay_notify]
+  before_filter :check_user, except: :alipay_notify
   before_action :set_order, only: [:show]
   
   layout 'user_layout', only: [:search, :incompleted, :completed, :canceled, :cancel, :show]
@@ -152,8 +153,9 @@ class OrdersController < ApplicationController
     
   end
   
-  def payment_notify
-    render text: "success"
+  def alipay_notify
+    
+    render text: 'success'
   end
 
   # def update

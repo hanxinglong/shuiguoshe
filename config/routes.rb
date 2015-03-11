@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/pay_help' => 'home#pay_help', as: :pay_help
   get '/deliver_help' => 'home#deliver_help', as: :deliver_help
   
-  post '/payment_notify' => 'orders#payment_notify'
+  # post '/payment_notify' => 'orders#payment_notify'
 
   devise_for :users, path: "account", controllers: {
     registrations: :account,
@@ -72,6 +72,10 @@ Rails.application.routes.draw do
     member do 
       patch :cancel
       # patch :complete
+    end
+    
+    collection do
+      post :alipay_notify
     end
   end
   get '/checkout' => 'orders#new', as: :checkout
