@@ -164,13 +164,13 @@ class OrdersController < ApplicationController
       case params[:trade_status]
       when 'TRADE_SUCCESS'
         # 买家完成支付
-        @order.pay
+        @order.pay if @order
       when 'TRADE_FINISHED'
         # 交易完成
         # @order.complete
       when 'TRADE_CLOSED'
         # 交易被关闭
-        @order.cancel
+        @order.cancel if @order
       end
       
       render text: 'success'
