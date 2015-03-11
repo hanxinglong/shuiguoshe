@@ -158,7 +158,7 @@ class Order < ActiveRecord::Base
       partner: Setting.partner,
       seller_id: Setting.seller_id,
       private_key: Setting.private_key,
-      public_key: Setting.public_key,
+      public_key: Setting.alipay_public_key,
       out_trade_no: self.order_no,
       subject: '1',
       body: '我是测试数据',

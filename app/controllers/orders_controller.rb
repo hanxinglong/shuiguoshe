@@ -154,8 +154,29 @@ class OrdersController < ApplicationController
   end
   
   def alipay_notify
-    
-    render text: 'success'
+    notify_params = params.except(*request.path_parameters.keys)
+    # 先校验消息的真实性
+    if Alipay::Notify.verify?(notify_params)
+      
+      # 获取交易关联的订单
+      @order = Order.find_by(order_no: params[:out_trade_no]) 
+      
+      case params[:trade_status]
+      when 'TRADE_SUCCESS'
+        # 买家完成支付
+        @order.pay
+      when 'TRADE_FINISHED'
+        # 交易完成
+        @order.complete
+      when 'TRADE_CLOSED'
+        # 交易被关闭
+        @order.cancel
+      end
+      
+      render text: 'success'
+    else
+      render text: 'error'
+    end
   end
 
   # def update
