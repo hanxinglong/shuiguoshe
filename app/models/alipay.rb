@@ -21,7 +21,7 @@ module Alipay
       sign = params.delete('sign')
       to_sign = params.sort.map { |item| item.join('=') }.join('&')
       
-      pkey.verify(digest, Base64.decode64(sign), to_sign)
+      pub_key.verify(digest, Base64.decode64(sign), to_sign)
     end
   end
   
