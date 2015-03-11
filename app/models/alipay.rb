@@ -34,7 +34,7 @@ module Alipay
   
   private
   
-  def self.stringify_keys(params)
+  def self.stringify_keys(hash)
     new_hash = {}
     hash.each do |key, value|
       new_hash[(key.to_s rescue key) || key] = value
