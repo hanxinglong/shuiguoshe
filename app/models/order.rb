@@ -163,7 +163,7 @@ class Order < ActiveRecord::Base
       subject: '1',
       body: '我是测试数据',
       total_fee: '0.02',
-      notify_url: 'http://shuiguoshe.com/payment_notify',
+      notify_url: 'http://shuiguoshe.com/orders/alipay_notify',
       service: 'mobile.securitypay.pay',
       payment_type: '1',
       _input_charset: 'utf-8',
