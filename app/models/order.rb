@@ -86,6 +86,7 @@ class Order < ActiveRecord::Base
     state :delivering
     state :canceled
     state :completed
+    state :no_pay
     
     after_transition :delivering => :completed, :do => :update_product_infos
     
@@ -104,6 +105,11 @@ class Order < ActiveRecord::Base
     event :complete do
       transition :delivering => :completed
     end
+    
+    event :pay do
+      transition :no_pay => :normal
+    end
+    
   end
   
   scope :today, -> { where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
@@ -143,6 +149,7 @@ class Order < ActiveRecord::Base
       id: self.id,
       order_no: self.order_no || "",
       state: order_state,
+      state_name: self.state || "",
       ordered_at: self.created_at.strftime("%Y-%m-%d %H:%M:%S"),
       total_price: format("%.2f", self.total_price),
       delivered_at: deliver_info,
@@ -162,6 +169,8 @@ class Order < ActiveRecord::Base
       "已取消"
     elsif self.completed?
       "已完成"
+    elsif self.no_pay?
+      "待付款"
     else
       ""
     end
@@ -173,6 +182,15 @@ class Order < ActiveRecord::Base
       "#{Time.zone.now.strftime("%Y-%m-%d")}（今天）18:00-21:00"
     else
       "#{(Time.zone.now + 1.day).strftime("%Y-%m-%d")}（明天）18:00-21:00"
+    end
+  end
+  
+  def shipment_info
+    info = ShipmentType.find_by(id: self.shipment_type)
+    if info.blank?
+      ""
+    else
+      "#{info.prefix}#{info.name}"
     end
   end
   

@@ -101,6 +101,10 @@ module Shuiguoshe
         @order.payment_type = params[:payment_type]
         @order.shipment_type = params[:shipment_type]
         
+        if @order.payment_type.to_i == 1
+          @order.state = "no_pay"
+        end
+        
         @order.add_line_items_from_cart(@cart)
         
         if @order.save(validate: false)
@@ -144,7 +148,7 @@ module Shuiguoshe
                  state: @order.state || "",
                  ordered_at: @order.created_at.strftime("%Y-%m-%d %H:%M:%S"),
                  total_price: format("%.2f", @order.total_price),
-                 delivered_at: @order.deliver_info,
+                 shipment_info: @order.shipment_info,
                  _payment_type: @order.payment_type || "",
                 }
              }
@@ -156,7 +160,7 @@ module Shuiguoshe
                    state: @order.state || "",
                    ordered_at: @order.created_at.strftime("%Y-%m-%d %H:%M:%S"),
                    total_price: format("%.2f", @order.total_price),
-                   delivered_at: @order.deliver_info,
+                   shipment_info: @order.shipment_info,
                    _payment_type: @order.payment_type || "",
                  }
              }
