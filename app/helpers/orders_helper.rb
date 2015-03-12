@@ -26,6 +26,8 @@ module OrdersHelper
       content_tag :span, "已取消", class: "label label-danger", style: "font-size: #{size}px;"
     elsif order.completed?
       content_tag :span, "已完成", class: "label label-success", style: "font-size: #{size}px;"
+    elsif order.no_pay?
+      content_tag :span, "待付款", class: "label label-success", style: "font-size: #{size}px;"
     end
   end
   

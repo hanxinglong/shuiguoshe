@@ -15,7 +15,7 @@ class ShipmentType < ActiveRecord::Base
     if Time.zone.now.strftime("%H:%M:%S") < order_time_line
       "今天（#{WEEK_DAYS[Time.zone.now.wday]}）"
     else
-      "明天（#{WEEK_DAYS[Time.zone.now.wday]}）"
+      "明天（#{WEEK_DAYS[(Time.zone.now + 1.day).wday]}）"
     end
   end
 end
