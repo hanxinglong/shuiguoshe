@@ -169,7 +169,7 @@ class User < ActiveRecord::Base
       avatar_url: self.avatar.url(:big) || "",
       score: self.score,
       delivering_orders_count: self.orders.normal.count,
-      completed_orders_count: self.orders.completed.count,
+      no_pay_orders_count: self.orders.no_pay.count,
       canceled_orders_count: self.orders.canceled.count,
     }
   end

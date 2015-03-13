@@ -27,7 +27,7 @@ module Shuiguoshe
         user = authenticate!
         @orders = user.orders.order("id desc")#.paginate page: params[:page], per_page: page_size
         
-        unless %w[all completed canceled delivering].include?(params[:filter])
+        unless %w[all completed canceled delivering no_pay].include?(params[:filter])
           return { code: -1, message: "不正确的参数#{params[:filter]}" }
         end
         

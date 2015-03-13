@@ -113,9 +113,10 @@ class Order < ActiveRecord::Base
   end
   
   scope :today, -> { where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
-  scope :normal, -> { without_state(:completed, :canceled) }
+  scope :normal, -> { without_state(:completed, :canceled, :no_pay) }
   scope :canceled, -> { with_state(:canceled) }
   scope :completed, -> { with_state(:completed) }
+  scope :no_pay, -> { with_state(:no_pay) }
   
   # def total_price
   #   line_items.to_a.sum { |item| item.total_price }
