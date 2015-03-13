@@ -73,7 +73,8 @@ module Shuiguoshe
     end
     
     def authenticate!
-      error!({"error" => "401 Unauthorized"}, 401) unless current_user
+      # error!({"error" => "401 Unauthorized"}, 401) unless current_user
+      return { code: 401, message: "用户未登录" } unless current_user
       current_user
     end
     
