@@ -124,11 +124,12 @@ module Shuiguoshe
           return { code: 104, message: "验证码无效" }
         end
         
-        if params[:password].length < 6
+        password = Base64.decode64(params[:password])
+        if password.length < 6
           return { code: 105, message: "密码太短，至少为6位" }
         end
         
-        @user = User.new(email: "#{params[:mobile].gsub(/\s+/,"")}@shuiguoshe.com", mobile: params[:mobile].gsub(/\s+/, ''), password: params[:password], password_confirmation: params[:password])
+        @user = User.new(email: "#{params[:mobile].gsub(/\s+/,"")}@shuiguoshe.com", mobile: params[:mobile].gsub(/\s+/, ''), password: password, password_confirmation: password)
         if @user.save
           warden.set_user(@user)
           @user.ensure_private_token!
@@ -154,7 +155,8 @@ module Shuiguoshe
           return { code: 102, message: "用户未注册" } 
         end
         
-        if user.valid_password?(params[:password])
+        password = Base64.decode64(params[:password])
+        if user.valid_password?(password)
           { code: 0, message: "ok", data: { token: user.private_token || "" } }
         else
           { code: 107, message: "登录密码不正确" }
@@ -197,11 +199,12 @@ module Shuiguoshe
           return { code: 104, message: "验证码无效" }
         end
         
-        if params[:password].length < 6
+        password = Base64.decode64(params[:password])
+        if password.length < 6
           return { code: 105, message: "密码太短，至少为6位" }
         end
         
-        if @user.update_attribute(:password, params[:password])
+        if @user.update_attribute(:password, password)
           { code: 0, message: "ok" }
         else
           { code: 108, message: "重置密码失败" } 
@@ -221,7 +224,9 @@ module Shuiguoshe
       post '/password/update' do
         user = authenticate!
         
-        unless user.valid_password?(params[:old_password])
+        old_password = Base64.decode64(params[:old_password])
+        
+        unless user.valid_password?(old_password)
           return { code: 109, message: "旧密码不正确" }
         end
         
@@ -229,12 +234,12 @@ module Shuiguoshe
         # if ac.blank?
         #   return { code: 104, message: "验证码无效" }
         # end
-        
-        if params[:password].length < 6
+        new_password = Base64.decode64(params[:password])
+        if new_password.length < 6
           return { code: 105, message: "密码太短，至少为6位" }
         end
         
-        if user.update_attribute(:password, params[:password])
+        if user.update_attribute(:password, new_password)
           { code: 0, message: "ok" }
         else
           { code: 110, message: "修改密码失败" }

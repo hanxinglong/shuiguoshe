@@ -2,6 +2,7 @@
 require "helpers"
 require "entities"
 require "setting"
+require "base64"
 
 require "users_api"
 require "banners_api"

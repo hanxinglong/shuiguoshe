@@ -1,4 +1,5 @@
 # coding: utf-8
+require 'base64'
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
