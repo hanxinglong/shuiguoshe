@@ -102,7 +102,7 @@ class Cpanel::ProductsController < Cpanel::ApplicationController
     def set_product
       @product = Product.find(params[:id])
       if current_user.is_seller
-        unless @product.product_type.area.seller == current_user
+        unless @product.product_type.seller == current_user
           render_404
         end
       elsif current_user.admin?
