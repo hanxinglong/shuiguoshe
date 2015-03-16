@@ -16,6 +16,11 @@ class Order < ActiveRecord::Base
     self.order_no = Time.now.to_s(:number) + Time.now.nsec.to_s
   end
   
+  after_create :send_email
+  def send_email
+    OrderMailer.notify_mail(self).deliver
+  end
+  
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
       item.cart_id = nil

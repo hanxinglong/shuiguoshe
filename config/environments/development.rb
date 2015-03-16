@@ -22,7 +22,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.smtp_settings = { 
     address: Setting.mail_domain, 
-    domain:  Setting.domain, 
+    domain:  'http://shuiguoshe.com', 
     port:    25 
   }
 
