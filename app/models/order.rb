@@ -161,9 +161,9 @@ class Order < ActiveRecord::Base
       private_key: Setting.private_key,
       public_key: Setting.alipay_public_key,
       out_trade_no: self.order_no,
-      subject: '1',
-      body: '我是测试数据',
-      total_fee: '0.02',
+      subject: '水果社购物',
+      body: self.product_bodys,
+      total_fee: format("%.2f", self.total_price),
       notify_url: 'http://shuiguoshe.com/orders/alipay_notify',
       service: 'mobile.securitypay.pay',
       payment_type: '1',
@@ -175,6 +175,11 @@ class Order < ActiveRecord::Base
       _payment_type: self.payment_type || "",
       
     }
+  end
+  
+  def product_bodys
+    items = self.line_items.limit(3)
+    items.map { |item| item.product.title }.join(',')
   end
   
   def order_state
