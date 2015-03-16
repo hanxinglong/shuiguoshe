@@ -1,1 +1,5 @@
-<a href="www.baidu.com">测试</a>
+<p>收货人手机：<%= @order.user_mobile %></p>
+<p>配送地址：<%= @order.user_apartment_name %></p>
+<p>订单总额：￥<%= product_price_tag(@order.total_price) %> 抵扣：-￥<%= product_price_tag(@order.discount_price) %></p>
+<p>下单日期：<%= @order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+<p>下单人：<%= @order.user.mobile %></p>
