@@ -136,7 +136,7 @@ module Shuiguoshe
                  out_trade_no: @order.order_no,
                  subject: '水果社购物',
                  body: @order.product_bodys,
-                 total_fee: format("%.2f", @order.total_price),
+                 total_fee: '0.02',#format("%.2f", @order.total_price),
                  notify_url: 'http://shuiguoshe.com/orders/alipay_notify',
                  service: 'mobile.securitypay.pay',
                  payment_type: '1',

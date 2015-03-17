@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
   end
   
   def add_line_items_from_cart(cart)
-    cart.line_items.each do |item|
+    cart.line_items.where(visible: true).each do |item|
       item.cart_id = nil
       line_items << item
     end
@@ -168,7 +168,7 @@ class Order < ActiveRecord::Base
       out_trade_no: self.order_no,
       subject: '水果社购物',
       body: self.product_bodys,
-      total_fee: format("%.2f", self.total_price),
+      total_fee: '0.02',#format("%.2f", self.total_price),
       notify_url: 'http://shuiguoshe.com/orders/alipay_notify',
       service: 'mobile.securitypay.pay',
       payment_type: '1',
