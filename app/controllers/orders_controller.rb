@@ -141,7 +141,7 @@ class OrdersController < ApplicationController
       # if @apartment && @apartment.name == '其他'
       #   current_user.deliver_address = @order.note if @order.note.present?
       # end
-      info = DeliverInfo.where(user_id: current_user.id, mobile: @order.mobile, apartment_id: @order.apartment_id).first_or_create
+      info = DeliverInfo.where(user_id: current_user.id, mobile: @order.mobile, apartment_id: @order.apartment_id, area_id: @order.apartment_id).first_or_create
       current_user.current_deliver_info_id = info.id
       current_user.save!
       
