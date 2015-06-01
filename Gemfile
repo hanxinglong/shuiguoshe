@@ -65,15 +65,17 @@ gem 'rack-utf8_sanitizer'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-gem 'unicorn'
-
-gem 'unicorn-worker-killer'
+# gem 'unicorn'
+# 
+# gem 'unicorn-worker-killer'
 
 gem 'dalli'
 
 gem 'state_machine'
 
 gem 'newrelic_rpm'
+
+gem 'puma'
 
 # Use Capistrano for deployment
 group :development do
@@ -90,6 +92,8 @@ group :development do
   gem 'quiet_assets'
   
   gem 'annotate', '~> 2.6.5'
+  
+  gem 'capistrano3-puma', require: false
 end
 
 
