@@ -16,7 +16,7 @@ set :puma_error_log,  "#{release_path}/log/puma.access.log"
 
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
-set :puma_init_active_record, false  # Change to true if using ActiveRecord
+set :puma_init_active_record, true  # Change to true if using ActiveRecord
 
 set :scm, :git
 set :repo_url, "git@github.com:tomwey/#{fetch(:application)}.git"
